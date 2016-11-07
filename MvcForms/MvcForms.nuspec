@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$id$</title>
+    <description>
+      Some utility classes to help create simple form input in a (pre core) MVC application.
+    </description>
+    <tags>Asp.Net Mvc Forms Bootstrap</tags>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <authors>Richard Brown</authors>
+    <licenseUrl>https://raw.githubusercontent.com/FlukeFan/MvcForms/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/FlukeFan/MvcForms</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/FlukeFan/MvcForms/master/icon.png</iconUrl>
+  </metadata>
+</package>
