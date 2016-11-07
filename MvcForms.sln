@@ -9,6 +9,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcForms.StubApp", "MvcForm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcForms.Tests", "MvcForms.Tests\MvcForms.Tests.csproj", "{86A86BD7-3C39-4FAE-A778-384437193545}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{4E86B21B-F8AB-44E3-859B-8D7A8293E3B8}"
+	ProjectSection(SolutionItems) = preProject
+		Build\Common.targets = Build\Common.targets
+		Build\MvcForms.nunit = Build\MvcForms.nunit
+		MvcForms.proj = MvcForms.proj
+		Build\VerifyCoverage.js = Build\VerifyCoverage.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{D1BD7D1D-2FB5-446E-885A-2E8BA16142F9}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		CommandPrompt.bat = CommandPrompt.bat
+		LICENSE.txt = LICENSE.txt
+		MvcForms.proj = MvcForms.proj
+		readme.txt = readme.txt
+		RunNUnit.bat = RunNUnit.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
