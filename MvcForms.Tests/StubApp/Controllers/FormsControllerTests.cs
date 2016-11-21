@@ -54,5 +54,19 @@ namespace MvcForms.Tests.StubApp.Controllers
                 response.Text.Should().Contain("validationErrorMessage");
             });
         }
+
+        [Test]
+        public void FormFor_GET_RendersForm()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get(FormsActions.FormFor("test"));
+
+                var form = response.Form<FormForPost>();
+                form.GetText(m => m.Value).Should().Be("test");
+
+                response.Text.Should().Contain("</form>");
+            });
+        }
     }
 }

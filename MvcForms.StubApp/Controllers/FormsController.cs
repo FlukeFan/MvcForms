@@ -7,6 +7,8 @@ namespace MvcForms.StubApp.Controllers
     {
         public static string ForModel() { return "~/Forms/ForModel"; }
         public static string ForModel(string initialValue) { return $"~/Forms/ForModel/{initialValue}"; }
+
+        public static string FormFor(string initialValue) { return $"~/Forms/FormFor/{initialValue}"; }
     }
 
     public class FormsController : Controller
@@ -26,6 +28,14 @@ namespace MvcForms.StubApp.Controllers
         public ActionResult ForModel(ForModelPost input)
         {
             var model = new ForModelView();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult FormFor(string id)
+        {
+            var model = new FormForView();
+            model.PostCommand = new FormForPost { Value = id };
             return View(model);
         }
     }

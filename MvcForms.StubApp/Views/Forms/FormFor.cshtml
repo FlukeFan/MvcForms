@@ -1,0 +1,13 @@
+﻿@inherits System.Web.Mvc.WebViewPage<FormForView>
+@using System.Web.Mvc.Html
+@using MvcForms
+@using MvcForms.StubApp.Models.Forms
+
+<p>FormFor</p>
+
+@using (var form = Html.FormFor(Model.PostCommand))
+{
+    <div>@form.Html.TextBoxFor(m => m.Value)</div>
+
+    <input type="submit" />
+}

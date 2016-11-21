@@ -95,8 +95,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Forms\BasicModelPost.cs" />
-    <Compile Include="Models\Forms\BasicModelView.cs" />
+    <Compile Include="Models\Forms\FormForPost.cs" />
+    <Compile Include="Models\Forms\FormForView.cs" />
+    <Compile Include="Models\Forms\ForModelPost.cs" />
+    <Compile Include="Models\Forms\ForModelView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -118,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forms\FormFor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
