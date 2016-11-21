@@ -22,11 +22,11 @@ namespace MvcForms.StubApp.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public ActionResult ForModel(ForModelPost input)
-        //{
-        //    var model = new ForModelView { Post = input };
-        //    return View(model);
-        //}
+        [HttpPost]
+        public ActionResult ForModel(ForModelPost input)
+        {
+            var model = new ForModelView();
+            return View(model);
+        }
     }
 }

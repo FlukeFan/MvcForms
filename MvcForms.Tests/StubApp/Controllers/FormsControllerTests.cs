@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Net;
+using FluentAssertions;
 using MvcForms.StubApp.Controllers;
 using MvcForms.StubApp.Models.Forms;
 using MvcForms.Tests.StubApp.Utility;
@@ -18,7 +19,6 @@ namespace MvcForms.Tests.StubApp.Controllers
                 var response = http.Get(FormsActions.ForModel());
 
                 var form = response.Form<ForModelPost>();
-
                 form.GetText(m => m.BasicValue).Should().BeNullOrWhiteSpace();
             });
         }
@@ -31,8 +31,26 @@ namespace MvcForms.Tests.StubApp.Controllers
                 var response = http.Get(FormsActions.ForModel("testValue"));
 
                 var form = response.Form<ForModelPost>();
-
                 form.GetText(m => m.BasicValue).Should().Be("testValue");
+
+                response.Text.Should().Contain("{validation=}");
+            });
+        }
+
+        [Test]
+        public void ForModel_Post_RendersValidationErrors()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get(FormsActions.ForModel("testValue"))
+                    .Form<ForModelPost>()
+                    .SetText(m => m.BasicValue, "tst")
+                    .Submit(http, r => r.SetExpectedResponse(HttpStatusCode.OK));
+
+                var form = response.Form<ForModelPost>();
+                form.GetText(m => m.BasicValue).Should().Be("tst");
+
+                response.Text.Should().Contain("validationErrorMessage");
             });
         }
     }
