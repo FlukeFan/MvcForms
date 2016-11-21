@@ -1,0 +1,22 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+@using MvcForms.StubApp.Controllers
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MvcForms.StubApp</title>
+</head>
+<body>
+    <div>
+        <h3>ForModel</h3>
+        <section>
+            <ul>
+                <li><a href="@Url.Content(FormsActions.ForModel())">ForModel()</a></li>
+                <li><a href="@Url.Content(FormsActions.ForModel("test"))">ForModel("test")</a></li>
+                <li><a href="@Url.Content(FormsActions.ForModel("tst"))">ForModel("tst")</a></li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

@@ -12,7 +12,7 @@ namespace MvcForms.Tests.StubApp.Controllers
     public class FormsControllerTests : StubAppTest
     {
         [Test]
-        public void ForModel_Get_RendersForm()
+        public void ForModel_GET_RendersForm()
         {
             StubApp.Test(http =>
             {
@@ -24,7 +24,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         }
 
         [Test]
-        public void ForModel_Get_RendersValues()
+        public void ForModel_GET_RendersValues()
         {
             StubApp.Test(http =>
             {
@@ -39,7 +39,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         }
 
         [Test]
-        public void ForModel_Post_RendersValidationErrors()
+        public void ForModel_POST_RendersValidationErrors()
         {
             StubApp.Test(http =>
             {
