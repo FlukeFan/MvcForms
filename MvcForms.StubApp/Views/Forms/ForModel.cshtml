@@ -1,0 +1,19 @@
+﻿@inherits System.Web.Mvc.WebViewPage<ForModelView>
+@using System.Web.Mvc.Html
+@using MvcForms
+@using MvcForms.StubApp.Models.Forms
+
+<p>Basic form</p>
+
+@if (Model != null && Model.Post != null)
+{
+    <p>BasicValue=@Model.Post.BasicValue</p>
+}
+
+@using (Html.BeginForm())
+{
+    <div>@Html.ForModel(Model.Post).TextBoxFor(m => m.BasicValue)</div>
+
+    <input type="submit" />
+
+}

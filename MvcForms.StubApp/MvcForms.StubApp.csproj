@@ -90,10 +90,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_output\AssemblyInfo.cs" />
+    <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Forms\BasicModelPost.cs" />
+    <Compile Include="Models\Forms\BasicModelView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -103,6 +106,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forms\ForModel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MvcForms\MvcForms.csproj">
+      <Project>{7aa07f6d-97b1-4c8e-a71d-3d331c6f7c3d}</Project>
+      <Name>MvcForms</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
