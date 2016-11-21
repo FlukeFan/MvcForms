@@ -33,6 +33,7 @@ namespace MvcForms.Tests.StubApp.Controllers
                 var form = response.Form<ForModelPost>();
                 form.GetText(m => m.BasicValue).Should().Be("testValue");
 
+                response.Text.Should().Contain("BasicValue=testValue");
                 response.Text.Should().Contain("{validation=}");
             });
         }
