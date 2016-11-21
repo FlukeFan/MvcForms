@@ -1,5 +1,8 @@
-﻿using MvcForms.StubApp.Controllers;
+﻿using FluentAssertions;
+using MvcForms.StubApp.Controllers;
+using MvcForms.StubApp.Models.Forms;
 using MvcForms.Tests.StubApp.Utility;
+using MvcTesting.Html;
 using NUnit.Framework;
 
 namespace MvcForms.Tests.StubApp.Controllers
@@ -12,7 +15,24 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             StubApp.Test(http =>
             {
-                http.Get(FormsActions.ForModel());
+                var response = http.Get(FormsActions.ForModel());
+
+                var form = response.Form<ForModelPost>();
+
+                form.GetText(m => m.BasicValue).Should().BeNullOrWhiteSpace();
+            });
+        }
+
+        [Test]
+        public void ForModel_Get_RendersValues()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get(FormsActions.ForModel("testValue"));
+
+                var form = response.Form<ForModelPost>();
+
+                form.GetText(m => m.BasicValue).Should().Be("testValue");
             });
         }
     }
