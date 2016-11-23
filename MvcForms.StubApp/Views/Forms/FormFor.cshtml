@@ -2,12 +2,11 @@
 @using System.Web.Mvc.Html
 @using MvcForms
 @using MvcForms.StubApp.Models.Forms
+@{ Layout = "~/Views/Shared/_bootstrap.cshtml"; }
 
-<p>FormFor</p>
+<h3>FormFor</h3>
 
 @using (var form = Html.FormFor(Model.PostCommand))
 {
     <div>@form.Html.TextBoxFor(m => m.Value)</div>
-
-    <input type="submit" />
 }
