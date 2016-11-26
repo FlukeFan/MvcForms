@@ -56,6 +56,18 @@ namespace MvcForms.Tests.StubApp.Controllers
         }
 
         [Test]
+        public void ForModelUsing_GET_RendersForm()
+        {
+            StubApp.Test(http =>
+            {
+                var response = http.Get(FormsActions.ForModelUsing("test"));
+
+                var form = response.Form<ForModelPost>();
+                form.GetText(m => m.BasicValue).Should().Be("test");
+            });
+        }
+
+        [Test]
         public void FormFor_GET_RendersForm()
         {
             StubApp.Test(http =>

@@ -1,0 +1,16 @@
+﻿@inherits System.Web.Mvc.WebViewPage<ForModelView>
+@using System.Web.Mvc.Html
+@using MvcForms
+@using MvcForms.StubApp.Models.Forms
+@{ Layout = "~/Views/Shared/_bootstrap.cshtml"; }
+
+<h3>ForModelUsing</h3>
+
+@using (Html.BeginForm())
+{
+    using (var form = Html.ForModel(Model.Post))
+    {
+        <div>@form.TextBoxFor(m => m.BasicValue)</div>
+        <div>{scopedValidation=@form.ValidationMessageFor(m => m.BasicValue)}</div>
+    }
+}
