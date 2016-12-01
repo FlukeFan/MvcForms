@@ -124,6 +124,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Forms\ForModelUsing.cshtml" />
+    <Content Include="Views\Forms\BootstrapHorizontal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

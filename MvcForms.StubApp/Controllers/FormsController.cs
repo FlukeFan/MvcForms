@@ -5,6 +5,8 @@ namespace MvcForms.StubApp.Controllers
 {
     public static class FormsActions
     {
+        public static string BootstrapHorizontal()              { return "~/Forms/BootstrapHorizontal"; }
+
         public static string ForModel()                         { return "~/Forms/ForModel"; }
         public static string ForModelUsing(string initialValue) { return $"~/Forms/ForModelUsing/{initialValue}"; }
         public static string ForModel(string initialValue)      { return $"~/Forms/ForModel/{initialValue}"; }
@@ -14,6 +16,12 @@ namespace MvcForms.StubApp.Controllers
 
     public class FormsController : Controller
     {
+        [HttpGet]
+        public ActionResult BootstrapHorizontal()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult ForModel(string id)
         {

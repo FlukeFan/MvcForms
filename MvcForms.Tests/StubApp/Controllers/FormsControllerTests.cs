@@ -12,6 +12,15 @@ namespace MvcForms.Tests.StubApp.Controllers
     public class FormsControllerTests : StubAppTest
     {
         [Test]
+        public void BootstrapHorizontal_GET_Renders()
+        {
+            StubApp.Test(http =>
+            {
+                http.Get(FormsActions.BootstrapHorizontal());
+            });
+        }
+
+        [Test]
         public void ForModel_GET_RendersForm()
         {
             StubApp.Test(http =>
