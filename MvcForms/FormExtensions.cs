@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using MvcForms.Controls;
 
 namespace MvcForms
@@ -15,16 +14,15 @@ namespace MvcForms
             return newHelper;
         }
 
-        public static Form<TPostModel> FormFor<TViewModel, TPostModel>(this HtmlHelper<TViewModel> helper, TPostModel postModel)
+        public static Form<TViewModel> FormFor<TViewModel>(this HtmlHelper<TViewModel> helper)
         {
-            return helper.FormFor(postModel, helper.BeginForm());
-
+            return helper.FormFor(helper.ViewData.Model);
         }
 
-        public static Form<TPostModel> FormFor<TViewModel, TPostModel>(this HtmlHelper<TViewModel> helper, TPostModel postModel, MvcForm form)
+        public static Form<TPostModel> FormFor<TViewModel, TPostModel>(this HtmlHelper<TViewModel> helper, TPostModel postModel)
         {
             var html = helper.ForModel(postModel);
-            return new Form<TPostModel>(html, form);
+            return new Form<TPostModel>(html);
         }
 
         private class ViewDataContainer : IViewDataContainer

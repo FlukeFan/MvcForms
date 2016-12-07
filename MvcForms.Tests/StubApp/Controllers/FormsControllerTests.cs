@@ -84,6 +84,9 @@ namespace MvcForms.Tests.StubApp.Controllers
                 var response = http.Get(FormsActions.FormFor("test"));
 
                 var form = response.Form<FormForPost>();
+                form.Method.Should().Be("post");
+                form.Action.Should().Be(FormsActions.FormFor("test").PathOnly());
+
                 form.GetText(m => m.Value).Should().Be("test");
 
                 response.Text.Should().Contain("</form>");
