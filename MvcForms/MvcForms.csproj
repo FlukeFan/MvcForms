@@ -82,8 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_output\AssemblyInfo.cs" />
-    <Compile Include="Controls\DisposableHtmlHelper.cs" />
+    <Compile Include="Controls\Control.cs" />
     <Compile Include="Controls\Form.cs" />
+    <Compile Include="Controls\ScopedHtmlHelper.cs" />
     <Compile Include="FormExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

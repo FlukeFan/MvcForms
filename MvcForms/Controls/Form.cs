@@ -1,25 +1,20 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using HtmlTags;
 
 namespace MvcForms.Controls
 {
-    public class Form<T> : IDisposable
+    public class Form<T> : Control<T, FormTag>
     {
-        public HtmlHelper<T>    Html    { get; protected set; }
-        public FormTag          FormTag { get; protected set; }
+        private string          _action;
 
-        public Form(HtmlHelper<T> html)
+        public Form(HtmlHelper<T> html) : base(html)
         {
-            Html = html;
-            FormTag = new FormTag(html.ViewContext.HttpContext.Request.RawUrl);
-
-            html.ViewContext.Writer.Write(FormTag.NoClosingTag().ToString());
+            _action = html.ViewContext.HttpContext.Request.RawUrl;
         }
 
-        public void Dispose()
+        protected override FormTag CreateTag()
         {
-            Html.ViewContext.Writer.Write($"</{FormTag.TagName()}>");
+            return new FormTag(_action);
         }
     }
 }

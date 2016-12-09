@@ -6,7 +6,7 @@
 
 <h3>FormFor</h3>
 
-@using (var form = Html.FormFor(Model.PostCommand))
+@using (var form = Html.FormFor(Model.PostCommand).Begin())
 {
     <div>@form.Html.TextBoxFor(m => m.Value)</div>
 }

@@ -8,9 +8,9 @@
 
 @using (Html.BeginForm())
 {
-    using (var form = Html.ForModel(Model.Post))
+    using (var form = Html.ForModelScope(Model.Post))
     {
-        <div>@form.TextBoxFor(m => m.BasicValue)</div>
-        <div>{scopedValidation=@form.ValidationMessageFor(m => m.BasicValue)}</div>
+        <div>@form.Html.TextBoxFor(m => m.BasicValue)</div>
+        <div>{scopedValidation=@form.Html.ValidationMessageFor(m => m.BasicValue)}</div>
     }
 }
