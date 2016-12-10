@@ -86,6 +86,7 @@ namespace MvcForms.Tests.StubApp.Controllers
                 var form = response.Form<FormForPost>();
                 form.Method.Should().Be("post");
                 form.Action.Should().Be(FormsActions.FormFor("test").PathOnly());
+                form.Element.Id.Should().Be("canSetId");
 
                 form.GetText(m => m.Value).Should().Be("test");
 
