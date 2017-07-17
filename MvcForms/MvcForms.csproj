@@ -87,7 +87,6 @@
     <Compile Include="FormExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="MvcForms.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
