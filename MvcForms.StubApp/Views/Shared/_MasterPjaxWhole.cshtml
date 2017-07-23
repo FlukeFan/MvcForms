@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PJAX Demo - @ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        <span id="header">@DateTime.Now.Ticks</span>
+    </div>
+    <div data-pjax="true">
+        @RenderBody()
+    </div>
+
+    @if (Request.Cookies["disableJs"] == null || Request.Cookies["disableJs"].Value != "True")
+    {
+        <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+        <script src="~/Scripts/pjax.js"></script>
+
+        <script>
+            $(function () {
+                pjax.init();
+            });
+        </script>
+    }
+    else
+    {
+        <div>JS Disabled for testing</div>
+    }
+</body>
+</html>

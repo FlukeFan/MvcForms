@@ -92,6 +92,7 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -99,6 +100,8 @@
     <Compile Include="Models\Forms\FormForView.cs" />
     <Compile Include="Models\Forms\ForModelPost.cs" />
     <Compile Include="Models\Forms\ForModelView.cs" />
+    <Compile Include="Views\Shared\SharedViews.cs" />
+    <Compile Include="Views\StubPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -125,9 +128,15 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\pjax.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Forms\ForModelUsing.cshtml" />
     <Content Include="Views\Forms\BootstrapHorizontal.cshtml" />
+    <Content Include="Views\System\PjaxPage1.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Views\Shared\_MasterPjaxWhole.cshtml" />
+    <Content Include="Views\System\PjaxPage2.cshtml" />
+    <Content Include="Views\Shared\_MasterPjaxPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -156,6 +165,7 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
