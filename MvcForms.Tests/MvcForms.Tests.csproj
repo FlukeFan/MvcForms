@@ -97,6 +97,7 @@
     <Compile Include="FormExtensionsTests.cs" />
     <Compile Include="StubApp\Controllers\FormsControllerTests.cs" />
     <Compile Include="StubApp\Controllers\HomeControllerTests.cs" />
+    <Compile Include="StubApp\Controllers\SystemControllerTests.cs" />
     <Compile Include="StubApp\SetUpFixture.cs" />
     <Compile Include="StubApp\Utility\StubAppTest.cs" />
     <Compile Include="StubApp\Utility\TestExtensions.cs" />
