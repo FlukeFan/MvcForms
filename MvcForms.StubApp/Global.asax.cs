@@ -9,6 +9,7 @@ namespace MvcForms.StubApp
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            GlobalFilters.Filters.Add(new PjaxFilter());
             RegisterRoutes(RouteTable.Routes);
         }
 

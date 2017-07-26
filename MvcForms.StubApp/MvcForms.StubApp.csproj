@@ -100,6 +100,7 @@
     <Compile Include="Models\Forms\FormForView.cs" />
     <Compile Include="Models\Forms\ForModelPost.cs" />
     <Compile Include="Models\Forms\ForModelView.cs" />
+    <Compile Include="PjaxFilter.cs" />
     <Compile Include="Views\Shared\SharedViews.cs" />
     <Compile Include="Views\StubPage.cs" />
   </ItemGroup>
