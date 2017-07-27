@@ -24,14 +24,33 @@ namespace MvcForms.Tests.System.Utility
 
         public static void BeforeTests(string childSearchFolder, string siteFolder, int port)
         {
-            var coverageFile = Environment.GetEnvironmentVariable("COVERAGE");
-            var iisExpressPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "IIS Express\\iisexpress.exe");
-            var webPath = WebPath(childSearchFolder, siteFolder);
+            var coverage = Environment.GetEnvironmentVariable("COVERAGE");
 
-            if (!string.IsNullOrWhiteSpace(coverageFile))
-                StartWithCoverage(iisExpressPath, webPath, coverageFile, port);
-            else
-                StartWithoutCoverage(iisExpressPath, webPath, port);
+            if (IsRunning(port))
+            {
+                KillRunningIisExpress();
+
+                // IISExpress already started on this port (presumably by the IDE)
+                if (!string.IsNullOrWhiteSpace(coverage))
+                    KillRunningIisExpress(); // we need to own the child process in order to acheive coverage
+                else
+                    return; // IISExpress already running, and we're not measuring coverage - nothing else to do
+            }
+
+            var exe = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "IIS Express\\iisexpress.exe");
+            var webPath = WebPath(childSearchFolder, siteFolder);
+            var args = $"/path:{webPath} /Port:{port}";
+
+            _process = Process.Start(new ProcessStartInfo()
+            {
+                FileName = exe,
+                Arguments = args,
+                CreateNoWindow = false,
+                UseShellExecute = true,
+            });
+
+
+            Wait.For(() => IsRunning(port).Should().BeTrue("IIS Express not running"));
         }
 
         public static void AfterTests()
@@ -42,50 +61,8 @@ namespace MvcForms.Tests.System.Utility
             // send keydown 'Q' to window (which stops IIS Express)
             PostMessage(_process.MainWindowHandle, WM_KEYDOWN, (IntPtr)VkKeyScan('Q'), IntPtr.Zero);
 
-            // wait for child OpenCover.Console to stop
-            Wait.For(() => OpenCoverProcesses().Count.Should().Be(1, "there should be a single (parent) OpenCover.Console process"));
-
+            Wait.For(() => _process.HasExited.Should().BeTrue("IISExpress has not exited"));
             _process = null;
-        }
-
-        private static void StartWithoutCoverage(string iisExpressPath, string webPath, int port)
-        {
-            if (IsRunning(port))
-                return;
-
-            var args = $"/path:{webPath} /Port:{port}";
-            var exe = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "IIS Express\\iisexpress.exe");
-
-            _process = Start(exe, args);
-
-            Wait.For(() => IsRunning(port).Should().BeTrue("IIS Express not running"));
-        }
-
-        private static void StartWithCoverage(string iisExpressPath, string webPath, string coverageFile, int port)
-        {
-            if (IsRunning(port))
-                KillRunningIisExpress();
-
-            Wait.For(() => OpenCoverProcesses().Count.Should().Be(1, "there should be a single (parent) OpenCover.Console process"));
-
-            var binPath = Path.Combine(webPath, "bin");
-            var exe = Environment.GetEnvironmentVariable("COVERAGE_EXE");
-            var args = $"-targetdir:\"{binPath}\" -target:\"{iisExpressPath}\" -targetargs:\"/path:{webPath} /Port:{port}\" -register:user -output:{coverageFile} -filter:\"+[*]*\"";
-
-            _process = Start(exe, args);
-            
-            Wait.For(() => IsRunning(port).Should().BeTrue("IIS Express not running"));
-        }
-
-        private static Process Start(string exe, string args)
-        {
-            return Process.Start(new ProcessStartInfo()
-            {
-                FileName = exe,
-                Arguments = args,
-                CreateNoWindow = false,
-                UseShellExecute = true,
-            });
         }
 
         private static void KillRunningIisExpress()
@@ -105,15 +82,6 @@ namespace MvcForms.Tests.System.Utility
         {
             var processes = Process.GetProcesses()
                 .Where(p => p.ProcessName.ToLower().StartsWith("iisexpress"))
-                .ToList();
-
-            return processes;
-        }
-
-        private static IList<Process> OpenCoverProcesses()
-        {
-            var processes = Process.GetProcesses()
-                .Where(p => p.ProcessName.ToLower().Contains("opencover.console"))
                 .ToList();
 
             return processes;
