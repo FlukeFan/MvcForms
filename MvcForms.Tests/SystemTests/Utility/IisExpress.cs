@@ -24,14 +24,13 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public static void BeforeTests(string childSearchFolder, string siteFolder, int port)
         {
-            var coverage = Environment.GetEnvironmentVariable("COVERAGE");
+            var runningWithCoverage = OpenCoverProcesses().Count > 0;
 
             if (IsRunning(port))
             {
-                KillRunningIisExpress();
-
                 // IISExpress already started on this port (presumably by the IDE)
-                if (!string.IsNullOrWhiteSpace(coverage))
+
+                if (runningWithCoverage)
                     KillRunningIisExpress(); // we need to own the child process in order to acheive coverage
                 else
                     return; // IISExpress already running, and we're not measuring coverage - nothing else to do
@@ -48,7 +47,6 @@ namespace MvcForms.Tests.SystemTests.Utility
                 CreateNoWindow = false,
                 UseShellExecute = true,
             });
-
 
             Wait.For(() => IsRunning(port).Should().BeTrue("IIS Express not running"));
         }
@@ -82,6 +80,15 @@ namespace MvcForms.Tests.SystemTests.Utility
         {
             var processes = Process.GetProcesses()
                 .Where(p => p.ProcessName.ToLower().StartsWith("iisexpress"))
+                .ToList();
+
+            return processes;
+        }
+
+        private static IList<Process> OpenCoverProcesses()
+        {
+            var processes = Process.GetProcesses()
+                .Where(p => p.ProcessName.ToLower().StartsWith("opencover"))
                 .ToList();
 
             return processes;
