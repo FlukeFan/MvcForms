@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace MvcForms.Tests.SystemTests.Utility
 {
@@ -122,6 +124,59 @@ namespace MvcForms.Tests.SystemTests.Utility
         {
             Console.WriteLine("Click browser 'forward' button");
             _webDriver.Navigate().Forward();
+        }
+
+        public void TypeText(string name, string text, bool clearFirst = true)
+        {
+            TypeText(name, $"input[name='{name}']", text, clearFirst);
+        }
+
+        private void TypeText(string name, string selector, string text, bool clearFirst = true)
+        {
+            Console.WriteLine("Type text '{0}' into '{1}'", text, name);
+            WaitFor(() =>
+            {
+                var inputs = _webDriver.FindElements(By.CssSelector(selector))
+                    .Where(i => i.Displayed && i.Enabled)
+                    .ToList();
+
+                inputs.Count.Should().Be(1, "should be 1 visible {0}, but found {1}", name, inputs.Count);
+                var input = inputs.Single();
+
+                var actions = new Actions(_webDriver);
+                actions.Click(input);
+
+                if (clearFirst)
+                {
+                    actions.KeyDown(Keys.Control);
+                    actions.SendKeys("a");
+                    actions.KeyUp(Keys.Control);
+                    actions.SendKeys(Keys.Backspace);
+                }
+
+                actions.SendKeys(text);
+                actions.Perform();
+            });
+        }
+
+        public void Submit(string text)
+        {
+            Console.WriteLine("Click button {0}", text);
+            WaitFor(() =>
+            {
+                IList<IWebElement> buttons = _webDriver.FindElements(By.CssSelector("form input[type=submit], form button"));
+
+                if (text != null)
+                    buttons = buttons.Where(b => b.GetAttribute("value") == text).ToList();
+
+                if (buttons.Count > 1)
+                    Assert.Fail("No single button; found: ", string.Join("\n", buttons.Select(b => b.GetAttribute("outerHTML"))));
+
+                if (buttons.Count < 1)
+                    Assert.Fail("No buttons found with text = ", text);
+
+                buttons.First().Click();
+            });
         }
     }
 }

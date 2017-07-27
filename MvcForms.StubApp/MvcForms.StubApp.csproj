@@ -138,6 +138,8 @@
     <Content Include="Views\Shared\_MasterPjaxWhole.cshtml" />
     <Content Include="Views\System\PjaxPage2.cshtml" />
     <Content Include="Views\Shared\_MasterPjaxPartial.cshtml" />
+    <Content Include="Views\System\PjaxForm.cshtml" />
+    <Content Include="Views\System\PjaxFormDone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

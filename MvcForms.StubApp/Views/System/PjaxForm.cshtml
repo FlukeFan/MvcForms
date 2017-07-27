@@ -1,0 +1,14 @@
+﻿@inherits StubPage<string>
+@{
+    SetLayout("Form:" + Model);
+}
+<form method="post">
+    @if (Request.HttpMethod == "POST")
+    {
+        <div>button=@Request.Form["button"]</div>
+    }
+
+    <span>enter 'Success' to complete form: </span>
+    <input type="text" name="postedValue" value="@Model" />
+    <button type="submit" name="button" value="go">go</button>
+</form>

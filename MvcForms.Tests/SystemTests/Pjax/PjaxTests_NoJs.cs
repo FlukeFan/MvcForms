@@ -95,5 +95,36 @@ namespace MvcForms.Tests.SystemTests.Pjax
             App.ShouldHaveUrl(SystemActions.PjaxPage1());
             VerifyNavState();
         }
+
+        [Test]
+        public void SubmitForm_Redraw()
+        {
+            App.GoTo(SystemActions.PjaxForm());
+
+            App.TypeText("postedValue", "posted");
+
+            StoreNavState();
+            App.Submit("go");
+
+            App.ShouldSeeText("button=go");
+            App.ShouldHaveTitleContaining("Form:posted");
+            App.ShouldHaveUrl(SystemActions.PjaxForm());
+            VerifyNavState();
+        }
+
+        [Test]
+        public void SubmitForm_Redirect()
+        {
+            App.GoTo(SystemActions.PjaxForm());
+
+            App.TypeText("postedValue", "Success");
+
+            StoreNavState();
+            App.Submit("go");
+
+            App.ShouldHaveTitleContaining("FormDone");
+            App.ShouldHaveUrl(SystemActions.PjaxFormDone());
+            VerifyNavState();
+        }
     }
 }
