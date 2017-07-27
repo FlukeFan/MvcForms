@@ -56,33 +56,35 @@ namespace MvcForms.Tests.System.Utility
             var args = $"/path:{webPath} /Port:{port}";
             var exe = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "IIS Express\\iisexpress.exe");
 
-            Start(exe, args, false);
+            _process = Start(exe, args);
 
             Wait.For(() => IsRunning(port).Should().BeTrue("IIS Express not running"));
         }
 
         private static void StartWithCoverage(string iisExpressPath, string webPath, string coverageFile, int port)
         {
-            KillRunningIisExpress();
+            if (IsRunning(port))
+                KillRunningIisExpress();
+
             Wait.For(() => OpenCoverProcesses().Count.Should().Be(1, "there should be a single (parent) OpenCover.Console process"));
 
             var binPath = Path.Combine(webPath, "bin");
             var exe = Environment.GetEnvironmentVariable("COVERAGE_EXE");
             var args = $"-targetdir:\"{binPath}\" -target:\"{iisExpressPath}\" -targetargs:\"/path:{webPath} /Port:{port}\" -register:user -output:{coverageFile} -filter:\"+[*]*\"";
 
-            _process = Start(exe, args, true);
-
+            _process = Start(exe, args);
+            
             Wait.For(() => IsRunning(port).Should().BeTrue("IIS Express not running"));
         }
 
-        private static Process Start(string exe, string args, bool showConsole)
+        private static Process Start(string exe, string args)
         {
             return Process.Start(new ProcessStartInfo()
             {
                 FileName = exe,
                 Arguments = args,
-                CreateNoWindow = !showConsole,
-                UseShellExecute = showConsole,
+                CreateNoWindow = false,
+                UseShellExecute = true,
             });
         }
 

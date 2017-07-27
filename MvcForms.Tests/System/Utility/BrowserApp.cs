@@ -8,6 +8,8 @@ namespace MvcForms.Tests.System.Utility
 {
     public class BrowserApp
     {
+        public const int Port = 59505;
+
         private IWebDriver  _webDriver;
         private bool        _jsDisabled;
 
@@ -17,7 +19,7 @@ namespace MvcForms.Tests.System.Utility
         public BrowserApp(IWebDriver webDriver, bool disableJs)
         {
             _webDriver = webDriver;
-            _webDriver.Navigate().GoToUrl("http://localhost:46585/");
+            _webDriver.Navigate().GoToUrl($"http://localhost:{Port}/");
 
             var scriptExecutor = (IJavaScriptExecutor)webDriver;
             scriptExecutor.ExecuteScript("document.cookie = 'disableJs=" + disableJs + "; path=/;'");
@@ -29,7 +31,7 @@ namespace MvcForms.Tests.System.Utility
             Console.WriteLine("Navigating to '{0}' ", action);
             WaitFor(() =>
             {
-                action = action.Replace("~/", "http://localhost:46585/");
+                action = action.Replace("~/", $"http://localhost:{Port}/");
                 _webDriver.Navigate().GoToUrl(action);
             });
         }

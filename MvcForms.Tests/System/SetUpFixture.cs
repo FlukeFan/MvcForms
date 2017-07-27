@@ -9,7 +9,7 @@ namespace MvcForms.Tests.System
         [SetUp]
         public void SetUp()
         {
-            IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", 46585);
+            IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port);
             WebDriver.Instance();
         }
 
