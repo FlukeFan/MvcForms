@@ -10,9 +10,17 @@ namespace MvcForms.Tests.SystemTests
         [SetUp]
         public void SetUp()
         {
-            Task.WaitAll(
-                Task.Run(() => IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port)),
-                Task.Run(() => WebDriver.Instance()));
+            try
+            {
+                Task.WaitAll(
+                    Task.Run(() => IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port)),
+                    Task.Run(() => WebDriver.Instance()));
+            }
+            catch
+            {
+                TearDown();
+                throw;
+            }
         }
 
         [TearDown]

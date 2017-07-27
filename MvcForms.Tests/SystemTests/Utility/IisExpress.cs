@@ -15,10 +15,14 @@ namespace MvcForms.Tests.SystemTests.Utility
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool PostThreadMessage(int idThread, uint Msg, IntPtr wParam, IntPtr lParam);
+
         [DllImport("user32.dll")]
         private static extern short VkKeyScan(char ch);
 
-        private const int WM_KEYDOWN = 0x100;
+        private const uint WM_QUIT      = 0x12;
+        private const uint WM_KEYDOWN   = 0x100;
 
         private static Process _process;
 
@@ -70,7 +74,13 @@ namespace MvcForms.Tests.SystemTests.Utility
                 var processes = IisExpressProcesses();
 
                 foreach (var process in processes)
-                    process.Kill();
+                {
+                    if (process.MainWindowHandle.ToInt32() != 0)
+                        PostMessage(process.MainWindowHandle, WM_QUIT, IntPtr.Zero, IntPtr.Zero);
+
+                    foreach (ProcessThread thread in process.Threads)
+                        PostThreadMessage(thread.Id, WM_QUIT, IntPtr.Zero, IntPtr.Zero);
+                }
 
                 processes.Count.Should().Be(0);
             });
