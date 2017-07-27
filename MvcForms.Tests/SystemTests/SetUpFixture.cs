@@ -16,11 +16,7 @@ namespace MvcForms.Tests.SystemTests
                     Task.Run(() => IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port)),
                     Task.Run(() => WebDriver.Instance()));
             }
-            catch
-            {
-                TearDown();
-                throw;
-            }
+            catch { TearDown(); throw; }
         }
 
         [TearDown]
