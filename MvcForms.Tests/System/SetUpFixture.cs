@@ -1,4 +1,5 @@
-﻿using MvcForms.Tests.System.Utility;
+﻿using System.Threading.Tasks;
+using MvcForms.Tests.System.Utility;
 using NUnit.Framework;
 
 namespace MvcForms.Tests.System
@@ -9,15 +10,17 @@ namespace MvcForms.Tests.System
         [SetUp]
         public void SetUp()
         {
-            IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port);
-            WebDriver.Instance();
+            Task.WaitAll(
+                Task.Run(() => IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port)),
+                Task.Run(() => WebDriver.Instance()));
         }
 
         [TearDown]
         public void TearDown()
         {
-            WebDriver.Close();
-            IisExpress.AfterTests();
+            Task.WaitAll(
+                Task.Run(() => WebDriver.Close()),
+                Task.Run(() => IisExpress.AfterTests()));
         }
     }
 }
