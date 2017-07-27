@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using MvcForms.Tests.System.Utility;
+using MvcForms.Tests.SystemTests.Utility;
 using NUnit.Framework;
 
-namespace MvcForms.Tests.System
+namespace MvcForms.Tests.SystemTests
 {
     [SetUpFixture]
     public class SetUpFixture

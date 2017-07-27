@@ -1,11 +1,11 @@
 ﻿using System;
 using FluentAssertions;
 using MvcForms.StubApp.Controllers;
-using MvcForms.Tests.System.Utility;
+using MvcForms.Tests.SystemTests.Utility;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace MvcForms.Tests.System.Pjax
+namespace MvcForms.Tests.SystemTests.Pjax
 {
     [TestFixture]
     public class PjaxTests_NoJs

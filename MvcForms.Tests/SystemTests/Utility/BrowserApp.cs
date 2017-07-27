@@ -4,7 +4,7 @@ using System.Linq;
 using FluentAssertions;
 using OpenQA.Selenium;
 
-namespace MvcForms.Tests.System.Utility
+namespace MvcForms.Tests.SystemTests.Utility
 {
     public class BrowserApp
     {

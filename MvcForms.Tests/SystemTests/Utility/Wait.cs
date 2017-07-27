@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace MvcForms.Tests.System.Utility
+namespace MvcForms.Tests.SystemTests.Utility
 {
     public static class Wait
     {

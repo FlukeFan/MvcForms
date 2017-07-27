@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using FluentAssertions;
 
-namespace MvcForms.Tests.System.Utility
+namespace MvcForms.Tests.SystemTests.Utility
 {
     public static class IisExpress
     {

@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace MvcForms.Tests.System.Utility
+namespace MvcForms.Tests.SystemTests.Utility
 {
     public class WebDriver
     {

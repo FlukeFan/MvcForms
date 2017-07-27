@@ -1,8 +1,8 @@
 ﻿using System;
 using FluentAssertions;
-using MvcForms.Tests.System.Utility;
+using MvcForms.Tests.SystemTests.Utility;
 
-namespace MvcForms.Tests.System.Pjax
+namespace MvcForms.Tests.SystemTests.Pjax
 {
     public class PjaxTests_Js : PjaxTests_NoJs
     {
