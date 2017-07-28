@@ -134,7 +134,8 @@ var pjax = {};
             data: context.data,
             timeout: 29000,
             dataType: "html",
-            success: function (data, textStatus, jqXHR) { callback(context, data, textStatus, jqXHR); }
+            success: function (data, textStatus, jqXHR) { callback(context, data, textStatus, jqXHR); },
+            error: function (jqXHR, textStatus, errorThrown) { callback(context, jqXHR.responseText, textStatus, jqXHR); }
         });
 
     }

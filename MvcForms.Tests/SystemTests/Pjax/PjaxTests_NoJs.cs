@@ -97,6 +97,17 @@ namespace MvcForms.Tests.SystemTests.Pjax
         }
 
         [Test]
+        public void Error()
+        {
+            App.GoTo(SystemActions.PjaxPage2());
+
+            App.Navigate("Navigate Error");
+
+            App.ShouldSeeText("DeliberateError");
+            App.ShouldHaveUrl(SystemActions.PjaxPageErr());
+        }
+
+        [Test]
         public void SubmitForm_Redraw()
         {
             App.GoTo(SystemActions.PjaxForm());
