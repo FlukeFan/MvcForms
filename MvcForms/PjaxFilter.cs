@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MvcForms.StubApp
+namespace MvcForms
 {
     public class PjaxFilter : IActionFilter
     {

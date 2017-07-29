@@ -85,6 +85,7 @@
     <Compile Include="Controls\Form.cs" />
     <Compile Include="Controls\ScopedHtmlHelper.cs" />
     <Compile Include="FormExtensions.cs" />
+    <Compile Include="PjaxFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MvcForms.nuspec" />
