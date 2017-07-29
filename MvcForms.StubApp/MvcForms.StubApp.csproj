@@ -197,10 +197,10 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <ItemGroup>
-    <MvcFormsContent Include="..\_output\MvcForms.$(Version)\content\**" />
-  </ItemGroup>
   <Target Name="BeforeBuild">
+    <ItemGroup>
+      <MvcFormsContent Include="..\_output\MvcForms.$(Version)\content\**" />
+    </ItemGroup>
     <Copy SourceFiles="@(MvcFormsContent)" DestinationFolder="%(RecursiveDir)" />
   </Target>
 </Project>
