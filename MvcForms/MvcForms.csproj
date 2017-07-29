@@ -90,6 +90,9 @@
     <None Include="MvcForms.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\pjax.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Build\Common.targets" />
   <Target Name="AfterBuild">

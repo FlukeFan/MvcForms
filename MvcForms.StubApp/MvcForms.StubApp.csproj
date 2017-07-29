@@ -129,7 +129,6 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <Content Include="Scripts\pjax.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Forms\ForModelUsing.cshtml" />
     <Content Include="Views\Forms\BootstrapHorizontal.cshtml" />
@@ -174,6 +173,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\Build\Common.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
@@ -197,11 +197,10 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
+  <ItemGroup>
+    <MvcFormsContent Include="..\_output\MvcForms.$(Version)\content\**" />
+  </ItemGroup>
   <Target Name="BeforeBuild">
+    <Copy SourceFiles="@(MvcFormsContent)" DestinationFolder="%(RecursiveDir)" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

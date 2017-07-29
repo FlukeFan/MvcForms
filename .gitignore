@@ -9,3 +9,4 @@
 /_output
 /Build/MvcForms.VisualState.xml
 /Build/TestResult.xml
+/MvcForms.StubApp/Scripts/pjax.js
