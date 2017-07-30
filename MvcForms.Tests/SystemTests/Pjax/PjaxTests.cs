@@ -7,40 +7,45 @@ using OpenQA.Selenium;
 
 namespace MvcForms.Tests.SystemTests.Pjax
 {
-    [TestFixture]
-    public class PjaxTests_NoJs
+    public class PjaxTests_Js : PjaxTests
     {
-        protected string _headerTicks;
+        protected override bool DisableJs() { return false; }
 
-        private BrowserApp App { get; set; }
-
-        [SetUp]
-        public void SetUp()
+        protected override void VerifyNavState()
         {
-            App = NewApp();
+            Console.WriteLine($"Verify header is still {_headerTicks}");
+            var newHeaderTicks = QueryHeaderTicks();
+            newHeaderTicks.Should().Be(_headerTicks);
         }
+    }
 
-        protected virtual BrowserApp NewApp()
-        {
-            return new BrowserApp(true);
-        }
+    public class PjaxTests_NoJs : PjaxTests
+    {
+        protected override bool DisableJs() { return true; }
 
-        protected virtual void StoreNavState()
-        {
-            _headerTicks = QueryHeaderTicks();
-        }
-
-        protected virtual void VerifyNavState()
+        protected override void VerifyNavState()
         {
             Console.WriteLine($"Verify header is not {_headerTicks}");
             var newHeaderTicks = QueryHeaderTicks();
             newHeaderTicks.Should().NotBe(_headerTicks);
+        }
+    }
+
+    public abstract class PjaxTests : NoJsTest
+    {
+        protected string _headerTicks;
+
+        private void StoreNavState()
+        {
+            _headerTicks = QueryHeaderTicks();
         }
 
         protected string QueryHeaderTicks()
         {
             return App.Query(wd => wd.FindElement(By.Id("header")).Text);
         }
+
+        protected abstract void VerifyNavState();
 
         [Test]
         public void Navigate()

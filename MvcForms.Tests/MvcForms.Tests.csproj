@@ -108,11 +108,11 @@
     <Compile Include="StubApp\SetUpFixture.cs" />
     <Compile Include="StubApp\Utility\StubAppTest.cs" />
     <Compile Include="StubApp\Utility\TestExtensions.cs" />
-    <Compile Include="SystemTests\Pjax\PjaxTests_Js.cs" />
-    <Compile Include="SystemTests\Pjax\PjaxTests_NoJs.cs" />
+    <Compile Include="SystemTests\Pjax\PjaxTests.cs" />
     <Compile Include="SystemTests\SetUpFixture.cs" />
     <Compile Include="SystemTests\Utility\BrowserApp.cs" />
     <Compile Include="SystemTests\Utility\IisExpress.cs" />
+    <Compile Include="SystemTests\Utility\NoJsTest.cs" />
     <Compile Include="SystemTests\Utility\Wait.cs" />
     <Compile Include="SystemTests\Utility\WebDriver.cs" />
     <Compile Include="Utility\FakeHtmlHelper.cs" />
