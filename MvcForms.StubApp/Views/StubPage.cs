@@ -8,14 +8,10 @@ namespace MvcForms.StubApp.Views
         public void SetLayout(string title)
         {
             ViewBag.Title = title;
-            Layout = SharedViews.MasterPjaxWhole;
 
-            var pjax = Request.Headers["X-PJAX"];
-
-            if (string.IsNullOrEmpty(pjax))
-                return;
-
-            Layout = SharedViews.MasterPjaxPartial;
+            Layout = Request.IsPjax()
+                ? SharedViews.MasterPjaxPartial
+                : SharedViews.MasterPjaxWhole;
         }
     }
 }
