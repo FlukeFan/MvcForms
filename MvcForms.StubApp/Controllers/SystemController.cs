@@ -44,10 +44,13 @@ namespace MvcForms.StubApp.Controllers
         [HttpPost]
         public ActionResult PjaxForm(string postedValue)
         {
+            if (!string.IsNullOrWhiteSpace(Request.Form["redirect"]))
+                return Redirect(SystemActions.PjaxForm());
+
             if (postedValue == "Success")
                 return Redirect(SystemActions.PjaxFormDone());
-            else
-                return View((object)postedValue);
+
+            return View((object)postedValue);
         }
 
         public ActionResult PjaxFormDone()

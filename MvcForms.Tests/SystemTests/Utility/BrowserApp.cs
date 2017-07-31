@@ -170,10 +170,10 @@ namespace MvcForms.Tests.SystemTests.Utility
                     buttons = buttons.Where(b => b.GetAttribute("value") == text).ToList();
 
                 if (buttons.Count > 1)
-                    Assert.Fail("No single button; found: ", string.Join("\n", buttons.Select(b => b.GetAttribute("outerHTML"))));
+                    Assert.Fail("No single button; found: {0}", string.Join("\n", buttons.Select(b => b.GetAttribute("outerHTML"))));
 
                 if (buttons.Count < 1)
-                    Assert.Fail("No buttons found with text = ", text);
+                    Assert.Fail("No buttons found with text = {0}", text);
 
                 buttons.First().Click();
             });

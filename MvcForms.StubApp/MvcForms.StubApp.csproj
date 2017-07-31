@@ -196,6 +196,9 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
   <Target Name="BeforeBuild">
     <ItemGroup>
       <MvcFormsContent Include="..\_output\MvcForms.$(Version)\content\**" />

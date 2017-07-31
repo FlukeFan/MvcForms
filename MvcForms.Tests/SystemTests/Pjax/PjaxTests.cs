@@ -13,9 +13,7 @@ namespace MvcForms.Tests.SystemTests.Pjax
 
         protected override void VerifyNavState()
         {
-            Console.WriteLine($"Verify header is still {_headerTicks}");
-            var newHeaderTicks = QueryHeaderTicks();
-            newHeaderTicks.Should().Be(_headerTicks);
+            VerifyNavRemained();
         }
     }
 
@@ -25,9 +23,7 @@ namespace MvcForms.Tests.SystemTests.Pjax
 
         protected override void VerifyNavState()
         {
-            Console.WriteLine($"Verify header is not {_headerTicks}");
-            var newHeaderTicks = QueryHeaderTicks();
-            newHeaderTicks.Should().NotBe(_headerTicks);
+            VerifyNavChanged();
         }
     }
 
@@ -43,6 +39,20 @@ namespace MvcForms.Tests.SystemTests.Pjax
         protected string QueryHeaderTicks()
         {
             return App.Query(wd => wd.FindElement(By.Id("header")).Text);
+        }
+
+        protected void VerifyNavChanged()
+        {
+            Console.WriteLine($"Verify header is not {_headerTicks}");
+            var newHeaderTicks = QueryHeaderTicks();
+            newHeaderTicks.Should().NotBe(_headerTicks);
+        }
+
+        protected void VerifyNavRemained()
+        {
+            Console.WriteLine($"Verify header is still {_headerTicks}");
+            var newHeaderTicks = QueryHeaderTicks();
+            newHeaderTicks.Should().Be(_headerTicks);
         }
 
         protected abstract void VerifyNavState();
@@ -102,6 +112,17 @@ namespace MvcForms.Tests.SystemTests.Pjax
         }
 
         [Test]
+        public void Navigate_NoPjax()
+        {
+            App.GoTo(SystemActions.PjaxPage2());
+
+            StoreNavState();
+            App.Navigate("Navigate to 2");
+
+            VerifyNavChanged();
+        }
+
+        [Test]
         public void Error()
         {
             App.GoTo(SystemActions.PjaxPage2());
@@ -141,6 +162,17 @@ namespace MvcForms.Tests.SystemTests.Pjax
             App.ShouldHaveTitleContaining("FormDone");
             App.ShouldHaveUrl(SystemActions.PjaxFormDone());
             VerifyNavState();
+        }
+
+        [Test]
+        public void SubmitForm_NoPjax()
+        {
+            App.GoTo(SystemActions.PjaxForm());
+
+            StoreNavState();
+            App.Submit("redirect");
+
+            VerifyNavChanged();
         }
     }
 }
