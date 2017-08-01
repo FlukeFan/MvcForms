@@ -104,5 +104,6 @@
   </ItemGroup>
   <Target Name="AfterBuild">
     <CallTarget Targets="PackageNuGet" />
+    <Copy SourceFiles="@(Content)" DestinationFolder="..\MvcForms.StubApp\%(RelativeDir)" />
   </Target>
 </Project>

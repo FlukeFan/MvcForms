@@ -6,8 +6,6 @@
     <Version>0.0.0.6</Version>
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
 
-    <MSBuildCommunityTasksPath>$(MSBuildThisFileDirectory)\..\packages\MSBuildTasks.1.5.0.235\tools</MSBuildCommunityTasksPath>
-
     <NuGetExe>$(MSBuildThisFileDirectory)\..\packages\NuGet.CommandLine.4.1.0\tools\NuGet.exe</NuGetExe>
     <OpenCoverExe>$(MSBuildThisFileDirectory)\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe</OpenCoverExe>
     <NUnitExe>$(MSBuildThisFileDirectory)\..\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe</NUnitExe>
@@ -23,8 +21,6 @@
     <CoverFilterFileOption Condition="Exists('CoverageFilter.txt')">-filterfile:CoverageFilter.txt</CoverFilterFileOption>
 
   </PropertyGroup>
-
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
 
   <ItemGroup>
     <TestDependencies Include="$(OutDir)\$(AssemblyName).dll" />
@@ -53,8 +49,6 @@
   <Target Name="PackageNuGet" Inputs="@(PackageDependencies)" Outputs="..\_output\$(AssemblyName).$(Version).nupkg">
     <Error Text="Missing $(AssemblyName).nuspec" Condition="!Exists('$(AssemblyName).nuspec')" />
     <Exec Command="$(NuGetExe) pack $(MSBuildProjectFile) -OutputDirectory ..\_output -Properties Configuration=$(Configuration);OutDir=$(OutDir)" />
-    <RemoveDir Directories="..\_output\$(AssemblyName).$(Version)" />
-    <Unzip ZipFileName="..\_output\$(AssemblyName).$(Version).nupkg" TargetDirectory="..\_output\$(AssemblyName).$(Version)" />
   </Target>
 
 </Project>

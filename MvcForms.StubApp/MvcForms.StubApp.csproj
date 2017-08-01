@@ -172,7 +172,6 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Build\Common.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
@@ -196,13 +195,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <PropertyGroup>
-    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-    <ItemGroup>
-      <MvcFormsContent Include="..\_output\MvcForms.$(Version)\content\**" />
-    </ItemGroup>
-    <Copy SourceFiles="@(MvcFormsContent)" DestinationFolder="%(RecursiveDir)" />
   </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>
