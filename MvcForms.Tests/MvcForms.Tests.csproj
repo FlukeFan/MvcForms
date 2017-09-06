@@ -102,7 +102,7 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="DesignContraintsTests.cs" />
     <Compile Include="FormExtensionsTests.cs" />
-    <Compile Include="NugetDependency.cs" />
+    <Compile Include="NugetPackage.cs" />
     <Compile Include="StubApp\Controllers\FormsControllerTests.cs" />
     <Compile Include="StubApp\Controllers\HomeControllerTests.cs" />
     <Compile Include="StubApp\SetUpFixture.cs" />
