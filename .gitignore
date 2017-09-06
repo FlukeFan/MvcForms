@@ -10,3 +10,7 @@
 /Build/MvcForms.VisualState.xml
 /Build/TestResult.xml
 /MvcForms.StubApp/Scripts/pjax.js
+/MvcForms.StubApp/Scripts/mvcForms.min.js
+/MvcForms.StubApp/Scripts/mvcForms.min.map
+/MvcForms/Scripts/mvcForms.min.js
+/MvcForms/Scripts/mvcForms.min.map

@@ -17,8 +17,9 @@ var pjax = {};
 
         $(document).on('click', 'input[type=submit], button', function (e) {
 
-            if (lastButton)
+            if (lastButton) {
                 lastButton.removeAttr('clicked');
+            }
 
             lastButton = $(e.target);
             lastButton.attr('clicked', 'true');
@@ -30,23 +31,27 @@ var pjax = {};
 
         var anchor = $(e.target);
 
-        if (anchor.attr('data-nopjax'))
+        if (anchor.attr('data-nopjax')) {
             return;
+        }
 
         var container = anchor.closest('[data-pjax]');
         var url = anchor.attr('href');
 
-        if (!container.attr('id'))
+        if (!container.attr('id')) {
             container.attr('id', 'pjax_' + new Date().valueOf());
+        }
 
-        if (url.toLowerCase().substr(0, 7) === 'http://' || url.toLowerCase().substr(0, 8) === 'https://')
+        if (url.toLowerCase().substr(0, 7) === 'http://' || url.toLowerCase().substr(0, 8) === 'https://') {
             return; // we don't pjax external links
+        }
 
-        if (history.state === null || history.state.containerId !== container.attr('id'))
+        if (history.state === null || history.state.containerId !== container.attr('id')) {
             history.replaceState({
                 url: location.pathname + location.search + location.hash,
                 containerId: container.attr('id')
             }, null, '');
+        }
 
         var context = {
             url: url,
@@ -66,8 +71,9 @@ var pjax = {};
 
         var url = stripInternalParams(jqXHR.getResponseHeader('X-PJAX-URL') || context.url);
 
-        if (url !== location.href)
+        if (url !== location.href) {
             history.pushState({ url: url, containerId: context.container.attr('id') }, null, url);
+        }
     }
 
     function submit(e) {
@@ -76,14 +82,16 @@ var pjax = {};
 
         var clickedButton = form.find('*[clicked=true]');
 
-        if (clickedButton.attr('data-nopjax'))
+        if (clickedButton.attr('data-nopjax')) {
             return;
+        }
 
         var container = form.closest('[data-pjax]');
         var data = form.serialize();
 
-        if (clickedButton.length > 0)
+        if (clickedButton.length > 0) {
             data += "&" + clickedButton.attr('name') + "=" + clickedButton.attr('value');
+        }
 
         var context = {
             url: form.attr('action') || location.url,
@@ -126,7 +134,7 @@ var pjax = {};
             container: container
         };
 
-        load(context, function (context, data, textStatus, jqXHR) {
+        load(context, function (context, data) {
             render(container, data);
         });
     }
@@ -142,7 +150,7 @@ var pjax = {};
             timeout: 29000,
             dataType: "html",
             success: function (data, textStatus, jqXHR) { callback(context, data, textStatus, jqXHR); },
-            error: function (jqXHR, textStatus, errorThrown) { callback(context, jqXHR.responseText, textStatus, jqXHR); }
+            error: function (jqXHR, textStatus) { callback(context, jqXHR.responseText, textStatus, jqXHR); }
         });
 
     }

@@ -11,6 +11,8 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <ProjectGuid>{7AA07F6D-97B1-4C8E-A71D-3D331C6F7C3D}</ProjectGuid>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +36,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxMin, Version=5.14.5506.26196, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxMin.5.14.5506.26202\lib\net40\AjaxMin.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlTags, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlTags.4.2.0\lib\net45\HtmlTags.dll</HintPath>
       <Private>True</Private>
@@ -89,21 +94,30 @@
     <Compile Include="RequestExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MvcForms.nuspec" />
+    <None Include="mvcForms.ajaxmin">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MvcForms.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\mvcForms.js" />
     <Content Include="Scripts\pjax.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Build\Common.targets" />
+  <Import Project="..\packages\AjaxMin.5.14.5506.26202\tools\net40\AjaxMin.targets" />
   <ItemGroup>
     <PackageDependencies Include="Scripts\**\*.js">
       <InProject>False</InProject>
     </PackageDependencies>
   </ItemGroup>
+  <PropertyGroup>
+    <AjaxMinTreatWarningsAsErrors>true</AjaxMinTreatWarningsAsErrors>
+  </PropertyGroup>
   <Target Name="AfterBuild">
     <CallTarget Targets="PackageNuGet" />
-    <Copy SourceFiles="@(Content)" DestinationFolder="..\MvcForms.StubApp\%(RelativeDir)" />
   </Target>
 </Project>

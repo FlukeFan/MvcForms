@@ -195,11 +195,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
   <Target Name="BeforeBuild">
+    <ItemGroup>
+      <MvcFormsScript Include="..\MvcForms\Scripts\*.min.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(MvcFormsScript)" DestinationFolder="Scripts" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
