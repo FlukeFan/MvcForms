@@ -110,6 +110,10 @@ var pjax = {};
 
     function render(container, data) {
 
+        $("#pjax_overlay")
+            .stop()
+            .fadeTo('fast', 0, function () { $(this).remove(); });
+
         container.html(data);
 
         var pjaxContent = container.children(':first');
@@ -140,6 +144,25 @@ var pjax = {};
     }
 
     function load(context, callback) {
+
+        $("<table id='pjax_overlay'><tbody><tr><td></td></tr></tbody></table>").css({
+            "position": "fixed",
+            "top": 0,
+            "left": 0,
+            "width": "100%",
+            "height": "100%",
+            "background-color": "rgba(0,0,0,1)",
+            "opacity": "0",
+            "z-index": 10000,
+            "vertical-align": "middle",
+            "text-align": "center",
+            "color": "#fff",
+            "font-size": "30px",
+            "font-weight": "bold",
+            "cursor": "wait"
+        })
+            .fadeTo('slow', 0.5)
+            .appendTo("body");
 
         $.ajax({
             headers: { 'X-PJAX': 'true', 'X-PJAX-URL': context.url },

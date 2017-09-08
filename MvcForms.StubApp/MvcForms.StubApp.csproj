@@ -20,6 +20,7 @@
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
     <ProjectGuid>{F633A03B-B28A-4DC6-960A-6C886DBEA173}</ProjectGuid>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -128,6 +129,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\mvcForms.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Forms\ForModelUsing.cshtml" />
     <Content Include="Views\Forms\BootstrapHorizontal.cshtml" />
@@ -138,6 +140,7 @@
     <Content Include="Views\Shared\_MasterPjaxPartial.cshtml" />
     <Content Include="Views\System\PjaxForm.cshtml" />
     <Content Include="Views\System\PjaxFormDone.cshtml" />
+    <Content Include="Scripts\mvcForms.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
