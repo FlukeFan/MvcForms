@@ -110,10 +110,6 @@ var pjax = {};
 
     function render(container, data) {
 
-        $("#pjax_overlay")
-            .stop()
-            .fadeTo('fast', 0, function () { $(this).remove(); });
-
         container.html(data);
 
         var pjaxContent = container.children(':first');
@@ -143,6 +139,14 @@ var pjax = {};
         });
     }
 
+    function hideOverlay() {
+
+        $("#pjax_overlay")
+            .stop(true)
+            .fadeTo(50, 0, function () { $(this).remove(); });
+
+    }
+
     function load(context, callback) {
 
         $("<table id='pjax_overlay'><tbody><tr><td></td></tr></tbody></table>").css({
@@ -161,7 +165,8 @@ var pjax = {};
             "font-weight": "bold",
             "cursor": "wait"
         })
-            .fadeTo('slow', 0.5)
+            .fadeTo(100, 0)
+            .fadeTo(1500, 0.2)
             .appendTo("body");
 
         $.ajax({
@@ -172,8 +177,8 @@ var pjax = {};
             data: context.data,
             timeout: 29000,
             dataType: "html",
-            success: function (data, textStatus, jqXHR) { callback(context, data, textStatus, jqXHR); },
-            error: function (jqXHR, textStatus) { callback(context, jqXHR.responseText, textStatus, jqXHR); }
+            success: function (data, textStatus, jqXHR) { hideOverlay(); callback(context, data, textStatus, jqXHR); },
+            error: function (jqXHR, textStatus) { hideOverlay(); callback(context, jqXHR.responseText, textStatus, jqXHR); }
         });
 
     }
