@@ -136,7 +136,8 @@ namespace MvcForms.Tests.SystemTests.Pjax
         [Test]
         public void SubmitForm_Redraw()
         {
-            App.GoTo(SystemActions.PjaxForm());
+            App.GoTo(HomeActions.Index());
+            App.Navigate("PjaxForm");
 
             App.TypeText("postedValue", "posted");
 

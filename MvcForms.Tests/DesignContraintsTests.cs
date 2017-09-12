@@ -21,16 +21,16 @@ namespace MvcForms.Tests
         }
 
         [Test]
-        public void OnlyMinifiedScriptsArePackaged()
+        public void OnlyMvcFormsScriptsArePackaged()
         {
             var folder = @"..\..\..\_output";
             var name = "MvcForms";
 
             var content = NugetPackage.FindContentFiles(folder, name);
 
-            var nonMinifiedFiles = content.Where(f => !f.Contains(".min.")).ToList();
+            var nonMvcFormsFiles = content.Where(f => !f.Contains("/mvcForms")).ToList();
 
-            nonMinifiedFiles.Should().BeEmpty("only minified files should be packaged (potentially change the build action to None)");
+            nonMvcFormsFiles.Should().BeEmpty("only mvcForms files should be packaged (potentially change the build action to None)");
         }
     }
 }

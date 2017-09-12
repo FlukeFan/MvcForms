@@ -1,6 +1,7 @@
-﻿@inherits System.Web.Mvc.WebViewPage
-@using MvcForms.StubApp.Controllers
-@{ Layout = "~/Views/Shared/_bootstrap.cshtml"; }
+﻿@inherits StubPage<string>
+@{
+    SetLayout("Home");
+}
 <div>
     <h3>Static HTML examples</h3>
     <section>
