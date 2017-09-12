@@ -75,7 +75,7 @@ namespace MvcForms.Tests
 
         public static void UsingPackage(string folder, string name, Action<ZipArchive> action)
         {
-            var regFile = name + "\\.\\d+\\.\\d+\\.\\d+\\.\\d+\\.nupkg";
+            var regFile = name + "\\.\\d+\\.\\d+\\.\\d+(\\.\\d+)?\\.nupkg";
             var regEx = new Regex(regFile);
             var files = Directory.GetFiles(folder, "*.*");
             var archiveFiles = files.Where(f => regEx.IsMatch(f)).ToList();
