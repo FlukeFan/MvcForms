@@ -103,7 +103,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\mvcForms.js" />
+    <None Include="Scripts\forms.js" />
     <None Include="Scripts\pjax.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,9 +1,14 @@
 <root>
   <!-- http://ajaxmin.codeplex.com/wikipage?title=XML%20File%20Formats -->
+  <arguments>–global:jQuery,$</arguments>
   <output path="Scripts\mvcForms.min.js">
-    <arguments> –global:jQuery,$</arguments>
     <symbolMap name="v3" path="Scripts\mvcForms.min.map" />
     <input path="Scripts\pjax.js"/>
-    <input path="Scripts\mvcForms.js"/>
+    <input path="Scripts\forms.js"/>
+  </output>
+  <output path="Scripts\mvcForms.js" type="">
+    <arguments>-pretty</arguments>
+    <input path="Scripts\pjax.js"/>
+    <input path="Scripts\forms.js"/>
   </output>
 </root>

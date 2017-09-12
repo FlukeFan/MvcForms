@@ -203,7 +203,7 @@
   </PropertyGroup>
   <Target Name="BeforeBuild">
     <ItemGroup>
-      <MvcFormsScript Include="..\MvcForms\Scripts\*.min.*" />
+      <MvcFormsScript Include="..\MvcForms\Scripts\mvcForms.*" />
     </ItemGroup>
     <Copy SourceFiles="@(MvcFormsScript)" DestinationFolder="Scripts" />
   </Target>
