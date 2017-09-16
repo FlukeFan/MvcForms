@@ -26,9 +26,11 @@ namespace MvcForms.Tests
             var folder = @"..\..\..\_output";
             var name = "MvcForms";
 
-            var content = NugetPackage.FindContentFiles(folder, name);
+            var contentFiles = NugetPackage.FindContentFiles(folder, name);
 
-            var nonMvcFormsFiles = content.Where(f => !f.Contains("/mvcForms")).ToList();
+            contentFiles.Should().NotBeEmpty("content (script) files should be packaged");
+
+            var nonMvcFormsFiles = contentFiles.Where(f => !f.Contains("/mvcForms")).ToList();
 
             nonMvcFormsFiles.Should().BeEmpty("only mvcForms files should be packaged (potentially change the build action to None)");
         }

@@ -1,0 +1,8 @@
+<root>
+  <!-- http://ajaxmin.codeplex.com/wikipage?title=XML%20File%20Formats -->
+  <arguments>–global:jQuery,$</arguments>
+  <output path="Scripts\mvcForms.min.js">
+    <symbolMap name="v3" path="Scripts\mvcForms.min.map" />
+    <input path="Scripts\mvcForms.js"/>
+  </output>
+</root>

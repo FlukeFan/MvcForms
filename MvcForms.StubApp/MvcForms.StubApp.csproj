@@ -207,4 +207,10 @@
     </ItemGroup>
     <Copy SourceFiles="@(MvcFormsScript)" DestinationFolder="Scripts" />
   </Target>
+  <Target Name="AfterClean">
+    <ItemGroup>
+      <MvcFormsScript Include="Scripts\mvcForms.*" />
+    </ItemGroup>
+    <Delete Files="@(MvcFormsScript)" />
+  </Target>
 </Project>

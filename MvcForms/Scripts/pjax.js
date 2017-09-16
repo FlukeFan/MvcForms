@@ -95,7 +95,7 @@ var pjax = {};
         }
 
         var context = {
-            url: form.attr('action') || (location.pathname + location.search + location.hash),
+            url: form.attr('action') || location.pathname + location.search + location.hash,
             data: data,
             verb: form.attr('method') || 'POST',
             container: container

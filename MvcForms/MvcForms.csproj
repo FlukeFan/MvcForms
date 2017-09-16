@@ -97,6 +97,9 @@
     <None Include="mvcForms.ajaxmin">
       <SubType>Designer</SubType>
     </None>
+    <None Include="mvcForms.min.ajaxmin">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="MvcForms.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -117,7 +120,7 @@
   <PropertyGroup>
     <AjaxMinTreatWarningsAsErrors>true</AjaxMinTreatWarningsAsErrors>
   </PropertyGroup>
-  <Target Name="AfterBuild">
+  <Target Name="NuGet" AfterTargets="BuildAjaxMinManifests">
     <CallTarget Targets="PackageNuGet" />
   </Target>
 </Project>
