@@ -6,7 +6,7 @@
     <input path="Scripts\pjax.js"/>
     <input path="Scripts\forms.js"/>
   </output>
-  <output path="Scripts\mvcForms.js" type="">
+  <output path="Scripts\mvcForms.js">
     <arguments>-pretty</arguments>
     <input path="Scripts\pjax.js"/>
     <input path="Scripts\forms.js"/>

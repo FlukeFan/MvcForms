@@ -4,6 +4,7 @@ var pjax = {};
 (function () {
 
     pjax.init = init;
+    pjax.onTimeout = onTimeout;
 
     var lastButton = null;
 
@@ -147,6 +148,11 @@ var pjax = {};
 
     }
 
+    function onTimeout() {
+        // default is to do nothing
+        // clients can change pjax.onTimeout to their requirements
+    }
+
     function load(context, callback) {
 
         $("<table id='pjax_overlay'><tbody><tr><td></td></tr></tbody></table>").css({
@@ -177,8 +183,18 @@ var pjax = {};
             data: context.data,
             timeout: 29000,
             dataType: "html",
-            success: function (data, textStatus, jqXHR) { hideOverlay(); callback(context, data, textStatus, jqXHR); },
-            error: function (jqXHR, textStatus) { hideOverlay(); callback(context, jqXHR.responseText, textStatus, jqXHR); }
+            success: function (data, textStatus, jqXHR) {
+                hideOverlay();
+                callback(context, data, textStatus, jqXHR);
+            },
+            error: function (jqXHR, textStatus) {
+                hideOverlay();
+                if (textStatus === "timeout") {
+                    pjax.onTimeout(jqXHR, textStatus);
+                } else {
+                    callback(context, jqXHR.responseText, textStatus, jqXHR);
+                }
+            }
         });
 
     }
