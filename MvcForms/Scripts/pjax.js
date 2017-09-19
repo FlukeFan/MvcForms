@@ -148,9 +148,17 @@ var pjax = {};
 
     }
 
-    function onError() {
-        // default is to do nothing
-        // clients can change pjax.onError(jqXHR, textStatus, errorThrown) to their requirements
+    function onError(jqXHR, textStatus, errorThrown, context, callback) {
+        // default is to do nothing if there was no response (and return false) and
+        // to display the error otherwise (and return true)
+        // clients can change pjax.onError to their requirements
+
+        if (!jqXHR.responseText) {
+            return false;
+        }
+
+        callback(context, jqXHR.responseText, textStatus, jqXHR);
+        return true;
     }
 
     function load(context, callback) {
@@ -189,11 +197,7 @@ var pjax = {};
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 hideOverlay();
-                if (jqXHR.responseText === undefined) {
-                    pjax.onError(jqXHR, textStatus, errorThrown)
-                } else {
-                    callback(context, jqXHR.responseText, textStatus, jqXHR);
-                }
+                pjax.onError(jqXHR, textStatus, errorThrown, context, callback);
             }
         });
 

@@ -19,8 +19,11 @@
         <script src="~/Scripts/mvcForms.min.js"></script>
 
         <script>
-            pjax.onError = function (jqXHR, textStatus, errorThrown) {
-                alert("textStatus='" + textStatus + "'\nerrorThrown='" + errorThrown + "'");
+            var pjaxOnError = pjax.onError;
+
+            pjax.onError = function (jqXHR, textStatus, errorThrown, context, callback) {
+                if (!pjaxOnError(jqXHR, textStatus, errorThrown, context, callback))
+                    alert("textStatus='" + textStatus + "'\nerrorThrown='" + errorThrown + "'");
             }
 
             $(function () {
