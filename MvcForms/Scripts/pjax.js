@@ -4,7 +4,7 @@ var pjax = {};
 (function () {
 
     pjax.init = init;
-    pjax.onTimeout = onTimeout;
+    pjax.onError = onError;
 
     var lastButton = null;
 
@@ -148,9 +148,9 @@ var pjax = {};
 
     }
 
-    function onTimeout() {
+    function onError() {
         // default is to do nothing
-        // clients can change pjax.onTimeout to their requirements
+        // clients can change pjax.onError(jqXHR, textStatus, errorThrown) to their requirements
     }
 
     function load(context, callback) {
@@ -187,10 +187,10 @@ var pjax = {};
                 hideOverlay();
                 callback(context, data, textStatus, jqXHR);
             },
-            error: function (jqXHR, textStatus) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 hideOverlay();
-                if (textStatus === "timeout") {
-                    pjax.onTimeout(jqXHR, textStatus);
+                if (jqXHR.responseText === undefined) {
+                    pjax.onError(jqXHR, textStatus, errorThrown)
                 } else {
                     callback(context, jqXHR.responseText, textStatus, jqXHR);
                 }

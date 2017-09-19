@@ -19,8 +19,8 @@
         <script src="~/Scripts/mvcForms.min.js"></script>
 
         <script>
-            pjax.onTimeout = function () {
-                alert("There was a timeout waiting for the page to load using pjax");
+            pjax.onError = function (jqXHR, textStatus, errorThrown) {
+                alert("textStatus='" + textStatus + "'\nerrorThrown='" + errorThrown + "'");
             }
 
             $(function () {
