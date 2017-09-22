@@ -8,7 +8,8 @@ namespace MvcForms.Controls
     public abstract class Control<TModel, TTag> : IHtmlString
         where TTag : HtmlTag
     {
-        private HtmlHelper<TModel>                  _html;
+        protected HtmlHelper<TModel>    _html;
+
         private Action<HtmlHelper<TModel>, TTag>    _tagMutator;
 
         public Control(HtmlHelper<TModel> html)

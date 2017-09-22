@@ -6,6 +6,6 @@
     Page 1
 </div>
 <div>
-    <a href="@Url.Content(SystemActions.PjaxPage2())">Navigate to 2</a>
-    <a href="@Url.Content(SystemActions.PjaxTimeout())">Navigate timeout</a>
+    @Html.LinkButton("Navigate to 2", SystemActions.PjaxPage2())
+    @Html.LinkButton("Navigate timeout", SystemActions.PjaxTimeout())
 </div>

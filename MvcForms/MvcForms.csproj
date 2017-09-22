@@ -89,6 +89,8 @@
     <Compile Include="Controls\Form.cs" />
     <Compile Include="Controls\ScopedHtmlHelper.cs" />
     <Compile Include="FormExtensions.cs" />
+    <Compile Include="Navigation\LinkButton.cs" />
+    <Compile Include="Navigation\NavigationExtensions.cs" />
     <Compile Include="PjaxFilter.cs" />
     <Compile Include="RequestExtensions.cs" />
   </ItemGroup>

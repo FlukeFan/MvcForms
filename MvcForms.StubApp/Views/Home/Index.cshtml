@@ -6,31 +6,31 @@
     <h3>Static HTML examples</h3>
     <section>
         <ul>
-            <li><a href="@Url.Content(FormsActions.BootstrapHorizontal())">Bootstrap Horizontal Form</a></li>
+            <li>@Html.LinkButton("Bootstrap Horizontal Form", FormsActions.BootstrapHorizontal())</li>
         </ul>
     </section>
 
     <h3>ForModel</h3>
     <section>
         <ul>
-            <li><a href="@Url.Content(FormsActions.ForModel())">ForModel()</a></li>
-            <li><a href="@Url.Content(FormsActions.ForModel("test"))">ForModel("test")</a></li>
-            <li><a href="@Url.Content(FormsActions.ForModel("tst"))">ForModel("tst")</a></li>
+            <li>@Html.LinkButton("ForModel()", FormsActions.ForModel())</li>
+            <li>@Html.LinkButton("ForModel(\"test\")", FormsActions.ForModel("test"))</li>
+            <li>@Html.LinkButton("ForModel(\"tst\")", FormsActions.ForModel("tst"))</li>
         </ul>
     </section>
 
     <h3>FormFor</h3>
     <section>
         <ul>
-            <li><a href="@Url.Content(FormsActions.FormFor("test"))">FormFor("test")</a></li>
+            <li>@Html.LinkButton("FormFor(\"test\")", FormsActions.FormFor("test"))</li>
         </ul>
     </section>
 
     <h3>System</h3>
     <section>
         <ul>
-            <li><a href="@Url.Content(SystemActions.PjaxPage1())">PjaxPage1</a></li>
-            <li><a href="@Url.Content(SystemActions.PjaxForm())">PjaxForm</a></li>
+            <li>@Html.LinkButton("PjaxPage1", SystemActions.PjaxPage1())</li>
+            <li>@Html.LinkButton("PjaxForm", SystemActions.PjaxForm())</li>
         </ul>
     </section>
 </div>
