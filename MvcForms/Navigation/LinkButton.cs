@@ -20,7 +20,7 @@ namespace MvcForms.Navigation
 
         protected override LinkTag CreateTag()
         {
-            var url = new UrlHelper(_html.ViewContext.RequestContext).Content(_action);
+            var url = Url.Content(_action);
             return new LinkTag(_content.ToHtmlString(), url);
         }
     }

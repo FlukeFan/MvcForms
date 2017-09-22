@@ -8,15 +8,18 @@ namespace MvcForms.Controls
     public abstract class Control<TModel, TTag> : IHtmlString
         where TTag : HtmlTag
     {
-        protected HtmlHelper<TModel>    _html;
-
+        private HtmlHelper<TModel>                  _html;
         private Action<HtmlHelper<TModel>, TTag>    _tagMutator;
+        private Lazy<UrlHelper>                     _urlHelper;
 
         public Control(HtmlHelper<TModel> html)
         {
             _html = html;
             _tagMutator = null;
+            _urlHelper = new Lazy<UrlHelper>(() => new UrlHelper(_html.ViewContext.RequestContext));
         }
+
+        protected UrlHelper Url { get { return _urlHelper.Value; } }
 
         protected abstract TTag CreateTag();
 
