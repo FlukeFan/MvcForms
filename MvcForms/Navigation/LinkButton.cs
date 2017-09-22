@@ -9,19 +9,33 @@ namespace MvcForms.Navigation
     {
         private IHtmlString _content;
         private string      _action;
+        private bool        _noPjax;
 
         public LinkButton(HtmlHelper<T> html, IHtmlString content, string action) : base(html)
         {
-            _content = content;
-            _action = action;
+            Content(content);
+            Action(action);
         }
 
+        public IHtmlString Content() { return _content; }
+        public LinkButton<T> Content(IHtmlString content)   { _content = content; return this; }
+        public LinkButton<T> Content(string content)        { return this.Content(MvcHtmlString.Create(content)); }
+
         public string Action() { return _action; }
+        public LinkButton<T> Action(string action)          { _action = action; return this; }
+
+        public bool GetNoPjax() { return _noPjax; }
+        public LinkButton<T> NoPjax(bool noPjax = true)     { _noPjax = noPjax; return this; }
 
         protected override LinkTag CreateTag()
         {
             var url = Url.Content(_action);
-            return new LinkTag(_content.ToHtmlString(), url);
+            var tag = new LinkTag(_content.ToHtmlString(), url);
+
+            if (_noPjax)
+                tag.Attr("data-nopjax", "true");
+
+            return tag;
         }
     }
 }

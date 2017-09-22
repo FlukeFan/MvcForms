@@ -7,7 +7,7 @@
 </div>
 <div>
     @Html.LinkButton("Navigate to 1", SystemActions.PjaxPage1())
-    @Html.LinkButton("Navigate to 2", SystemActions.PjaxPage2()).Tag(t => t.Attr("data-nopjax", "true"))
+    @Html.LinkButton("Navigate to 2", SystemActions.PjaxPage2()).NoPjax()
     @Html.LinkButton("Navigate Redirect", SystemActions.PjaxPage3())
     @Html.LinkButton("Navigate Error", SystemActions.PjaxPageErr())
 </div>
