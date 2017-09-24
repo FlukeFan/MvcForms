@@ -19,7 +19,8 @@ namespace MvcForms
             _urlHelper = new Lazy<UrlHelper>(() => new UrlHelper(_html.ViewContext.RequestContext));
         }
 
-        protected UrlHelper Url { get { return _urlHelper.Value; } }
+        protected UrlHelper             Url     => _urlHelper.Value;
+        protected HtmlHelper<TModel>    Html    => _html;
 
         protected abstract TTag CreateTag();
 

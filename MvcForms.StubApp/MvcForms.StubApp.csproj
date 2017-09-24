@@ -93,6 +93,7 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModalController.cs" />
     <Compile Include="Controllers\PjaxController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -143,6 +144,8 @@
     <Content Include="Scripts\mvcForms.min.map" />
     <Content Include="Views\Forms\Index.cshtml" />
     <Content Include="Views\Pjax\Index.cshtml" />
+    <Content Include="Views\Modal\Index.cshtml" />
+    <Content Include="Views\Modal\Page1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

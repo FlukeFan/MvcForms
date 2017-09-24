@@ -1,0 +1,11 @@
+﻿@inherits StubPage<string>
+@{
+    SetLayout("Page1");
+}
+<h3>Page1</h3>
+@using (var form = Html.Form().Begin())
+{
+
+    @Html.LinkButtonCancelModal()
+
+}

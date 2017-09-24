@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="DesignContraintsTests.cs" />
+    <Compile Include="SystemTests\ModalTests.cs" />
     <Compile Include="Unit\Forms\ButtonTests.cs" />
     <Compile Include="Unit\Forms\FormExtensionsTests.cs" />
     <Compile Include="NugetPackage.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="StubApp\SetUpFixture.cs" />
     <Compile Include="StubApp\Utility\StubAppTest.cs" />
     <Compile Include="StubApp\Utility\TestExtensions.cs" />
-    <Compile Include="SystemTests\Pjax\PjaxTests.cs" />
+    <Compile Include="SystemTests\PjaxTests.cs" />
     <Compile Include="SystemTests\SetUpFixture.cs" />
     <Compile Include="SystemTests\Utility\BrowserApp.cs" />
     <Compile Include="SystemTests\Utility\IisExpress.cs" />

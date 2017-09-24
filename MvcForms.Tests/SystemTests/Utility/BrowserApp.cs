@@ -79,6 +79,16 @@ namespace MvcForms.Tests.SystemTests.Utility
             });
         }
 
+        public void ShouldNotSeeText(string text)
+        {
+            Console.WriteLine("Verify can not see text '{0}'", text);
+            WaitFor(() =>
+            {
+                var body = _webDriver.FindElement(By.TagName("body"));
+                body.Text.Should().NotContain(text);
+            });
+        }
+
         public void ShouldHaveTitleContaining(string text)
         {
             Console.WriteLine("Verify title contains '{0}'", text);

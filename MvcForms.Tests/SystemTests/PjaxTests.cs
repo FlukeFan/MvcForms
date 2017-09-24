@@ -5,7 +5,7 @@ using MvcForms.Tests.SystemTests.Utility;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace MvcForms.Tests.SystemTests.Pjax
+namespace MvcForms.Tests.SystemTests
 {
     public class PjaxTests_Js : PjaxTests
     {
@@ -60,7 +60,8 @@ namespace MvcForms.Tests.SystemTests.Pjax
         [Test]
         public void Navigate()
         {
-            App.GoTo(PjaxActions.Page1());
+            App.GoTo(PjaxActions.Index());
+            App.Navigate("Page1");
             App.ShouldSeeText("Page 1");
             App.ShouldHaveTitleContaining("Page 1");
             App.ShouldHaveUrl(PjaxActions.Page1());
@@ -137,7 +138,7 @@ namespace MvcForms.Tests.SystemTests.Pjax
         public void SubmitForm_Redraw()
         {
             App.GoTo(PjaxActions.Index());
-            App.Navigate("PjaxForm");
+            App.Navigate("Form");
 
             App.TypeText("postedValue", "posted");
 

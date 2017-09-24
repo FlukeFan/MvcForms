@@ -14,5 +14,25 @@ namespace MvcForms.Navigation
         {
             return new LinkButton<TViewModel>(helper, content, action);
         }
+
+        public static LinkButton<TViewModel> LinkButtonModal<TViewModel>(this HtmlHelper<TViewModel> helper, string content, string action)
+        {
+            return helper.LinkButtonModal(MvcHtmlString.Create(content), action);
+        }
+
+        public static LinkButton<TViewModel> LinkButtonModal<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content, string action)
+        {
+            return new LinkButton<TViewModel>(helper, content, action).Modal();
+        }
+
+        public static LinkButton<TViewModel> LinkButtonCancelModal<TViewModel>(this HtmlHelper<TViewModel> helper, string content = "Cancel")
+        {
+            return helper.LinkButtonCancelModal(MvcHtmlString.Create(content));
+        }
+
+        public static LinkButton<TViewModel> LinkButtonCancelModal<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content)
+        {
+            return new LinkButton<TViewModel>(helper, content).ModalReturn();
+        }
     }
 }
