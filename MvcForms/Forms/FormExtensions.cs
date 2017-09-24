@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 
 namespace MvcForms.Forms
 {
@@ -28,6 +29,16 @@ namespace MvcForms.Forms
         {
             var newHelper = helper.ForModel(postModel);
             return new Form<TPostModel>(newHelper);
+        }
+
+        public static Button<TViewModel> ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, string content)
+        {
+            return helper.ButtonSubmit(MvcHtmlString.Create(content));
+        }
+
+        public static Button<TViewModel> ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content)
+        {
+            return new Button<TViewModel>(helper, "submit", content);
         }
 
         private class ViewDataContainer : IViewDataContainer

@@ -16,14 +16,14 @@ namespace MvcForms.Navigation
             Action(action);
         }
 
-        public IHtmlString Content() { return _content; }
+        public IHtmlString Content()                        { return _content; }
+        public LinkButton<T> Content(string content)        { return Content(MvcHtmlString.Create(content)); }
         public LinkButton<T> Content(IHtmlString content)   { _content = content; return this; }
-        public LinkButton<T> Content(string content)        { return this.Content(MvcHtmlString.Create(content)); }
 
-        public string Action() { return _action; }
+        public string Action()                              { return _action; }
         public LinkButton<T> Action(string action)          { _action = action; return this; }
 
-        public bool GetNoPjax() { return _noPjax; }
+        public bool CausesNoPjax()                          { return _noPjax; }
         public LinkButton<T> NoPjax(bool noPjax = true)     { _noPjax = noPjax; return this; }
 
         protected override LinkTag CreateTag()

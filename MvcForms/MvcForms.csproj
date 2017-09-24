@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Control.cs" />
+    <Compile Include="Forms\Button.cs" />
     <Compile Include="Forms\Form.cs" />
     <Compile Include="ScopedHtmlHelper.cs" />
     <Compile Include="Forms\FormExtensions.cs" />
