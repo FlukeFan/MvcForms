@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace MvcForms.Controls
+namespace MvcForms
 {
     public class ScopedHtmlHelper<T> : IDisposable
     {

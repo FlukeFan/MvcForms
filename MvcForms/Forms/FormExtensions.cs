@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
-using MvcForms.Controls;
 
-namespace MvcForms
+namespace MvcForms.Forms
 {
     public static class FormExtensions
     {

@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using HtmlTags;
 
-namespace MvcForms.Controls
+namespace MvcForms
 {
     public abstract class Control<TModel, TTag> : IHtmlString
         where TTag : HtmlTag

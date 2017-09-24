@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
-using MvcForms.Tests.Utility;
+using MvcForms.Forms;
+using MvcForms.Tests.Unit.Utility;
 using NUnit.Framework;
 
-namespace MvcForms.Tests
+namespace MvcForms.Tests.Unit.Forms
 {
     [TestFixture]
     public class FormExtensionsTests
@@ -18,7 +19,7 @@ namespace MvcForms.Tests
         public void FormFor()
         {
             var html = FakeHtmlHelper.New(new TestViewModel());
-            
+
             html.FakeViewContext.FakeHttpContext.FakeRequest.SetRawUrl("http://fake.url");
 
             var form = html.FormFor(html.Model.Cmd);

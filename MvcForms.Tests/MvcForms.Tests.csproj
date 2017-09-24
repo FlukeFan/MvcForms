@@ -101,7 +101,7 @@
   <ItemGroup>
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="DesignContraintsTests.cs" />
-    <Compile Include="FormExtensionsTests.cs" />
+    <Compile Include="Unit\Forms\FormExtensionsTests.cs" />
     <Compile Include="NugetPackage.cs" />
     <Compile Include="StubApp\Controllers\FormsControllerTests.cs" />
     <Compile Include="StubApp\Controllers\HomeControllerTests.cs" />
@@ -115,10 +115,10 @@
     <Compile Include="SystemTests\Utility\NoJsTest.cs" />
     <Compile Include="SystemTests\Utility\Wait.cs" />
     <Compile Include="SystemTests\Utility\WebDriver.cs" />
-    <Compile Include="Utility\FakeHtmlHelper.cs" />
-    <Compile Include="Utility\FakeHttpContext.cs" />
-    <Compile Include="Utility\FakeHttpRequest.cs" />
-    <Compile Include="Utility\FakeViewContext.cs" />
+    <Compile Include="Unit\Utility\FakeHtmlHelper.cs" />
+    <Compile Include="Unit\Utility\FakeHttpContext.cs" />
+    <Compile Include="Unit\Utility\FakeHttpRequest.cs" />
+    <Compile Include="Unit\Utility\FakeViewContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Build\Common.targets" />

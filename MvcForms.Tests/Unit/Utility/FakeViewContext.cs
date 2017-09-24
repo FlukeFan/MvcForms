@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MvcForms.Tests.Utility
+namespace MvcForms.Tests.Unit.Utility
 {
     public class FakeViewContext : ViewContext
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace MvcForms.Tests.Utility
+namespace MvcForms.Tests.Unit.Utility
 {
     public class FakeHttpRequest : HttpRequestBase
     {

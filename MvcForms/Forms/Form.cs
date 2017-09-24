@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using HtmlTags;
 
-namespace MvcForms.Controls
+namespace MvcForms.Forms
 {
     public class Form<T> : Control<T, FormTag>
     {
