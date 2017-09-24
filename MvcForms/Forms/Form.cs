@@ -6,11 +6,12 @@ namespace MvcForms.Forms
     public class Form<T> : Control<T, HtmlTag>
     {
         private string _action;
-        private string _method = "post";
+        private string _method;
 
         public Form(HtmlHelper<T> html) : base(html)
         {
             _action = html.ViewContext.HttpContext.Request.RawUrl;
+            Method("post");
         }
 
         public string Action() { return _action; }
