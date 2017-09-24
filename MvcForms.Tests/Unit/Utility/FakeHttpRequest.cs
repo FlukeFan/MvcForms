@@ -6,7 +6,8 @@ namespace MvcForms.Tests.Unit.Utility
     {
         private string _rawUrl = "blah";
 
-        public override string RawUrl { get { return _rawUrl; } }
+        public override string RawUrl           => _rawUrl;
+        public override string ApplicationPath  => "/";
 
         public FakeHttpRequest SetRawUrl(string rawUrl) { _rawUrl = rawUrl; return this; }
     }

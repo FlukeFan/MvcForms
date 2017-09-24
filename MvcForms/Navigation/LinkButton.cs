@@ -4,7 +4,7 @@ using HtmlTags;
 
 namespace MvcForms.Navigation
 {
-    public class LinkButton<T> : Control<T, LinkTag>
+    public class LinkButton<T> : Control<T, HtmlTag>
     {
         private IHtmlString _content;
         private string      _action;
@@ -26,10 +26,13 @@ namespace MvcForms.Navigation
         public bool CausesNoPjax()                          { return _noPjax; }
         public LinkButton<T> NoPjax(bool noPjax = true)     { _noPjax = noPjax; return this; }
 
-        protected override LinkTag CreateTag()
+        protected override HtmlTag CreateTag()
         {
             var url = Url.Content(_action);
-            var tag = new LinkTag(_content.ToHtmlString(), url);
+
+            var tag = new HtmlTag("a")
+                .Attr("href", url)
+                .Text(_content.ToHtmlString()).Encoded(false);
 
             if (_noPjax)
                 tag.Attr("data-nopjax", "true");

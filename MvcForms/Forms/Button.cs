@@ -38,7 +38,7 @@ namespace MvcForms.Forms
         {
             var tag = new HtmlTag("button")
                 .Attr("type", _type)
-                .Text(_content.ToHtmlString());
+                .Text(_content.ToHtmlString()).Encoded(false);
 
             if (_name != null)
                 tag.Attr("name", _name);
