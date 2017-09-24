@@ -5,6 +5,8 @@ namespace MvcForms.StubApp.Controllers
 {
     public static class FormsActions
     {
+        public static string Index()                            { return "~/Forms/Index"; }
+
         public static string BootstrapHorizontal()              { return "~/Forms/BootstrapHorizontal"; }
 
         public static string ForModel()                         { return "~/Forms/ForModel"; }
@@ -16,6 +18,12 @@ namespace MvcForms.StubApp.Controllers
 
     public class FormsController : Controller
     {
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult BootstrapHorizontal()
         {

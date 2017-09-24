@@ -1,0 +1,11 @@
+﻿@inherits StubPage<object>
+@{
+    SetLayout("Page 1");
+}
+<div>
+    Page 1
+</div>
+<div>
+    @Html.LinkButton("Navigate to 2", PjaxActions.Page2())
+    @Html.LinkButton("Navigate timeout", PjaxActions.Timeout())
+</div>

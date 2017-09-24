@@ -93,7 +93,7 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\PjaxController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -133,14 +133,16 @@
     <Content Include="Web.config" />
     <Content Include="Views\Forms\ForModelUsing.cshtml" />
     <Content Include="Views\Forms\BootstrapHorizontal.cshtml" />
-    <Content Include="Views\System\PjaxPage1.cshtml" />
+    <Content Include="Views\Pjax\Page1.cshtml" />
     <Content Include="Views\web.config" />
     <Content Include="Views\Shared\_MasterPjaxWhole.cshtml" />
-    <Content Include="Views\System\PjaxPage2.cshtml" />
+    <Content Include="Views\Pjax\Page2.cshtml" />
     <Content Include="Views\Shared\_MasterPjaxPartial.cshtml" />
-    <Content Include="Views\System\PjaxForm.cshtml" />
-    <Content Include="Views\System\PjaxFormDone.cshtml" />
+    <Content Include="Views\Pjax\Form.cshtml" />
+    <Content Include="Views\Pjax\FormDone.cshtml" />
     <Content Include="Scripts\mvcForms.min.map" />
+    <Content Include="Views\Forms\Index.cshtml" />
+    <Content Include="Views\Pjax\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

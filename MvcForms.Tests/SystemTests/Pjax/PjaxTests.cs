@@ -60,24 +60,24 @@ namespace MvcForms.Tests.SystemTests.Pjax
         [Test]
         public void Navigate()
         {
-            App.GoTo(SystemActions.PjaxPage1());
+            App.GoTo(PjaxActions.Page1());
             App.ShouldSeeText("Page 1");
             App.ShouldHaveTitleContaining("Page 1");
-            App.ShouldHaveUrl(SystemActions.PjaxPage1());
+            App.ShouldHaveUrl(PjaxActions.Page1());
 
             StoreNavState();
             App.Navigate("Navigate to 2");
 
             App.ShouldSeeText("Page 2");
             App.ShouldHaveTitleContaining("Page 2");
-            App.ShouldHaveUrl(SystemActions.PjaxPage2());
+            App.ShouldHaveUrl(PjaxActions.Page2());
             VerifyNavState();
         }
 
         [Test]
         public void BackAndForward()
         {
-            App.GoTo(SystemActions.PjaxPage1());
+            App.GoTo(PjaxActions.Page1());
             App.Navigate("Navigate to 2");
 
             StoreNavState();
@@ -85,7 +85,7 @@ namespace MvcForms.Tests.SystemTests.Pjax
 
             App.ShouldSeeText("Page 1");
             App.ShouldHaveTitleContaining("Page 1");
-            App.ShouldHaveUrl(SystemActions.PjaxPage1());
+            App.ShouldHaveUrl(PjaxActions.Page1());
             VerifyNavState();
 
             StoreNavState();
@@ -93,28 +93,28 @@ namespace MvcForms.Tests.SystemTests.Pjax
 
             App.ShouldSeeText("Page 2");
             App.ShouldHaveTitleContaining("Page 2");
-            App.ShouldHaveUrl(SystemActions.PjaxPage2());
+            App.ShouldHaveUrl(PjaxActions.Page2());
             VerifyNavState();
         }
 
         [Test]
         public void Redirect()
         {
-            App.GoTo(SystemActions.PjaxPage2());
+            App.GoTo(PjaxActions.Page2());
 
             StoreNavState();
             App.Navigate("Navigate Redirect");
 
             App.ShouldSeeText("Page 1");
             App.ShouldHaveTitleContaining("Page 1");
-            App.ShouldHaveUrl(SystemActions.PjaxPage1());
+            App.ShouldHaveUrl(PjaxActions.Page1());
             VerifyNavState();
         }
 
         [Test]
         public void Navigate_NoPjax()
         {
-            App.GoTo(SystemActions.PjaxPage2());
+            App.GoTo(PjaxActions.Page2());
 
             StoreNavState();
             App.Navigate("Navigate to 2");
@@ -125,18 +125,18 @@ namespace MvcForms.Tests.SystemTests.Pjax
         [Test]
         public void Error()
         {
-            App.GoTo(SystemActions.PjaxPage2());
+            App.GoTo(PjaxActions.Page2());
 
             App.Navigate("Navigate Error");
 
             App.ShouldSeeText("DeliberateError");
-            App.ShouldHaveUrl(SystemActions.PjaxPageErr());
+            App.ShouldHaveUrl(PjaxActions.PageErr());
         }
 
         [Test]
         public void SubmitForm_Redraw()
         {
-            App.GoTo(HomeActions.Index());
+            App.GoTo(PjaxActions.Index());
             App.Navigate("PjaxForm");
 
             App.TypeText("postedValue", "posted");
@@ -146,14 +146,14 @@ namespace MvcForms.Tests.SystemTests.Pjax
 
             App.ShouldSeeText("button=go");
             App.ShouldHaveTitleContaining("Form:posted");
-            App.ShouldHaveUrl(SystemActions.PjaxForm());
+            App.ShouldHaveUrl(PjaxActions.Form());
             VerifyNavState();
         }
 
         [Test]
         public void SubmitForm_Redirect()
         {
-            App.GoTo(SystemActions.PjaxForm());
+            App.GoTo(PjaxActions.Form());
 
             App.TypeText("postedValue", "Success");
 
@@ -161,14 +161,14 @@ namespace MvcForms.Tests.SystemTests.Pjax
             App.Submit("go");
 
             App.ShouldHaveTitleContaining("FormDone");
-            App.ShouldHaveUrl(SystemActions.PjaxFormDone());
+            App.ShouldHaveUrl(PjaxActions.FormDone());
             VerifyNavState();
         }
 
         [Test]
         public void SubmitForm_NoPjax()
         {
-            App.GoTo(SystemActions.PjaxForm());
+            App.GoTo(PjaxActions.Form());
 
             StoreNavState();
             App.Submit("redirect");

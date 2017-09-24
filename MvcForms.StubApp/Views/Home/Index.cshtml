@@ -3,34 +3,9 @@
     SetLayout("Home");
 }
 <div>
-    <h3>Static HTML examples</h3>
-    <section>
-        <ul>
-            <li>@Html.LinkButton("Bootstrap Horizontal Form", FormsActions.BootstrapHorizontal())</li>
-        </ul>
-    </section>
 
-    <h3>ForModel</h3>
-    <section>
-        <ul>
-            <li>@Html.LinkButton("ForModel()", FormsActions.ForModel())</li>
-            <li>@Html.LinkButton("ForModel(\"test\")", FormsActions.ForModel("test"))</li>
-            <li>@Html.LinkButton("ForModel(\"tst\")", FormsActions.ForModel("tst"))</li>
-        </ul>
-    </section>
+    @Html.LinkButton("<h3>Forms</h3>", FormsActions.Index())
 
-    <h3>FormFor</h3>
-    <section>
-        <ul>
-            <li>@Html.LinkButton("FormFor(\"test\")", FormsActions.FormFor("test"))</li>
-        </ul>
-    </section>
+    @Html.LinkButton("<h3>Pjax</h3>", PjaxActions.Index())
 
-    <h3>System</h3>
-    <section>
-        <ul>
-            <li>@Html.LinkButton("PjaxPage1", SystemActions.PjaxPage1())</li>
-            <li>@Html.LinkButton("PjaxForm", SystemActions.PjaxForm())</li>
-        </ul>
-    </section>
 </div>

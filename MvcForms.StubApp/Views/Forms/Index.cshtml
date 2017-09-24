@@ -1,0 +1,27 @@
+﻿@inherits System.Web.Mvc.WebViewPage<FormForView>
+@using System.Web.Mvc.Html
+@using MvcForms.StubApp.Models.Forms
+@{ Layout = "~/Views/Shared/_bootstrap.cshtml"; }
+
+<h3>Static HTML examples</h3>
+<section>
+    <ul>
+        <li>@Html.LinkButton("Bootstrap Horizontal Form", FormsActions.BootstrapHorizontal())</li>
+    </ul>
+</section>
+
+<h3>ForModel</h3>
+<section>
+    <ul>
+        <li>@Html.LinkButton("ForModel()", FormsActions.ForModel())</li>
+        <li>@Html.LinkButton("ForModel(\"test\")", FormsActions.ForModel("test"))</li>
+        <li>@Html.LinkButton("ForModel(\"tst\")", FormsActions.ForModel("tst"))</li>
+    </ul>
+</section>
+
+<h3>FormFor</h3>
+<section>
+    <ul>
+        <li>@Html.LinkButton("FormFor(\"test\")", FormsActions.FormFor("test"))</li>
+    </ul>
+</section>

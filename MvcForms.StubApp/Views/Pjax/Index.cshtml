@@ -1,0 +1,11 @@
+﻿@inherits StubPage<string>
+@{
+    SetLayout("Pjax");
+}
+<h3>Pjax</h3>
+<section>
+    <ul>
+        <li>@Html.LinkButton("PjaxPage1", PjaxActions.Page1())</li>
+        <li>@Html.LinkButton("PjaxForm", PjaxActions.Form())</li>
+    </ul>
+</section>
