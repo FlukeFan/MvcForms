@@ -25,7 +25,7 @@ namespace MvcForms.StubApp.Controllers
         [HttpPost]
         public ActionResult Page1(object ignored)
         {
-            return Redirect(ModalActions.Index());
+            return this.ReturnModal();
         }
     }
 }

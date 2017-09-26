@@ -105,6 +105,7 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="DesignContraintsTests.cs" />
     <Compile Include="SystemTests\ModalTests.cs" />
+    <Compile Include="Unit\ControllerExtrensionsTests.cs" />
     <Compile Include="Unit\Forms\ButtonTests.cs" />
     <Compile Include="Unit\Forms\FormExtensionsTests.cs" />
     <Compile Include="NugetPackage.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="SystemTests\Utility\Wait.cs" />
     <Compile Include="SystemTests\Utility\WebDriver.cs" />
     <Compile Include="Unit\Navigation\LinkButtonTests.cs" />
+    <Compile Include="Unit\Utility\FakeController.cs" />
     <Compile Include="Unit\Utility\FakeHtmlHelper.cs" />
     <Compile Include="Unit\Utility\FakeHttpContext.cs" />
     <Compile Include="Unit\Utility\FakeHttpRequest.cs" />

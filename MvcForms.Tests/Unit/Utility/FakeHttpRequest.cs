@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Web;
 
 namespace MvcForms.Tests.Unit.Utility
@@ -7,8 +8,9 @@ namespace MvcForms.Tests.Unit.Utility
     {
         private string _rawUrl = "http://unit.test/default/rawUrl";
 
-        public override string RawUrl           => _rawUrl;
-        public override string ApplicationPath  => "/";
+        public override string  RawUrl          => _rawUrl;
+        public override string  ApplicationPath => "/";
+        public override Uri     Url             => new Uri(_rawUrl);
 
         public FakeHttpRequest SetRawUrl(string rawUrl) { _rawUrl = rawUrl; return this; }
 
