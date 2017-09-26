@@ -6,6 +6,7 @@ namespace MvcForms.StubApp.Controllers
     {
         public static string Index() { return "~/Modal/Index"; }
         public static string Page1() { return "~/Modal/Page1"; }
+        public static string Page2() { return "~/Modal/Page2"; }
     }
 
     public class ModalController : Controller
@@ -18,6 +19,12 @@ namespace MvcForms.StubApp.Controllers
 
         [HttpGet]
         public ActionResult Page1()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Page2()
         {
             return View();
         }

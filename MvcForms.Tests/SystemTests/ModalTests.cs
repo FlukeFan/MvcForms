@@ -39,5 +39,26 @@ namespace MvcForms.Tests.SystemTests
 
             App.ShouldSeeText("ModalIndex");
         }
+
+        [Test]
+        public void NestedModal()
+        {
+            App.GoTo(ModalActions.Index());
+
+            App.ShouldSeeText("Modal");
+
+            App.Navigate("Modal1");
+
+            App.ShouldSeeText("Page1");
+
+            App.Navigate("Modal2");
+
+            App.ShouldSeeText("Page2");
+
+            App.Navigate("Cancel");
+            App.Navigate("Cancel");
+
+            App.ShouldSeeText("ModalIndex");
+        }
     }
 }
