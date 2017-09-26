@@ -11,3 +11,13 @@
     @Html.LinkButton("Navigate Redirect", PjaxActions.Page3())
     @Html.LinkButton("Navigate Error", PjaxActions.PageErr())
 </div>
+<div style="margin-top: 20px">
+    <a href="#" id="customLink">Click</a>
+    <div id="hidden" style="display: none">Hidden=false</div>
+</div>
+@section script {
+    $('#customLink').click(function () {
+        $('#customLink').hide();
+        $('#hidden').show();
+    });
+}

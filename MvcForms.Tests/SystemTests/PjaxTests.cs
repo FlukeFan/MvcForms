@@ -15,6 +15,17 @@ namespace MvcForms.Tests.SystemTests
         {
             VerifyNavRemained();
         }
+
+        [Test]
+        public void CanRunInlineScripts()
+        {
+            App.GoTo(PjaxActions.Page1());
+            App.Navigate("Navigate to 2");
+
+            App.Navigate("Click");
+
+            App.ShouldSeeText("Hidden=false");
+        }
     }
 
     public class PjaxTests_NoJs : PjaxTests

@@ -19,6 +19,12 @@
         <script src="~/Scripts/mvcForms.min.js"></script>
 
         <script>
+            $(function () {
+                @RenderSection("script", required: false)
+            });
+        </script>
+
+        <script>
             var pjaxOnError = pjax.onError;
 
             pjax.onError = function (jqXHR, textStatus, errorThrown, context, callback) {
@@ -34,6 +40,7 @@
     else
     {
         <div>JS Disabled for testing</div>
+        <pre><code>@RenderSection("script", required: false)</code></pre>
     }
 </body>
 </html>

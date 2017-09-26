@@ -39,6 +39,10 @@ var pjax = {};
         var container = anchor.closest('[data-pjax]');
         var url = anchor.attr('href');
 
+        if (!url || url.substr(0, 1) === '#') {
+            return;
+        }
+
         if (!container.attr('id')) {
             container.attr('id', 'pjax_' + new Date().valueOf());
         }
