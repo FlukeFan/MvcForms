@@ -177,7 +177,7 @@ namespace MvcForms.Tests.SystemTests.Utility
                 IList<IWebElement> buttons = _webDriver.FindElements(By.CssSelector("form input[type=submit], form button"));
 
                 if (text != null)
-                    buttons = buttons.Where(b => b.GetAttribute("value") == text).ToList();
+                    buttons = buttons.Where(b => b.Text == text || b.GetAttribute("value") == text).ToList();
 
                 if (buttons.Count > 1)
                     Assert.Fail("No single button; found: {0}", string.Join("\n", buttons.Select(b => b.GetAttribute("outerHTML"))));

@@ -28,5 +28,16 @@ namespace MvcForms.Tests.SystemTests
             App.ShouldSeeText("ModalIndex");
             App.ShouldNotSeeText("Page1");
         }
+
+        [Test]
+        public void Ok()
+        {
+            App.GoTo(ModalActions.Index());
+            App.Navigate("Modal1");
+
+            App.Submit("OK");
+
+            App.ShouldSeeText("ModalIndex");
+        }
     }
 }
