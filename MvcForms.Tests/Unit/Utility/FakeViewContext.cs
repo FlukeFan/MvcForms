@@ -9,6 +9,6 @@ namespace MvcForms.Tests.Unit.Utility
             HttpContext = new FakeHttpContext();
         }
 
-        public FakeHttpContext FakeHttpContext { get { return (FakeHttpContext)HttpContext; } }
+        public FakeHttpContext FakeHttpContext => (FakeHttpContext)HttpContext;
     }
 }

@@ -6,6 +6,8 @@
 @using (var form = Html.Form().Begin())
 {
 
-    @Html.LinkButtonCancelModal()
+    @form.Html.LinkButtonCancelModal().DefaultModalReturn(ModalActions.Index())
+
+    @form.Html.ButtonSubmit("OK")
 
 }

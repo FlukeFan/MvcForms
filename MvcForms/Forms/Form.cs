@@ -14,11 +14,11 @@ namespace MvcForms.Forms
             Method("post");
         }
 
-        public string Action() { return _action; }
-        public Form<T> Action(string action) { _action = action; return this; }
+        public string   Action()                { return _action; }
+        public Form<T>  Action(string action)   { _action = action; return this; }
 
-        public string Method() { return _method; }
-        public Form<T> Method(string method) { _method = method; return this; }
+        public string   Method()                { return _method; }
+        public Form<T>  Method(string method)   { _method = method; return this; }
 
         protected override HtmlTag CreateTag()
         {

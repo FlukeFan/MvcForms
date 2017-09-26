@@ -7,9 +7,8 @@ namespace MvcForms.Tests.Unit.Utility
     {
         private FakeHttpRequest _request = new FakeHttpRequest();
 
-        public override HttpRequestBase Request => _request;
-
-        public FakeHttpRequest FakeRequest { get { return _request; } }
+        public override HttpRequestBase Request     => _request;
+        public FakeHttpRequest          FakeRequest => _request;
 
         public override object GetService(Type serviceType)
         {

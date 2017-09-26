@@ -4,6 +4,11 @@ namespace MvcForms.Tests.Unit.Utility
 {
     public class FakeHtmlHelper
     {
+        public static FakeHtmlHelper<object> New()
+        {
+            return New<object>(null);
+        }
+
         public static FakeHtmlHelper<T> New<T>(T model)
         {
             var viewContext = new FakeViewContext();
@@ -29,6 +34,8 @@ namespace MvcForms.Tests.Unit.Utility
             Model = model;
         }
 
-        public FakeViewContext FakeViewContext { get { return (FakeViewContext)ViewContext; } }
+        public FakeViewContext FakeViewContext => (FakeViewContext)ViewContext;
+
+        public FakeHtmlHelper<T> SetRawUrl(string rawUrl) { FakeViewContext.FakeHttpContext.FakeRequest.SetRawUrl(rawUrl); return this; }
     }
 }

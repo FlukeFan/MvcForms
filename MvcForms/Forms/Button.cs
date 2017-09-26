@@ -18,21 +18,21 @@ namespace MvcForms.Forms
             Content(content);
         }
 
-        public string Type()                            { return _type; }
-        public Button<T> Type(string type)              { _type = type; return this; }
+        public string       Type()                          { return _type; }
+        public Button<T>    Type(string type)               { _type = type; return this; }
 
-        public IHtmlString Content()                    { return _content; }
-        public Button<T> Content(string content)        { return Content(MvcHtmlString.Create(content)); }
-        public Button<T> Content(IHtmlString content)   { _content = content; return this; }
+        public IHtmlString  Content()                       { return _content; }
+        public Button<T>    Content(string content)         { return Content(MvcHtmlString.Create(content)); }
+        public Button<T>    Content(IHtmlString content)    { _content = content; return this; }
 
-        public string Name()                            { return _name; }
-        public Button<T> Name(string name)              { _name = name; return this; }
+        public string       Name()                          { return _name; }
+        public Button<T>    Name(string name)               { _name = name; return this; }
 
-        public string Value()                           { return _value; }
-        public Button<T> Value(string value)            { _value = value; return this; }
+        public string       Value()                         { return _value; }
+        public Button<T>    Value(string value)             { _value = value; return this; }
 
-        public bool CausesNoPjax()                      { return _noPjax; }
-        public Button<T> NoPjax(bool noPjax = true)     { _noPjax = noPjax; return this; }
+        public bool         CausesNoPjax()                  { return _noPjax; }
+        public Button<T>    NoPjax(bool noPjax = true)      { _noPjax = noPjax; return this; }
 
         protected override HtmlTag CreateTag()
         {

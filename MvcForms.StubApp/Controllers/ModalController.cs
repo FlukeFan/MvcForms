@@ -21,5 +21,11 @@ namespace MvcForms.StubApp.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Page1(object ignored)
+        {
+            return Redirect(ModalActions.Index());
+        }
     }
 }
