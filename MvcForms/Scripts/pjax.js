@@ -30,7 +30,7 @@ var pjax = {};
 
     function navigate(e) {
 
-        var anchor = $(e.target);
+        var anchor = $(e.currentTarget);
 
         if (anchor.attr('data-nopjax')) {
             return;
