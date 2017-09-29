@@ -1,8 +1,7 @@
-﻿@inherits System.Web.Mvc.WebViewPage<FormForView>
-@using System.Web.Mvc.Html
-@using MvcForms.StubApp.Models.Forms
-@{ Layout = "~/Views/Shared/_bootstrap.cshtml"; }
-
+﻿@inherits StubPage<ForModelView>
+@{
+    SetLayout("Static HTML examples");
+}
 <h3>Static HTML examples</h3>
 <section>
     <ul>

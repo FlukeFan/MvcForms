@@ -102,6 +102,7 @@
     <Compile Include="Models\Forms\FormForView.cs" />
     <Compile Include="Models\Forms\ForModelPost.cs" />
     <Compile Include="Models\Forms\ForModelView.cs" />
+    <Compile Include="Views\PjaxPage.cs" />
     <Compile Include="Views\Shared\SharedViews.cs" />
     <Compile Include="Views\StubPage.cs" />
   </ItemGroup>
@@ -110,7 +111,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\mvcForms.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
   </ItemGroup>
@@ -128,15 +128,16 @@
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\mvcForms.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Forms\ForModelUsing.cshtml" />
     <Content Include="Views\Forms\BootstrapHorizontal.cshtml" />
     <Content Include="Views\Pjax\Page1.cshtml" />
     <Content Include="Views\web.config" />
-    <Content Include="Views\Shared\_MasterPjaxWhole.cshtml" />
+    <Content Include="Views\Shared\_PjaxWhole.cshtml" />
     <Content Include="Views\Pjax\Page2.cshtml" />
-    <Content Include="Views\Shared\_MasterPjaxPartial.cshtml" />
+    <Content Include="Views\Shared\_PjaxPartial.cshtml" />
     <Content Include="Views\Pjax\Form.cshtml" />
     <Content Include="Views\Pjax\FormDone.cshtml" />
     <Content Include="Scripts\mvcForms.min.map" />
@@ -165,7 +166,7 @@
     <Content Include="Views\Forms\FormFor.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_bootstrap.cshtml" />
+    <Content Include="Views\Shared\_Master.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.12.4.min.map" />

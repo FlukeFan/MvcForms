@@ -1,8 +1,7 @@
-﻿@inherits System.Web.Mvc.WebViewPage<ForModelView>
-@using System.Web.Mvc.Html
-@using MvcForms.StubApp.Models.Forms
-@{ Layout = "~/Views/Shared/_bootstrap.cshtml"; }
-
+﻿@inherits StubPage<ForModelView>
+@{
+    SetLayout("ForModelUsing");
+}
 <h3>ForModelUsing</h3>
 
 @using (Html.BeginForm())

@@ -1,0 +1,10 @@
+﻿@{
+    Layout = SharedViews.Master;
+}
+<div>
+    <span id="header">@DateTime.Now.Ticks</span>
+</div>
+<div data-pjax="true">
+    @RenderBody()
+</div>
+@section script {@RenderSection("script", false)}

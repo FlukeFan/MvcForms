@@ -2,7 +2,8 @@
 {
     public class SharedViews
     {
-        public const string MasterPjaxWhole     = "~/Views/Shared/_MasterPjaxWhole.cshtml";
-        public const string MasterPjaxPartial   = "~/Views/Shared/_MasterPjaxPartial.cshtml";
+        public const string Master      = "~/Views/Shared/_Master.cshtml";
+        public const string PjaxWhole   = "~/Views/Shared/_PjaxWhole.cshtml";
+        public const string PjaxPartial = "~/Views/Shared/_PjaxPartial.cshtml";
     }
 }

@@ -61,6 +61,9 @@ namespace MvcForms.Navigation
                 .Attr("href", url)
                 .Text(_content.ToHtmlString()).Encoded(false);
 
+            if (_modal)
+                tag.Attr("data-dialog", "true");
+
             if (_noPjax)
                 tag.Attr("data-nopjax", "true");
 

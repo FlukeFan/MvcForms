@@ -5,13 +5,10 @@ namespace MvcForms.StubApp.Views
 {
     public abstract class StubPage<T> : WebViewPage<T>
     {
-        public void SetLayout(string title)
+        public virtual void SetLayout(string title)
         {
             ViewBag.Title = title;
-
-            Layout = Request.IsPjax()
-                ? SharedViews.MasterPjaxPartial
-                : SharedViews.MasterPjaxWhole;
+            Layout = SharedViews.Master;
         }
     }
 }

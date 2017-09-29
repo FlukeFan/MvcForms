@@ -8,6 +8,7 @@ var mvcForms = {};
     function init() {
 
         pjax.init();
+        dialog.init();
 
     }
 

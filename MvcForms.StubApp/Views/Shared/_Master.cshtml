@@ -1,15 +1,22 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html class="no-js">
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
-    <title>PJAX Demo - @ViewBag.Title</title>
+
+    <title>MvcForms - @ViewBag.Title</title>
+
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+
+    @if (Request.Cookies["disableJs"] == null || Request.Cookies["disableJs"].Value != "True")
+    {
+        <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    }
+
 </head>
+
 <body>
-    <div>
-        <span id="header">@DateTime.Now.Ticks</span>
-    </div>
-    <div data-pjax="true">
+    <div class="container-fluid">
         @RenderBody()
     </div>
 

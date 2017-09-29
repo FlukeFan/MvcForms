@@ -121,6 +121,9 @@
       <InProject>False</InProject>
     </PackageDependencies>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\dialog.js" />
+  </ItemGroup>
   <PropertyGroup>
     <AjaxMinTreatWarningsAsErrors>true</AjaxMinTreatWarningsAsErrors>
   </PropertyGroup>
