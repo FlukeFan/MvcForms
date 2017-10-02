@@ -5,6 +5,9 @@ var mvfPjax = {};
 
     mvfPjax.init = init;
     mvfPjax.onError = onError;
+    mvfPjax.load = load;
+    mvfPjax.addOverlay = addOverlay;
+    mvfPjax.removeOverlay = removeOverlay;
 
     var lastButton = null;
 
@@ -64,7 +67,7 @@ var mvfPjax = {};
             container: container
         };
 
-        load(context, navigateSuccess);
+        mvfPjax.load(context, navigateSuccess);
         e.preventDefault();
 
     }
@@ -105,7 +108,7 @@ var mvfPjax = {};
             container: container
         };
 
-        load(context, navigateSuccess);
+        mvfPjax.load(context, navigateSuccess);
         e.preventDefault();
     }
 
@@ -139,14 +142,38 @@ var mvfPjax = {};
             container: container
         };
 
-        load(context, function (context, data) {
+        mvfPjax.load(context, function (context, data) {
             render(container, data);
         });
     }
 
-    function hideOverlay() {
+    function addOverlay(id, fadeTime1, fadeTime2) {
 
-        $("#pjax_overlay")
+        return $("<table id='" + id + "'><tbody><tr><td></td></tr></tbody></table>").css({
+            "position": "fixed",
+            "top": 0,
+            "left": 0,
+            "width": "100%",
+            "height": "100%",
+            "background-color": "rgba(0,0,0,1)",
+            "opacity": "0",
+            "z-index": 10000,
+            "vertical-align": "middle",
+            "text-align": "center",
+            "color": "#fff",
+            "font-size": "30px",
+            "font-weight": "bold",
+            "cursor": "wait"
+        })
+            .fadeTo(fadeTime1 || 100, 0)
+            .fadeTo(fadeTime2 || 1500, 0.2)
+            .appendTo("body");
+
+    }
+
+    function removeOverlay(id) {
+
+        $("#" + id)
             .stop(true)
             .fadeTo(50, 0, function () { $(this).remove(); });
 
@@ -167,25 +194,10 @@ var mvfPjax = {};
 
     function load(context, callback) {
 
-        $("<table id='pjax_overlay'><tbody><tr><td></td></tr></tbody></table>").css({
-            "position": "fixed",
-            "top": 0,
-            "left": 0,
-            "width": "100%",
-            "height": "100%",
-            "background-color": "rgba(0,0,0,1)",
-            "opacity": "0",
-            "z-index": 10000,
-            "vertical-align": "middle",
-            "text-align": "center",
-            "color": "#fff",
-            "font-size": "30px",
-            "font-weight": "bold",
-            "cursor": "wait"
-        })
-            .fadeTo(100, 0)
-            .fadeTo(1500, 0.2)
-            .appendTo("body");
+        callback = callback || navigateSuccess;
+
+        var overlayId = "pjax_overlay";
+        mvfPjax.addOverlay(overlayId);
 
         $.ajax({
             headers: { 'X-PJAX': 'true', 'X-PJAX-URL': context.url },
@@ -196,11 +208,11 @@ var mvfPjax = {};
             timeout: 29000,
             dataType: "html",
             success: function (data, textStatus, jqXHR) {
-                hideOverlay();
+                mvfPjax.removeOverlay(overlayId);
                 callback(context, data, textStatus, jqXHR);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                hideOverlay();
+                mvfPjax.removeOverlay(overlayId);
                 mvfPjax.onError(jqXHR, textStatus, errorThrown, context, callback);
             }
         });
