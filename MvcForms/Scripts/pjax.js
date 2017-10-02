@@ -1,10 +1,10 @@
 ﻿
-var pjax = {};
+var mvfPjax = {};
 
 (function () {
 
-    pjax.init = init;
-    pjax.onError = onError;
+    mvfPjax.init = init;
+    mvfPjax.onError = onError;
 
     var lastButton = null;
 
@@ -201,7 +201,7 @@ var pjax = {};
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 hideOverlay();
-                pjax.onError(jqXHR, textStatus, errorThrown, context, callback);
+                mvfPjax.onError(jqXHR, textStatus, errorThrown, context, callback);
             }
         });
 

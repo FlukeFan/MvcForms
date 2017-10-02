@@ -32,9 +32,9 @@
         </script>
 
         <script>
-            var pjaxOnError = pjax.onError;
+            var pjaxOnError = mvfPjax.onError;
 
-            pjax.onError = function (jqXHR, textStatus, errorThrown, context, callback) {
+            mvfPjax.onError = function (jqXHR, textStatus, errorThrown, context, callback) {
                 if (!pjaxOnError(jqXHR, textStatus, errorThrown, context, callback))
                     alert("textStatus='" + textStatus + "'\nerrorThrown='" + errorThrown + "'");
             }

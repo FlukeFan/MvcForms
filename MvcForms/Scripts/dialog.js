@@ -1,9 +1,9 @@
 ﻿
-var dialog = {};
+var mvfDialog = {};
 
 (function () {
 
-    dialog.init = init;
+    mvfDialog.init = init;
 
     function init() {
 
@@ -11,8 +11,11 @@ var dialog = {};
 
     }
 
-    function openDialog() {
+    function openDialog(e) {
+
+        e.preventDefault();
         alert('open dialog');
+
     }
 
 }());
