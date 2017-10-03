@@ -98,6 +98,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <None Include="Content\mvcForms.scss" />
     <None Include="mvcForms.ajaxmin">
       <SubType>Designer</SubType>
     </None>
@@ -124,8 +129,17 @@
   <ItemGroup>
     <None Include="Scripts\dialog.js" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\mvcForms.css">
+      <DependentUpon>mvcForms.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\mvcForms.min.css">
+      <DependentUpon>mvcForms.css</DependentUpon>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <AjaxMinTreatWarningsAsErrors>true</AjaxMinTreatWarningsAsErrors>
+    <AjaxMinOutputFolder>$(ProjectDir)</AjaxMinOutputFolder>
   </PropertyGroup>
   <Target Name="NuGet" AfterTargets="BuildAjaxMinManifests">
     <CallTarget Targets="PackageNuGet" />

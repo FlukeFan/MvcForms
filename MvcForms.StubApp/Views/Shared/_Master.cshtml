@@ -7,6 +7,7 @@
     <title>MvcForms - @ViewBag.Title</title>
 
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/mvcForms.min.css" />
 
     @if (Request.Cookies["disableJs"] == null || Request.Cookies["disableJs"].Value != "True")
     {
@@ -32,9 +33,9 @@
         </script>
 
         <script>
-            var pjaxOnError = mvfPjax.onError;
+            var pjaxOnError = mfoPjax.onError;
 
-            mvfPjax.onError = function (jqXHR, textStatus, errorThrown, context, callback) {
+            mfoPjax.onError = function (jqXHR, textStatus, errorThrown, context, callback) {
                 if (!pjaxOnError(jqXHR, textStatus, errorThrown, context, callback))
                     alert("textStatus='" + textStatus + "'\nerrorThrown='" + errorThrown + "'");
             }

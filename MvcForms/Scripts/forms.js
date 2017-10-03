@@ -7,8 +7,8 @@ var mvcForms = {};
 
     function init() {
 
-        mvfPjax.init();
-        mvfDialog.init();
+        mfoPjax.init();
+        mfoDialog.init();
 
     }
 

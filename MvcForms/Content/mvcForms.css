@@ -1,0 +1,9 @@
+﻿.mfo-overlay {
+  background-color: black;
+  opacity: 0;
+  color: #fff;
+  cursor: wait; }
+
+.mfo-dialog {
+  background: white; }
+

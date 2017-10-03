@@ -204,14 +204,17 @@
   </PropertyGroup>
   <Target Name="BeforeBuild">
     <ItemGroup>
-      <MvcFormsScript Include="..\MvcForms\Scripts\mvcForms.*" />
+      <MvcFormsScripts Include="..\MvcForms\Scripts\mvcForms.*" />
+      <MvcFormsContent Include="..\MvcForms\Content\mvcForms*.css" />
     </ItemGroup>
-    <Copy SourceFiles="@(MvcFormsScript)" DestinationFolder="Scripts" />
+    <Copy SourceFiles="@(MvcFormsScripts)" DestinationFolder="Scripts" />
+    <Copy SourceFiles="@(MvcFormsContent)" DestinationFolder="Content" />
   </Target>
   <Target Name="AfterClean">
     <ItemGroup>
-      <MvcFormsScript Include="Scripts\mvcForms.*" />
+      <MvcFormsContent Include="Scripts\mvcForms.*" />
+      <MvcFormsContent Include="Content\mvcForms*.css" />
     </ItemGroup>
-    <Delete Files="@(MvcFormsScript)" />
+    <Delete Files="@(MvcFormsContent)" />
   </Target>
 </Project>

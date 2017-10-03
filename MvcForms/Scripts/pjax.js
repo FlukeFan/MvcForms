@@ -1,13 +1,13 @@
 ﻿
-var mvfPjax = {};
+var mfoPjax = {};
 
 (function () {
 
-    mvfPjax.init = init;
-    mvfPjax.onError = onError;
-    mvfPjax.load = load;
-    mvfPjax.addOverlay = addOverlay;
-    mvfPjax.removeOverlay = removeOverlay;
+    mfoPjax.init = init;
+    mfoPjax.onError = onError;
+    mfoPjax.load = load;
+    mfoPjax.addOverlay = addOverlay;
+    mfoPjax.removeOverlay = removeOverlay;
 
     var lastButton = null;
 
@@ -63,11 +63,11 @@ var mvfPjax = {};
 
         var context = {
             url: url,
-            verb: "GET",
+            verb: 'GET',
             container: container
         };
 
-        mvfPjax.load(context, navigateSuccess);
+        mfoPjax.load(context, navigateSuccess);
         e.preventDefault();
 
     }
@@ -98,7 +98,7 @@ var mvfPjax = {};
         var data = form.serialize();
 
         if (clickedButton.length > 0) {
-            data += "&" + clickedButton.attr('name') + "=" + clickedButton.attr('value');
+            data += '&' + clickedButton.attr('name') + '=' + clickedButton.attr('value');
         }
 
         var context = {
@@ -108,7 +108,7 @@ var mvfPjax = {};
             container: container
         };
 
-        mvfPjax.load(context, navigateSuccess);
+        mfoPjax.load(context, navigateSuccess);
         e.preventDefault();
     }
 
@@ -137,43 +137,37 @@ var mvfPjax = {};
         }
 
         var context = {
-            verb: "GET",
+            verb: 'GET',
             url: popstate.url,
             container: container
         };
 
-        mvfPjax.load(context, function (context, data) {
+        mfoPjax.load(context, function (context, data) {
             render(container, data);
         });
     }
 
     function addOverlay(id, fadeTime1, fadeTime2) {
 
-        return $("<table id='" + id + "'><tbody><tr><td></td></tr></tbody></table>").css({
-            "position": "fixed",
-            "top": 0,
-            "left": 0,
-            "width": "100%",
-            "height": "100%",
-            "background-color": "rgba(0,0,0,1)",
-            "opacity": "0",
-            "z-index": 10000,
-            "vertical-align": "middle",
-            "text-align": "center",
-            "color": "#fff",
-            "font-size": "30px",
-            "font-weight": "bold",
-            "cursor": "wait"
+        return $('<table id="' + id + '" class="mfo-overlay"><tbody><tr><td></td></tr></tbody></table>').css({
+            'position': 'fixed',
+            'top': 0,
+            'left': 0,
+            'width': '100%',
+            'height': '100%',
+            'vertical-align': 'middle',
+            'text-align': 'center',
+            'z-index': 10000
         })
             .fadeTo(fadeTime1 || 100, 0)
             .fadeTo(fadeTime2 || 1500, 0.2)
-            .appendTo("body");
+            .appendTo('body');
 
     }
 
     function removeOverlay(id) {
 
-        $("#" + id)
+        $('#' + id)
             .stop(true)
             .fadeTo(50, 0, function () { $(this).remove(); });
 
@@ -196,8 +190,8 @@ var mvfPjax = {};
 
         callback = callback || navigateSuccess;
 
-        var overlayId = "pjax_overlay";
-        mvfPjax.addOverlay(overlayId);
+        var overlayId = 'pjax_overlay';
+        mfoPjax.addOverlay(overlayId);
 
         $.ajax({
             headers: { 'X-PJAX': 'true', 'X-PJAX-URL': context.url },
@@ -206,14 +200,14 @@ var mvfPjax = {};
             url: context.url,
             data: context.data,
             timeout: 29000,
-            dataType: "html",
+            dataType: 'html',
             success: function (data, textStatus, jqXHR) {
-                mvfPjax.removeOverlay(overlayId);
+                mfoPjax.removeOverlay(overlayId);
                 callback(context, data, textStatus, jqXHR);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                mvfPjax.removeOverlay(overlayId);
-                mvfPjax.onError(jqXHR, textStatus, errorThrown, context, callback);
+                mfoPjax.removeOverlay(overlayId);
+                mfoPjax.onError(jqXHR, textStatus, errorThrown, context, callback);
             }
         });
 

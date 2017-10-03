@@ -1,9 +1,9 @@
 ﻿
-var mvfDialog = {};
+var mfoDialog = {};
 
 (function () {
 
-    mvfDialog.init = init;
+    mfoDialog.init = init;
 
     function init() {
 
@@ -16,24 +16,21 @@ var mvfDialog = {};
         var anchor = $(e.currentTarget);
         var url = anchor.attr('href');
 
-        mvfPjax.removeOverlay('dialog_overlay');
-        var overlay = mvfPjax.addOverlay('dialog_overlay', 50, 50);
+        mfoPjax.addOverlay('dialog_overlay', 50, 50);
 
-        var container = $('<div></div>').css({
+        var container = $('<div class="mfo-dialog"></div>').css({
             'z-index': '10500',
-            'background': 'white',
             'position': 'fixed'
-        });
-
-        $(document.body).append(container);
+        })
+            .appendTo('body');
 
         var context = {
             url: url,
-            verb: "GET",
+            verb: 'GET',
             container: container
         };
 
-        mvfPjax.load(context);
+        mfoPjax.load(context);
 
         e.preventDefault();
 
