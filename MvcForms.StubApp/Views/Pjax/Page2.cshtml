@@ -15,9 +15,11 @@
     <a href="#" id="customLink">Click</a>
     <div id="hidden" style="display: none">Hidden=false</div>
 </div>
-@section script {
+@section scripts {
+<script>
     $('#customLink').click(function () {
         $('#customLink').hide();
         $('#hidden').show();
     });
+</script>
 }

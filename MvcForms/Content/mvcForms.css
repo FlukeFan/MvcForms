@@ -1,9 +1,11 @@
 ﻿.mfo-overlay {
   background-color: black;
   opacity: 0;
-  color: #fff;
-  cursor: wait; }
+  color: #fff; }
 
 .mfo-dialog {
-  background: white; }
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px; }
 

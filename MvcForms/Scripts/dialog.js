@@ -4,6 +4,7 @@ var mfoDialog = {};
 (function () {
 
     mfoDialog.init = init;
+    mfoDialog.showModal = showModal;
 
     function init() {
 
@@ -33,6 +34,21 @@ var mfoDialog = {};
         mfoPjax.load(context);
 
         e.preventDefault();
+
+    }
+
+    function showModal(html) {
+
+        mfoPjax.addOverlay('dialog_overlay', 50, 50);
+
+        var container = $('<div class="mfo-dialog"></div>').css({
+            position: 'absolute',
+            'z-index': 10500
+        })
+            .appendTo('body')
+            .html(html);
+
+        return container;
 
     }
 

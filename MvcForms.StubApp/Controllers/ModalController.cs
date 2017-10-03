@@ -5,6 +5,7 @@ namespace MvcForms.StubApp.Controllers
     public static class ModalActions
     {
         public static string Index() { return "~/Modal/Index"; }
+        public static string Client() { return "~/Modal/Client"; }
         public static string Page1() { return "~/Modal/Page1"; }
         public static string Page2() { return "~/Modal/Page2"; }
     }
@@ -13,6 +14,12 @@ namespace MvcForms.StubApp.Controllers
     {
         [HttpGet]
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Client()
         {
             return View();
         }

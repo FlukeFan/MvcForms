@@ -146,6 +146,7 @@
     <Content Include="Views\Modal\Index.cshtml" />
     <Content Include="Views\Modal\Page1.cshtml" />
     <Content Include="Views\Modal\Page2.cshtml" />
+    <Content Include="Views\Modal\Client.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

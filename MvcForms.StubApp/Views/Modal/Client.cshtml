@@ -1,0 +1,25 @@
+﻿@inherits StubPage<string>
+@{
+    SetLayout("Client Dialogs");
+}
+<h3>Client Dialogs</h3>
+
+<ul>
+    <li><button id="openDialog">Open Dialog</button></li>
+</ul>
+
+@section scripts {
+<script>
+
+    $(function () {
+
+        $('#openDialog').click(function () {
+
+            mfoDialog.showModal('<div>Hello World</div>');
+
+        });
+
+    });
+
+</script>
+}

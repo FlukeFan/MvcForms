@@ -191,7 +191,7 @@ var mfoPjax = {};
         callback = callback || navigateSuccess;
 
         var overlayId = 'pjax_overlay';
-        mfoPjax.addOverlay(overlayId);
+        mfoPjax.addOverlay(overlayId).css('cursor', 'wait');
 
         $.ajax({
             headers: { 'X-PJAX': 'true', 'X-PJAX-URL': context.url },
