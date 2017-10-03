@@ -8,14 +8,20 @@
     <li><button id="openDialog">Open Dialog</button></li>
 </ul>
 
+<style>
+    .client-dialog {
+        padding: 6px;
+    }
+</style>
+
 @section scripts {
 <script>
 
     $(function () {
 
-        $('#openDialog').click(function () {
+        $(document).on('click', '#openDialog', function () {
 
-            mfoDialog.showModal('<div>Hello World</div>');
+            mfoDialog.showModal('<div class="client-dialog">Hello World</div>');
 
         });
 
