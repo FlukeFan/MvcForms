@@ -42,7 +42,10 @@ var mfoDialog = {};
         mfoPjax.addOverlay('dialog_overlay', 50, 50);
 
         var container = $('<div class="mfo-dialog"></div>').css({
+            'margin': 'auto',
             'position': 'fixed',
+            'left': '0',
+            'right': '0',
             'z-index': 10500,
             'width': '90%',
             'max-height': '500px'

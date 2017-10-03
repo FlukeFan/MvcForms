@@ -149,14 +149,15 @@ var mfoPjax = {};
 
     function addOverlay(id, fadeTime1, fadeTime2) {
 
-        return $('<table id="' + id + '" class="mfo-overlay"><tbody><tr><td></td></tr></tbody></table>').css({
+        return $('<div id="' + id + '" class="mfo-overlay"></div>').css({
+            'opacity': '0',
+            'margin': '0',
+            'border': '0',
             'position': 'fixed',
             'top': 0,
             'left': 0,
             'width': '100%',
             'height': '100%',
-            'vertical-align': 'middle',
-            'text-align': 'center',
             'z-index': 10000
         })
             .fadeTo(fadeTime1 || 100, 0)
