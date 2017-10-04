@@ -7,10 +7,13 @@ var mfoDialog = {};
     mfoDialog.showModal = showModal;
 
     var maxHeight;
+    var originalOverflow;
+    var dialogStack = [];
 
     function init() {
 
         $(document).on('click', '[data-dialog]', openDialog);
+        $(document).on('click', '[data-close-dialog]', closeDialog);
 
         maxHeight = $(window).height() - 20;
 
@@ -43,7 +46,13 @@ var mfoDialog = {};
 
     function showModal(html) {
 
-        $('body').css('overflow', 'hidden');
+        if (dialogStack.length === 0) {
+            // prevent scroll on underlying page
+            var body = $('body');
+            originalOverflow = body.css('overflow');
+            body.css('overflow', 'hidden');
+        }
+
         mfoPjax.addOverlay('dialog_overlay', 50, 50);
 
         var container = $('<div></div>').css({
@@ -79,9 +88,35 @@ var mfoDialog = {};
             width = "80%";
         }
 
+        dialogStack.push({
+            dialog: dialog,
+            container: container,
+            overlay: 'dialog_overlay'
+        });
+
         dialog.width(width);
 
         return dialog;
+
+    }
+
+    function closeDialog(e) {
+
+        if (dialogStack.length === 0) {
+            return;
+        }
+
+        var topDialog = dialogStack.pop();
+
+        topDialog.dialog.remove();
+        topDialog.container.remove();
+        mfoPjax.removeOverlay(topDialog.overlay);
+
+        if (dialogStack.length === 0) {
+            $('body').css('overflow', originalOverflow);
+        }
+
+        e.preventDefault();
 
     }
 
