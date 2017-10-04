@@ -6,9 +6,13 @@ var mfoDialog = {};
     mfoDialog.init = init;
     mfoDialog.showModal = showModal;
 
+    var maxHeight;
+
     function init() {
 
         $(document).on('click', '[data-dialog]', openDialog);
+
+        maxHeight = $(window).height() - 20;
 
     }
 
@@ -61,7 +65,8 @@ var mfoDialog = {};
             'right': '0',
             'top': '50%',
             'transform': 'translateY(-50%)',
-            'max-height': '500px'
+            'max-height': maxHeight + 'px',
+            'overflow': 'auto'
         })
             .appendTo(container);
 
