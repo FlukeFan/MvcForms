@@ -4,8 +4,14 @@
 }
 <h3>Client Dialogs</h3>
 
+<ul class="double-size">
+    <li>Some text></li>
+</ul>
+
 <ul>
     <li><button id="openDialog">Open Dialog</button></li>
+    <li><button id="openSmallDialog">Open Small Dialog</button></li>
+    <li><button id="openWideDialog">Open Wide Dialog</button></li>
 </ul>
 
 <style>
@@ -21,7 +27,41 @@
 
         $(document).on('click', '#openDialog', function () {
 
-            mfoDialog.showModal('<div class="client-dialog">Hello World</div>');
+            mfoDialog.showModal(
+                '<div class="client-dialog">'
+                + '<ul class="double-size"><li>some text</li></ul>'
+                + 'Hello World'
+                + '</div > '
+            );
+
+        });
+
+        $(document).on('click', '#openSmallDialog', function () {
+
+            mfoDialog.showModal(
+                '<div class="client-dialog" data-modal-width="200px">'
+                + '<ul class="double-size"><li>some text</li></ul>'
+                + 'Hello World'
+                + '</div > '
+            );
+
+        });
+
+        $(document).on('click', '#openWideDialog', function () {
+
+            mfoDialog.showModal(
+                '<div class="client-dialog" data-modal-width="95%">'
+                + '<ul class="double-size"><li>some text</li></ul>'
+                + 'Hello World'
+                + '</div > '
+            );
+
+        });
+
+        $(document).on('click', '.double-size', function (e) {
+
+            var container = $(e.currentTarget);
+            container.html(container.html() + container.html());
 
         });
 

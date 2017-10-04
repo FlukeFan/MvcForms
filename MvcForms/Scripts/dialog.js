@@ -60,11 +60,20 @@ var mfoDialog = {};
             'right': '0',
             'top': '50%',
             'transform': 'translateY(-50%)',
-            'width': '90%',
             'max-height': '500px'
         })
-            .appendTo(container)
-            .html(html);
+            .appendTo(container);
+
+        dialog.html(html);
+
+        var dialogContent = dialog.children(':first');
+        var width = dialogContent.attr('data-modal-width');
+
+        if (!width) {
+            width = "80%";
+        }
+
+        dialog.width(width);
 
         return dialog;
 
