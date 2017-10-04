@@ -39,6 +39,7 @@ var mfoDialog = {};
 
     function showModal(html) {
 
+        $('body').css('overflow', 'hidden');
         mfoPjax.addOverlay('dialog_overlay', 50, 50);
 
         var container = $('<div></div>').css({
