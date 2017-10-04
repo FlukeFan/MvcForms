@@ -41,19 +41,32 @@ var mfoDialog = {};
 
         mfoPjax.addOverlay('dialog_overlay', 50, 50);
 
-        var container = $('<div class="mfo-dialog"></div>').css({
-            'margin': 'auto',
+        var container = $('<div></div>').css({
+            'margin': '0',
+            'border': '0',
             'position': 'fixed',
+            'top': 0,
+            'left': 0,
+            'width': '100%',
+            'height': '100%',
+            'z-index': 10500
+        })
+            .appendTo('body');
+
+        var dialog = $('<div class="mfo-dialog"></div>').css({
+            'margin': 'auto',
+            'position': 'absolute',
             'left': '0',
             'right': '0',
-            'z-index': 10500,
+            'top': '50%',
+            'transform': 'translateY(-50%)',
             'width': '90%',
             'max-height': '500px'
         })
-            .appendTo('body')
+            .appendTo(container)
             .html(html);
 
-        return container;
+        return dialog;
 
     }
 
