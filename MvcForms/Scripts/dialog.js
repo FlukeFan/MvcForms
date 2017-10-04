@@ -5,6 +5,7 @@ var mfoDialog = {};
 
     mfoDialog.init = init;
     mfoDialog.showModal = showModal;
+    mfoDialog.dialogCount = dialogCount;
 
     var maxHeight;
     var originalOverflow;
@@ -44,9 +45,13 @@ var mfoDialog = {};
 
     }
 
+    function dialogCount() {
+        return dialogStack.length;
+    }
+
     function showModal(html) {
 
-        if (dialogStack.length === 0) {
+        if (dialogCount() === 0) {
             // prevent scroll on underlying page
             var body = $('body');
             originalOverflow = body.css('overflow');
@@ -102,7 +107,7 @@ var mfoDialog = {};
 
     function closeDialog(e) {
 
-        if (dialogStack.length === 0) {
+        if (dialogCount() === 0) {
             return;
         }
 
@@ -112,7 +117,7 @@ var mfoDialog = {};
         topDialog.container.remove();
         mfoPjax.removeOverlay(topDialog.overlay);
 
-        if (dialogStack.length === 0) {
+        if (dialogCount() === 0) {
             $('body').css('overflow', originalOverflow);
         }
 

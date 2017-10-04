@@ -12,11 +12,16 @@
     <li><button id="openDialog">Open Dialog</button></li>
     <li><button id="openSmallDialog">Open Small Dialog</button></li>
     <li><button id="openWideDialog">Open Wide Dialog</button></li>
+    <li><button class="open-nested-dialog">Open Nested Dialog</button></li>
 </ul>
 
 <style>
     .client-dialog {
         padding: 6px;
+    }
+
+    li {
+        margin: 5px;
     }
 </style>
 
@@ -55,6 +60,25 @@
                 '<div class="client-dialog" data-modal-width="95%">'
                 + '<ul class="double-size"><li>some text</li></ul>'
                 + 'Hello World'
+                + '<a href="#" data-close-dialog="true">Cancel</a>'
+                + '</div > '
+            );
+
+        });
+
+        $(document).on('click', '.open-nested-dialog', function () {
+
+            var content = '<ul>';
+            for (var i = 0; i < (10 - mfoDialog.dialogCount() * 2); i++) {
+                content += '<li>some text</li>';
+            }
+
+            content += '</ul>'
+
+            mfoDialog.showModal(
+                '<div class="client-dialog">'
+                + content
+                + '<button class="open-nested-dialog">Open Nested Dialog</button>'
                 + '<a href="#" data-close-dialog="true">Cancel</a>'
                 + '</div > '
             );
