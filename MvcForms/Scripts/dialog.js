@@ -25,7 +25,7 @@ var mfoDialog = {};
         var anchor = $(e.currentTarget);
         var url = anchor.attr('href');
 
-        mfoPjax.addOverlay('dialog_overlay', 50, 50);
+        mfoPjax.addOverlay(50, 50);
 
         var container = $('<div class="mfo-dialog"></div>').css({
             'z-index': '10500',
@@ -51,14 +51,17 @@ var mfoDialog = {};
 
     function showModal(html) {
 
-        if (dialogCount() === 0) {
+        var count = dialogCount();
+
+        if (count === 0) {
             // prevent scroll on underlying page
             var body = $('body');
             originalOverflow = body.css('overflow');
             body.css('overflow', 'hidden');
         }
 
-        mfoPjax.addOverlay('dialog_overlay', 50, 50);
+        var overlay = mfoPjax.addOverlay(1, 100)
+            .css('z-index', 10000 + count * 1000);
 
         var container = $('<div></div>').css({
             'margin': '0',
@@ -68,7 +71,7 @@ var mfoDialog = {};
             'left': 0,
             'width': '100%',
             'height': '100%',
-            'z-index': 10500
+            'z-index': 10500 + count * 1000
         })
             .appendTo('body');
 
@@ -96,7 +99,7 @@ var mfoDialog = {};
         dialogStack.push({
             dialog: dialog,
             container: container,
-            overlay: 'dialog_overlay'
+            overlay: overlay
         });
 
         dialog.width(width);

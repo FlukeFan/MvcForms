@@ -147,9 +147,9 @@ var mfoPjax = {};
         });
     }
 
-    function addOverlay(id, fadeTime1, fadeTime2) {
+    function addOverlay(fadeTime1, fadeTime2) {
 
-        return $('<div id="' + id + '" class="mfo-overlay"></div>').css({
+        return $('<div class="mfo-overlay"></div>').css({
             'opacity': '0',
             'margin': '0',
             'border': '0',
@@ -166,11 +166,12 @@ var mfoPjax = {};
 
     }
 
-    function removeOverlay(id) {
+    function removeOverlay(overlay) {
 
-        $('#' + id)
-            .stop(true)
-            .fadeTo(50, 0, function () { $(this).remove(); });
+        overlay.stop(true)
+            .fadeTo(50, 0, function () {
+                overlay.remove();
+            });
 
     }
 
@@ -191,9 +192,7 @@ var mfoPjax = {};
 
         callback = callback || navigateSuccess;
 
-        var overlayId = 'pjax_overlay';
-
-        mfoPjax.addOverlay(overlayId)
+        var overlay = mfoPjax.addOverlay()
             .css('cursor', 'wait');
 
         $.ajax({
@@ -205,11 +204,11 @@ var mfoPjax = {};
             timeout: 29000,
             dataType: 'html',
             success: function (data, textStatus, jqXHR) {
-                mfoPjax.removeOverlay(overlayId);
+                mfoPjax.removeOverlay(overlay);
                 callback(context, data, textStatus, jqXHR);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                mfoPjax.removeOverlay(overlayId);
+                mfoPjax.removeOverlay(overlay);
                 mfoPjax.onError(jqXHR, textStatus, errorThrown, context, callback);
             }
         });
