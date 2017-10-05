@@ -6,6 +6,10 @@ var mfoDialog = {};
     mfoDialog.init = init;
     mfoDialog.showModal = showModal;
     mfoDialog.dialogCount = dialogCount;
+    mfoDialog.topDialog = topDialog;
+    mfoDialog.closeDialog = closeDialog;
+
+    removeModalHistory();
 
     var maxHeight;
     var originalOverflow;
@@ -13,14 +17,31 @@ var mfoDialog = {};
 
     function init() {
 
-        $(document).on('click', '[data-dialog]', openDialog);
-        $(document).on('click', '[data-close-dialog]', closeDialog);
+        $(document).on('click', '[data-dialog]', onClickOpenDialog);
+        $(document).on('click', '[data-close-dialog]', onClickCloseDialog);
+        $(window).on('popstate', onPopState);
 
         maxHeight = $(window).height() - 20;
 
     }
 
-    function openDialog(e) {
+    function onPopState() {
+
+        if (!history.state || history.state.dialogCount === undefined) {
+            return;
+        }
+
+        var count = history.state.dialogCount;
+
+        if (count < dialogCount()) {
+            closeDialog();
+        } else if (count > dialogCount()) {
+            history.back();
+        }
+
+    }
+
+    function onClickOpenDialog(e) {
 
         var anchor = $(e.currentTarget);
         var url = anchor.attr('href');
@@ -45,8 +66,31 @@ var mfoDialog = {};
 
     }
 
+    function onClickCloseDialog(e) {
+
+        history.back();
+        e.preventDefault();
+
+    }
+
+    function removeModalHistory() {
+        if (history.state && history.state.dialogCount > 0) {
+            history.back();
+            setTimeout(removeModalHistory, 1);
+        }
+    }
+
     function dialogCount() {
         return dialogStack.length;
+    }
+
+    function topDialog() {
+
+        if (dialogCount() === 0) {
+            return $('body');
+        } else {
+            return dialogStack[dialogStack.length - 1];
+        }
     }
 
     function showModal(html) {
@@ -93,7 +137,7 @@ var mfoDialog = {};
         var width = dialogContent.attr('data-modal-width');
 
         if (!width) {
-            width = "80%";
+            width = '80%';
         }
 
         dialogStack.push({
@@ -104,11 +148,20 @@ var mfoDialog = {};
 
         dialog.width(width);
 
+        if (history.state === null || !history.dialogCount) {
+            var state = history.state || {};
+            state.dialogCount = count;
+            history.replaceState(state, null, '');
+        }
+
+        var url = location.pathname + location.search + location.hash;
+        history.pushState({ dialogCount: count + 1 }, null, url);
+
         return dialog;
 
     }
 
-    function closeDialog(e) {
+    function closeDialog() {
 
         if (dialogCount() === 0) {
             return;
@@ -123,8 +176,6 @@ var mfoDialog = {};
         if (dialogCount() === 0) {
             $('body').css('overflow', originalOverflow);
         }
-
-        e.preventDefault();
 
     }
 

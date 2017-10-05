@@ -13,25 +13,25 @@ var mfoPjax = {};
 
     function init() {
 
-        $(document).on('click', '[data-pjax] a', navigate);
-
-        $(document).on('submit', '[data-pjax] form', submit);
-
-        $(window).on('popstate', onpopstate);
-
-        $(document).on('click', 'input[type=submit], button', function (e) {
-
-            if (lastButton) {
-                lastButton.removeAttr('clicked');
-            }
-
-            lastButton = $(e.target);
-            lastButton.attr('clicked', 'true');
-        });
+        $(document).on('click', '[data-pjax] a', onNavigate);
+        $(document).on('submit', '[data-pjax] form', onSubmitForm);
+        $(window).on('popstate', onPopState);
+        $(document).on('click', 'input[type=submit], button', onSubmitClicked);
 
     }
 
-    function navigate(e) {
+    function onSubmitClicked(e) {
+
+        if (lastButton) {
+            lastButton.removeAttr('clicked');
+        }
+
+        lastButton = $(e.currentTarget);
+        lastButton.attr('clicked', 'true');
+
+    }
+
+    function onNavigate(e) {
 
         var anchor = $(e.currentTarget);
 
@@ -55,10 +55,10 @@ var mfoPjax = {};
         }
 
         if (history.state === null || history.state.containerId !== container.attr('id')) {
-            history.replaceState({
-                url: location.pathname + location.search + location.hash,
-                containerId: container.attr('id')
-            }, null, '');
+            var state = history.state || {};
+            state.url = location.pathname + location.search + location.hash;
+            state.containerId = container.attr('id');
+            history.replaceState(state, null, '');
         }
 
         var context = {
@@ -72,19 +72,7 @@ var mfoPjax = {};
 
     }
 
-    function navigateSuccess(context, data, textStatus, jqXHR) {
-
-        var container = context.container;
-        render(container, data);
-
-        var url = stripInternalParams(jqXHR.getResponseHeader('X-PJAX-URL') || context.url);
-
-        if (url !== location.href) {
-            history.pushState({ url: url, containerId: context.container.attr('id') }, null, url);
-        }
-    }
-
-    function submit(e) {
+    function onSubmitForm(e) {
 
         var form = $(e.currentTarget);
 
@@ -112,6 +100,58 @@ var mfoPjax = {};
         e.preventDefault();
     }
 
+    function onPopState(e) {
+
+        var popState = e.originalEvent.state;
+
+        if (popState === null || !popState.containerId) {
+            return;
+        }
+
+        var container = $('#' + popState.containerId);
+
+        if (container.length === 0) {
+            // no container - just refresh the page
+            location.reload();
+            return;
+        }
+
+        var context = {
+            verb: 'GET',
+            url: popState.url,
+            container: container
+        };
+
+        mfoPjax.load(context, function (context, data) {
+            render(container, data);
+        });
+    }
+
+    function onError(jqXHR, textStatus, errorThrown, context, callback) {
+        // default is to do nothing if there was no response (and return false) and
+        // to display the error otherwise (and return true)
+        // clients can change pjax.onError to their requirements
+
+        if (!jqXHR.responseText) {
+            return false;
+        }
+
+        callback(context, jqXHR.responseText, textStatus, jqXHR);
+        return true;
+    }
+
+    function navigateSuccess(context, data, textStatus, jqXHR) {
+
+        var container = context.container;
+        render(container, data);
+
+        var url = stripInternalParams(jqXHR.getResponseHeader('X-PJAX-URL') || context.url);
+
+        if (url !== location.href) {
+            history.pushState({ url: url, containerId: context.container.attr('id') }, null, url);
+        }
+    }
+
     function stripInternalParams(url) {
         return url.replace(/([?&])(_pjax|_)=[^&]*/g, '');
     }
@@ -123,28 +163,6 @@ var mfoPjax = {};
         var pjaxContent = container.children(':first');
         document.title = pjaxContent.attr('data-title');
 
-    }
-
-    function onpopstate(e) {
-
-        var popstate = e.originalEvent.state;
-        var container = $('#' + popstate.containerId);
-
-        if (container.length === 0) {
-            // no container - just refresh the page
-            location.reload();
-            return;
-        }
-
-        var context = {
-            verb: 'GET',
-            url: popstate.url,
-            container: container
-        };
-
-        mfoPjax.load(context, function (context, data) {
-            render(container, data);
-        });
     }
 
     function addOverlay(fadeTime1, fadeTime2) {
@@ -173,19 +191,6 @@ var mfoPjax = {};
                 overlay.remove();
             });
 
-    }
-
-    function onError(jqXHR, textStatus, errorThrown, context, callback) {
-        // default is to do nothing if there was no response (and return false) and
-        // to display the error otherwise (and return true)
-        // clients can change pjax.onError to their requirements
-
-        if (!jqXHR.responseText) {
-            return false;
-        }
-
-        callback(context, jqXHR.responseText, textStatus, jqXHR);
-        return true;
     }
 
     function load(context, callback) {
