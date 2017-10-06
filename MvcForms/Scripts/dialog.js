@@ -20,8 +20,17 @@ var mfoDialog = {};
         $(document).on('click', '[data-dialog]', onClickOpenDialog);
         $(document).on('click', '[data-close-dialog]', onClickCloseDialog);
         $(window).on('popstate', onPopState);
+        $(document).on('keyup', onDocKeyup);
 
         maxHeight = $(window).height() - 20;
+
+    }
+
+    function onDocKeyup(e) {
+
+        if (dialogCount() > 0 && e.keyCode === 27) {
+            history.back();
+        }
 
     }
 

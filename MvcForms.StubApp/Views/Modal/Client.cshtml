@@ -33,7 +33,7 @@
         $(document).on('click', '#openDialog', function () {
 
             mfoDialog.showModal(
-                '<div class="client-dialog">'
+                '<div class="client-dialog" data-title="Open Dialog">'
                 + '<ul class="double-size"><li>some text</li></ul>'
                 + 'Hello World'
                 + '<a href="#" data-close-dialog="true">Cancel</a>'
@@ -45,7 +45,7 @@
         $(document).on('click', '#openSmallDialog', function () {
 
             mfoDialog.showModal(
-                '<div class="client-dialog" data-modal-width="200px">'
+                '<div class="client-dialog" data-modal-width="200px" data-title="Open Small Dialog">'
                 + '<ul class="double-size"><li>some text</li></ul>'
                 + 'Hello World'
                 + '<a href="#" data-close-dialog="true">Cancel</a>'
@@ -57,7 +57,7 @@
         $(document).on('click', '#openWideDialog', function () {
 
             mfoDialog.showModal(
-                '<div class="client-dialog" data-modal-width="95%">'
+                '<div class="client-dialog" data-modal-width="95%" data-title="Open Wide Dialog">'
                 + '<ul class="double-size"><li>some text</li></ul>'
                 + 'Hello World'
                 + '<a href="#" data-close-dialog="true">Cancel</a>'
@@ -76,7 +76,7 @@
             content += '</ul>'
 
             mfoDialog.showModal(
-                '<div class="client-dialog">'
+                '<div class="client-dialog"  data-title="Dialog' + (mfoDialog.dialogCount() + 1) + '">'
                 + content
                 + '<button class="open-nested-dialog">Open Nested Dialog</button>'
                 + '<a href="#" data-close-dialog="true">Cancel</a>'
