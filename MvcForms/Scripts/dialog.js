@@ -142,20 +142,26 @@ var mfoDialog = {};
 
         dialog.html(html);
 
+        dialogStack.push({
+            dialog: dialog,
+            container: container,
+            previousTitle: document.title,
+            overlay: overlay
+        });
+
         var dialogContent = dialog.children(':first');
         var width = dialogContent.attr('data-modal-width');
+        var title = dialogContent.attr('data-title');
 
         if (!width) {
             width = '80%';
         }
 
-        dialogStack.push({
-            dialog: dialog,
-            container: container,
-            overlay: overlay
-        });
-
         dialog.width(width);
+
+        if (title) {
+            document.title = document.title + ' - ' + title;
+        }
 
         if (history.state === null || !history.dialogCount) {
             var state = history.state || {};
@@ -181,6 +187,7 @@ var mfoDialog = {};
         topDialog.dialog.remove();
         topDialog.container.remove();
         mfoPjax.removeOverlay(topDialog.overlay);
+        document.title = topDialog.previousTitle;
 
         if (dialogCount() === 0) {
             $('body').css('overflow', originalOverflow);
