@@ -12,7 +12,7 @@ var mfoDialog = {};
     removeModalHistory();
 
     var autoWidthStart = 700;
-    var currentWidth;
+    var dialogBorder = 10;
     var maxHeight;
     var maxWidth;
     var originalOverflow;
@@ -32,8 +32,8 @@ var mfoDialog = {};
 
     function onWindowResize() {
 
-        maxHeight = $(window).height() - 10;
-        maxWidth = $(window).width() - 10;
+        maxHeight = $(window).height() - dialogBorder;
+        maxWidth = $(window).width() - dialogBorder;
         resizeDialogs();
 
     }
@@ -157,7 +157,6 @@ var mfoDialog = {};
             dialog: dialog,
             container: container,
             previousTitle: document.title,
-            previousWidth: currentWidth,
             overlay: overlay
         };
 
@@ -197,7 +196,6 @@ var mfoDialog = {};
         topDialog.container.remove();
         mfoPjax.removeOverlay(topDialog.overlay);
         document.title = topDialog.previousTitle;
-        currentWidth = topDialog.previousWidth;
 
         if (dialogCount() === 0) {
             $('body').css('overflow', originalOverflow);
@@ -207,7 +205,7 @@ var mfoDialog = {};
 
     function resizeDialogs() {
 
-        var currentWidth = autoWidthStart;
+        var currentWidth = autoWidthStart + dialogBorder;
 
         for (var i = 0; i < dialogStack.length; i++) {
 
@@ -216,11 +214,7 @@ var mfoDialog = {};
             var dialogContent = dialog.children(':first');
             var width = dialogContent.attr('data-modal-width');
 
-            if (i === 0) {
-                currentWidth = autoWidthStart;
-            }
-
-            var autoWidth = currentWidth - 10;
+            var autoWidth = currentWidth - dialogBorder;
 
             if (!width) {
                 width = autoWidth;
