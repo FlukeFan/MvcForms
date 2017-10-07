@@ -9,16 +9,33 @@ var mfoPjaxDialog = {};
 
         $(document).on('click', '[data-modal-dialog]', onClickOpenModalDialog);
         $(document).on('pjax:navigate', onPjaxNavigate);
+        $(document).on('pjax:submitform', onPjaxSubmitForm);
 
     }
 
     function onPjaxNavigate(e, context) {
 
-        var closesDialog = context.anchor.attr('data-close-dialog');
+        var anchor = context.anchor;
+        var closesDialog = anchor.attr('data-close-dialog');
+        var opensDialog = anchor.attr('data-modal-dialog');
 
-        if (closesDialog) {
+        if (closesDialog || opensDialog) {
             context.cancel = true;
         }
+
+    }
+
+    function onPjaxSubmitForm(e, context) {
+
+        var form = context.form;
+        var dialog = form.closest('.mfo-dialog');
+
+        if (dialog.length === 0) {
+            return;
+        }
+
+        context.headers = { 'X-PJAX-MODAL': 'true' };
+        context.noPushState = true;
 
     }
 

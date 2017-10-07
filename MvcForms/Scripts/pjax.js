@@ -97,11 +97,18 @@ var mfoPjax = {};
         }
 
         var context = {
+            form: form,
             url: form.attr('action') || location.pathname + location.search + location.hash,
             data: data,
             verb: form.attr('method') || 'POST',
             container: container
         };
+
+        container.trigger("pjax:submitform", context);
+
+        if (context.cancel === true) {
+            return;
+        }
 
         mfoPjax.load(context, navigateSuccess);
         e.preventDefault();
@@ -151,6 +158,10 @@ var mfoPjax = {};
 
         var container = context.container;
         render(container, data);
+
+        if (context.noPushState === true) {
+            return;
+        }
 
         var url = stripInternalParams(jqXHR.getResponseHeader('X-PJAX-URL') || context.url);
 

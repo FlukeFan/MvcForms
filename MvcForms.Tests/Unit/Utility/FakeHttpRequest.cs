@@ -6,11 +6,13 @@ namespace MvcForms.Tests.Unit.Utility
 {
     public class FakeHttpRequest : HttpRequestBase
     {
-        private string _rawUrl = "http://unit.test/default/rawUrl";
+        private string              _rawUrl     = "http://unit.test/default/rawUrl";
+        private NameValueCollection _headers    = new NameValueCollection();
 
-        public override string  RawUrl          => _rawUrl;
-        public override string  ApplicationPath => "/";
-        public override Uri     Url             => new Uri(_rawUrl);
+        public override string              RawUrl              => _rawUrl;
+        public override string              ApplicationPath     => "/";
+        public override Uri                 Url                 => new Uri(_rawUrl);
+        public override NameValueCollection Headers             => _headers;
 
         public FakeHttpRequest SetRawUrl(string rawUrl) { _rawUrl = rawUrl; return this; }
 
