@@ -137,7 +137,7 @@ var mfoPjax = {};
         };
 
         mfoPjax.load(context, function (context, data) {
-            render(container, data);
+            render(context, data);
         });
     }
 
@@ -156,8 +156,7 @@ var mfoPjax = {};
 
     function navigateSuccess(context, data, textStatus, jqXHR) {
 
-        var container = context.container;
-        render(container, data);
+        render(context, data);
 
         if (context.noPushState === true) {
             return;
@@ -174,12 +173,16 @@ var mfoPjax = {};
         return url.replace(/([?&])(_pjax|_)=[^&]*/g, '');
     }
 
-    function render(container, data) {
+    function render(context, data) {
 
+        var container = context.container;
         container.html(data);
 
-        var pjaxContent = container.children(':first');
-        document.title = pjaxContent.attr('data-title');
+        if (context.noPushState !== true) {
+            var pjaxContent = container.children(':first');
+            var title = pjaxContent.attr('data-title');
+            document.title = title;
+        }
 
     }
 
