@@ -8,5 +8,10 @@ namespace MvcForms
         {
             return !string.IsNullOrEmpty(request.Headers["X-PJAX"]);
         }
+
+        public static bool IsPjaxModal(this HttpRequestBase request)
+        {
+            return !string.IsNullOrEmpty(request.Headers["X-PJAX-MODAL"]);
+        }
     }
 }

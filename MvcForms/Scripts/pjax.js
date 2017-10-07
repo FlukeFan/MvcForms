@@ -54,18 +54,25 @@ var mfoPjax = {};
             return; // we don't pjax external links
         }
 
+        var context = {
+            anchor: anchor,
+            url: url,
+            verb: 'GET',
+            container: container
+        };
+
+        container.trigger("pjax:navigate", context);
+
+        if (context.cancel === true) {
+            return;
+        }
+
         if (history.state === null || history.state.containerId !== container.attr('id')) {
             var state = history.state || {};
             state.url = location.pathname + location.search + location.hash;
             state.containerId = container.attr('id');
             history.replaceState(state, null, '');
         }
-
-        var context = {
-            url: url,
-            verb: 'GET',
-            container: container
-        };
 
         mfoPjax.load(context, navigateSuccess);
         e.preventDefault();
@@ -200,8 +207,15 @@ var mfoPjax = {};
         var overlay = mfoPjax.addOverlay()
             .css('cursor', 'wait');
 
+        var headers = {
+            'X-PJAX': 'true',
+            'X-PJAX-URL': context.url
+        };
+
+        $.extend(headers, context.headers);
+
         $.ajax({
-            headers: { 'X-PJAX': 'true', 'X-PJAX-URL': context.url },
+            headers: headers,
             cache: false,
             type: context.verb,
             url: context.url,

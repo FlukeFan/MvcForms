@@ -147,6 +147,7 @@
     <Content Include="Views\Modal\Page1.cshtml" />
     <Content Include="Views\Modal\Page2.cshtml" />
     <Content Include="Views\Modal\Client.cshtml" />
+    <Content Include="Views\Shared\_PjaxModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

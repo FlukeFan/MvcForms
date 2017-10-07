@@ -9,6 +9,7 @@ var mvcForms = {};
 
         mfoPjax.init();
         mfoDialog.init();
+        mfoPjaxDialog.init();
 
     }
 

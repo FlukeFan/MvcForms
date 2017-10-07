@@ -20,7 +20,6 @@ var mfoDialog = {};
 
     function init() {
 
-        $(document).on('click', '[data-dialog]', onClickOpenDialog);
         $(document).on('click', '[data-close-dialog]', onClickCloseDialog);
         $(window).on('popstate', onPopState);
         $(document).on('keyup', onDocKeyup);
@@ -59,31 +58,6 @@ var mfoDialog = {};
         } else if (count > dialogCount()) {
             history.back();
         }
-
-    }
-
-    function onClickOpenDialog(e) {
-
-        var anchor = $(e.currentTarget);
-        var url = anchor.attr('href');
-
-        mfoPjax.addOverlay(50, 50);
-
-        var container = $('<div class="mfo-dialog"></div>').css({
-            'z-index': '10500',
-            'position': 'fixed'
-        })
-            .appendTo('body');
-
-        var context = {
-            url: url,
-            verb: 'GET',
-            container: container
-        };
-
-        mfoPjax.load(context);
-
-        e.preventDefault();
 
     }
 

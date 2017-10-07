@@ -8,7 +8,10 @@ namespace MvcForms.StubApp.Views
         public virtual void SetLayout(string title)
         {
             ViewBag.Title = title;
-            Layout = SharedViews.Master;
+
+            Layout = Request.IsPjaxModal()
+                ? SharedViews.PjaxModal
+                : SharedViews.Master;
         }
     }
 }

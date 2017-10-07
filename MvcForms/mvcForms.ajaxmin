@@ -5,6 +5,7 @@
     <arguments>-pponly</arguments>
     <input path="Scripts\pjax.js"/>
     <input path="Scripts\dialog.js"/>
+    <input path="Scripts\pjaxDialog.js"/>
     <input path="Scripts\forms.js"/>
   </output>
 </root>
