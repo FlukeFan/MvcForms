@@ -11,7 +11,10 @@ var mfoDialog = {};
 
     removeModalHistory();
 
+    var autoWidthStart = 700;
+    var currentWidth;
     var maxHeight;
+    var maxWidth;
     var originalOverflow;
     var dialogStack = [];
 
@@ -21,8 +24,17 @@ var mfoDialog = {};
         $(document).on('click', '[data-close-dialog]', onClickCloseDialog);
         $(window).on('popstate', onPopState);
         $(document).on('keyup', onDocKeyup);
+        $(window).on('resize', onWindowResize);
 
-        maxHeight = $(window).height() - 20;
+        onWindowResize();
+
+    }
+
+    function onWindowResize() {
+
+        maxHeight = $(window).height() - 10;
+        maxWidth = $(window).width() - 10;
+        resizeDialogs();
 
     }
 
@@ -135,29 +147,26 @@ var mfoDialog = {};
             'right': '0',
             'top': '50%',
             'transform': 'translateY(-50%)',
-            'max-height': maxHeight + 'px',
             'overflow': 'auto'
         })
             .appendTo(container);
 
         dialog.html(html);
 
-        dialogStack.push({
+        var dialogInfo = {
             dialog: dialog,
             container: container,
             previousTitle: document.title,
+            previousWidth: currentWidth,
             overlay: overlay
-        });
+        };
+
+        dialogStack.push(dialogInfo);
+
+        resizeDialogs();
 
         var dialogContent = dialog.children(':first');
-        var width = dialogContent.attr('data-modal-width');
         var title = dialogContent.attr('data-title');
-
-        if (!width) {
-            width = '80%';
-        }
-
-        dialog.width(width);
 
         if (title) {
             document.title = document.title + ' - ' + title;
@@ -188,9 +197,44 @@ var mfoDialog = {};
         topDialog.container.remove();
         mfoPjax.removeOverlay(topDialog.overlay);
         document.title = topDialog.previousTitle;
+        currentWidth = topDialog.previousWidth;
 
         if (dialogCount() === 0) {
             $('body').css('overflow', originalOverflow);
+        }
+
+    }
+
+    function resizeDialogs() {
+
+        var currentWidth = autoWidthStart;
+
+        for (var i = 0; i < dialogStack.length; i++) {
+
+            var dialogInfo = dialogStack[i];
+            var dialog = dialogInfo.dialog;
+            var dialogContent = dialog.children(':first');
+            var width = dialogContent.attr('data-modal-width');
+
+            if (i === 0) {
+                currentWidth = autoWidthStart;
+            }
+
+            var autoWidth = currentWidth - 10;
+
+            if (!width) {
+                width = autoWidth;
+            }
+
+            dialog.width(width);
+            dialog.css('max-height', maxHeight + 'px');
+
+            if (dialog.width() > maxWidth) {
+                dialog.width(maxWidth);
+            }
+
+            currentWidth = dialog.width();
+
         }
 
     }
