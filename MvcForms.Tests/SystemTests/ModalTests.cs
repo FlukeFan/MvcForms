@@ -6,12 +6,12 @@ namespace MvcForms.Tests.SystemTests
 {
     public class ModalTests_NoJs : ModalTests
     {
-        protected override bool DisableJs() { return true; }
+        protected override bool JsDisabled() { return true; }
     }
 
     public class ModalTests_Js : ModalTests
     {
-        protected override bool DisableJs() { return false; }
+        protected override bool JsDisabled() { return false; }
     }
 
     public abstract class ModalTests : NoJsTest
@@ -54,12 +54,27 @@ namespace MvcForms.Tests.SystemTests
             App.Navigate("Modal1");
 
             App.ShouldSeeText("Page1");
+            App.ShouldSeeText("Count=0");
 
             App.Navigate("Modal2");
 
             App.ShouldSeeText("Page2");
 
             App.Navigate("Cancel");
+
+            if (JsDisabled())
+                App.ShouldSeeText("Count=1");
+            else
+                App.ShouldSeeText("Count=0");
+
+            App.Navigate("Modal2");
+            App.Submit("OK");
+
+            if (!JsDisabled())
+                Assert.Ignore("we don't refresh the underlying page on submit (yet)");
+
+            App.ShouldSeeText("Count=3");
+
             App.Navigate("Cancel");
 
             App.ShouldSeeText("ModalIndex");

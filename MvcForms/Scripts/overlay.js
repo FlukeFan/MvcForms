@@ -30,11 +30,25 @@ var mfoOverlay = {};
             var el = $(this);
             var disabled = el.prop('disabled');
             var tabIndex = el.prop('tabIndex');
+
             undisableActions.push(function () {
-                el.prop('disabled', disabled);
-                el.prop('tabindex', tabIndex);
+
+                if (disabled !== undefined) {
+                    el.prop('disabled', disabled);
+                }
+
+                if (tabIndex) {
+                    el.prop('tabindex', tabIndex);
+                } else {
+                    el.removeProp('tabindex');
+                }
+
             });
-            el.prop('disabled', true);
+
+            if (disabled === false) {
+                el.prop('disabled', true);
+            }
+
             el.prop('tabindex', -1);
 
         });

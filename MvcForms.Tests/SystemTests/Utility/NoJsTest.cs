@@ -10,11 +10,11 @@ namespace MvcForms.Tests.SystemTests.Utility
         [SetUp]
         public void SetUp()
         {
-            App = new BrowserApp(DisableJs());
+            App = new BrowserApp(JsDisabled());
 
         }
 
-        protected abstract bool DisableJs();
+        protected abstract bool JsDisabled();
     }
 
 

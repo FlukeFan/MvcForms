@@ -55,7 +55,7 @@ var mfoDialog = {};
         var count = history.state.dialogCount;
 
         if (count < dialogCount()) {
-            closeDialog(closeResponse);
+            removeTopDialog(closeResponse);
         } else if (count > dialogCount()) {
             history.back();
         }
@@ -69,6 +69,13 @@ var mfoDialog = {};
         closeResponse = JSON.parse(response);
         history.back();
         e.preventDefault();
+
+    }
+
+    function closeDialog(response) {
+
+        closeResponse = response;
+        history.back();
 
     }
 
@@ -163,7 +170,7 @@ var mfoDialog = {};
 
     }
 
-    function closeDialog(response) {
+    function removeTopDialog(response) {
 
         if (dialogCount() === 0) {
             return;

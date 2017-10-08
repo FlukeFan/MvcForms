@@ -4,4 +4,10 @@
 }
 <h3>Page2</h3>
 
-@Html.LinkButtonCancelModal()
+@using (var form = Html.Form().Begin())
+{
+
+    @form.Html.LinkButtonCancelModal().DefaultModalReturn(ModalActions.Index())
+    @form.Html.ButtonSubmit("OK")
+
+}

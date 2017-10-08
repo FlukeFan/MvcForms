@@ -12,9 +12,12 @@ namespace MvcForms.StubApp.Controllers
 
     public class ModalController : Controller
     {
+        public static int Count;
+
         [HttpGet]
         public ActionResult Index()
         {
+            Count = 0;
             return View();
         }
 
@@ -33,12 +36,20 @@ namespace MvcForms.StubApp.Controllers
         [HttpGet]
         public ActionResult Page2()
         {
+            Count++;
             return View();
         }
 
         [HttpPost]
         public ActionResult Page1(object ignored)
         {
+            return this.ReturnModal();
+        }
+
+        [HttpPost]
+        public ActionResult Page2(object ignored)
+        {
+            Count++;
             return this.ReturnModal();
         }
     }

@@ -174,7 +174,9 @@ namespace MvcForms.Tests.SystemTests.Utility
             Console.WriteLine("Click button {0}", text);
             WaitFor(() =>
             {
-                IList<IWebElement> buttons = _webDriver.FindElements(By.CssSelector("form input[type=submit], form button"));
+                IList<IWebElement> buttons = _webDriver.FindElements(By.CssSelector("form input[type=submit], form button"))
+                    .Where(b => b.Enabled)
+                    .ToList();
 
                 if (text != null)
                     buttons = buttons.Where(b => b.Text == text || b.GetAttribute("value") == text).ToList();

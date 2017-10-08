@@ -9,7 +9,7 @@ namespace MvcForms.Tests.SystemTests
 {
     public class PjaxTests_Js : PjaxTests
     {
-        protected override bool DisableJs() { return false; }
+        protected override bool JsDisabled() { return false; }
 
         protected override void VerifyNavState()
         {
@@ -30,7 +30,7 @@ namespace MvcForms.Tests.SystemTests
 
     public class PjaxTests_NoJs : PjaxTests
     {
-        protected override bool DisableJs() { return true; }
+        protected override bool JsDisabled() { return true; }
 
         protected override void VerifyNavState()
         {
