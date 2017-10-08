@@ -136,6 +136,7 @@
     <Content Include="Content\mvcForms.min.css">
       <DependentUpon>mvcForms.css</DependentUpon>
     </Content>
+    <None Include="Scripts\overlay.js" />
     <None Include="Scripts\pjaxDialog.js" />
   </ItemGroup>
   <PropertyGroup>

@@ -113,7 +113,7 @@ namespace MvcForms.Tests.SystemTests.Utility
             WaitFor(() =>
             {
                 IList<IWebElement> links = _webDriver.FindElements(By.TagName("a"))
-                    .Where(l => l.Text == linkText)
+                    .Where(l => l.Enabled && l.GetAttribute("tabIndex") != "-1" && l.Text == linkText)
                     .ToList();
 
                 links.Count.Should().BeLessThan(2, "No single link; found: ", string.Join("\n", links.Select(l => l.GetAttribute("outerHTML"))));

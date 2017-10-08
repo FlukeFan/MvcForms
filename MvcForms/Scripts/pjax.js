@@ -6,8 +6,6 @@ var mfoPjax = {};
     mfoPjax.init = init;
     mfoPjax.onError = onError;
     mfoPjax.load = load;
-    mfoPjax.addOverlay = addOverlay;
-    mfoPjax.removeOverlay = removeOverlay;
 
     var lastButton = null;
 
@@ -186,39 +184,11 @@ var mfoPjax = {};
 
     }
 
-    function addOverlay(fadeTime1, fadeTime2) {
-
-        return $('<div class="mfo-overlay"></div>').css({
-            'opacity': '0',
-            'margin': '0',
-            'border': '0',
-            'position': 'fixed',
-            'top': 0,
-            'left': 0,
-            'width': '100%',
-            'height': '100%',
-            'z-index': 10000
-        })
-            .fadeTo(fadeTime1 || 100, 0)
-            .fadeTo(fadeTime2 || 1500, 0.2)
-            .appendTo('body');
-
-    }
-
-    function removeOverlay(overlay) {
-
-        overlay.stop(true)
-            .fadeTo(50, 0, function () {
-                overlay.remove();
-            });
-
-    }
-
     function load(context, callback) {
 
         callback = callback || navigateSuccess;
 
-        var overlay = mfoPjax.addOverlay()
+        var overlay = mfoOverlay.add()
             .css('cursor', 'wait');
 
         var headers = {
@@ -237,11 +207,11 @@ var mfoPjax = {};
             timeout: 29000,
             dataType: 'html',
             success: function (data, textStatus, jqXHR) {
-                mfoPjax.removeOverlay(overlay);
+                mfoOverlay.remove(overlay);
                 callback(context, data, textStatus, jqXHR);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                mfoPjax.removeOverlay(overlay);
+                mfoOverlay.remove(overlay);
                 mfoPjax.onError(jqXHR, textStatus, errorThrown, context, callback);
             }
         });

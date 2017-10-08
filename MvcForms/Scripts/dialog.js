@@ -99,7 +99,7 @@ var mfoDialog = {};
             body.css('overflow', 'hidden');
         }
 
-        var overlay = mfoPjax.addOverlay(1, 100)
+        var overlay = mfoOverlay.add(1, 100)
             .css('z-index', 10000 + count * 1000);
 
         var container = $('<div></div>').css({
@@ -168,7 +168,7 @@ var mfoDialog = {};
 
         topDialog.dialog.remove();
         topDialog.container.remove();
-        mfoPjax.removeOverlay(topDialog.overlay);
+        mfoOverlay.remove(topDialog.overlay);
         document.title = topDialog.previousTitle;
 
         if (dialogCount() === 0) {

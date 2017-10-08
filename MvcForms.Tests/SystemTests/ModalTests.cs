@@ -9,6 +9,11 @@ namespace MvcForms.Tests.SystemTests
         protected override bool DisableJs() { return true; }
     }
 
+    public class ModalTests_Js : ModalTests
+    {
+        protected override bool DisableJs() { return false; }
+    }
+
     public abstract class ModalTests : NoJsTest
     {
         [Test]
@@ -21,7 +26,6 @@ namespace MvcForms.Tests.SystemTests
             App.Navigate("Modal1");
 
             App.ShouldSeeText("Page1");
-            App.ShouldNotSeeText("ModalIndex");
 
             App.Navigate("Cancel");
 
