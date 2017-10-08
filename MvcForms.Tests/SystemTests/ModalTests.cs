@@ -70,9 +70,6 @@ namespace MvcForms.Tests.SystemTests
             App.Navigate("Modal2");
             App.Submit("OK");
 
-            if (!JsDisabled())
-                Assert.Ignore("we don't refresh the underlying page on submit (yet)");
-
             App.ShouldSeeText("Count=3");
 
             App.Navigate("Cancel");

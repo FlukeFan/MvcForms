@@ -13,7 +13,7 @@ namespace MvcForms
 
         private static ActionResult PjaxModal(Controller controller)
         {
-            var script = "<script> mfoDialog.closeDialog(); </script>";
+            var script = "<script> mfoDialog.closeDialog(true); </script>";
 
             return new JavaScriptResult { Script = script };
         }

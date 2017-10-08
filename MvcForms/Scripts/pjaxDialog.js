@@ -42,6 +42,7 @@ var mfoPjaxDialog = {};
     function onClickOpenModalDialog(e) {
 
         var anchor = $(e.currentTarget);
+        var pjaxContainer = anchor.closest('[data-pjax]');
         var url = anchor.attr('href');
 
         var context = {
@@ -50,15 +51,45 @@ var mfoPjaxDialog = {};
             headers: { 'X-PJAX-MODAL': 'true' }
         };
 
-        mfoPjax.load(context, onDisplayModalContent);
+        mfoPjax.load(context, function (context, data) {
+            onDisplayModalContent(context, data, pjaxContainer);
+        });
 
         e.preventDefault();
 
     }
 
-    function onDisplayModalContent(context, data) {
+    function onDisplayModalContent(context, data, pjaxContainer) {
 
-        mfoDialog.showModal(data);
+        var dialogInfo = mfoDialog.showModal(data, function (response) {
+            onModalClosed(response, pjaxContainer);
+        });
+
+        var dialog = dialogInfo.dialog;
+        dialog.attr('data-pjax', context.url);
+
+    }
+
+    function onModalClosed(response, pjaxContainer) {
+
+        if (response) {
+
+            if (pjaxContainer.length === 0) {
+
+                location.reload(true);
+
+            } else {
+
+                var context = {
+                    container: pjaxContainer,
+                    headers: { 'X-PJAX-MODAL': 'true' }
+                };
+
+                mfoPjax.reload(context);
+
+            }
+
+        }
 
     }
 

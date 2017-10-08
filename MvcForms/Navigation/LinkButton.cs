@@ -62,7 +62,7 @@ namespace MvcForms.Navigation
                 .Text(_content.ToHtmlString()).Encoded(false);
 
             if (_modalReturn)
-                tag.Attr("data-close-dialog", "true");
+                tag.Attr("data-close-dialog", "false");
 
             if (_modal)
                 tag.Attr("data-modal-dialog", "true");

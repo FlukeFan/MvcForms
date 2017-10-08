@@ -6,6 +6,7 @@ var mfoPjax = {};
     mfoPjax.init = init;
     mfoPjax.onError = onError;
     mfoPjax.load = load;
+    mfoPjax.reload = reload;
 
     var lastButton = null;
 
@@ -96,7 +97,7 @@ var mfoPjax = {};
 
         var context = {
             form: form,
-            url: form.attr('action') || location.pathname + location.search + location.hash,
+            url: form.attr('action') || (location.pathname + location.search + location.hash),
             data: data,
             verb: form.attr('method') || 'POST',
             container: container
@@ -215,6 +216,16 @@ var mfoPjax = {};
                 mfoPjax.onError(jqXHR, textStatus, errorThrown, context, callback);
             }
         });
+
+    }
+
+    function reload(context) {
+
+        context.url = context.container.attr('data-pjax');
+        context.verb = 'GET';
+        context.noPushState = true;
+
+        load(context);
 
     }
 
