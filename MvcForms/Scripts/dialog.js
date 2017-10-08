@@ -17,6 +17,7 @@ var mfoDialog = {};
     var maxWidth;
     var originalOverflow;
     var dialogStack = [];
+    var closeResponse;
 
     function init() {
 
@@ -54,7 +55,7 @@ var mfoDialog = {};
         var count = history.state.dialogCount;
 
         if (count < dialogCount()) {
-            closeDialog();
+            closeDialog(closeResponse);
         } else if (count > dialogCount()) {
             history.back();
         }
@@ -63,6 +64,9 @@ var mfoDialog = {};
 
     function onClickCloseDialog(e) {
 
+        var anchor = $(e.currentTarget);
+        var response = anchor.attr('data-close-dialog');
+        closeResponse = JSON.parse(response);
         history.back();
         e.preventDefault();
 
@@ -88,7 +92,7 @@ var mfoDialog = {};
         }
     }
 
-    function showModal(html) {
+    function showModal(html, callback) {
 
         var count = dialogCount();
 
@@ -131,6 +135,7 @@ var mfoDialog = {};
             dialog: dialog,
             container: container,
             previousTitle: document.title,
+            callback: callback,
             overlay: overlay
         };
 
@@ -154,11 +159,11 @@ var mfoDialog = {};
         var url = location.pathname + location.search + location.hash;
         history.pushState({ dialogCount: count + 1 }, null, url);
 
-        return dialog;
+        return dialogInfo;
 
     }
 
-    function closeDialog() {
+    function closeDialog(response) {
 
         if (dialogCount() === 0) {
             return;
@@ -173,6 +178,10 @@ var mfoDialog = {};
 
         if (dialogCount() === 0) {
             $('body').css('overflow', originalOverflow);
+        }
+
+        if (topDialog.callback) {
+            topDialog.callback(response);
         }
 
     }

@@ -59,8 +59,11 @@
                 '<div class="client-dialog" data-modal-width="200px" data-title="Open Small Dialog">'
                 + '<ul class="double-size"><li>some text</li></ul>'
                 + 'Hello World'
-                + '<a href="#" data-close-dialog="true">Cancel</a>'
+                + '<a href="#" data-close-dialog="{ &quot;message&quot;: &quot;small dialog closed&quot; }">Cancel</a>'
                 + '</div > '
+                , function (response) {
+                    alert(response.message);
+                }
             );
 
         });
