@@ -81,9 +81,12 @@ var mfoPjaxDialog = {};
             } else {
 
                 var context = {
-                    container: pjaxContainer,
-                    headers: { 'X-PJAX-MODAL': 'true' }
+                    container: pjaxContainer
                 };
+
+                if (mfoDialog.dialogCount() !== 0) {
+                    context.headers = { 'X-PJAX-MODAL': 'true' };
+                }
 
                 mfoPjax.reload(context);
 
