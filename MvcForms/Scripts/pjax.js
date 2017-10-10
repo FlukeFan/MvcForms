@@ -97,7 +97,7 @@ var mfoPjax = {};
 
         var context = {
             form: form,
-            url: form.attr('action') || (location.pathname + location.search + location.hash),
+            url: form.attr('action') || location.pathname + location.search + location.hash,
             data: data,
             verb: form.attr('method') || 'POST',
             container: container
@@ -221,7 +221,14 @@ var mfoPjax = {};
 
     function reload(context) {
 
-        context.url = context.container.attr('data-pjax');
+        var url = context.container.attr('data-pjax');
+
+        if (url === 'true') {
+            url = location.pathname + location.search + location.hash;
+        }
+
+        context.url = url;
+
         context.verb = 'GET';
         context.noPushState = true;
 
