@@ -214,9 +214,9 @@
   </Target>
   <Target Name="AfterClean">
     <ItemGroup>
-      <MvcFormsContent Include="Scripts\mvcForms.*" />
-      <MvcFormsContent Include="Content\mvcForms*.css" />
+      <CopiedContent Include="Scripts\mvcForms.*" />
+      <CopiedContent Include="Content\mvcForms*.css" />
     </ItemGroup>
-    <Delete Files="@(MvcFormsContent)" />
+    <Delete Files="@(CopiedContent)" />
   </Target>
 </Project>
