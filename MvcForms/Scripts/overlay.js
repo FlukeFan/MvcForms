@@ -8,6 +8,8 @@ var mfoOverlay = {};
 
     function add(fadeTime1, fadeTime2) {
 
+        var zIndex = maxZIndex() + 500;
+
         var overlay = $('<div class="mfo-overlay"></div>').css({
             'opacity': '0',
             'margin': '0',
@@ -17,7 +19,7 @@ var mfoOverlay = {};
             'left': 0,
             'width': '100%',
             'height': '100%',
-            'z-index': 10000
+            'z-index': zIndex
         })
             .fadeTo(fadeTime1 || 100, 0)
             .fadeTo(fadeTime2 || 1500, 0.2)
@@ -68,6 +70,18 @@ var mfoOverlay = {};
             .fadeTo(50, 0, function () {
                 overlay.remove();
             });
+
+    }
+
+    function maxZIndex() {
+
+        // https://stackoverflow.com/a/1118216/357728
+        return Math.max.apply(null,
+            $.map($('body *'), function (e) {
+                if ($(e).css('position') !== 'static') {
+                    return parseInt($(e).css('z-index')) || 1;
+                }
+            }).concat(500));
 
     }
 

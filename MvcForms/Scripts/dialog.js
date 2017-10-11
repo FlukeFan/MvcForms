@@ -110,8 +110,9 @@ var mfoDialog = {};
             body.css('overflow', 'hidden');
         }
 
-        var overlay = mfoOverlay.add(1, 100)
-            .css('z-index', 10000 + count * 1000);
+        var overlay = mfoOverlay.add(1, 100);
+
+        var zIndex = parseInt(overlay.css('z-index')) + 500;
 
         var container = $('<div></div>').css({
             'margin': '0',
@@ -121,7 +122,7 @@ var mfoDialog = {};
             'left': 0,
             'width': '100%',
             'height': '100%',
-            'z-index': 10500 + count * 1000
+            'z-index': zIndex
         })
             .appendTo('body');
 
