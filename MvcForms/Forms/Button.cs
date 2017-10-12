@@ -4,7 +4,7 @@ using HtmlTags;
 
 namespace MvcForms.Forms
 {
-    public class Button<T> : Control<T, HtmlTag>
+    public class Button : Control<HtmlTag>
     {
         private string      _type;
         private IHtmlString _content;
@@ -12,27 +12,27 @@ namespace MvcForms.Forms
         private string      _value;
         private bool        _noPjax;
 
-        public Button(HtmlHelper<T> html, string type, IHtmlString content) : base(html)
+        public Button(HtmlHelper html, string type, IHtmlString content) : base(html)
         {
             Type(type);
             Content(content);
         }
 
         public string       Type()                          { return _type; }
-        public Button<T>    Type(string type)               { _type = type; return this; }
+        public Button       Type(string type)               { _type = type; return this; }
 
         public IHtmlString  Content()                       { return _content; }
-        public Button<T>    Content(string content)         { return Content(MvcHtmlString.Create(content)); }
-        public Button<T>    Content(IHtmlString content)    { _content = content; return this; }
+        public Button       Content(string content)         { return Content(MvcHtmlString.Create(content)); }
+        public Button       Content(IHtmlString content)    { _content = content; return this; }
 
         public string       Name()                          { return _name; }
-        public Button<T>    Name(string name)               { _name = name; return this; }
+        public Button       Name(string name)               { _name = name; return this; }
 
         public string       Value()                         { return _value; }
-        public Button<T>    Value(string value)             { _value = value; return this; }
+        public Button       Value(string value)             { _value = value; return this; }
 
         public bool         CausesNoPjax()                  { return _noPjax; }
-        public Button<T>    NoPjax(bool noPjax = true)      { _noPjax = noPjax; return this; }
+        public Button       NoPjax(bool noPjax = true)      { _noPjax = noPjax; return this; }
 
         protected override HtmlTag CreateTag()
         {

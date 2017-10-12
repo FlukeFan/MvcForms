@@ -95,6 +95,8 @@
     <Compile Include="Navigation\NavigationExtensions.cs" />
     <Compile Include="PjaxFilter.cs" />
     <Compile Include="RequestExtensions.cs" />
+    <Compile Include="Styler.cs" />
+    <Compile Include="Stylers\BootstrapStyle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -139,6 +141,7 @@
     <None Include="Scripts\overlay.js" />
     <None Include="Scripts\pjaxDialog.js" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <AjaxMinTreatWarningsAsErrors>true</AjaxMinTreatWarningsAsErrors>
     <AjaxMinOutputFolder>$(ProjectDir)</AjaxMinOutputFolder>

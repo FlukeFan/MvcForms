@@ -10,11 +10,11 @@ namespace MvcForms
 
         public HtmlHelper<T> Html { get { return _html; } }
 
-        public ScopedHtmlHelper(HtmlHelper<T> html) : this(html, null) { }
+        public ScopedHtmlHelper(HtmlHelper html) : this(html, null) { }
 
-        public ScopedHtmlHelper(HtmlHelper<T> html, Action onDispose)
+        public ScopedHtmlHelper(HtmlHelper html, Action onDispose)
         {
-            _html = html;
+            _html = (HtmlHelper<T>)html;
             _onDispose = onDispose ?? (() => { });
         }
 

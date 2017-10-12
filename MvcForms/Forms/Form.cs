@@ -1,9 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using HtmlTags;
 
 namespace MvcForms.Forms
 {
-    public class Form<T> : Control<T, HtmlTag>
+    public class Form<T> : Control<HtmlTag>
     {
         private string _action;
         private string _method;
@@ -19,6 +20,23 @@ namespace MvcForms.Forms
 
         public string   Method()                { return _method; }
         public Form<T>  Method(string method)   { _method = method; return this; }
+
+        public new Form<T> Tag(Action<HtmlTag> tagMutator)
+        {
+            Tag((html, tag) => tagMutator(tag));
+            return this;
+        }
+
+        public new Form<T> Tag(Action<HtmlHelper, HtmlTag> tagMutator)
+        {
+            base.Tag(tagMutator);
+            return this;
+        }
+
+        public ScopedHtmlHelper<T> Begin()
+        {
+            return Begin<T>();
+        }
 
         protected override HtmlTag CreateTag()
         {

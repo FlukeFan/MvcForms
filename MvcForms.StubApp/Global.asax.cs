@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MvcForms.Stylers;
 
 namespace MvcForms.StubApp
 {
@@ -10,6 +11,7 @@ namespace MvcForms.StubApp
         protected void Application_Start(object sender, EventArgs e)
         {
             GlobalFilters.Filters.Add(new PjaxFilter());
+            Styler.Set(new BootstrapStyle());
             RegisterRoutes(RouteTable.Routes);
         }
 

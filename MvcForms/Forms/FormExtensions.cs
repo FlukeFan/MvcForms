@@ -31,14 +31,14 @@ namespace MvcForms.Forms
             return new Form<TPostModel>(newHelper);
         }
 
-        public static Button<TViewModel> ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, string content)
+        public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, string content)
         {
             return helper.ButtonSubmit(MvcHtmlString.Create(content));
         }
 
-        public static Button<TViewModel> ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content)
+        public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content)
         {
-            return new Button<TViewModel>(helper, "submit", content);
+            return new Button(helper, "submit", content);
         }
 
         private class ViewDataContainer : IViewDataContainer
