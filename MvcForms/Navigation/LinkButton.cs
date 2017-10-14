@@ -4,7 +4,7 @@ using HtmlTags;
 
 namespace MvcForms.Navigation
 {
-    public class LinkButton : Control<HtmlTag>
+    public class LinkButton : Control
     {
         private IHtmlString _content;
         private string      _action;

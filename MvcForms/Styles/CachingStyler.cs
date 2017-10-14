@@ -13,8 +13,11 @@ namespace MvcForms.Styles
             if (!_cachedStylers.ContainsKey(type))
                 lock (_cachedStylers)
                 {
-                    var styler = base.StylerFor(type);
-                    _cachedStylers.Add(type, styler);
+                    if (!_cachedStylers.ContainsKey(type))
+                    {
+                        var styler = base.StylerFor(type);
+                        _cachedStylers.Add(type, styler);
+                    }
                 }
 
             return _cachedStylers[type];
