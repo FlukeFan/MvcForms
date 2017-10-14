@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/mvcForms.min.css" />
 
+    <style>
+        .buttonList li { margin: 5px; }
+    </style>
+
     @if (Request.Cookies["disableJs"] == null || Request.Cookies["disableJs"].Value != "True")
     {
         <script src="~/Scripts/modernizr-2.8.3.js"></script>
