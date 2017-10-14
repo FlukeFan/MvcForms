@@ -3,7 +3,7 @@ using MvcForms.Navigation;
 
 namespace MvcForms.Styles.Bootstrap
 {
-    public class BootstrapStyle : Styler
+    public class BootstrapStyle : CachingStyler
     {
         public BootstrapStyle()
         {

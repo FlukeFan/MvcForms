@@ -8,14 +8,15 @@ namespace MvcForms
     public abstract class Control<TTag> : IHtmlString
         where TTag : HtmlTag
     {
-        private HtmlHelper                  _html;
-        private Action<HtmlHelper, TTag>    _tagMutator;
-        private Lazy<UrlHelper>             _urlHelper;
+        private static readonly Func<HtmlHelper, TTag, TTag> _defaultHelper = (h, t) => t;
+
+        private HtmlHelper                      _html;
+        private Func<HtmlHelper, TTag, TTag>    _tagMutator = _defaultHelper;
+        private Lazy<UrlHelper>                 _urlHelper;
 
         public Control(HtmlHelper html)
         {
             _html = html;
-            _tagMutator = null;
             _urlHelper = new Lazy<UrlHelper>(() => new UrlHelper(_html.ViewContext.RequestContext));
         }
 
@@ -28,7 +29,7 @@ namespace MvcForms
         {
             var tag = CreateTag();
             tag = (TTag)Styler.Style(this, tag);
-            _tagMutator?.Invoke(_html, tag);
+            tag = _tagMutator(_html, tag);
             return tag;
         }
 
@@ -37,12 +38,12 @@ namespace MvcForms
             return RenderTag().ToHtmlString();
         }
 
-        public Control<TTag> Tag(Action<TTag> tagMutator)
+        public Control<TTag> Tag(Func<TTag, TTag> tagMutator)
         {
             return Tag((html, tag) => tagMutator(tag));
         }
 
-        public Control<TTag> Tag(Action<HtmlHelper, TTag> tagMutator)
+        public Control<TTag> Tag(Func<HtmlHelper, TTag, TTag> tagMutator)
         {
             _tagMutator = tagMutator;
             return this;

@@ -21,13 +21,13 @@ namespace MvcForms.Forms
         public string   Method()                { return _method; }
         public Form<T>  Method(string method)   { _method = method; return this; }
 
-        public new Form<T> Tag(Action<HtmlTag> tagMutator)
+        public new Form<T> Tag(Func<HtmlTag, HtmlTag> tagMutator)
         {
             Tag((html, tag) => tagMutator(tag));
             return this;
         }
 
-        public new Form<T> Tag(Action<HtmlHelper, HtmlTag> tagMutator)
+        public new Form<T> Tag(Func<HtmlHelper, HtmlTag, HtmlTag> tagMutator)
         {
             base.Tag(tagMutator);
             return this;

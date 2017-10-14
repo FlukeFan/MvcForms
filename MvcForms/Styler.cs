@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HtmlTags;
+using MvcForms.Styles;
 
 namespace MvcForms
 {
@@ -26,9 +27,6 @@ namespace MvcForms
         private IList<Func<Type, ApplyStyle>> _stylers
             = new List<Func<Type, ApplyStyle>>();
 
-        private IDictionary<Type, ApplyStyle> _cachedStylers
-            = new Dictionary<Type, ApplyStyle>();
-
         protected void Register(Func<Type, ApplyStyle> stylerFactory)
         {
             _stylers.Add(stylerFactory);
@@ -41,25 +39,21 @@ namespace MvcForms
 
         public virtual ApplyStyle StylerFor(Type type)
         {
-            if (!_cachedStylers.ContainsKey(type))
-                lock(_cachedStylers)
+            var styler = _applyNoStyle;
+
+            // most recently added stylers have higher precedence
+            for (var i = _stylers.Count - 1; i >= 0; i--)
+            {
+                var customStyler = _stylers[i](type);
+
+                if (customStyler != null)
                 {
-                    var styler = _applyNoStyle;
-
-                    if (!_cachedStylers.ContainsKey(type))
-                    {
-                        // most recently added stylers have higher precedence
-                        for (var i = _stylers.Count - 1; i >= 0; i--)
-                        {
-                            var customStyler = _stylers[i](type);
-                            styler = customStyler ?? styler;
-                        }
-                    }
-
-                    _cachedStylers.Add(type, styler);
+                    styler = customStyler;
+                    break;
                 }
+            }
 
-            return _cachedStylers[type];
+            return styler;
         }
     }
 }
