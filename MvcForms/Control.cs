@@ -12,6 +12,7 @@ namespace MvcForms
         private HtmlHelper                          _html;
         private Func<HtmlHelper, HtmlTag, HtmlTag>  _tagMutator = _defaultHelper;
         private Lazy<UrlHelper>                     _urlHelper;
+        private bool                                _noStyle;
 
         public Control(HtmlHelper html)
         {
@@ -27,7 +28,10 @@ namespace MvcForms
         protected HtmlTag RenderTag()
         {
             var tag = CreateTag();
-            tag = Styler.Style(this, tag);
+
+            if (!_noStyle)
+                tag = Styler.Style(this, tag);
+
             tag = _tagMutator(_html, tag);
             return tag;
         }
@@ -46,6 +50,12 @@ namespace MvcForms
         public Control Tag(Func<HtmlTag, HtmlTag> tagMutator)
         {
             return Tag((html, tag) => tagMutator(tag));
+        }
+
+        public Control NoStyle(bool noStyle = true)
+        {
+            _noStyle = noStyle;
+            return this;
         }
 
         public ScopedHtmlHelper<TModel> Begin<TModel>()

@@ -4,11 +4,11 @@
 }
 <div>
 
-    @Html.LinkButton("<h4>Forms</h4>", FormsActions.Index())
-
-    @Html.LinkButton("<h4>Pjax</h4>", PjaxActions.Index())
-
-    @Html.LinkButton("<h4>Modal</h4>", ModalActions.Index())
+    <ul>
+        <li>@Html.LinkButton("<h4>Forms</h4>", FormsActions.Index()).NoStyle()</li>
+        <li>@Html.LinkButton("<h4>Pjax</h4>", PjaxActions.Index()).NoStyle()</li>
+        <li>@Html.LinkButton("<h4>Modal</h4>", ModalActions.Index()).NoStyle()</li>
+</ul>
 
 
 </div>
