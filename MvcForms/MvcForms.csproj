@@ -87,8 +87,10 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="ControllerExtensions.cs" />
+    <Compile Include="EmptyStyle.cs" />
     <Compile Include="Forms\Button.cs" />
     <Compile Include="Forms\Form.cs" />
+    <Compile Include="IStyler.cs" />
     <Compile Include="ScopedHtmlHelper.cs" />
     <Compile Include="Forms\FormExtensions.cs" />
     <Compile Include="Navigation\LinkButton.cs" />
@@ -96,7 +98,7 @@
     <Compile Include="PjaxFilter.cs" />
     <Compile Include="RequestExtensions.cs" />
     <Compile Include="Styler.cs" />
-    <Compile Include="Stylers\BootstrapStyle.cs" />
+    <Compile Include="Styles\Bootstrap\BootstrapStyle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

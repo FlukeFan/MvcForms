@@ -4,22 +4,22 @@ using HtmlTags;
 
 namespace MvcForms
 {
-    public abstract class Styler
+    public abstract class Styler : IStyler
     {
-        protected delegate HtmlTag ApplyStyle(object control, HtmlTag tag);
+        public delegate HtmlTag ApplyStyle(object control, HtmlTag tag);
 
         private static readonly ApplyStyle _applyNoStyle = (c, t) => t;
 
-        private static Styler _styler = new EmptyStyler();
+        private static IStyler _styler = new EmptyStyle();
 
-        public static void Set(Styler styler)
+        public static void Set(IStyler styler)
         {
             _styler = styler;
         }
 
         public static HtmlTag Style<TControl>(TControl control, HtmlTag tag)
         {
-            var styler = _styler.For(control.GetType());
+            var styler = _styler.StylerFor(control.GetType());
             return styler(control, tag);
         }
 
@@ -39,7 +39,7 @@ namespace MvcForms
             Register(t => t == typeof(TControl) ? styler : null);
         }
 
-        protected virtual ApplyStyle For(Type type)
+        public virtual ApplyStyle StylerFor(Type type)
         {
             if (!_cachedStylers.ContainsKey(type))
                 lock(_cachedStylers)
@@ -60,10 +60,6 @@ namespace MvcForms
                 }
 
             return _cachedStylers[type];
-        }
-
-        private class EmptyStyler : Styler
-        {
         }
     }
 }

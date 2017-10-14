@@ -1,7 +1,7 @@
 ﻿using HtmlTags;
 using MvcForms.Navigation;
 
-namespace MvcForms.Stylers
+namespace MvcForms.Styles.Bootstrap
 {
     public class BootstrapStyle : Styler
     {

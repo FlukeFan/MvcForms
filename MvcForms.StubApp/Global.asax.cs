@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using MvcForms.Stylers;
+using MvcForms.Styles.Bootstrap;
 
 namespace MvcForms.StubApp
 {

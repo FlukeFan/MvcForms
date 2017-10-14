@@ -34,5 +34,28 @@ namespace MvcForms.Tests
 
             nonMvcFormsFiles.Should().BeEmpty("only mvcForms files should be packaged (potentially change the build action to None)");
         }
+
+        [Test]
+        public void StylerMethodsAreVirtual()
+        {
+            var stylerTypes = typeof(IStyler).Assembly.GetTypes()
+                .Where(t => typeof(IStyler).IsAssignableFrom(t))
+                .Where(t => !t.IsAbstract)
+                .ToList();
+
+            foreach (var stylerType in stylerTypes)
+            {
+                foreach (var method in stylerType.GetMethods())
+                {
+                    if (method.IsPrivate)
+                        continue;
+
+                    if (method.DeclaringType == typeof(object))
+                        continue;
+
+                    method.IsVirtual.Should().BeTrue("methd {0} on {1} should be virtual to allow clients to override", method.Name, stylerType.FullName);
+                }
+            }
+        }
     }
 }
