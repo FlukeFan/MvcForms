@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using HtmlTags;
 
 namespace MvcForms.Forms
@@ -20,8 +21,9 @@ namespace MvcForms.Forms
         public string   Method()                { return _method; }
         public Form<T>  Method(string method)   { _method = method; return this; }
 
-        public ScopedHtmlHelper<T> Begin()
+        public ScopedHtmlHelper<T> Begin(Action<Form<T>> formMutator = null)
         {
+            formMutator?.Invoke(this);
             return Begin<T>();
         }
 

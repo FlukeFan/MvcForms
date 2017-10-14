@@ -86,7 +86,6 @@
   <ItemGroup>
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Control.cs" />
-    <Compile Include="ControlExtensions.cs" />
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Styles\CachingStyler.cs" />
     <Compile Include="Styles\EmptyStyle.cs" />

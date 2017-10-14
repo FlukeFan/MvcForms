@@ -4,7 +4,7 @@
 }
 <h3>FormFor</h3>
 
-@using (var form = Html.FormFor(Model.PostCommand).Tag(t => t.Id("canSetId")).Begin())
+@using (var form = Html.FormFor(Model.PostCommand).Begin(f => f.Tag(t => t.Id("canSetId"))))
 {
     <div>@form.Html.TextBoxFor(m => m.Value)</div>
 }

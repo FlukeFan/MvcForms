@@ -37,9 +37,15 @@ namespace MvcForms
             return RenderTag().ToHtmlString();
         }
 
-        public void SetTagMutator(Func<HtmlHelper, HtmlTag, HtmlTag> tagMutator)
+        public Control Tag(Func<HtmlHelper, HtmlTag, HtmlTag> tagMutator)
         {
             _tagMutator = tagMutator;
+            return this;
+        }
+
+        public Control Tag(Func<HtmlTag, HtmlTag> tagMutator)
+        {
+            return Tag((html, tag) => tagMutator(tag));
         }
 
         public ScopedHtmlHelper<TModel> Begin<TModel>()
