@@ -5,10 +5,11 @@
 <div>
 
     <ul>
-        <li>@Html.LinkButton("<h4>Forms</h4>", FormsActions.Index()).NoStyle()</li>
-        <li>@Html.LinkButton("<h4>Pjax</h4>", PjaxActions.Index()).NoStyle()</li>
-        <li>@Html.LinkButton("<h4>Modal</h4>", ModalActions.Index()).NoStyle()</li>
-</ul>
+        <li>@Html.LinkButton(Html.Raw("<h4>Forms</h4>"), FormsActions.Index()).NoStyle()</li>
+        <li>@Html.LinkButton(Html.Raw("<h4>Pjax</h4>"), PjaxActions.Index()).NoStyle()</li>
+        <li>@Html.LinkButton(Html.Raw("<h4>Modal</h4>"), ModalActions.Index()).NoStyle()</li>
+        <li>@Html.LinkButton(Html.Raw("<h4>Examples</h4>"), ExamplesActions.Index()).NoStyle()</li>
+    </ul>
 
 
 </div>

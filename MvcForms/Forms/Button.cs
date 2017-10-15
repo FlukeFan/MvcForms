@@ -22,7 +22,7 @@ namespace MvcForms.Forms
         public Button       Type(string type)               { _type = type; return this; }
 
         public IHtmlString  Content()                       { return _content; }
-        public Button       Content(string content)         { return Content(MvcHtmlString.Create(content)); }
+        public Button       Content(string content)         { return Content(MvcHtmlString.Create(HttpUtility.HtmlEncode(content))); }
         public Button       Content(IHtmlString content)    { _content = content; return this; }
 
         public string       Name()                          { return _name; }
@@ -38,7 +38,7 @@ namespace MvcForms.Forms
         {
             var tag = new HtmlTag("button")
                 .Attr("type", _type)
-                .Text(_content.ToHtmlString()).Encoded(false);
+                .AppendHtml(_content.ToHtmlString());
 
             if (_name != null)
                 tag.Attr("name", _name);

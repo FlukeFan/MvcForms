@@ -33,7 +33,7 @@ namespace MvcForms.Forms
 
         public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, string content)
         {
-            return helper.ButtonSubmit(MvcHtmlString.Create(content));
+            return helper.ButtonSubmit(MvcHtmlString.Create(HttpUtility.HtmlEncode(content)));
         }
 
         public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content)

@@ -20,7 +20,7 @@ namespace MvcForms.Navigation
         }
 
         public IHtmlString  Content()                               { return _content; }
-        public LinkButton   Content(string content)                 { return Content(MvcHtmlString.Create(content)); }
+        public LinkButton   Content(string content)                 { return Content(MvcHtmlString.Create(HttpUtility.HtmlEncode(content))); }
         public LinkButton   Content(IHtmlString content)            { _content = content; return this; }
 
         public string       Action()                                { return _action; }
@@ -59,7 +59,7 @@ namespace MvcForms.Navigation
 
             var tag = new HtmlTag("a")
                 .Attr("href", url)
-                .Text(_content.ToHtmlString()).Encoded(false);
+                .AppendHtml(_content.ToHtmlString());
 
             if (_modalReturn)
                 tag.Attr("data-close-dialog", "false");

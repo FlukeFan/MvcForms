@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\_output\AssemblyInfo.cs" />
+    <Compile Include="Controllers\ExamplesController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModalController.cs" />
@@ -148,6 +149,8 @@
     <Content Include="Views\Modal\Page2.cshtml" />
     <Content Include="Views\Modal\Client.cshtml" />
     <Content Include="Views\Shared\_PjaxModal.cshtml" />
+    <Content Include="Views\Examples\Index.cshtml" />
+    <Content Include="Views\Examples\Buttons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

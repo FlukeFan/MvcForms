@@ -92,7 +92,10 @@ var mfoPjax = {};
         var data = form.serialize();
 
         if (clickedButton.length > 0) {
-            data += '&' + clickedButton.attr('name') + '=' + clickedButton.attr('value');
+            var name = clickedButton.attr('name');
+            if (name) {
+                data += '&' + name + '=' + (clickedButton.attr('value') || "");
+            }
         }
 
         var context = {

@@ -7,7 +7,7 @@ namespace MvcForms.Navigation
     {
         public static LinkButton LinkButton<TViewModel>(this HtmlHelper<TViewModel> helper, string content, string action)
         {
-            return helper.LinkButton(MvcHtmlString.Create(content), action);
+            return helper.LinkButton(MvcHtmlString.Create(HttpUtility.HtmlEncode(content)), action);
         }
 
         public static LinkButton LinkButton<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content, string action)
@@ -17,7 +17,7 @@ namespace MvcForms.Navigation
 
         public static LinkButton LinkButtonModal<TViewModel>(this HtmlHelper<TViewModel> helper, string content, string action)
         {
-            return helper.LinkButtonModal(MvcHtmlString.Create(content), action);
+            return helper.LinkButtonModal(MvcHtmlString.Create(HttpUtility.HtmlEncode(content)), action);
         }
 
         public static LinkButton LinkButtonModal<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content, string action)
@@ -27,7 +27,7 @@ namespace MvcForms.Navigation
 
         public static LinkButton LinkButtonCancelModal<TViewModel>(this HtmlHelper<TViewModel> helper, string content = "Cancel")
         {
-            return helper.LinkButtonCancelModal(MvcHtmlString.Create(content));
+            return helper.LinkButtonCancelModal(MvcHtmlString.Create(HttpUtility.HtmlEncode(content)));
         }
 
         public static LinkButton LinkButtonCancelModal<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content)

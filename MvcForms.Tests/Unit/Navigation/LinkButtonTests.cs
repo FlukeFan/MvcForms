@@ -14,10 +14,33 @@ namespace MvcForms.Tests.Unit.Navigation
         {
             var helper = FakeHtmlHelper.New();
 
-            var linkButton = helper.LinkButton("<i>italic</i>", "~/home");
+            var linkButton = helper.LinkButton(helper.Raw("<i>italic</i>"), "~/home");
 
             var html = linkButton.ToHtmlString();
             html.Should().Contain("<i>italic</i>");
+        }
+
+        [Test]
+        public void HelperStringsAreEscaped()
+        {
+            var helper = FakeHtmlHelper.New<object>(null);
+
+            var linkButton = helper.LinkButton("<b>bold</b>", "#");
+
+            var html = linkButton.ToHtmlString();
+            html.Should().Contain("&lt;b&gt;");
+        }
+
+        [Test]
+        public void ControlStringsAreEscaped()
+        {
+            var helper = FakeHtmlHelper.New<object>(null);
+
+            var linkButton = new LinkButton(helper, helper.Raw("test"))
+                .Content("<b>bold</b>");
+
+            var html = linkButton.ToHtmlString();
+            html.Should().Contain("&lt;b&gt;");
         }
 
         [Test]

@@ -1,0 +1,19 @@
+﻿@inherits PjaxPage<string>
+@{
+    SetLayout("Buttons");
+}
+<h3>Buttons</h3>
+
+<p>
+    @Html.LinkButton("LinkButton - no styling applied", "#").NoStyle()
+</p>
+<p>
+    @Html.LinkButton("Standard LinkButton", "#")
+    @Html.LinkButton("Adjacent standard LinkButton", "#")
+</p>
+<form method="get">
+    <p>
+        @Html.LinkButton("LinkButton inside <form>", "#")
+        @Html.ButtonSubmit("Button type=\"submit\" inside <form>")
+    </p>
+</form>
