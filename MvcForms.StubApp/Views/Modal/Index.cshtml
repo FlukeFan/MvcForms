@@ -5,7 +5,7 @@
 <h3>ModalIndex</h3>
 <section>
     <ul class="buttonList">
-        <li>@Html.LinkButton("Client Dialogs", ModalActions.Client())</li>
+        <li>@Html.LinkButton("Client Dialogs", ModalActions.Client()).NoPjax()</li>
         <li>@Html.LinkButtonModal("Modal1", ModalActions.Page1())</li>
     </ul>
 </section>

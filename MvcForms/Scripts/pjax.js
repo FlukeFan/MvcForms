@@ -155,6 +155,35 @@ var mfoPjax = {};
 
     function navigateSuccess(context, data, textStatus, jqXHR) {
 
+        var first100 = data.substr(0, 100);
+
+        if (first100.indexOf('<html') >= 0 || first100.indexOf('<HTML') >= 0) {
+
+            // loading a full HTML page into the PJAX body is an error, so
+            // attempt to scrape out the <body> part of the page and
+            // disable the scripts
+            var bodyStart = Math.max(data.indexOf('<body'), data.indexOf('<BODY'));
+
+            if (bodyStart >= 0) {
+                data = data.substr(bodyStart + 5);
+                var bodyEnd = data.indexOf('>');
+
+                if (bodyEnd >= 0) {
+                    data = data.substr(bodyEnd + 1);
+                }
+            }
+
+            var bodyEnd = Math.max(data.indexOf('</body>'), data.indexOf('</BODY>'));
+
+            if (bodyEnd >= 0) {
+                data = data.substr(0, bodyEnd);
+            }
+
+            data = data.replace(/<script/g, 'script_disabled_pjax_error');
+            data = data.replace(/<SCRIPT/g, 'SCRIPT_DISABLED_PJAX_ERROR');
+
+        }
+
         render(context, data);
 
         if (context.noPushState === true) {
@@ -166,6 +195,7 @@ var mfoPjax = {};
         if (url !== location.href) {
             history.pushState({ url: url, containerId: context.container.attr('id') }, null, url);
         }
+
     }
 
     function stripInternalParams(url) {
