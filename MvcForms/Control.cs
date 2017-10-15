@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using HtmlTags;
@@ -13,6 +14,7 @@ namespace MvcForms
         private Func<HtmlHelper, HtmlTag, HtmlTag>  _tagMutator = _defaultHelper;
         private Lazy<UrlHelper>                     _urlHelper;
         private bool                                _noStyle;
+        private IDictionary<string, object>         _controlBag;
 
         public Control(HtmlHelper html)
         {
@@ -40,6 +42,19 @@ namespace MvcForms
         {
             return RenderTag().ToHtmlString();
         }
+
+        public IDictionary<string, object> ControlBag
+        {
+            get
+            {
+                if (_controlBag == null)
+                    _controlBag = new Dictionary<string, object>();
+
+                return _controlBag;
+            }
+        }
+
+        public IDictionary<string, object> NullableControlBag => _controlBag;
 
         public Control Tag(Func<HtmlHelper, HtmlTag, HtmlTag> tagMutator)
         {

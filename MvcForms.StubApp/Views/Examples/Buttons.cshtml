@@ -3,7 +3,9 @@
     SetLayout("Buttons");
 }
 <h3>Buttons</h3>
-
+<style>
+    p { margin-top: 20px; }
+</style>
 <p>
     @Html.LinkButton("LinkButton - no styling applied", "#").NoStyle()
 </p>
@@ -17,3 +19,22 @@
         @Html.ButtonSubmit("Button type=\"submit\" inside <form>")
     </p>
 </form>
+<p>
+    <fieldset>
+        <legend>Default button styles</legend>
+        @Html.LinkButton("LinkButton.Style(DefaultButton.Default)", "#").Style(MvcForms.Styles.Default.DefaultButton.Default)
+        @Html.LinkButton("LinkButton.Style(DefaultButton.Primary)", "#").Style(MvcForms.Styles.Default.DefaultButton.Primary)
+        @Html.LinkButton("LinkButton.Style(DefaultButton.Accent)", "#").Style(MvcForms.Styles.Default.DefaultButton.Accent)
+    </fieldset>
+</p>
+<p>
+    <fieldset>
+        <legend>Bootstrap button styles</legend>
+        @Html.LinkButton("LinkButton.Style(BootstrapButton.Default)", "#").Style(MvcForms.Styles.Bootstrap.BootstrapButton.Default)
+        @Html.LinkButton("LinkButton.Style(BootstrapButton.Primary)", "#").Style(MvcForms.Styles.Bootstrap.BootstrapButton.Primary)
+        @Html.LinkButton("LinkButton.Style(BootstrapButton.Success)", "#").Style(MvcForms.Styles.Bootstrap.BootstrapButton.Success)
+        @Html.LinkButton("LinkButton.Style(BootstrapButton.Info)", "#").Style(MvcForms.Styles.Bootstrap.BootstrapButton.Info)
+        @Html.LinkButton("LinkButton.Style(BootstrapButton.Warning)", "#").Style(MvcForms.Styles.Bootstrap.BootstrapButton.Warning)
+        @Html.LinkButton("LinkButton.Style(BootstrapButton.Danger)", "#").Style(MvcForms.Styles.Bootstrap.BootstrapButton.Danger)
+    </fieldset>
+</p>

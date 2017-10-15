@@ -4,7 +4,7 @@ using HtmlTags;
 
 namespace MvcForms.Forms
 {
-    public class Button : Control
+    public class Button : Control, IHasButtonStyle
     {
         private string      _type;
         private IHtmlString _content;

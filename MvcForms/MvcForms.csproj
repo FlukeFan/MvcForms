@@ -90,7 +90,10 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="ControllerExtensions.cs" />
+    <Compile Include="Styles\Bootstrap\BootstrapButton.cs" />
+    <Compile Include="Styles\ButtonStyle.cs" />
     <Compile Include="Styles\CachingStyler.cs" />
+    <Compile Include="Styles\Default\DefaultButton.cs" />
     <Compile Include="Styles\EmptyStyle.cs" />
     <Compile Include="Forms\Button.cs" />
     <Compile Include="Forms\Form.cs" />
@@ -103,6 +106,8 @@
     <Compile Include="RequestExtensions.cs" />
     <Compile Include="Styler.cs" />
     <Compile Include="Styles\Bootstrap\BootstrapStyle.cs" />
+    <Compile Include="IHasButtonStyle.cs" />
+    <Compile Include="Styles\StyleExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
