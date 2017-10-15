@@ -155,35 +155,6 @@ var mfoPjax = {};
 
     function navigateSuccess(context, data, textStatus, jqXHR) {
 
-        var first100 = data.substr(0, 100);
-
-        if (first100.indexOf('<html') >= 0 || first100.indexOf('<HTML') >= 0) {
-
-            // loading a full HTML page into the PJAX body is an error, so
-            // attempt to scrape out the <body> part of the page and
-            // disable the scripts
-            var bodyStart = Math.max(data.indexOf('<body'), data.indexOf('<BODY'));
-
-            if (bodyStart >= 0) {
-                data = data.substr(bodyStart + 5);
-                var bodyEnd = data.indexOf('>');
-
-                if (bodyEnd >= 0) {
-                    data = data.substr(bodyEnd + 1);
-                }
-            }
-
-            var bodyEnd = Math.max(data.indexOf('</body>'), data.indexOf('</BODY>'));
-
-            if (bodyEnd >= 0) {
-                data = data.substr(0, bodyEnd);
-            }
-
-            data = data.replace(/<script/g, 'script_disabled_pjax_error');
-            data = data.replace(/<SCRIPT/g, 'SCRIPT_DISABLED_PJAX_ERROR');
-
-        }
-
         render(context, data);
 
         if (context.noPushState === true) {
@@ -203,6 +174,44 @@ var mfoPjax = {};
     }
 
     function render(context, data) {
+
+        var first100 = data.substr(0, 100);
+
+        if (first100.indexOf('<html') >= 0 || first100.indexOf('<HTML') >= 0) {
+
+            // loading a full HTML page into the PJAX body is an error, so
+            // attempt to scrape out the <body> part of the page and
+            // disable the scripts
+            var bodyStart = Math.max(data.indexOf('<body'), data.indexOf('<BODY'));
+
+            if (bodyStart >= 0) {
+                data = data.substr(bodyStart + 5);
+                var bodyStartClose = data.indexOf('>');
+
+                if (bodyStartClose >= 0) {
+                    data = data.substr(bodyStartClose + 1);
+                }
+            }
+
+            var bodyEnd = Math.max(data.indexOf('body>'), data.indexOf('BODY>'));
+
+            if (bodyEnd >= 0) {
+                data = data.substr(0, bodyEnd);
+                var bodyEndOpen = data.lastIndexOf('</');
+
+                if (bodyEndOpen >= 0) {
+                    data = data.substr(0, bodyEndOpen);
+                }
+            }
+
+            data = data.replace(/<script/g, 'script_tag_disabled_pjax_error: ');
+            data = data.replace(/<SCRIPT/g, 'SCRIPT_TAG_DISABLED_PJAX_ERROR: ');
+
+            data = '<div data-title="Error - Attempt to load non-PJAX page into container">'
+                + '<h1 style="background:white; color: red">Error - Attempt to load non-PJAX page into container</h1>'
+                + '<div>' + data + '</div></div>';
+
+        }
 
         var container = context.container;
         container.html(data);
