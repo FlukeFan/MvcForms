@@ -38,3 +38,11 @@
         @Html.LinkButton("LinkButton.Style(BootstrapButton.Danger)", "#").Style(MvcForms.Styles.Bootstrap.BootstrapButton.Danger)
     </fieldset>
 </p>
+@if (Request.IsPjaxModal())
+{
+    @Html.LinkButtonCancelModal()
+}
+ else
+{
+    @Html.LinkButtonModal("Modal", ExamplesActions.Buttons())
+}
