@@ -11,7 +11,7 @@ namespace MvcForms.StubApp
         protected void Application_Start(object sender, EventArgs e)
         {
             GlobalFilters.Filters.Add(new PjaxFilter());
-            Styler.Set(new BootstrapStyle());
+            Styler.Set(new Bootstrap3Style());
             RegisterRoutes(RouteTable.Routes);
         }
 

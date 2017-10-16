@@ -90,6 +90,7 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="ControllerExtensions.cs" />
+    <Compile Include="Styles\Bootstrap\Bootstrap3Style.cs" />
     <Compile Include="Styles\Bootstrap\BootstrapButton.cs" />
     <Compile Include="Styles\ButtonStyle.cs" />
     <Compile Include="Styles\CachingStyler.cs" />

@@ -6,7 +6,7 @@ using MvcForms.Styles.Default;
 
 namespace MvcForms.Styles.Bootstrap
 {
-    public class BootstrapStyle : CachingStyler
+    public abstract class BootstrapStyle : CachingStyler
     {
         protected IDictionary<DefaultButton, string> DefaultButtonStyles = new Dictionary<DefaultButton, string>
         {
