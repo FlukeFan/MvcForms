@@ -14,5 +14,7 @@
     {
         public string StringInput1 { get; set; }
         public string StringInput2 { get; set; }
+
+        public FormInputsModel[] InputsArray;
     }
 }
