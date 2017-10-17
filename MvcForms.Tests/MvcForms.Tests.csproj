@@ -112,6 +112,7 @@
     <Compile Include="StubApp\Controllers\ExamplesControllerTests.cs" />
     <Compile Include="SystemTests\ModalTests.cs" />
     <Compile Include="Unit\ControllerExtrensionsTests.cs" />
+    <Compile Include="Unit\ControlTests.cs" />
     <Compile Include="Unit\Forms\ButtonTests.cs" />
     <Compile Include="Unit\Forms\FormExtensionsTests.cs" />
     <Compile Include="NugetPackage.cs" />

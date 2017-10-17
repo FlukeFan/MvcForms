@@ -8,13 +8,13 @@ namespace MvcForms
 {
     public abstract class Control : IHtmlString
     {
-        private static readonly Func<HtmlHelper, HtmlTag, HtmlTag> _defaultHelper = (h, t) => t;
+        private static readonly TagMutator _defaultMutator = (h, t) => t;
 
-        private HtmlHelper                          _html;
-        private Func<HtmlHelper, HtmlTag, HtmlTag>  _tagMutator = _defaultHelper;
-        private Lazy<UrlHelper>                     _urlHelper;
-        private bool                                _noStyle;
-        private IDictionary<string, object>         _controlBag;
+        private HtmlHelper                  _html;
+        private TagMutator                  _tagMutator = _defaultMutator;
+        private Lazy<UrlHelper>             _urlHelper;
+        private bool                        _noStyle;
+        private IDictionary<string, object> _controlBag;
 
         public Control(HtmlHelper html)
         {
@@ -56,15 +56,23 @@ namespace MvcForms
 
         public IDictionary<string, object> NullableControlBag => _controlBag;
 
-        public Control Tag(Func<HtmlHelper, HtmlTag, HtmlTag> tagMutator)
+        public delegate HtmlTag TagMutator(HtmlHelper helper, HtmlTag tag);
+
+        public Control Tag(Func<TagMutator, HtmlHelper, HtmlTag, HtmlTag> tagMutator)
         {
-            _tagMutator = tagMutator;
+            var existingMutator = _tagMutator;
+            _tagMutator = (html, tag) => tagMutator(existingMutator, html, tag);
             return this;
         }
 
         public Control Tag(Func<HtmlTag, HtmlTag> tagMutator)
         {
-            return Tag((html, tag) => tagMutator(tag));
+            return Tag((mutator, html, tag) => tagMutator(tag));
+        }
+
+        public Control ThenTag(Func<HtmlTag, HtmlTag> tagMutator)
+        {
+            return Tag((mutator, html, tag) => tagMutator(mutator(html, tag)));
         }
 
         public Control NoStyle(bool noStyle = true)
