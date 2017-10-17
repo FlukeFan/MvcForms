@@ -46,6 +46,9 @@
     <Reference Include="FluentAssertions.Core, Version=4.19.4.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.4.19.4\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlTags, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlTags.6.0.0\lib\net45\HtmlTags.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -124,6 +127,7 @@
     <Compile Include="SystemTests\Utility\NoJsTest.cs" />
     <Compile Include="SystemTests\Utility\Wait.cs" />
     <Compile Include="SystemTests\Utility\WebDriver.cs" />
+    <Compile Include="Unit\Forms\InputTextTests.cs" />
     <Compile Include="Unit\Navigation\LinkButtonTests.cs" />
     <Compile Include="Unit\Utility\FakeController.cs" />
     <Compile Include="Unit\Utility\FakeHtmlHelper.cs" />

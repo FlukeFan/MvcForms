@@ -5,7 +5,8 @@ namespace MvcForms.Forms
 {
     public interface IRenderedFormRow
     {
-        HtmlTag Row { get; }
+        HtmlTag Row     { get; }
+        HtmlTag Control { get; }
     }
 
     public class FormRow<TControl> : Control, IRenderedFormRow
@@ -16,7 +17,8 @@ namespace MvcForms.Forms
         private TControl    _control;
 
         // POST render members
-        private HtmlTag     _row;
+        private HtmlTag     _rowTag;
+        private HtmlTag     _controlTag;
 
         public FormRow(HtmlHelper html, string labelText, TControl control) : base(html)
         {
@@ -24,17 +26,19 @@ namespace MvcForms.Forms
             _control = control;
         }
 
-        public HtmlTag Row => _row;
+        HtmlTag IRenderedFormRow.Row        => _rowTag;
+        HtmlTag IRenderedFormRow.Control    => _controlTag;
 
         protected override HtmlTag CreateTag()
         {
             var label = new HtmlTag("label").Text(_labeltext);
+            _controlTag = _control.RenderTag();
 
-            _row = new HtmlTag("div")
+            _rowTag = new HtmlTag("div")
                 .Append(label)
-                .Append(_control.RenderTag());
+                .Append(_controlTag);
 
-            return _row;
+            return _rowTag;
         }
     }
 }
