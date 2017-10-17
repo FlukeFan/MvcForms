@@ -11,9 +11,8 @@ namespace MvcForms.Tests.Unit.Utility
 
         public static FakeHtmlHelper<T> New<T>(T model)
         {
-            var viewContext = new FakeViewContext();
-
             var viewDataDictionary = new ViewDataDictionary<T>(model);
+            var viewContext = new FakeViewContext(viewDataDictionary);
             var viewDataContainer = new ViewDataContainer { ViewData = viewDataDictionary };
 
             return new FakeHtmlHelper<T>(viewContext, viewDataContainer, model);

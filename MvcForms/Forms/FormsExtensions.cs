@@ -48,18 +48,40 @@ namespace MvcForms.Forms
             public ViewDataDictionary ViewData { get; set; }
         }
 
+        public static InputText InputText<T>(this HtmlHelper<T> helper, Expression<Func<T, string>> property)
+        {
+            var propertyContext = FindPropertyContext(helper, property);
+            return new InputText(helper, propertyContext);
+        }
+
         public static FormRow<InputText> LabelledInputText<T>(this HtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
         {
-            return LabelledControl(helper, label, property, ctx => new InputText(helper));
+            return LabelledControl(helper, label, property, ctx => new InputText(helper, ctx.Property));
+        }
+
+        public static PropertyContext FindPropertyContext<T, P>(HtmlHelper<T> helper, Expression<Func<T, P>> property)
+        {
+            var propertyName = property.GetExpressionText();
+            var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(propertyName);
+            var id = TagBuilder.CreateSanitizedId(name);
+
+            return new PropertyContext
+            {
+                Name = name,
+                Id = id,
+            };
         }
 
         public delegate TControl ControlFactory<TControl>(ControlContext controlContext);
 
-        private static FormRow<TControl> LabelledControl<TModel, TProperty, TControl>(this HtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
+        public static FormRow<TControl> LabelledControl<TModel, TProperty, TControl>(this HtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
             where TControl : Control
         {
+            var propertyContext = FindPropertyContext(helper, property);
+
             var controlContext = new ControlContext
             {
+                Property = propertyContext,
             };
 
             var control = controlFactory(controlContext);
