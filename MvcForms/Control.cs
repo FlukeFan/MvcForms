@@ -27,7 +27,7 @@ namespace MvcForms
 
         protected abstract HtmlTag CreateTag();
 
-        protected HtmlTag RenderTag()
+        public HtmlTag RenderTag()
         {
             var tag = CreateTag();
 

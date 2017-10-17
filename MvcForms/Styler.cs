@@ -32,6 +32,11 @@ namespace MvcForms
             _stylers.Add(stylerFactory);
         }
 
+        protected void RegisterInterface<TInterface>(ApplyStyle styler)
+        {
+            Register(t => typeof(TInterface).IsAssignableFrom(t) ? styler : null);
+        }
+
         protected void Register<TControl>(ApplyStyle styler)
         {
             Register(t => t == typeof(TControl) ? styler : null);

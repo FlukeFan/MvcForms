@@ -1,0 +1,12 @@
+﻿@inherits PjaxPage<MvcForms.StubApp.Models.Examples.InputsModel>
+@{
+    SetLayout("Inputs");
+}
+<h3>Inputs</h3>
+<style>
+    p { margin-top: 20px; }
+</style>
+@using (var form = Html.FormFor(Model.PostModel).Begin())
+{
+    @form.Html.LabelledInputText("StringInput1", f => f.StringInput1)
+}

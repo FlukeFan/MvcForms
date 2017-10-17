@@ -99,6 +99,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Examples\InputsModel.cs" />
     <Compile Include="Models\Forms\FormForPost.cs" />
     <Compile Include="Models\Forms\FormForView.cs" />
     <Compile Include="Models\Forms\ForModelPost.cs" />
@@ -151,6 +152,7 @@
     <Content Include="Views\Shared\_PjaxModal.cshtml" />
     <Content Include="Views\Examples\Index.cshtml" />
     <Content Include="Views\Examples\Buttons.cshtml" />
+    <Content Include="Views\Examples\Inputs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,9 +1,11 @@
-﻿using System.Web;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MvcForms.Forms
 {
-    public static class FormExtensions
+    public static class FormsExtensions
     {
         public static ScopedHtmlHelper<TPostModel> ForModelScope<TViewModel, TPostModel>(this HtmlHelper<TViewModel> helper, TPostModel postModel)
         {
@@ -44,6 +46,27 @@ namespace MvcForms.Forms
         private class ViewDataContainer : IViewDataContainer
         {
             public ViewDataDictionary ViewData { get; set; }
+        }
+
+        public static FormRow<InputText> LabelledInputText<T>(this HtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
+        {
+            return LabelledControl(helper, label, property, ctx => new InputText(helper));
+        }
+
+        public delegate TControl ControlFactory<TControl>(ControlContext controlContext);
+
+        private static FormRow<TControl> LabelledControl<TModel, TProperty, TControl>(this HtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
+            where TControl : Control
+        {
+            var controlContext = new ControlContext
+            {
+            };
+
+            var control = controlFactory(controlContext);
+
+            var formRow = new FormRow<TControl>(helper, labelText, control);
+
+            return formRow;
         }
     }
 }

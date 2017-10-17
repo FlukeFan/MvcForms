@@ -24,5 +24,14 @@ namespace MvcForms.Tests.StubApp.Controllers
                 http.Get(ExamplesActions.Buttons());
             });
         }
+
+        [Test]
+        public void Inputs_GET_Renders()
+        {
+            StubApp.Test(http =>
+            {
+                http.Get(ExamplesActions.Inputs());
+            });
+        }
     }
 }

@@ -4,10 +4,14 @@ using HtmlTags;
 
 namespace MvcForms.Forms
 {
-    public class Form<T> : Control
+    public interface IForm
     {
-        private string _action;
-        private string _method;
+    }
+
+    public class Form<T> : Control, IForm
+    {
+        private string  _action;
+        private string  _method;
 
         public Form(HtmlHelper<T> html) : base(html)
         {

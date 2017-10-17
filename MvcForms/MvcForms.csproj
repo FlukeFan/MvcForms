@@ -90,6 +90,9 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="ControllerExtensions.cs" />
+    <Compile Include="Forms\ControlContext.cs" />
+    <Compile Include="Forms\FormRow.cs" />
+    <Compile Include="Forms\InputText.cs" />
     <Compile Include="Styles\Bootstrap\Bootstrap3Style.cs" />
     <Compile Include="Styles\Bootstrap\BootstrapButton.cs" />
     <Compile Include="Styles\ButtonStyle.cs" />
@@ -100,7 +103,7 @@
     <Compile Include="Forms\Form.cs" />
     <Compile Include="IStyler.cs" />
     <Compile Include="ScopedHtmlHelper.cs" />
-    <Compile Include="Forms\FormExtensions.cs" />
+    <Compile Include="Forms\FormsExtensions.cs" />
     <Compile Include="Navigation\LinkButton.cs" />
     <Compile Include="Navigation\NavigationExtensions.cs" />
     <Compile Include="PjaxFilter.cs" />
