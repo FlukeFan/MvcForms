@@ -50,7 +50,7 @@ namespace MvcForms.Forms
 
         public static InputText InputText<T>(this HtmlHelper<T> helper, Expression<Func<T, string>> property)
         {
-            var propertyContext = FindPropertyContext(helper, property);
+            var propertyContext = PropertyContext.New(helper, property);
             return new InputText(helper, propertyContext);
         }
 
@@ -59,25 +59,12 @@ namespace MvcForms.Forms
             return LabelledControl(helper, label, property, ctx => new InputText(helper, ctx.Property));
         }
 
-        public static PropertyContext FindPropertyContext<T, P>(HtmlHelper<T> helper, Expression<Func<T, P>> property)
-        {
-            var propertyName = property.GetExpressionText();
-            var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(propertyName);
-            var id = TagBuilder.CreateSanitizedId(name);
-
-            return new PropertyContext
-            {
-                Name = name,
-                Id = id,
-            };
-        }
-
         public delegate TControl ControlFactory<TControl>(ControlContext controlContext);
 
         public static FormRow<TControl> LabelledControl<TModel, TProperty, TControl>(this HtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
             where TControl : Control
         {
-            var propertyContext = FindPropertyContext(helper, property);
+            var propertyContext = PropertyContext.New(helper, property);
 
             var controlContext = new ControlContext
             {
