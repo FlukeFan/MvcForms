@@ -2,6 +2,7 @@
 {
     public class ControlContext
     {
-        public PropertyContext Property;
+        public PropertyContext  Property;
+        public string           LabelText;
     }
 }

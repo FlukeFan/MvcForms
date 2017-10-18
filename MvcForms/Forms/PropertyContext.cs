@@ -16,9 +16,10 @@ namespace MvcForms.Forms
 
             return new PropertyContext
             {
-                Name = name,
-                Id = id,
-                Value = value,
+                Name        = name,
+                Id          = id,
+                Value       = value,
+                Metadata    = metadata,
             };
         }
 
@@ -27,6 +28,7 @@ namespace MvcForms.Forms
         public string           Id;
         public string           Name;
         public string           Value;
+        public ModelMetadata    Metadata;
 
         public static string RenderValue(ModelStateDictionary modelState, string name, ModelMetadata metadata)
         {

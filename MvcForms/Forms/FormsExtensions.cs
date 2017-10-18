@@ -68,12 +68,13 @@ namespace MvcForms.Forms
 
             var controlContext = new ControlContext
             {
-                Property = propertyContext,
+                Property    = propertyContext,
+                LabelText   = labelText,
             };
 
             var control = controlFactory(controlContext);
 
-            var formRow = new FormRow<TControl>(helper, labelText, control);
+            var formRow = new FormRow<TControl>(helper, controlContext, control);
 
             return formRow;
         }
