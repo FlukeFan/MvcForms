@@ -8,5 +8,8 @@
     box-shadow: 0 5px 15px rgba(0,0,0,.5);
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 4px;
-    padding: 15px; // to fix negative margins for forms inside dialogs https://github.com/twbs/bootstrap/issues/8959
+
+    .container, .container-fluid {
+        padding: 15px; // to fix negative margins for forms inside dialogs https://github.com/twbs/bootstrap/issues/8959
+    }
 }
