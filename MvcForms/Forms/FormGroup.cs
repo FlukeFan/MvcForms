@@ -13,7 +13,6 @@ namespace MvcForms.Forms
     public class FormGroup<TControl> : Control, IRenderedFormGroup
         where TControl : Control
     {
-
         private GroupContext    _groupContext;
         private TControl        _control;
 

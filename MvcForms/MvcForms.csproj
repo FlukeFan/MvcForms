@@ -94,7 +94,7 @@
     <Compile Include="Forms\FormGroup.cs" />
     <Compile Include="Forms\InputText.cs" />
     <Compile Include="Forms\PropertyContext.cs" />
-    <Compile Include="Forms\ReflectionHelper.cs" />
+    <Compile Include="ReflectionHelper.cs" />
     <Compile Include="Styles\Bootstrap\Bootstrap3Style.cs" />
     <Compile Include="Styles\Bootstrap\BootstrapButton.cs" />
     <Compile Include="Styles\ButtonStyle.cs" />

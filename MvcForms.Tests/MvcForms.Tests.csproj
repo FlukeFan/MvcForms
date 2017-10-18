@@ -131,6 +131,7 @@
     <Compile Include="Unit\Forms\FormGroupTests.cs" />
     <Compile Include="Unit\Forms\InputTextTests.cs" />
     <Compile Include="Unit\Navigation\LinkButtonTests.cs" />
+    <Compile Include="Unit\ReflectionHelperTests.cs" />
     <Compile Include="Unit\Utility\FakeController.cs" />
     <Compile Include="Unit\Utility\FakeHtmlHelper.cs" />
     <Compile Include="Unit\Utility\FakeHttpContext.cs" />
