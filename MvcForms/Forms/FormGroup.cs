@@ -5,9 +5,10 @@ namespace MvcForms.Forms
 {
     public interface IRenderedFormGroup
     {
-        HtmlTag Container   { get; }
-        HtmlTag Label       { get; }
-        HtmlTag Control     { get; }
+        HtmlTag Container           { get; }
+        HtmlTag Label               { get; }
+        HtmlTag ControlContainer    { get; }
+        HtmlTag Control             { get; }
     }
 
     public class FormGroup<TControl> : Control, IRenderedFormGroup
@@ -19,6 +20,7 @@ namespace MvcForms.Forms
         // POST render members
         private HtmlTag     _containerTag;
         private HtmlTag     _labelTag;
+        private HtmlTag     _controlContainerTag;
         private HtmlTag     _controlTag;
 
         public FormGroup(HtmlHelper html, GroupContext groupContext, TControl control) : base(html)
@@ -27,9 +29,10 @@ namespace MvcForms.Forms
             _control = control;
         }
 
-        HtmlTag IRenderedFormGroup.Container    => _containerTag;
-        HtmlTag IRenderedFormGroup.Label        => _labelTag;
-        HtmlTag IRenderedFormGroup.Control      => _controlTag;
+        HtmlTag IRenderedFormGroup.Container        => _containerTag;
+        HtmlTag IRenderedFormGroup.Label            => _labelTag;
+        HtmlTag IRenderedFormGroup.ControlContainer => _controlContainerTag;
+        HtmlTag IRenderedFormGroup.Control          => _controlTag;
 
         protected override HtmlTag CreateTag()
         {
@@ -38,10 +41,11 @@ namespace MvcForms.Forms
                 .Text(_groupContext.LabelText);
 
             _controlTag = _control.RenderTag();
+            _controlContainerTag = new HtmlTag("div").Append(_controlTag);
 
             _containerTag = new HtmlTag("div")
                 .Append(_labelTag)
-                .Append(_controlTag);
+                .Append(_controlContainerTag);
 
             return _containerTag;
         }

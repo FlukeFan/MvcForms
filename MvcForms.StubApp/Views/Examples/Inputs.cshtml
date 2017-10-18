@@ -14,13 +14,6 @@
 {
     @Html.ValidationSummary()
 
-    <h3>ASP.NET MVC Example</h3>
-    <div>
-        @form.Html.LabelFor(c => c.StringInput1, "Project Name")
-        @form.Html.TextBoxFor(c => c.StringInput1)
-        @form.Html.ValidationMessageFor(c => c.StringInput1)
-    </div>
-
     <h3>InputText</h3>
     <div>
         StringInput1: @form.Html.InputText(f => f.StringInput1)
@@ -28,4 +21,12 @@
 
     <h3>LabelledInputText</h3>
     @form.Html.LabelledInputText("StringInput2", f => f.StringInput2)
+}
+@if (Request.IsPjaxModal())
+{
+    @Html.LinkButtonCancelModal()
+}
+else
+{
+    @Html.LinkButtonModal("Modal", ExamplesActions.Inputs())
 }
