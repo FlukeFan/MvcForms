@@ -90,8 +90,8 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="ControllerExtensions.cs" />
-    <Compile Include="Forms\ControlContext.cs" />
-    <Compile Include="Forms\FormRow.cs" />
+    <Compile Include="Forms\GroupContext.cs" />
+    <Compile Include="Forms\FormGroup.cs" />
     <Compile Include="Forms\InputText.cs" />
     <Compile Include="Forms\PropertyContext.cs" />
     <Compile Include="Forms\ReflectionHelper.cs" />

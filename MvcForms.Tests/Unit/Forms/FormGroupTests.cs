@@ -7,26 +7,26 @@ using NUnit.Framework;
 namespace MvcForms.Tests.Unit.Forms
 {
     [TestFixture]
-    public class FormRowTests
+    public class FormGroupTests
     {
         [Test]
-        public void FormRow()
+        public void FormGroup()
         {
             var model = new FormInputsModel();
 
             var helper = FakeHtmlHelper.New(model);
 
-            var formRow = helper.LabelledInputText("test label", f => f.StringInput1);
-            var tags = Render(formRow);
+            var group = helper.LabelledInputText("test label", f => f.StringInput1);
+            var tags = Render(group);
 
             tags.Label.Attr("for").Should().Be(tags.Control.Id());
         }
 
-        public IRenderedFormRow Render<T>(FormRow<T> formRow)
+        public IRenderedFormGroup Render<T>(FormGroup<T> group)
             where T : Control
         {
-            formRow.RenderTag();
-            return (IRenderedFormRow)formRow;
+            group.RenderTag();
+            return (IRenderedFormGroup)group;
         }
     }
 }

@@ -128,7 +128,7 @@
     <Compile Include="SystemTests\Utility\NoJsTest.cs" />
     <Compile Include="SystemTests\Utility\Wait.cs" />
     <Compile Include="SystemTests\Utility\WebDriver.cs" />
-    <Compile Include="Unit\Forms\FormRowTests.cs" />
+    <Compile Include="Unit\Forms\FormGroupTests.cs" />
     <Compile Include="Unit\Forms\InputTextTests.cs" />
     <Compile Include="Unit\Navigation\LinkButtonTests.cs" />
     <Compile Include="Unit\Utility\FakeController.cs" />

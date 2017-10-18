@@ -54,27 +54,27 @@ namespace MvcForms.Forms
             return new InputText(helper, propertyContext);
         }
 
-        public static FormRow<InputText> LabelledInputText<T>(this HtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
+        public static FormGroup<InputText> LabelledInputText<T>(this HtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
         {
             return LabelledControl(helper, label, property, ctx => new InputText(helper, ctx.Property));
         }
 
-        public delegate TControl ControlFactory<TControl>(ControlContext controlContext);
+        public delegate TControl ControlFactory<TControl>(GroupContext groupContext);
 
-        public static FormRow<TControl> LabelledControl<TModel, TProperty, TControl>(this HtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
+        public static FormGroup<TControl> LabelledControl<TModel, TProperty, TControl>(this HtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
             where TControl : Control
         {
             var propertyContext = PropertyContext.New(helper, property);
 
-            var controlContext = new ControlContext
+            var groupContext = new GroupContext
             {
                 Property    = propertyContext,
                 LabelText   = labelText,
             };
 
-            var control = controlFactory(controlContext);
+            var control = controlFactory(groupContext);
 
-            var formRow = new FormRow<TControl>(helper, controlContext, control);
+            var formRow = new FormGroup<TControl>(helper, groupContext, control);
 
             return formRow;
         }
