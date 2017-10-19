@@ -69,6 +69,19 @@ namespace MvcForms.Tests.SystemTests.Utility
             return query(_webDriver);
         }
 
+        public object Exec(string javascript)
+        {
+            object returnValue = null;
+
+            WaitFor(() =>
+            {
+                var scriptExecutor = (IJavaScriptExecutor)_webDriver;
+                returnValue = scriptExecutor.ExecuteScript(javascript);
+            });
+
+            return returnValue;
+        }
+
         public void ShouldSeeText(string text)
         {
             Console.WriteLine("Verify can see text '{0}'", text);

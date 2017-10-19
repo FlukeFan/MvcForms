@@ -164,6 +164,7 @@ var mfoDialog = {};
             history.replaceState(state, null, '');
         }
 
+        mfoPjax.onBeforeNonPjaxPushState();
         var url = location.pathname + location.search + location.hash;
         history.pushState({ dialogCount: count + 1 }, null, url);
 

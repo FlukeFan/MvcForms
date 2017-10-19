@@ -1,4 +1,5 @@
-﻿using MvcForms.StubApp.Controllers;
+﻿using FluentAssertions;
+using MvcForms.StubApp.Controllers;
 using MvcForms.Tests.SystemTests.Utility;
 using NUnit.Framework;
 
@@ -19,9 +20,19 @@ namespace MvcForms.Tests.SystemTests
         [Test]
         public void Cancel()
         {
-            App.GoTo(ModalActions.Index());
+            App.GoTo(HomeActions.Testing());
+            App.Navigate("Modal");
 
             App.ShouldSeeText("Modal");
+
+            var setScript = "$('#insidePjaxPartial').text('modified');";
+            var getScript = "return $('#insidePjaxPartial').text();";
+
+            if (!JsDisabled())
+            {
+                App.Exec(setScript);
+                App.Exec(getScript).Should().Be("modified");
+            }
 
             App.Navigate("Modal1");
 
@@ -31,6 +42,9 @@ namespace MvcForms.Tests.SystemTests
 
             App.ShouldSeeText("ModalIndex");
             App.ShouldNotSeeText("Page1");
+
+            if (!JsDisabled())
+                App.Exec(getScript).Should().Be("modified", "cancelling dialog should not refresh page");
         }
 
         [Test]

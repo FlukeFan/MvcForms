@@ -1,0 +1,12 @@
+﻿@inherits PjaxPage<string>
+@{
+    SetLayout("Testing");
+}
+<h3>Testing links</h3>
+<section>
+    <ul class="buttonList">
+        <li>@Html.LinkButton(Html.Raw("<h4>Forms</h4>"), FormsActions.Index()).NoStyle()</li>
+        <li>@Html.LinkButton(Html.Raw("<h4>Pjax</h4>"), PjaxActions.Index()).NoStyle()</li>
+        <li>@Html.LinkButton(Html.Raw("<h4>Modal</h4>"), ModalActions.Index()).NoStyle()</li>
+    </ul>
+</section>

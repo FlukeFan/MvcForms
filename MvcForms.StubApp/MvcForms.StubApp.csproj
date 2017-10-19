@@ -153,6 +153,7 @@
     <Content Include="Views\Examples\Index.cshtml" />
     <Content Include="Views\Examples\Buttons.cshtml" />
     <Content Include="Views\Examples\Inputs.cshtml" />
+    <Content Include="Views\Home\Testing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
