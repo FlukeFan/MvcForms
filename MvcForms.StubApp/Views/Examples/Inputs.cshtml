@@ -2,7 +2,9 @@
 @{
     SetLayout("Inputs");
 }
+
 <h3>Inputs</h3>
+
 <style>
     p { margin-top: 20px; }
     form {
@@ -10,9 +12,9 @@
         max-width: 800px;
     }
 </style>
+
 @using (var form = Html.FormFor(Model.PostModel).Begin())
 {
-    @Html.ValidationSummary()
 
     <h3>InputText</h3>
     <div>
@@ -21,12 +23,16 @@
 
     <h3>LabelledInputText</h3>
     @form.Html.LabelledInputText("StringInput2", f => f.StringInput2)
-}
-@if (Request.IsPjaxModal())
-{
-    @Html.LinkButtonCancelModal()
-}
-else
-{
-    @Html.LinkButtonModal("Modal", ExamplesActions.Inputs())
+
+
+    @form.Html.ButtonSubmit("Submit").Style(MvcForms.Styles.Default.DefaultButton.Primary)
+
+    if (Request.IsPjaxModal())
+    {
+        @Html.LinkButtonCancelModal()
+    }
+    else
+    {
+        @Html.LinkButtonModal("Modal", ExamplesActions.Inputs())
+    }
 }

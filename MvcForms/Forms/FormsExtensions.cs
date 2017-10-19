@@ -66,17 +66,13 @@ namespace MvcForms.Forms
         {
             var propertyContext = PropertyContext.New(helper, property);
 
-            var groupContext = new GroupContext
-            {
-                Property    = propertyContext,
-                LabelText   = labelText,
-            };
+            var groupContext = GroupContext.New(helper, propertyContext, labelText);
 
             var control = controlFactory(groupContext);
 
-            var formRow = new FormGroup<TControl>(helper, groupContext, control);
+            var formGroup = new FormGroup<TControl>(helper, groupContext, control);
 
-            return formRow;
+            return formGroup;
         }
     }
 }

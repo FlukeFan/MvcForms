@@ -13,6 +13,8 @@ namespace MvcForms.Forms
             var id = TagBuilder.CreateSanitizedId(name);
             var metadata = ModelMetadata.FromLambdaExpression(property, helper.ViewData);
             var value = RenderValue(helper.ViewData.ModelState, name, metadata);
+            var modelState = helper.ViewData.ModelState;
+            var propertyModelState = modelState[name];
 
             return new PropertyContext
             {
@@ -20,6 +22,7 @@ namespace MvcForms.Forms
                 Id          = id,
                 Value       = value,
                 Metadata    = metadata,
+                ModelState  = propertyModelState,
             };
         }
 
@@ -29,6 +32,7 @@ namespace MvcForms.Forms
         public string           Name;
         public string           Value;
         public ModelMetadata    Metadata;
+        public ModelState       ModelState;
 
         public static string RenderValue(ModelStateDictionary modelState, string name, ModelMetadata metadata)
         {

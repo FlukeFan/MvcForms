@@ -22,9 +22,17 @@ namespace MvcForms.StubApp.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Inputs()
         {
             var model = new InputsModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Inputs(FormInputsModel postModel)
+        {
+            var model = new InputsModel { PostModel = postModel };
             return View(model);
         }
     }

@@ -8,7 +8,7 @@ namespace MvcForms.Styles.Bootstrap
         public Bootstrap3Style()
         {
             RegisterInterface<IForm>((c, t) => FormStyler((IForm)c, t));
-            RegisterInterface<IRenderedFormGroup>((c, t) => FormRowStyler((IRenderedFormGroup)c, t));
+            RegisterInterface<IRenderedFormGroup>((c, t) => FormGroupStyler((IRenderedFormGroup)c, t));
             Register<InputText>((c, t) => InputTextStyler((InputText)c, t));
         }
 
@@ -17,7 +17,7 @@ namespace MvcForms.Styles.Bootstrap
             return tag.AddClasses("form-horizontal");
         }
 
-        public virtual HtmlTag FormRowStyler(IRenderedFormGroup formGroup, HtmlTag tag)
+        public virtual HtmlTag FormGroupStyler(IRenderedFormGroup formGroup, HtmlTag tag)
         {
             formGroup.Container.AddClasses("form-group");
             formGroup.Label.AddClasses("control-label", "col-xs-4");

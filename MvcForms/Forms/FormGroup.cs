@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using HtmlTags;
 
 namespace MvcForms.Forms
@@ -9,6 +10,7 @@ namespace MvcForms.Forms
         HtmlTag Label               { get; }
         HtmlTag ControlContainer    { get; }
         HtmlTag Control             { get; }
+        HtmlTag Error               { get; }
     }
 
     public class FormGroup<TControl> : Control, IRenderedFormGroup
@@ -22,6 +24,7 @@ namespace MvcForms.Forms
         private HtmlTag     _labelTag;
         private HtmlTag     _controlContainerTag;
         private HtmlTag     _controlTag;
+        private HtmlTag     _errorTag;
 
         public FormGroup(HtmlHelper html, GroupContext groupContext, TControl control) : base(html)
         {
@@ -33,11 +36,14 @@ namespace MvcForms.Forms
         HtmlTag IRenderedFormGroup.Label            => _labelTag;
         HtmlTag IRenderedFormGroup.ControlContainer => _controlContainerTag;
         HtmlTag IRenderedFormGroup.Control          => _controlTag;
+        HtmlTag IRenderedFormGroup.Error            => _errorTag;
 
         protected override HtmlTag CreateTag()
         {
+            var property = _groupContext.Property;
+
             _labelTag = new HtmlTag("label")
-                .Attr("for", _groupContext.Property.Id)
+                .Attr("for", property.Id)
                 .Text(_groupContext.LabelText);
 
             _controlTag = _control.RenderTag();
@@ -46,6 +52,14 @@ namespace MvcForms.Forms
             _containerTag = new HtmlTag("div")
                 .Append(_labelTag)
                 .Append(_controlContainerTag);
+
+            if (_groupContext.HasErrors)
+            {
+                var messages = property.ModelState.Errors.Select(e => e.ErrorMessage);
+                var message = string.Join(" ", messages);
+                _errorTag = new HtmlTag("div").Text(message);
+                _containerTag.Append(_errorTag);
+            }
 
             return _containerTag;
         }
