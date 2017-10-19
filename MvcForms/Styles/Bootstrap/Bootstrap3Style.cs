@@ -19,9 +19,18 @@ namespace MvcForms.Styles.Bootstrap
 
         public virtual HtmlTag FormGroupStyler(IRenderedFormGroup formGroup, HtmlTag tag)
         {
+            var groupContext = formGroup.GroupContext;
+
             formGroup.Container.AddClasses("form-group");
             formGroup.Label.AddClasses("control-label", "col-xs-4");
             formGroup.ControlContainer.AddClasses("col-xs-8");
+
+            if (formGroup.Error != null)
+                formGroup.Error.AddClasses("help-block", "col-xs-offset-4", "col-xs-8");
+
+            if (groupContext.HasErrors)
+                formGroup.Container.AddClasses("has-error");
+
             return tag;
         }
 

@@ -4,7 +4,12 @@ using HtmlTags;
 
 namespace MvcForms.Forms
 {
-    public interface IRenderedFormGroup
+    public interface IFormGroup
+    {
+        GroupContext GroupContext { get; }
+    }
+
+    public interface IRenderedFormGroup : IFormGroup
     {
         HtmlTag Container           { get; }
         HtmlTag Label               { get; }
@@ -31,6 +36,8 @@ namespace MvcForms.Forms
             _groupContext = groupContext;
             _control = control;
         }
+
+        public GroupContext GroupContext => _groupContext;
 
         HtmlTag IRenderedFormGroup.Container        => _containerTag;
         HtmlTag IRenderedFormGroup.Label            => _labelTag;
