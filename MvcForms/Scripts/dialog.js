@@ -11,7 +11,7 @@ var mfoDialog = {};
 
     removeModalHistory();
 
-    var autoWidthStart = 700;
+    var autoWidthStart = 780;
     var dialogBorder = 10;
     var maxHeight;
     var maxWidth;
