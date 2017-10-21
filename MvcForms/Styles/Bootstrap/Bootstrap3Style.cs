@@ -22,11 +22,11 @@ namespace MvcForms.Styles.Bootstrap
             var groupContext = formGroup.GroupContext;
 
             formGroup.Container.AddClasses("form-group");
-            formGroup.Label.AddClasses("control-label", "col-xs-4");
-            formGroup.ControlContainer.AddClasses("col-xs-8");
+            formGroup.Label.AddClasses("control-label", "col-sm-4");
+            formGroup.ControlContainer.AddClasses("col-sm-8");
 
             if (formGroup.Error != null)
-                formGroup.Error.AddClasses("help-block", "col-xs-offset-4", "col-xs-8");
+                formGroup.Error.AddClasses("help-block", "col-sm-offset-4", "col-sm-8");
 
             if (groupContext.HasErrors)
                 formGroup.Container.AddClasses("has-error");
