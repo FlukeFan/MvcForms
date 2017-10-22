@@ -13,3 +13,14 @@
         padding: 15px; // to fix negative margins for forms inside dialogs https://github.com/twbs/bootstrap/issues/8959
     }
 }
+
+// if .no-js is applied to top-level <html> element
+// these classes are compatible with modernizr changing it to
+// .js if javascript is enabled
+html.js .hide-js {
+    display: none;
+}
+
+html.no-js .show-js {
+    display: none;
+}

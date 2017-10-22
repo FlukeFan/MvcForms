@@ -53,7 +53,7 @@ namespace MvcForms.Styles.Bootstrap
 
                 var closeButton = new HtmlTag("button")
                     .Attr("type", "button")
-                    .AddClasses("close")
+                    .AddClasses("close", "show-js")
                     .Attr("data-dismiss", "alert")
                     .Attr("aria-label", "Close")
                     .Append(new HtmlTag("span")
