@@ -17,6 +17,8 @@
 @using (var form = Html.FormFor(Model.PostModel).Begin())
 {
 
+    @form.Html.ErrorSummary()
+
     <h3>InputText</h3>
     <div>
         @form.Html.InputText(f => f.StringInput1)

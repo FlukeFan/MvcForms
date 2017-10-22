@@ -54,6 +54,11 @@ namespace MvcForms.Forms
             return formButtons.Begin<T>();
         }
 
+        public static ErrorSummary ErrorSummary<T>(this HtmlHelper<T> helper)
+        {
+            return new ErrorSummary(helper);
+        }
+
         public static InputText InputText<T>(this HtmlHelper<T> helper, Expression<Func<T, string>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);

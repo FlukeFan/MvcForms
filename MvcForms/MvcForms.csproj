@@ -90,6 +90,7 @@
     <Compile Include="..\_output\AssemblyInfo.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="ControllerExtensions.cs" />
+    <Compile Include="Forms\ErrorSummary.cs" />
     <Compile Include="Forms\FormButtons.cs" />
     <Compile Include="Forms\GroupContext.cs" />
     <Compile Include="Forms\FormGroup.cs" />

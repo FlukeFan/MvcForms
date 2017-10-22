@@ -32,6 +32,7 @@ namespace MvcForms.StubApp.Controllers
         [HttpPost]
         public ActionResult Inputs(FormInputsModel postModel)
         {
+            ModelState.AddModelError("", "A sample error message");
             var model = new InputsModel { PostModel = postModel };
             return View(model);
         }
