@@ -10,6 +10,7 @@ namespace MvcForms.Styles.Bootstrap
             RegisterInterface<IForm>((c, t) => FormStyler((IForm)c, t));
             RegisterInterface<IRenderedFormGroup>((c, t) => FormGroupStyler((IRenderedFormGroup)c, t));
             RegisterInterface<IRenderedFormButtons>((c, t) => FormButtonsStyler((IRenderedFormButtons)c, t));
+            RegisterInterface<IRenderedErrorSummary>((c, t) => ErrorSummaryStyler((IRenderedErrorSummary)c, t));
             Register<InputText>((c, t) => InputTextStyler((InputText)c, t));
         }
 
@@ -39,6 +40,29 @@ namespace MvcForms.Styles.Bootstrap
         {
             formButtons.Outer.AddClasses("row");
             formButtons.Inner.AddClasses("col-sm-offset-4", "col-sm-8");
+            return tag;
+        }
+
+        public virtual HtmlTag ErrorSummaryStyler(IRenderedErrorSummary errorSummary, HtmlTag tag)
+        {
+            foreach (var errorTag in errorSummary.Errors)
+            {
+                var text = errorTag.Text();
+                errorTag.AddClasses("alert", "alert-warning", "alert-dismissible");
+                errorTag.Attr("role", "alert");
+
+                var closeButton = new HtmlTag("button")
+                    .Attr("type", "button")
+                    .AddClasses("close")
+                    .Attr("data-dimsiss", "alert")
+                    .Attr("aria-label", "Close")
+                    .Append(new HtmlTag("span")
+                        .Text("&times;").Encoded(false)
+                        .Attr("aria-hidden", "true"));
+
+                errorTag.Append(closeButton);
+            }
+
             return tag;
         }
 
