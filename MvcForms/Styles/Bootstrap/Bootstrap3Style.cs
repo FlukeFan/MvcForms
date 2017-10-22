@@ -9,6 +9,7 @@ namespace MvcForms.Styles.Bootstrap
         {
             RegisterInterface<IForm>((c, t) => FormStyler((IForm)c, t));
             RegisterInterface<IRenderedFormGroup>((c, t) => FormGroupStyler((IRenderedFormGroup)c, t));
+            RegisterInterface<IRenderedFormButtons>((c, t) => FormButtonsStyler((IRenderedFormButtons)c, t));
             Register<InputText>((c, t) => InputTextStyler((InputText)c, t));
         }
 
@@ -31,6 +32,13 @@ namespace MvcForms.Styles.Bootstrap
             if (groupContext.HasErrors)
                 formGroup.Container.AddClasses("has-error");
 
+            return tag;
+        }
+
+        public virtual HtmlTag FormButtonsStyler(IRenderedFormButtons formButtons, HtmlTag tag)
+        {
+            formButtons.Outer.AddClasses("row");
+            formButtons.Inner.AddClasses("col-sm-offset-4", "col-sm-8");
             return tag;
         }
 

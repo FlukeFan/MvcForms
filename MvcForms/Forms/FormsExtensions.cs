@@ -22,6 +22,11 @@ namespace MvcForms.Forms
             return newHelper;
         }
 
+        private class ViewDataContainer : IViewDataContainer
+        {
+            public ViewDataDictionary ViewData { get; set; }
+        }
+
         public static Form<TViewModel> Form<TViewModel>(this HtmlHelper<TViewModel> helper)
         {
             return helper.FormFor(helper.ViewData.Model);
@@ -43,9 +48,10 @@ namespace MvcForms.Forms
             return new Button(helper, "submit", content);
         }
 
-        private class ViewDataContainer : IViewDataContainer
+        public static ScopedHtmlHelper<T> FormButtons<T>(this HtmlHelper<T> helper)
         {
-            public ViewDataDictionary ViewData { get; set; }
+            var formButtons = new FormButtons(helper);
+            return formButtons.Begin<T>();
         }
 
         public static InputText InputText<T>(this HtmlHelper<T> helper, Expression<Func<T, string>> property)

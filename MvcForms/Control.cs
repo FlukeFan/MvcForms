@@ -81,7 +81,7 @@ namespace MvcForms
             return this;
         }
 
-        public ScopedHtmlHelper<TModel> Begin<TModel>()
+        public virtual ScopedHtmlHelper<TModel> Begin<TModel>()
         {
             var tag = RenderTag().NoClosingTag();
             _html.ViewContext.Writer.Write(tag.ToHtmlString());

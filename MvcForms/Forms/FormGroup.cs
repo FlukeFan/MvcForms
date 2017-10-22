@@ -24,7 +24,7 @@ namespace MvcForms.Forms
         private GroupContext    _groupContext;
         private TControl        _control;
 
-        // POST render members
+        // post-render members
         private HtmlTag     _containerTag;
         private HtmlTag     _labelTag;
         private HtmlTag     _controlContainerTag;

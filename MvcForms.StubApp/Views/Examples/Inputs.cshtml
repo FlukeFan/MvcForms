@@ -10,6 +10,7 @@
     form {
         background: #eee;
         max-width: 800px;
+        padding: 15px;
     }
 </style>
 
@@ -18,21 +19,25 @@
 
     <h3>InputText</h3>
     <div>
-        StringInput1: @form.Html.InputText(f => f.StringInput1)
+        @form.Html.InputText(f => f.StringInput1)
     </div>
 
     <h3>LabelledInputText</h3>
     @form.Html.LabelledInputText("StringInput2", f => f.StringInput2)
 
 
-    @form.Html.ButtonSubmit("Submit").Style(MvcForms.Styles.Default.DefaultButton.Primary)
+    using (form.Html.FormButtons())
+    {
+        @form.Html.ButtonSubmit("Submit").Style(MvcForms.Styles.Default.DefaultButton.Primary)
+        @form.Html.ButtonSubmit("Another Submit")
 
-    if (Request.IsPjaxModal())
-    {
-        @Html.LinkButtonCancelModal()
-    }
-    else
-    {
-        @Html.LinkButtonModal("Modal", ExamplesActions.Inputs())
+        if (Request.IsPjaxModal())
+        {
+            @Html.LinkButtonCancelModal()
+        }
+        else
+        {
+            @Html.LinkButtonModal("Modal", ExamplesActions.Inputs())
+        }
     }
 }
