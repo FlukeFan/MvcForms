@@ -7,7 +7,7 @@ namespace MvcForms
 {
     public abstract class Styler : IStyler
     {
-        public delegate HtmlTag ApplyStyle(object control, HtmlTag tag);
+        public delegate HtmlTag ApplyStyle(IControl control, HtmlTag tag);
 
         private static readonly ApplyStyle _applyNoStyle = (c, t) => t;
 
@@ -19,6 +19,7 @@ namespace MvcForms
         }
 
         public static HtmlTag Style<TControl>(TControl control, HtmlTag tag)
+            where TControl : IControl
         {
             var styler = _styler.StylerFor(control.GetType());
             return styler(control, tag);

@@ -6,7 +6,13 @@ using HtmlTags;
 
 namespace MvcForms
 {
-    public abstract class Control : IHtmlString
+    public interface IControl
+    {
+        HtmlHelper  Html    { get; }
+        UrlHelper   Url     { get; }
+    }
+
+    public abstract class Control : IControl, IHtmlString
     {
         private static readonly TagMutator _defaultMutator = (h, t) => t;
 
@@ -22,8 +28,8 @@ namespace MvcForms
             _urlHelper = new Lazy<UrlHelper>(() => new UrlHelper(_html.ViewContext.RequestContext));
         }
 
-        protected UrlHelper     Url     => _urlHelper.Value;
-        protected HtmlHelper    Html    => _html;
+        public HtmlHelper   Html    => _html;
+        public UrlHelper    Url     => _urlHelper.Value;
 
         protected abstract HtmlTag CreateTag();
 
