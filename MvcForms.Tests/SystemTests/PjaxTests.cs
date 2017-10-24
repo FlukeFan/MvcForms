@@ -175,6 +175,10 @@ namespace MvcForms.Tests.SystemTests
             App.ShouldHaveTitleContaining("FormDone");
             App.ShouldHaveUrl(PjaxActions.FormDone());
             VerifyNavState();
+
+            App.Back();
+
+            App.ShouldSeeText("enter");
         }
 
         [Test]
