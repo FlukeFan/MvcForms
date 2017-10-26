@@ -3,16 +3,16 @@ using HtmlTags;
 
 namespace MvcForms.Forms
 {
-    public class InputText : NamedInput
+    public class InputHidden : NamedInput
     {
-        public InputText(HtmlHelper html, PropertyContext propertyContext) : base(html, propertyContext)
+        public InputHidden(HtmlHelper html, PropertyContext propertyContext) : base(html, propertyContext)
         {
         }
 
         protected override HtmlTag CreateTag()
         {
             return CreateInputTag()
-                .Attr("type", "text");
+                .Attr("type", "hidden");
         }
     }
 }

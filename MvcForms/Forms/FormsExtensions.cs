@@ -59,6 +59,12 @@ namespace MvcForms.Forms
             return new ErrorSummary(helper);
         }
 
+        public static InputHidden InputHidden<T>(this HtmlHelper<T> helper, Expression<Func<T, string>> property)
+        {
+            var propertyContext = PropertyContext.New(helper, property);
+            return new InputHidden(helper, propertyContext);
+        }
+
         public static InputText InputText<T>(this HtmlHelper<T> helper, Expression<Func<T, string>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);

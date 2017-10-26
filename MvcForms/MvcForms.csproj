@@ -94,6 +94,8 @@
     <Compile Include="Forms\FormButtons.cs" />
     <Compile Include="Forms\GroupContext.cs" />
     <Compile Include="Forms\FormGroup.cs" />
+    <Compile Include="Forms\NamedInput.cs" />
+    <Compile Include="Forms\InputHidden.cs" />
     <Compile Include="Forms\InputText.cs" />
     <Compile Include="Forms\PropertyContext.cs" />
     <Compile Include="ReflectionHelper.cs" />
