@@ -73,12 +73,11 @@ namespace MvcForms
 
         public Control Tag(Func<HtmlTag, HtmlTag> tagMutator)
         {
-            return Tag((mutator, html, tag) => tagMutator(tag));
-        }
-
-        public Control ThenTag(Func<HtmlTag, HtmlTag> tagMutator)
-        {
-            return Tag((mutator, html, tag) => tagMutator(mutator(html, tag)));
+            return Tag((mutator, html, tag) =>
+            {
+                tagMutator(tag);
+                return tag;
+            });
         }
 
         public Control NoStyle(bool noStyle = true)

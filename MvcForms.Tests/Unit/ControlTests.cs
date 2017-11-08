@@ -16,7 +16,7 @@ namespace MvcForms.Tests.Unit
 
             protected override HtmlTag CreateTag()
             {
-                return new HtmlTag("div");
+                return new HtmlTag("div").Append(new HtmlTag("span"));
             }
         }
 
@@ -29,16 +29,17 @@ namespace MvcForms.Tests.Unit
 
             control.RenderTag().Attr("data-test1").Should().Be("value1");
 
-            control.Tag(t => t.Attr("data-test2", "value2"));
+            control.Tag(t => t.Attr("data-test2", "value2").Children[0].Attr("data-test4", "value4"));
 
             control.RenderTag().Attr("data-test1").Should().BeNullOrWhiteSpace();
             control.RenderTag().Attr("data-test2").Should().Be("value2");
 
-            control.ThenTag(t => t.Attr("data-test3", "value3"));
+            control.Tag((p, h, t) => p(h, t).Attr("data-test3", "value3"));
 
             control.RenderTag().Attr("data-test1").Should().BeNullOrWhiteSpace();
             control.RenderTag().Attr("data-test2").Should().Be("value2");
             control.RenderTag().Attr("data-test3").Should().Be("value3");
+            control.RenderTag().Children[0].Attr("data-test4").Should().Be("value4");
         }
     }
 }
