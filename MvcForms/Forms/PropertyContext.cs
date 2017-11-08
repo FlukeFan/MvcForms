@@ -8,7 +8,7 @@ namespace MvcForms.Forms
     {
         public static PropertyContext New<T, P>(HtmlHelper<T> helper, Expression<Func<T, P>> property)
         {
-            var propertyName = property.GetExpressionText();
+            var propertyName = ExpressionHelper.GetExpressionText(property);
             var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(propertyName);
             var id = TagBuilder.CreateSanitizedId(name);
             var metadata = ModelMetadata.FromLambdaExpression(property, helper.ViewData);

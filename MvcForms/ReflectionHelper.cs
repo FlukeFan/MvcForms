@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
 
@@ -9,14 +8,6 @@ namespace MvcForms
     public static class ReflectionHelper
     {
         private static IDictionary<Type, PropertyInfo> _cachedViewData = new Dictionary<Type, PropertyInfo>();
-
-        public static string GetExpressionText(this LambdaExpression propertyLambda)
-        {
-            if (propertyLambda.Body.NodeType == ExpressionType.Convert)
-                propertyLambda = LambdaExpression.Lambda((propertyLambda.Body as UnaryExpression).Operand);
-
-            return ExpressionHelper.GetExpressionText(propertyLambda);
-        }
 
         public static ViewDataDictionary GenericViewData(this HtmlHelper helper)
         {
