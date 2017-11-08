@@ -9,7 +9,6 @@ namespace MvcForms
     public static class ReflectionHelper
     {
         private static IDictionary<Type, PropertyInfo> _cachedViewData = new Dictionary<Type, PropertyInfo>();
-        //private static IDictionary<Type, PropertyInfo> _cachedViewData = new Dictionary<Type, PropertyInfo>();
 
         public static string GetExpressionText(this LambdaExpression propertyLambda)
         {
