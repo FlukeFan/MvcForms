@@ -40,6 +40,10 @@ namespace MvcForms.Tests.Unit
             control.RenderTag().Attr("data-test2").Should().Be("value2");
             control.RenderTag().Attr("data-test3").Should().Be("value3");
             control.RenderTag().Children[0].Attr("data-test4").Should().Be("value4");
+
+            control.Tag((p, h, t) => new HtmlTag("a"));
+
+            control.RenderTag().TagName().Should().Be("a");
         }
     }
 }
