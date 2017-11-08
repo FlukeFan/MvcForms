@@ -13,13 +13,9 @@ namespace MvcForms.Tests.Unit.Forms
         [Test]
         public void InputText()
         {
-            var model = new FormInputsModel();
-            model.StringInput1 = "existing value";
+            var model = new FormInputsModel { StringInput1 = "existing value" };
 
-            var helper = FakeHtmlHelper.New(model);
-
-            var input = helper.InputText(f => f.StringInput1);
-            var tag = input.RenderTag();
+            var tag = model.Helper().InputText(f => f.StringInput1).RenderTag();
 
             tag.Attr("type").Should().Be("text");
             tag.Attr("name").Should().Be("StringInput1");
@@ -32,8 +28,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var helper = FakeHtmlHelper.New(new FormInputsModel());
 
-            var input = helper.InputText(f => f.InputsArray[1].StringInput2);
-            var tag = input.RenderTag();
+            var tag = helper.InputText(f => f.InputsArray[1].StringInput2).RenderTag();
 
             tag.Attr("type").Should().Be("text");
             tag.Attr("name").Should().Be("InputsArray[1].StringInput2");
@@ -49,6 +44,14 @@ namespace MvcForms.Tests.Unit.Forms
             var input = helper.InputText(f => f.StringInput1);
 
             input.Value().Should().Be("attempted value");
+        }
+
+        [Test]
+        public void CanLabel()
+        {
+            var model = new FormInputsModel();
+
+            model.Helper().LabelledInputText("label", m => m.StringInput1).RenderTag().ToHtmlString().Contains("type=\"text\"");
         }
     }
 }

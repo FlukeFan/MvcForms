@@ -8,5 +8,10 @@ namespace MvcForms.Tests.Unit.Utility
         {
             return control.ToHtmlString();
         }
+
+        public static FakeHtmlHelper<T> Helper<T>(this T model)
+        {
+            return FakeHtmlHelper.New(model);
+        }
     }
 }

@@ -13,10 +13,8 @@ namespace MvcForms.Tests.Unit.Forms
         public void InputHidden()
         {
             var model = new FormInputsModel { StringInput1 = "123" };
-            var helper = FakeHtmlHelper.New(model);
 
-            var input = helper.InputHidden(f => f.StringInput1);
-            var tag = input.RenderTag();
+            var tag = model.Helper().InputHidden(f => f.StringInput1).RenderTag();
 
             tag.TagName().Should().Be("input");
             tag.Attr("type").Should().Be("hidden");
@@ -28,10 +26,8 @@ namespace MvcForms.Tests.Unit.Forms
         public void InputHidden_Long()
         {
             var model = new FormInputsModel { Long = 123 };
-            var helper = FakeHtmlHelper.New(model);
 
-            var input = helper.InputHidden(f => f.Long);
-            var tag = input.RenderTag();
+            var tag = model.Helper().InputHidden(f => f.Long).RenderTag();
 
             tag.TagName().Should().Be("input");
             tag.Attr("type").Should().Be("hidden");

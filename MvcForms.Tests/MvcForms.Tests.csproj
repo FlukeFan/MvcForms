@@ -129,6 +129,7 @@
     <Compile Include="SystemTests\Utility\Wait.cs" />
     <Compile Include="SystemTests\Utility\WebDriver.cs" />
     <Compile Include="Unit\Forms\FormGroupTests.cs" />
+    <Compile Include="Unit\Forms\InputNumberTests.cs" />
     <Compile Include="Unit\Forms\InputHiddenTests.cs" />
     <Compile Include="Unit\Forms\InputTextTests.cs" />
     <Compile Include="Unit\Navigation\LinkButtonTests.cs" />

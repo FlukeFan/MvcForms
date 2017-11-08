@@ -27,6 +27,10 @@
     <h3>LabelledInputText</h3>
     @form.Html.LabelledInputText("StringInput2", f => f.StringInput2)
 
+    <h3>LabelledInputNumber</h3>
+    @form.Html.LabelledInputNumber("Int", f => f.Int)
+    @form.Html.LabelledInputNumber("NullableInt", f => f.NullableInt)
+    @form.Html.LabelledInputNumber("StringInput1", f => f.StringInput1)
 
     using (form.Html.FormButtons())
     {
