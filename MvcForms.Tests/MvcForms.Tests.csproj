@@ -131,6 +131,7 @@
     <Compile Include="Unit\Forms\FormGroupTests.cs" />
     <Compile Include="Unit\Forms\InputNumberTests.cs" />
     <Compile Include="Unit\Forms\InputHiddenTests.cs" />
+    <Compile Include="Unit\Forms\FormTests.cs" />
     <Compile Include="Unit\Forms\InputTextTests.cs" />
     <Compile Include="Unit\Navigation\LinkButtonTests.cs" />
     <Compile Include="Unit\ReflectionHelperTests.cs" />

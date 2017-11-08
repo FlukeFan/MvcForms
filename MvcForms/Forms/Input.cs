@@ -10,6 +10,7 @@ namespace MvcForms.Forms
         private string          _id;
         private string          _name;
         private string          _value;
+        private string          _autoComplete;
 
         public Input(HtmlHelper html, PropertyContext propertyContext, string type) : base(html)
         {
@@ -34,13 +35,18 @@ namespace MvcForms.Forms
         public string   Value()             { return _value; }
         public Input    Value(string value) { _value = value; return this; }
 
+        public string   AutoComplete()                      { return _autoComplete; }
+        public Input    AutoComplete(string autoComplete)   { _autoComplete = autoComplete; return this; }
+        public Input    AutoCompleteOff()                   { return AutoComplete("off"); }
+
         protected override HtmlTag CreateTag()
         {
             return new HtmlTag("input")
                 .Attr("type", _type)
                 .Attr("id", _id)
                 .Attr("name", _name)
-                .Attr("value", _value);
+                .Attr("value", _value)
+                .Attr("autocomplete", _autoComplete);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace MvcForms.Forms
     {
         private string  _action;
         private string  _method;
+        private string  _autoComplete;
 
         public Form(HtmlHelper<T> html) : base(html)
         {
@@ -19,11 +20,15 @@ namespace MvcForms.Forms
             Method("post");
         }
 
-        public string   Action()                { return _action; }
-        public Form<T>  Action(string action)   { _action = action; return this; }
+        public string   Action()                            { return _action; }
+        public Form<T>  Action(string action)               { _action = action; return this; }
 
-        public string   Method()                { return _method; }
-        public Form<T>  Method(string method)   { _method = method; return this; }
+        public string   Method()                            { return _method; }
+        public Form<T>  Method(string method)               { _method = method; return this; }
+
+        public string   AutoComplete()                      { return _autoComplete; }
+        public Form<T>  AutoComplete(string autoComplete)   { _autoComplete = autoComplete; return this; }
+        public Form<T>  AutoCompleteOff()                   { return AutoComplete("off"); }
 
         public ScopedHtmlHelper<T> Begin(Action<Form<T>> formMutator = null)
         {
@@ -35,7 +40,8 @@ namespace MvcForms.Forms
         {
             return new HtmlTag("form")
                 .Attr("method", _method)
-                .Attr("action", _action);
+                .Attr("action", _action)
+                .Attr("autocomplete", _autoComplete);
         }
     }
 }

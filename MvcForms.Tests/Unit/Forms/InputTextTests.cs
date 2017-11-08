@@ -53,5 +53,25 @@ namespace MvcForms.Tests.Unit.Forms
 
             model.Helper().LabelledInputText("label", m => m.StringInput1).RenderTag().ToHtmlString().Contains("type=\"text\"");
         }
+
+        [Test]
+        public void AutoComplete_Off()
+        {
+            var model = new FormInputsModel();
+
+            var tag = model.Helper().InputText(f => f.StringInput1).AutoCompleteOff().RenderTag();
+
+            tag.Attr("autocomplete").Should().Be("off");
+        }
+
+        [Test]
+        public void Form_AutoCompleteDefault()
+        {
+            var model = new FormInputsModel();
+
+            var tag = model.Helper().InputText(f => f.StringInput1).RenderTag();
+
+            tag.ToString().Should().NotContain("autocomplete");
+        }
     }
 }
