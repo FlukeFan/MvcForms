@@ -67,6 +67,7 @@ var mfoPjaxDialog = {};
 
         var dialog = dialogInfo.dialog;
         dialog.attr('data-pjax', context.url);
+        context.container = dialog;
 
     }
 

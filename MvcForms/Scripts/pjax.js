@@ -282,6 +282,11 @@ var mfoPjax = {};
             success: function (data, textStatus, jqXHR) {
                 mfoOverlay.remove(overlay);
                 callback(context, data, textStatus, jqXHR);
+                if (context.container) {
+                    context.container.trigger('pjax:loaded', context);
+                } else {
+                    console.warn('context.container not set in pjax:load (cannot raise pjax:loaded event)');
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 mfoOverlay.remove(overlay);
