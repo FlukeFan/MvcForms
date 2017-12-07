@@ -10,11 +10,6 @@ namespace MvcForms.Tests.SystemTests
         protected override bool JsDisabled() { return true; }
     }
 
-    public class ModalTests_Js : ModalTests
-    {
-        protected override bool JsDisabled() { return false; }
-    }
-
     public abstract class ModalTests : NoJsTest
     {
         [Test]

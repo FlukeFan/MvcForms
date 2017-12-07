@@ -184,10 +184,20 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void Submit(string text)
         {
+            ClickButton(text, "form input[type=submit], form button");
+        }
+
+        public void ClickButton(string text)
+        {
+            ClickButton(text, "button");
+        }
+
+        private void ClickButton(string text, string selector)
+        {
             Console.WriteLine("Click button {0}", text);
             WaitFor(() =>
             {
-                IList<IWebElement> buttons = _webDriver.FindElements(By.CssSelector("form input[type=submit], form button"))
+                IList<IWebElement> buttons = _webDriver.FindElements(By.CssSelector(selector))
                     .Where(b => b.Enabled)
                     .ToList();
 

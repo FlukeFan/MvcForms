@@ -8,6 +8,10 @@ var mfoDialog = {};
     mfoDialog.dialogCount = dialogCount;
     mfoDialog.topDialog = topDialog;
     mfoDialog.closeDialog = closeDialog;
+    mfoDialog.showDialog = showDialog;
+    mfoDialog.dialogHtml = dialogHtml;
+    mfoDialog.alert = alertDialog;
+    mfoDialog.confirm = confirmDialog;
 
     removeModalHistory();
 
@@ -97,6 +101,73 @@ var mfoDialog = {};
         } else {
             return dialogStack[dialogStack.length - 1];
         }
+    }
+
+    function alertDialog(options) {
+
+        var defaults = {
+            buttons: ['OK']
+        };
+
+        $.extend(defaults, options);
+
+        showDialog(defaults);
+
+    }
+
+    function confirmDialog(options) {
+
+        var defaults = {
+            buttons: ['OK', 'Cancel']
+        };
+
+        $.extend(defaults, options);
+
+        showDialog(defaults);
+
+    }
+
+    function showDialog(options) {
+
+        var defaults = {
+            width: '200px'
+        };
+
+        $.extend(defaults, options);
+
+        var html = mfoDialog.dialogHtml(defaults);
+
+        var dialogInfo = showModal(html, function (response) {
+            if (options.onShow) {
+                options.onShow(response);
+            }
+        });
+
+        dialogInfo.dialog.find('.dialogHtml-buttons button').first().focus();
+
+    }
+
+    function dialogHtml(options) {
+
+        var buttons = '<div class="dialogHtml-buttons">';
+
+        if (options.buttons) {
+            for (var i in options.buttons) {
+                var buttonText = options.buttons[i];
+                buttons += '<button type="button" href="#" data-close-dialog="{ &quot;text&quot;: &quot;' + buttonText + '&quot; }">' + buttonText + '</button>';
+            }
+        }
+
+        buttons += '</div>';
+
+        var html =
+            '<div data-modal-width="' + options.width + '" data-title="' + options.title + '">'
+            + '<div><h3>' + options.title + '</h3></div>'
+            + '<div><p>' + options.message + '</p></div>'
+            + buttons
+            + '</div > ';
+
+        return html;
     }
 
     function showModal(html, callback) {

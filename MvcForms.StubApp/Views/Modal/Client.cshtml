@@ -13,6 +13,8 @@
     <li><button id="openSmallDialog">Open Small Dialog</button></li>
     <li><button id="openWideDialog">Open Wide Dialog</button></li>
     <li><button class="open-nested-dialog">Open Nested Dialog</button></li>
+    <li><button id="showAlertDialog">Alert</button></li>
+    <li><button id="showConfirmDialog">Confirm</button></li>
 </ul>
 
 
@@ -20,7 +22,7 @@
     <h3>Some focusable elements</h3>
     <button>button</button>
     <button disabled="disabled">button disabled</button>
-    <input type="text" />
+    <input type="text" id="textInput" />
     <a onclick="alert('clicked'); return false;" href="#" disabled="disabled">anchor</a>
     <select><option>option 1</option></select>
     <textarea>textarea</textarea>
@@ -40,6 +42,30 @@
 <script>
 
     $(function () {
+
+        $(document).on('click', '#showAlertDialog', function () {
+
+            mfoDialog.alert({
+                title: 'alert_title',
+                message: 'alert_message',
+                onClose: function () {
+                    $('#textInput').text('alert_closed');
+                }
+            });
+
+        });
+
+        $(document).on('click', '#showConfirmDialog', function () {
+
+            mfoDialog.confirm({
+                title: 'confirm_title',
+                message: 'confirm_message',
+                onClose: function () {
+                    $('#textInput').text('confirm_closed');
+                }
+            });
+
+        });
 
         $(document).on('click', '#openDialog', function () {
 
