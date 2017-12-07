@@ -48,8 +48,8 @@
             mfoDialog.alert({
                 title: 'alert_title',
                 message: 'alert_message',
-                onClose: function () {
-                    $('#textInput').text('alert_closed');
+                onClose: function (response) {
+                    $('#textInput').val('alert_closed: ' + response.clicked);
                 }
             });
 
@@ -60,8 +60,8 @@
             mfoDialog.confirm({
                 title: 'confirm_title',
                 message: 'confirm_message',
-                onClose: function () {
-                    $('#textInput').text('confirm_closed');
+                onClose: function (response) {
+                    $('#textInput').val('confirm_closed: ' + response.clicked);
                 }
             });
 

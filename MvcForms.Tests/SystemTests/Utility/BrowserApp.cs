@@ -111,6 +111,16 @@ namespace MvcForms.Tests.SystemTests.Utility
             });
         }
 
+        public void ShouldHaveValue(string inputSelector, string expectedValue)
+        {
+            Console.WriteLine($"Verify input {inputSelector} has value '{expectedValue}'");
+            WaitFor(() =>
+            {
+                var input = _webDriver.FindElement(By.CssSelector(inputSelector));
+                input.GetAttribute("value").Should().Be(expectedValue);
+            });
+        }
+
         public void ShouldHaveUrl(string action)
         {
             Console.WriteLine("Verify url is for action '{0}'", action);

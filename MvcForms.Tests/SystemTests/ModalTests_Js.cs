@@ -19,7 +19,7 @@ namespace MvcForms.Tests.SystemTests
 
             App.ClickButton("OK");
 
-            App.ShouldNotSeeText("alert_title");
+            App.ShouldHaveValue("#textInput", "alert_closed: OK");
         }
 
         [Test]
@@ -34,15 +34,13 @@ namespace MvcForms.Tests.SystemTests
 
             App.ClickButton("OK");
 
-            App.ShouldNotSeeText("confirm_title");
+            App.ShouldHaveValue("#textInput", "confirm_closed: OK");
 
             App.ClickButton("Confirm");
 
-            App.ShouldSeeText("confirm_title");
-
             App.ClickButton("Cancel");
 
-            App.ShouldNotSeeText("confirm_title");
+            App.ShouldHaveValue("#textInput", "confirm_closed: Cancel");
         }
     }
 }

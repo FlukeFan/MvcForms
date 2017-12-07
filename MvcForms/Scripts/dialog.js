@@ -138,8 +138,8 @@ var mfoDialog = {};
         var html = mfoDialog.dialogHtml(defaults);
 
         var dialogInfo = showModal(html, function (response) {
-            if (options.onShow) {
-                options.onShow(response);
+            if (options.onClose) {
+                options.onClose(response);
             }
         });
 
@@ -154,7 +154,7 @@ var mfoDialog = {};
         if (options.buttons) {
             for (var i in options.buttons) {
                 var buttonText = options.buttons[i];
-                buttons += '<button type="button" href="#" data-close-dialog="{ &quot;text&quot;: &quot;' + buttonText + '&quot; }">' + buttonText + '</button>';
+                buttons += '<button type="button" href="#" data-close-dialog="{ &quot;clicked&quot;: &quot;' + buttonText + '&quot; }">' + buttonText + '</button>';
             }
         }
 
