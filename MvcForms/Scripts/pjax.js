@@ -173,16 +173,21 @@ var mfoPjax = {};
         });
     }
 
-    function onError(jqXHR, textStatus, errorThrown, context, callback) {
-        // default is to do nothing if there was no response (and return false) and
-        // to display the error otherwise (and return true)
+    function onError(jqXHR) {
+        // default is to do nothing if there was no response (and return false (not handled)) and
+        // to display the error in a dialog otherwise (and return true (was handled))
         // clients can change pjax.onError to their requirements
 
         if (!jqXHR.responseText) {
             return false;
         }
 
-        callback(context, jqXHR.responseText, textStatus, jqXHR);
+        mfoDialog.alert({
+            width: '85%',
+            title: 'Error',
+            message: stripBody(jqXHR.responseText)
+        });
+
         return true;
     }
 
@@ -206,7 +211,7 @@ var mfoPjax = {};
         return url.replace(/([?&])(_pjax|_)=[^&]*/g, '');
     }
 
-    function render(context, data) {
+    function stripBody(data, includeErrorTitle) {
 
         var first100 = data.substr(0, 100);
 
@@ -240,11 +245,20 @@ var mfoPjax = {};
             data = data.replace(/<script/g, 'script_tag_disabled_pjax_error: ');
             data = data.replace(/<SCRIPT/g, 'SCRIPT_TAG_DISABLED_PJAX_ERROR: ');
 
-            data = '<div data-title="Error - Attempt to load non-PJAX page into container">'
-                + '<h1 style="background:white; color: red">Error - Attempt to load non-PJAX page into container</h1>'
-                + '<div>' + data + '</div></div>';
-
+            if (includeErrorTitle) {
+                data = '<div data-title="Error - Attempt to load non-PJAX page into container">'
+                    + '<h1 style="background:white; color: red">Error - Attempt to load non-PJAX page into container</h1>'
+                    + '<div>' + data + '</div></div>';
+            }
         }
+
+        return data;
+
+    }
+
+    function render(context, data) {
+
+        data = stripBody(data, true);
 
         var container = context.container;
         container.html(data);

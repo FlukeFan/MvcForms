@@ -142,7 +142,17 @@ namespace MvcForms.Tests.SystemTests
             App.Navigate("Navigate Error");
 
             App.ShouldSeeText("DeliberateError");
-            App.ShouldHaveUrl(PjaxActions.PageErr());
+
+            if (JsDisabled())
+            {
+                // browser will have nagivated, and user can press back to get back to the previous page
+                App.ShouldHaveUrl(PjaxActions.PageErr());
+            }
+            else
+            {
+                // error will have been caught by JS, displayed in a modal alert dialog, and the user can press back to close the dialog
+                App.ShouldHaveUrl(PjaxActions.Page2());
+            }
         }
 
         [Test]

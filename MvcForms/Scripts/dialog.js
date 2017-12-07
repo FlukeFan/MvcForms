@@ -163,7 +163,7 @@ var mfoDialog = {};
         var html =
             '<div data-modal-width="' + options.width + '" data-title="' + options.title + '">'
             + '<div><h3>' + options.title + '</h3></div>'
-            + '<div><p>' + options.message + '</p></div>'
+            + '<div style="max-height: ' + (maxHeight - 100) + 'px; overflow: auto;"><p>' + options.message + '</p></div>'
             + buttons
             + '</div > ';
 
