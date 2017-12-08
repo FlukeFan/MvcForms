@@ -8,6 +8,7 @@ var mfoPjax = {};
     mfoPjax.load = load;
     mfoPjax.reload = reload;
     mfoPjax.onBeforeNonPjaxPushState = onBeforeNonPjaxPushState;
+    mfoPjax.stripBody = stripBody;
 
     var lastButton = null;
 
@@ -173,22 +174,12 @@ var mfoPjax = {};
         });
     }
 
-    function onError(jqXHR) {
-        // default is to do nothing if there was no response (and return false (not handled)) and
-        // to display the error in a dialog otherwise (and return true (was handled))
+    function onError(jqXHR, textStatus, errorThrown) {
+
+        // default is to display the error in an alert
         // clients can change pjax.onError to their requirements
+        alert('Error: textStatus="' + textStatus + '"\nerrorThrown="' + errorThrown + '"');
 
-        if (!jqXHR.responseText) {
-            return false;
-        }
-
-        mfoDialog.alert({
-            width: '85%',
-            title: 'Error',
-            message: stripBody(jqXHR.responseText)
-        });
-
-        return true;
     }
 
     function navigateSuccess(context, data, textStatus, jqXHR) {

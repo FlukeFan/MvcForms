@@ -11,6 +11,34 @@ var mfoPjaxDialog = {};
         $(document).on('pjax:navigate', onPjaxNavigate);
         $(document).on('pjax:submitform', onPjaxSubmitForm);
 
+        mfoPjax.onError = onPjaxError;
+
+    }
+
+    function onPjaxError(jqXHR, textStatus, errorThrown) {
+
+        // change default pjax.onError to use an alert dialog
+
+        var options = {
+            title: 'Error: ' + textStatus,
+            message: 'errorThrown="' + errorThrown + '"'
+        };
+
+        if (textStatus === 'error') {
+            options.title = 'Error';
+        }
+
+        if (jqXHR.responseText) {
+            options.width = '70%';
+            options.message = mfoPjax.stripBody(jqXHR.responseText);
+        } else {
+            if (errorThrown === 'timeout') {
+                options.message = 'No response from server.';
+            }
+        }
+
+        mfoDialog.alert(options);
+
     }
 
     function onPjaxNavigate(e, context) {

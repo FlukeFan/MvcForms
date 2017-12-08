@@ -160,10 +160,13 @@ var mfoDialog = {};
 
         buttons += '</div>';
 
+        var title = options.title || '';
+        var message = options.message || '';
+
         var html =
-            '<div data-modal-width="' + options.width + '" data-title="' + options.title + '">'
+            '<div data-modal-width="' + options.width + '" data-title="' + title + '">'
             + '<div><h3>' + options.title + '</h3></div>'
-            + '<div style="max-height: ' + (maxHeight - 100) + 'px; overflow: auto;"><p>' + options.message + '</p></div>'
+            + '<div style="max-height: ' + (maxHeight - 100) + 'px; overflow: auto;"><p>' + message.replace('\n', '<br/>') + '</p></div>'
             + buttons
             + '</div > ';
 
