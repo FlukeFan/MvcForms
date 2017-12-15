@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace MvcForms
+﻿namespace MvcForms
 {
     public interface IStyler
     {
-        Styler.ApplyStyle StylerFor(Type type);
+        Styler.ApplyStyle StylerFor(IControl control);
     }
 }

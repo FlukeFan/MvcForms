@@ -21,7 +21,7 @@ namespace MvcForms
         public static HtmlTag Style<TControl>(TControl control, HtmlTag tag)
             where TControl : IControl
         {
-            var styler = _styler.StylerFor(control.GetType());
+            var styler = _styler.StylerFor(control);
             return styler(control, tag);
         }
 
@@ -43,14 +43,16 @@ namespace MvcForms
             Register(t => t == typeof(TControl) ? styler : null);
         }
 
-        public virtual ApplyStyle StylerFor(Type type)
+        public virtual ApplyStyle StylerFor(IControl control)
         {
             var styler = _applyNoStyle;
+
+            var controlType = control.GetType();
 
             // most recently added stylers have higher precedence
             for (var i = _stylers.Count - 1; i >= 0; i--)
             {
-                var customStyler = _stylers[i](type);
+                var customStyler = _stylers[i](controlType);
 
                 if (customStyler != null)
                 {

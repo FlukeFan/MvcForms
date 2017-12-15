@@ -8,14 +8,16 @@ namespace MvcForms.Styles
         private IDictionary<Type, ApplyStyle> _cachedStylers
             = new Dictionary<Type, ApplyStyle>();
 
-        public override ApplyStyle StylerFor(Type type)
+        public override ApplyStyle StylerFor(IControl control)
         {
+            var type = control.GetType();
+
             if (!_cachedStylers.ContainsKey(type))
                 lock (_cachedStylers)
                 {
                     if (!_cachedStylers.ContainsKey(type))
                     {
-                        var styler = base.StylerFor(type);
+                        var styler = base.StylerFor(control);
                         _cachedStylers.Add(type, styler);
                     }
                 }

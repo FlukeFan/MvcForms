@@ -107,6 +107,7 @@
     <Compile Include="Models\Forms\ForModelView.cs" />
     <Compile Include="Utility\CssFramework.cs" />
     <Compile Include="Utility\CssFrameworkExtensions.cs" />
+    <Compile Include="Utility\MultiStyler.cs" />
     <Compile Include="Views\PjaxPage.cs" />
     <Compile Include="Views\Shared\SharedViews.cs" />
     <Compile Include="Views\StubPage.cs" />
