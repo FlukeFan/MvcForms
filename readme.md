@@ -4,18 +4,23 @@
 MvcForms
 ========
 
-Some utility classes to help create simple form input in a (pre core) MVC application.
+Some utility classes to help create simple form input in an MVC application.
 
 
 Building
 ========
 
-To build, open CommandPrompt.bat, and type 'b'.
+To build, open CommandPrompt.bat as administrator, and type 'br' (to restore) then 'b'.
 
 Build commands:
 
-b                               : build
-b /t:clean                      : clean
-b /t:RestorePackages            : Restore NuGet packages
-b /t:setApiKey /p:apiKey=[key]  : set the api key
-b /t:push                       : Push packages to NuGet and publish them (setApiKey before running this)
+br                                      Restore dependencies (execute this first)
+b                                       Dev-build
+ba                                      Build all (including slow tests and coverage)
+bw                                      Watch dev-build
+bt [test]                               Run tests with filter Name~[test]
+btw [test]                              Watch run tests with filter Name~[test]
+bc                                      Clean the build outputs
+
+b /t:setApiKey /p:apiKey=[key]          Set the api key
+b /t:push                               Push packages to NuGet and publish them (setApiKey before running this)
