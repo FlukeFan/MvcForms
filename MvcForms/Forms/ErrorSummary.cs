@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Web.Mvc;
 using HtmlTags;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Forms
 {

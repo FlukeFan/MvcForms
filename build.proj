@@ -3,7 +3,7 @@
   <Import Project="Build\common.build.proj" />
 
   <ItemGroup>
-<!--    <ProjectsToBuild Include="MvcForms\MvcForms.csproj" />-->
+    <ProjectsToBuild Include="MvcForms\MvcForms.csproj" />
 <!--    <ProjectsToBuild Include="MvcForms.StubApp\MvcForms.StubApp.csproj" />-->
 <!--    <ProjectsToBuild Include="MvcForms.Tests\MvcForms.Tests.csproj" />-->
   </ItemGroup>

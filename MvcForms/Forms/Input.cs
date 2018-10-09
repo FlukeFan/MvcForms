@@ -1,5 +1,5 @@
-﻿using System.Web.Mvc;
-using HtmlTags;
+﻿using HtmlTags;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Forms
 {

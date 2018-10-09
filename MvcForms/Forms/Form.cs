@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Web.Mvc;
 using HtmlTags;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Forms
 {
@@ -16,7 +17,7 @@ namespace MvcForms.Forms
 
         public Form(HtmlHelper<T> html) : base(html)
         {
-            _action = html.ViewContext.HttpContext.Request.RawUrl;
+            _action = html.ViewContext.HttpContext.Request.GetEncodedUrl();
             Method("post");
         }
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Forms
 {
@@ -17,14 +18,11 @@ namespace MvcForms.Forms
         {
             var viewData = new ViewDataDictionary(helper.ViewData);
             viewData.Model = postModel;
-            var data = new ViewDataContainer { ViewData = viewData };
-            var newHelper = new HtmlHelper<TPostModel>(helper.ViewContext, data);
-            return newHelper;
-        }
-
-        private class ViewDataContainer : IViewDataContainer
-        {
-            public ViewDataDictionary ViewData { get; set; }
+            // no idea how to do this in Core *sigh*
+            //IHtmlGenerator generator = null;
+            //ICompositeViewEngine viewEngine = null;
+            //var newHelper = new HtmlHelper<TPostModel>(generator, viewEngine, helper.MetadataProvider, helper.ViewContext., data);
+            return null;// newHelper;
         }
 
         public static Form<TViewModel> Form<TViewModel>(this HtmlHelper<TViewModel> helper)
@@ -40,10 +38,10 @@ namespace MvcForms.Forms
 
         public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, string content)
         {
-            return helper.ButtonSubmit(MvcHtmlString.Create(HttpUtility.HtmlEncode(content)));
+            return helper.ButtonSubmit(new HtmlString(HttpUtility.HtmlEncode(content)));
         }
 
-        public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content)
+        public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlContent content)
         {
             return new Button(helper, "submit", content);
         }
