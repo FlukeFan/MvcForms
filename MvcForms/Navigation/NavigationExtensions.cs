@@ -1,5 +1,6 @@
 ﻿using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Navigation
 {
@@ -7,30 +8,30 @@ namespace MvcForms.Navigation
     {
         public static LinkButton LinkButton<TViewModel>(this HtmlHelper<TViewModel> helper, string content, string action)
         {
-            return helper.LinkButton(MvcHtmlString.Create(HttpUtility.HtmlEncode(content)), action);
+            return helper.LinkButton(new HtmlString(HttpUtility.HtmlEncode(content)), action);
         }
 
-        public static LinkButton LinkButton<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content, string action)
+        public static LinkButton LinkButton<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlContent content, string action)
         {
             return new LinkButton(helper, content, action);
         }
 
         public static LinkButton LinkButtonModal<TViewModel>(this HtmlHelper<TViewModel> helper, string content, string action)
         {
-            return helper.LinkButtonModal(MvcHtmlString.Create(HttpUtility.HtmlEncode(content)), action);
+            return helper.LinkButtonModal(new HtmlString(HttpUtility.HtmlEncode(content)), action);
         }
 
-        public static LinkButton LinkButtonModal<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content, string action)
+        public static LinkButton LinkButtonModal<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlContent content, string action)
         {
             return new LinkButton(helper, content, action).Modal();
         }
 
         public static LinkButton LinkButtonCancelModal<TViewModel>(this HtmlHelper<TViewModel> helper, string content = "Cancel")
         {
-            return helper.LinkButtonCancelModal(MvcHtmlString.Create(HttpUtility.HtmlEncode(content)));
+            return helper.LinkButtonCancelModal(new HtmlString(HttpUtility.HtmlEncode(content)));
         }
 
-        public static LinkButton LinkButtonCancelModal<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlString content)
+        public static LinkButton LinkButtonCancelModal<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlContent content)
         {
             return new LinkButton(helper, content).ModalReturn();
         }

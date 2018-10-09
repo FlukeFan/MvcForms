@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace MvcForms.Forms
 {
@@ -10,7 +13,7 @@ namespace MvcForms.Forms
         {
             var propertyName = ExpressionHelper.GetExpressionText(property);
             var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(propertyName);
-            var id = TagBuilder.CreateSanitizedId(name);
+            var id = TagBuilder.CreateSanitizedId(name, "_");
             var metadata = ModelMetadata.FromLambdaExpression(property, helper.ViewData);
             var value = RenderValue(helper.ViewData.ModelState, name, metadata);
             var modelState = helper.ViewData.ModelState;

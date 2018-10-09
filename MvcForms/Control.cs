@@ -1,35 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
+using System.IO;
+using System.Text.Encodings.Web;
 using HtmlTags;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms
 {
     public interface IControl
     {
         HtmlHelper  Html    { get; }
-        UrlHelper   Url     { get; }
+        IUrlHelper  Url     { get; }
     }
 
-    public abstract class Control : IControl, IHtmlString
+    public abstract class Control : IControl, IHtmlContent
     {
         private static readonly TagMutator _defaultMutator = (h, t) => t;
 
         private HtmlHelper                  _html;
         private TagMutator                  _tagMutator = _defaultMutator;
-        private Lazy<UrlHelper>             _urlHelper;
+        private Lazy<IUrlHelper>            _urlHelper;
         private bool                        _noStyle;
         private IDictionary<string, object> _controlBag;
 
         public Control(HtmlHelper html)
         {
             _html = html;
-            _urlHelper = new Lazy<UrlHelper>(() => new UrlHelper(_html.ViewContext.RequestContext));
+            _urlHelper = new Lazy<IUrlHelper>(() => new UrlHelper(_html.ViewContext));
         }
 
-        public HtmlHelper   Html    => _html;
-        public UrlHelper    Url     => _urlHelper.Value;
+        public HtmlHelper  Html     => _html;
+        public IUrlHelper   Url     => _urlHelper.Value;
 
         protected abstract HtmlTag CreateTag();
 
@@ -44,9 +48,9 @@ namespace MvcForms
             return tag;
         }
 
-        string IHtmlString.ToHtmlString()
+        void IHtmlContent.WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
-            return RenderTag().ToHtmlString();
+            RenderTag().WriteTo(writer, encoder);
         }
 
         public IDictionary<string, object> ControlBag

@@ -1,27 +1,29 @@
 ﻿using System.Web;
-using System.Web.Mvc;
 using HtmlTags;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Navigation
 {
     public class LinkButton : Control, IHasButtonStyle
     {
-        private IHtmlString _content;
-        private string      _action;
-        private bool        _noPjax;
-        private bool        _modal;
-        private bool        _modalReturn;
-        private string      _defaultModalReturn;
+        private IHtmlContent    _content;
+        private string          _action;
+        private bool            _noPjax;
+        private bool            _modal;
+        private bool            _modalReturn;
+        private string          _defaultModalReturn;
 
-        public LinkButton(HtmlHelper html, IHtmlString content, string action = "#") : base(html)
+        public LinkButton(HtmlHelper html, IHtmlContent content, string action = "#") : base(html)
         {
             Content(content);
             Action(action);
         }
 
-        public IHtmlString  Content()                               { return _content; }
-        public LinkButton   Content(string content)                 { return Content(MvcHtmlString.Create(HttpUtility.HtmlEncode(content))); }
-        public LinkButton   Content(IHtmlString content)            { _content = content; return this; }
+        public IHtmlContent Content()                               { return _content; }
+        public LinkButton   Content(string content)                 { return Content(new HtmlString(HttpUtility.HtmlEncode(content))); }
+        public LinkButton   Content(IHtmlContent content)           { _content = content; return this; }
 
         public string       Action()                                { return _action; }
         public LinkButton   Action(string action)                   { _action = action; return this; }
@@ -45,7 +47,7 @@ namespace MvcForms.Navigation
 
             if (_modalReturn)
             {
-                url = request.QueryString["modalReturnUrl"];
+                url = request.Query["modalReturnUrl"];
 
                 if (string.IsNullOrWhiteSpace(url))
                     url = Url.Content(_defaultModalReturn ?? "#");
@@ -53,8 +55,8 @@ namespace MvcForms.Navigation
 
             if (_modal)
             {
-                var returnUrl = request.Url.PathAndQuery;
-                url += "?modalReturnUrl=" + HttpUtility.UrlEncode(returnUrl);
+                var returnUrl = request.GetEncodedUrl();
+                url += "?modalReturnUrl=" + returnUrl;
             }
 
             var tag = new HtmlTag("a")

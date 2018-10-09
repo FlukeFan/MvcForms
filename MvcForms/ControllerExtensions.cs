@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MvcForms
 {
@@ -15,13 +16,13 @@ namespace MvcForms
         {
             var script = "<script> mfoDialog.closeDialog(true); </script>";
 
-            return new JavaScriptResult { Script = script };
+            return new ContentResult { ContentType = "application/javascript", Content = script };
         }
 
         private static ActionResult RedirectModal(Controller controller, string defaultModalReturnAction = null)
         {
-            var modalReturnUrl = controller.Request.QueryString["modalReturnUrl"];
-            var redirectUrl = modalReturnUrl ?? defaultModalReturnAction ?? controller.Request.Url.OriginalString;
+            var modalReturnUrl = controller.Request.Query["modalReturnUrl"][0];
+            var redirectUrl = modalReturnUrl ?? defaultModalReturnAction ?? controller.Request.GetEncodedUrl();
             return new RedirectResult(redirectUrl);
         }
     }

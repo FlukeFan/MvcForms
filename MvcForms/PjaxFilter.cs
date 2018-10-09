@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace MvcForms
 {
@@ -9,7 +10,7 @@ namespace MvcForms
             var context = filterContext.HttpContext;
             var request = context.Request;
             var response = context.Response;
-            response.AddHeader("X-PJAX-URL", request.Url.ToString());
+            response.Headers.Add("X-PJAX-URL", request.GetEncodedUrl());
         }
 
         public void OnActionExecuting(ActionExecutingContext filterContext)

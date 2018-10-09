@@ -1,171 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <OutputType>Library</OutputType>
-    <RootNamespace>MvcForms</RootNamespace>
-    <AssemblyName>MvcForms</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <ProjectGuid>{7AA07F6D-97B1-4C8E-A71D-3D331C6F7C3D}</ProjectGuid>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="AjaxMin, Version=5.14.5506.26196, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
-      <HintPath>..\packages\AjaxMin.5.14.5506.26202\lib\net40\AjaxMin.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlTags, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlTags.6.0.0\lib\net45\HtmlTags.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.4.4.0\lib\netstandard1.0\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\_output\AssemblyInfo.cs" />
-    <Compile Include="Control.cs" />
-    <Compile Include="ControllerExtensions.cs" />
-    <Compile Include="Forms\ErrorSummary.cs" />
-    <Compile Include="Forms\FormButtons.cs" />
-    <Compile Include="Forms\GroupContext.cs" />
-    <Compile Include="Forms\FormGroup.cs" />
-    <Compile Include="Forms\Input.cs" />
-    <Compile Include="Forms\PropertyContext.cs" />
-    <Compile Include="ReflectionHelper.cs" />
-    <Compile Include="Styles\Bootstrap\Bootstrap3Style.cs" />
-    <Compile Include="Styles\Bootstrap\BootstrapButton.cs" />
-    <Compile Include="Styles\ButtonStyle.cs" />
-    <Compile Include="Styles\CachingStyler.cs" />
-    <Compile Include="Styles\Default\DefaultButton.cs" />
-    <Compile Include="Styles\EmptyStyle.cs" />
-    <Compile Include="Forms\Button.cs" />
-    <Compile Include="Forms\Form.cs" />
-    <Compile Include="IStyler.cs" />
-    <Compile Include="ScopedHtmlHelper.cs" />
-    <Compile Include="Forms\FormsExtensions.cs" />
-    <Compile Include="Navigation\LinkButton.cs" />
-    <Compile Include="Navigation\NavigationExtensions.cs" />
-    <Compile Include="PjaxFilter.cs" />
-    <Compile Include="RequestExtensions.cs" />
-    <Compile Include="Styler.cs" />
-    <Compile Include="Styles\Bootstrap\BootstrapStyle.cs" />
-    <Compile Include="IHasButtonStyle.cs" />
-    <Compile Include="Styles\StyleExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="compilerconfig.json" />
-    <None Include="compilerconfig.json.defaults">
-      <DependentUpon>compilerconfig.json</DependentUpon>
-    </None>
-    <None Include="Content\mvcForms.scss" />
-    <None Include="mvcForms.ajaxmin">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="mvcForms.min.ajaxmin">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="MvcForms.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\forms.js" />
-    <None Include="Scripts\pjax.js" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <Import Project="..\Build\Common.targets" />
-  <Import Project="..\packages\AjaxMin.5.14.5506.26202\tools\net40\AjaxMin.targets" />
-  <ItemGroup>
-    <PackageDependencies Include="Scripts\**\*.js">
-      <InProject>False</InProject>
-    </PackageDependencies>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\dialog.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\mvcForms.css">
-      <DependentUpon>mvcForms.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\mvcForms.min.css">
-      <DependentUpon>mvcForms.css</DependentUpon>
-    </Content>
-    <None Include="Scripts\overlay.js" />
-    <None Include="Scripts\pjaxDialog.js" />
-  </ItemGroup>
-  <ItemGroup />
+
   <PropertyGroup>
-    <AjaxMinTreatWarningsAsErrors>true</AjaxMinTreatWarningsAsErrors>
-    <AjaxMinOutputFolder>$(ProjectDir)</AjaxMinOutputFolder>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DebugType>full</DebugType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
   </PropertyGroup>
-  <Target Name="NuGet" AfterTargets="BuildAjaxMinManifests">
-    <CallTarget Targets="PackageNuGet" />
-  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlTags.AspNetCore" Version="7.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.1" />
+    <PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.1.2-alpha">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>
