@@ -14,7 +14,7 @@ namespace MvcForms.Forms
             var propertyName = ExpressionHelper.GetExpressionText(property);
             var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(propertyName);
             var id = TagBuilder.CreateSanitizedId(name, "_");
-            var metadata = ModelMetadata.FromLambdaExpression(property, helper.ViewData);
+            var metadata = (ModelMetadata)null;//.FromLambdaExpression(property, helper.ViewData); todo - fix for core
             var value = RenderValue(helper.ViewData.ModelState, name, metadata);
             var modelState = helper.ViewData.ModelState;
             var propertyModelState = modelState[name];
@@ -35,7 +35,7 @@ namespace MvcForms.Forms
         public string           Name;
         public string           Value;
         public ModelMetadata    Metadata;
-        public ModelState       ModelState;
+        public ModelStateEntry  ModelState;
 
         public static string RenderValue(ModelStateDictionary modelState, string name, ModelMetadata metadata)
         {
@@ -47,7 +47,7 @@ namespace MvcForms.Forms
             if (!modelState.ContainsKey(name))
                 return null;
 
-            var value = modelState[name].Value;
+            var value = modelState[name];
 
             if (value == null)
                 return null;
@@ -57,7 +57,7 @@ namespace MvcForms.Forms
 
         public static string ModelValue(ModelMetadata metadata)
         {
-            return Convert.ToString(metadata.Model);
+            return Convert.ToString("todo - no idea what this was doing before");// metadata.Model);
         }
     }
 }

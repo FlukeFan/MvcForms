@@ -1,18 +1,19 @@
 ﻿using System.Web;
-using System.Web.Mvc;
 using HtmlTags;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Forms
 {
     public class Button : Control, IHasButtonStyle
     {
-        private string      _type;
-        private IHtmlString _content;
-        private string      _name;
-        private string      _value;
-        private bool        _noPjax;
+        private string          _type;
+        private IHtmlContent    _content;
+        private string          _name;
+        private string          _value;
+        private bool            _noPjax;
 
-        public Button(HtmlHelper html, string type, IHtmlString content) : base(html)
+        public Button(HtmlHelper html, string type, IHtmlContent content) : base(html)
         {
             Type(type);
             Content(content);
@@ -21,9 +22,9 @@ namespace MvcForms.Forms
         public string       Type()                          { return _type; }
         public Button       Type(string type)               { _type = type; return this; }
 
-        public IHtmlString  Content()                       { return _content; }
-        public Button       Content(string content)         { return Content(MvcHtmlString.Create(HttpUtility.HtmlEncode(content))); }
-        public Button       Content(IHtmlString content)    { _content = content; return this; }
+        public IHtmlContent Content()                       { return _content; }
+        public Button       Content(string content)         { return Content(new HtmlString(HttpUtility.HtmlEncode(content))); }
+        public Button       Content(IHtmlContent content)   { _content = content; return this; }
 
         public string       Name()                          { return _name; }
         public Button       Name(string name)               { _name = name; return this; }
