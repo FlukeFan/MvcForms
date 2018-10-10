@@ -4,6 +4,12 @@
   <PropertyGroup>
 
     <Version>0.0.5</Version>
+    <Description>Some utility classes to help create simple form input in an MVC application.</Description>
+    <PackageTags>Asp.Net Mvc Forms Bootstrap</PackageTags>
+    <Authors>Richard Brown</Authors>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/FlukeFan/MvcForms/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/FlukeFan/MvcForms</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/FlukeFan/MvcForms/master/icon.png</PackageIconUrl>
 
     <PreserveCompilationContext Condition="$(IsTestProject)=='true'">true</PreserveCompilationContext>
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>
