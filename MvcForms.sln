@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{18C1498F
 		Build\common.targets = Build\common.targets
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcForms.Build.BuildUtil", "Build\BuildUtil\MvcForms.Build.BuildUtil.csproj", "{99E1D34D-F466-465C-8512-0A942022944E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{B53E513F-11B5-462E-AFB0-A63A9C177968}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -28,6 +26,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcForms.StubApp", "MvcForm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcForms.Tests", "MvcForms.Tests\MvcForms.Tests.csproj", "{648D3E1D-21B7-46BE-84A1-7800437A8644}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build.BuildUtil", "Build\BuildUtil\Build.BuildUtil.csproj", "{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,18 +38,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{99E1D34D-F466-465C-8512-0A942022944E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Debug|x64.Build.0 = Debug|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Debug|x86.Build.0 = Debug|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Release|x64.ActiveCfg = Release|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Release|x64.Build.0 = Release|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Release|x86.ActiveCfg = Release|Any CPU
-		{99E1D34D-F466-465C-8512-0A942022944E}.Release|x86.Build.0 = Release|Any CPU
 		{56E8384C-715A-471D-8D65-6EA4259A72C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56E8384C-715A-471D-8D65-6EA4259A72C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56E8384C-715A-471D-8D65-6EA4259A72C6}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -86,12 +74,24 @@ Global
 		{648D3E1D-21B7-46BE-84A1-7800437A8644}.Release|x64.Build.0 = Release|Any CPU
 		{648D3E1D-21B7-46BE-84A1-7800437A8644}.Release|x86.ActiveCfg = Release|Any CPU
 		{648D3E1D-21B7-46BE-84A1-7800437A8644}.Release|x86.Build.0 = Release|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Debug|x64.Build.0 = Debug|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Debug|x86.Build.0 = Debug|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Release|x64.ActiveCfg = Release|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Release|x64.Build.0 = Release|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Release|x86.ActiveCfg = Release|Any CPU
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{99E1D34D-F466-465C-8512-0A942022944E} = {18C1498F-CFB8-4D89-A1F6-F884ED44A9EF}
+		{CE2ED896-CDEB-4227-8ED0-90EF9FA0EADB} = {18C1498F-CFB8-4D89-A1F6-F884ED44A9EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBD813FE-FFE4-4ED9-836B-0F37936A7B2D}
