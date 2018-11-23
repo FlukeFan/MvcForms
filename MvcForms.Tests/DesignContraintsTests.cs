@@ -5,6 +5,7 @@ using NUnit.Framework;
 namespace MvcForms.Tests
 {
     [TestFixture]
+    [Ignore("updating to core")]
     public class DesignContraintsTests
     {
         [Test]

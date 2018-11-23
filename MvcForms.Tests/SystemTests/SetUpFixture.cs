@@ -5,10 +5,11 @@ using NUnit.Framework;
 namespace MvcForms.Tests.SystemTests
 {
     [SetUpFixture]
+    [Ignore("updating to core")]
     public class SetUpFixture
     {
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             try
             {
@@ -16,11 +17,11 @@ namespace MvcForms.Tests.SystemTests
                     Task.Run(() => IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port)),
                     Task.Run(() => WebDriver.Instance()));
             }
-            catch { TearDown(); throw; }
+            catch { OneTimeTearDown(); throw; }
         }
 
-        [TearDown]
-        public void TearDown()
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
         {
             Task.WaitAll(
                 Task.Run(() => WebDriver.Close()),

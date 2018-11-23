@@ -4,16 +4,17 @@ using NUnit.Framework;
 namespace MvcForms.Tests.StubApp
 {
     [SetUpFixture]
+    [Ignore("updating to core")]
     public class SetUpFixture
     {
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             StubAppTest.SetUpWebHost();
         }
 
-        [TearDown]
-        public void TearDown()
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
         {
             StubAppTest.TearDownWebHost();
         }
