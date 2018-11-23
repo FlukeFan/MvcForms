@@ -1,5 +1,4 @@
-﻿using MvcForms.StubApp.Controllers;
-using MvcForms.Tests.StubApp.Utility;
+﻿using MvcForms.Tests.StubApp.Utility;
 using NUnit.Framework;
 
 namespace MvcForms.Tests.StubApp.Controllers

@@ -1,7 +1,5 @@
 ﻿using System.Net;
 using FluentAssertions;
-using MvcForms.StubApp.Controllers;
-using MvcForms.StubApp.Models.Forms;
 using MvcForms.Tests.StubApp.Utility;
 using MvcTesting.Html;
 using NUnit.Framework;

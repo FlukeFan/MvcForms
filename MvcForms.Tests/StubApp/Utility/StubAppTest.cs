@@ -1,5 +1,4 @@
-﻿using MvcTesting.Hosting;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace MvcForms.Tests.StubApp.Utility
 {
