@@ -1,4 +1,5 @@
-﻿using MvcForms.Tests.StubApp.Utility;
+﻿using MvcForms.StubApp.Controllers;
+using MvcForms.Tests.StubApp.Utility;
 using NUnit.Framework;
 
 namespace MvcForms.Tests.StubApp.Controllers
@@ -9,27 +10,27 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void Index_GET_Renders()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                http.Get(ExamplesActions.Index());
+                await http.GetAsync(ExamplesActions.Index());
             });
         }
 
         [Test]
         public void Buttons_GET_Renders()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                http.Get(ExamplesActions.Buttons());
+                await http.GetAsync(ExamplesActions.Buttons());
             });
         }
 
         [Test]
         public void Inputs_GET_Renders()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                http.Get(ExamplesActions.Inputs());
+                await http.GetAsync(ExamplesActions.Inputs());
             });
         }
     }

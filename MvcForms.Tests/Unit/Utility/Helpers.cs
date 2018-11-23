@@ -1,10 +1,10 @@
-﻿using System.Web;
+﻿using Microsoft.AspNetCore.Html;
 
 namespace MvcForms.Tests.Unit.Utility
 {
     public static class Helpers
     {
-        public static string ToHtmlString(this IHtmlString control)
+        public static string ToHtmlString(this HtmlString control)
         {
             return control.ToHtmlString();
         }

@@ -1,5 +1,4 @@
-﻿using System.Web.Mvc;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MvcForms.Forms;
 using MvcForms.StubApp.Models.Examples;
 using MvcForms.Tests.Unit.Utility;
@@ -39,7 +38,7 @@ namespace MvcForms.Tests.Unit.Forms
         public void AttemptedValue()
         {
             var helper = FakeHtmlHelper.New(new FormInputsModel());
-            helper.ViewData.ModelState.Add("StringInput1", new ModelState { Value = new ValueProviderResult("raw value", "attempted value", null) });
+            //helper.ViewData.ModelState.Add("StringInput1", new ModelState { Value = new ValueProviderResult("raw value", "attempted value", null) });
 
             var input = helper.InputText(f => f.StringInput1);
 

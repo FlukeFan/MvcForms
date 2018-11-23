@@ -1,5 +1,4 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace MvcForms.Tests.Unit.Utility
 {
@@ -12,13 +11,13 @@ namespace MvcForms.Tests.Unit.Utility
 
         public FakeController()
         {
-            var fakeContext = new FakeHttpContext();
-            var routeData = new RouteData();
-            ControllerContext = new ControllerContext(fakeContext, routeData, this);
+            //var fakeContext = new FakeHttpContext();
+            //var routeData = new RouteData();
+            //ControllerContext = new ControllerContext(fakeContext, routeData, this);
         }
 
-        public FakeHttpContext FakeHttpContext => (FakeHttpContext)HttpContext;
+        //public FakeHttpContext FakeHttpContext => (FakeHttpContext)HttpContext;
 
-        public FakeController SetRawUrl(string rawUrl) { FakeHttpContext.FakeRequest.SetRawUrl(rawUrl); return this; }
+        public FakeController SetRawUrl(string rawUrl) { /*FakeHttpContext.FakeRequest.SetRawUrl(rawUrl);*/ return this; }
     }
 }

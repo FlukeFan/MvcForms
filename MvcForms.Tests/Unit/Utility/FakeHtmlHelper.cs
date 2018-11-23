@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Tests.Unit.Utility
 {
@@ -11,11 +11,11 @@ namespace MvcForms.Tests.Unit.Utility
 
         public static FakeHtmlHelper<T> New<T>(T model)
         {
-            var viewDataDictionary = new ViewDataDictionary<T>(model);
-            var viewContext = new FakeViewContext(viewDataDictionary);
-            var viewDataContainer = new ViewDataContainer { ViewData = viewDataDictionary };
+            //var viewDataDictionary = new ViewDataDictionary<T>(model);
+            //var viewContext = new FakeViewContext(viewDataDictionary);
+            //var viewDataContainer = new ViewDataContainer { ViewData = viewDataDictionary };
 
-            return new FakeHtmlHelper<T>(viewContext, viewDataContainer, model);
+            return new FakeHtmlHelper<T>(null, null, model);
         }
 
         private class ViewDataContainer : IViewDataContainer
@@ -24,17 +24,22 @@ namespace MvcForms.Tests.Unit.Utility
         }
     }
 
+    public interface IViewDataContainer
+    {
+
+    }
+
     public class FakeHtmlHelper<T> : HtmlHelper<T>
     {
         public T Model { get; protected set; }
 
-        public FakeHtmlHelper(FakeViewContext viewContext, IViewDataContainer viewDataContainer, T model) : base(viewContext, viewDataContainer)
+        public FakeHtmlHelper(object viewContext, IViewDataContainer viewDataContainer, T model) : base(null, null, null, null, null, null, null)
         {
             Model = model;
         }
 
-        public FakeViewContext FakeViewContext => (FakeViewContext)ViewContext;
+        //public FakeViewContext FakeViewContext => (FakeViewContext)ViewContext;
 
-        public FakeHtmlHelper<T> SetRawUrl(string rawUrl) { FakeViewContext.FakeHttpContext.FakeRequest.SetRawUrl(rawUrl); return this; }
+        public FakeHtmlHelper<T> SetRawUrl(string rawUrl) { /*FakeViewContext.FakeHttpContext.FakeRequest.SetRawUrl(rawUrl);*/ return this; }
     }
 }

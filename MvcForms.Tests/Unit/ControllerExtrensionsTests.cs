@@ -1,5 +1,5 @@
-﻿using System.Web.Mvc;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using MvcForms.Tests.Unit.Utility;
 using NUnit.Framework;
 

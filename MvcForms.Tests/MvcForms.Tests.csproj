@@ -13,9 +13,11 @@
     <PackageReference Include="FluentAssertions" Version="5.5.0" />
     <PackageReference Include="MvcTesting" Version="0.0.1" />
     <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MvcForms.StubApp\MvcForms.StubApp.csproj" />
     <ProjectReference Include="..\MvcForms\MvcForms.csproj" />
   </ItemGroup>
 

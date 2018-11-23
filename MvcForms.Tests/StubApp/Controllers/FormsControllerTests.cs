@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using FluentAssertions;
+using MvcForms.StubApp.Controllers;
+using MvcForms.StubApp.Models.Forms;
 using MvcForms.Tests.StubApp.Utility;
 using MvcTesting.Html;
 using NUnit.Framework;
@@ -12,27 +14,27 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void Index_GET_Renders()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                http.Get(FormsActions.Index());
+                await http.GetAsync(FormsActions.Index());
             });
         }
 
         [Test]
         public void BootstrapHorizontal_GET_Renders()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                http.Get(FormsActions.BootstrapHorizontal());
+                await http.GetAsync(FormsActions.BootstrapHorizontal());
             });
         }
 
         [Test]
         public void ForModel_GET_RendersForm()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                var response = http.Get(FormsActions.ForModel());
+                var response = await http.GetAsync(FormsActions.ForModel());
 
                 var form = response.Form<ForModelPost>();
                 form.GetText(m => m.BasicValue).Should().BeNullOrWhiteSpace();
@@ -42,9 +44,9 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void ForModel_GET_RendersValues()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                var response = http.Get(FormsActions.ForModel("testValue"));
+                var response = await http.GetAsync(FormsActions.ForModel("testValue"));
 
                 var form = response.Form<ForModelPost>();
                 form.GetText(m => m.BasicValue).Should().Be("testValue");
@@ -57,12 +59,12 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void ForModel_POST_RendersValidationErrors()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                var response = http.Get(FormsActions.ForModel("testValue"))
-                    .Form<ForModelPost>()
+                var response = await http.GetAsync(FormsActions.ForModel("testValue"))
+                    .Form<ForModelPost>().Result
                     .SetText(m => m.BasicValue, "tst")
-                    .Submit(http, r => r.SetExpectedResponse(HttpStatusCode.OK));
+                    .Submit(r => r.SetExpectedResponse(HttpStatusCode.OK));
 
                 var form = response.Form<ForModelPost>();
                 form.GetText(m => m.BasicValue).Should().Be("tst");
@@ -74,9 +76,9 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void ForModelUsing_GET_RendersForm()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                var response = http.Get(FormsActions.ForModelUsing("test"));
+                var response = await http.GetAsync(FormsActions.ForModelUsing("test"));
 
                 var form = response.Form<ForModelPost>();
                 form.GetText(m => m.BasicValue).Should().Be("test");
@@ -86,9 +88,9 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void FormFor_GET_RendersForm()
         {
-            StubApp.Test(http =>
+            Test(async http =>
             {
-                var response = http.Get(FormsActions.FormFor("test"));
+                var response = await http.GetAsync(FormsActions.FormFor("test"));
 
                 var form = response.Form<FormForPost>();
                 form.Method.Should().Be("post");
