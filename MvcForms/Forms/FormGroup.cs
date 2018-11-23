@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using HtmlTags;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
@@ -31,7 +31,7 @@ namespace MvcForms.Forms
         private HtmlTag     _controlTag;
         private HtmlTag     _errorTag;
 
-        public FormGroup(HtmlHelper html, GroupContext groupContext, TControl control) : base(html)
+        public FormGroup(IHtmlHelper html, GroupContext groupContext, TControl control) : base(html)
         {
             _groupContext = groupContext;
             _control = control;

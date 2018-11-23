@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms
@@ -9,7 +10,7 @@ namespace MvcForms
     {
         private static IDictionary<Type, PropertyInfo> _cachedViewData = new Dictionary<Type, PropertyInfo>();
 
-        public static ViewDataDictionary GenericViewData(this HtmlHelper helper)
+        public static ViewDataDictionary GenericViewData(this IHtmlHelper helper)
         {
             var helperType = helper.GetType();
 
@@ -25,7 +26,7 @@ namespace MvcForms
             return (ViewDataDictionary)viewData;
         }
 
-        public static dynamic GenericViewBag(this HtmlHelper helper)
+        public static dynamic GenericViewBag(this IHtmlHelper helper)
         {
             var helperType = helper.GetType();
             var viewBagProperty = FindFirstProperty(helperType, "ViewBag");

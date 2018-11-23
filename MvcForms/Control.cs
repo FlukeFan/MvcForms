@@ -5,14 +5,14 @@ using System.Text.Encodings.Web;
 using HtmlTags;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms
 {
     public interface IControl
     {
-        HtmlHelper  Html    { get; }
+        IHtmlHelper Html    { get; }
         IUrlHelper  Url     { get; }
     }
 
@@ -20,19 +20,19 @@ namespace MvcForms
     {
         private static readonly TagMutator _defaultMutator = (h, t) => t;
 
-        private HtmlHelper                  _html;
+        private IHtmlHelper                 _html;
         private TagMutator                  _tagMutator = _defaultMutator;
         private Lazy<IUrlHelper>            _urlHelper;
         private bool                        _noStyle;
         private IDictionary<string, object> _controlBag;
 
-        public Control(HtmlHelper html)
+        public Control(IHtmlHelper html)
         {
             _html = html;
             _urlHelper = new Lazy<IUrlHelper>(() => new UrlHelper(_html.ViewContext));
         }
 
-        public HtmlHelper  Html     => _html;
+        public IHtmlHelper  Html    => _html;
         public IUrlHelper   Url     => _urlHelper.Value;
 
         protected abstract HtmlTag CreateTag();
@@ -66,9 +66,9 @@ namespace MvcForms
 
         public IDictionary<string, object> NullableControlBag => _controlBag;
 
-        public delegate HtmlTag TagMutator(HtmlHelper helper, HtmlTag tag);
+        public delegate HtmlTag TagMutator(IHtmlHelper helper, HtmlTag tag);
 
-        public Control Tag(Func<TagMutator, HtmlHelper, HtmlTag, HtmlTag> tagMutator)
+        public Control Tag(Func<TagMutator, IHtmlHelper, HtmlTag, HtmlTag> tagMutator)
         {
             var existingMutator = _tagMutator;
             _tagMutator = (html, tag) => tagMutator(existingMutator, html, tag);

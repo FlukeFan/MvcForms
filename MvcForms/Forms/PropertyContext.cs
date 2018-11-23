@@ -2,14 +2,13 @@
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace MvcForms.Forms
 {
     public class PropertyContext
     {
-        public static PropertyContext New<T, P>(HtmlHelper<T> helper, Expression<Func<T, P>> property)
+        public static PropertyContext New<T, P>(IHtmlHelper<T> helper, Expression<Func<T, P>> property)
         {
             var propertyName = ExpressionHelper.GetExpressionText(property);
             var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(propertyName);

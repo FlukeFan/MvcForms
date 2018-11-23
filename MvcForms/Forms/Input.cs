@@ -1,5 +1,5 @@
 ﻿using HtmlTags;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
@@ -12,7 +12,7 @@ namespace MvcForms.Forms
         private string          _value;
         private string          _autoComplete;
 
-        public Input(HtmlHelper html, PropertyContext propertyContext, string type) : base(html)
+        public Input(IHtmlHelper html, PropertyContext propertyContext, string type) : base(html)
         {
             _propertyContext = propertyContext;
             Type(type);

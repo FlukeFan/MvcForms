@@ -1,20 +1,20 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms
 {
     public class ScopedHtmlHelper<T> : IDisposable
     {
-        private HtmlHelper<T>   _html;
+        private IHtmlHelper<T>  _html;
         private Action          _onDispose;
 
-        public HtmlHelper<T> Html { get { return _html; } }
+        public IHtmlHelper<T> Html { get { return _html; } }
 
-        public ScopedHtmlHelper(HtmlHelper html) : this(html, null) { }
+        public ScopedHtmlHelper(IHtmlHelper html) : this(html, null) { }
 
-        public ScopedHtmlHelper(HtmlHelper html, Action onDispose)
+        public ScopedHtmlHelper(IHtmlHelper html, Action onDispose)
         {
-            _html = (HtmlHelper<T>)html;
+            _html = (IHtmlHelper<T>)html;
             _onDispose = onDispose ?? (() => { });
         }
 

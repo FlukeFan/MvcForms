@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using HtmlTags;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
@@ -15,7 +15,7 @@ namespace MvcForms.Forms
         // post-render members
         private IList<HtmlTag> _errorTags = new List<HtmlTag>();
 
-        public ErrorSummary(HtmlHelper html) : base(html)
+        public ErrorSummary(IHtmlHelper html) : base(html)
         {
         }
 

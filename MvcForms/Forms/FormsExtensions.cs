@@ -2,19 +2,20 @@
 using System.Linq.Expressions;
 using System.Web;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace MvcForms.Forms
 {
     public static class FormsExtensions
     {
-        public static ScopedHtmlHelper<TPostModel> ForModelScope<TViewModel, TPostModel>(this HtmlHelper<TViewModel> helper, TPostModel postModel)
+        public static ScopedHtmlHelper<TPostModel> ForModelScope<TViewModel, TPostModel>(this IHtmlHelper<TViewModel> helper, TPostModel postModel)
         {
             var newHelper = helper.ForModel(postModel);
             return new ScopedHtmlHelper<TPostModel>(newHelper);
         }
 
-        public static HtmlHelper<TPostModel> ForModel<TViewModel, TPostModel>(this HtmlHelper<TViewModel> helper, TPostModel postModel)
+        public static HtmlHelper<TPostModel> ForModel<TViewModel, TPostModel>(this IHtmlHelper<TViewModel> helper, TPostModel postModel)
         {
             var viewData = new ViewDataDictionary(helper.ViewData);
             viewData.Model = postModel;
@@ -25,41 +26,41 @@ namespace MvcForms.Forms
             return null;// newHelper;
         }
 
-        public static Form<TViewModel> Form<TViewModel>(this HtmlHelper<TViewModel> helper)
+        public static Form<TViewModel> Form<TViewModel>(this IHtmlHelper<TViewModel> helper)
         {
             return helper.FormFor(helper.ViewData.Model);
         }
 
-        public static Form<TPostModel> FormFor<TViewModel, TPostModel>(this HtmlHelper<TViewModel> helper, TPostModel postModel)
+        public static Form<TPostModel> FormFor<TViewModel, TPostModel>(this IHtmlHelper<TViewModel> helper, TPostModel postModel)
         {
             var newHelper = helper.ForModel(postModel);
             return new Form<TPostModel>(newHelper);
         }
 
-        public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, string content)
+        public static Button ButtonSubmit<TViewModel>(this IHtmlHelper<TViewModel> helper, string content)
         {
             return helper.ButtonSubmit(new HtmlString(HttpUtility.HtmlEncode(content)));
         }
 
-        public static Button ButtonSubmit<TViewModel>(this HtmlHelper<TViewModel> helper, IHtmlContent content)
+        public static Button ButtonSubmit<TViewModel>(this IHtmlHelper<TViewModel> helper, IHtmlContent content)
         {
             return new Button(helper, "submit", content);
         }
 
-        public static ScopedHtmlHelper<T> FormButtons<T>(this HtmlHelper<T> helper)
+        public static ScopedHtmlHelper<T> FormButtons<T>(this IHtmlHelper<T> helper)
         {
             var formButtons = new FormButtons(helper);
             return formButtons.Begin<T>();
         }
 
-        public static ErrorSummary ErrorSummary<T>(this HtmlHelper<T> helper)
+        public static ErrorSummary ErrorSummary<T>(this IHtmlHelper<T> helper)
         {
             return new ErrorSummary(helper);
         }
 
         #region InputHidden
 
-        public static Input InputHidden<TModel, TValue>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TValue>> property)
+        public static Input InputHidden<TModel, TValue>(this IHtmlHelper<TModel> helper, Expression<Func<TModel, TValue>> property)
         {
             var propertyContext = PropertyContext.New<TModel, TValue>(helper, property);
             return new Input(helper, propertyContext, "hidden");
@@ -69,13 +70,13 @@ namespace MvcForms.Forms
 
         #region InputText
 
-        public static Input InputText<T>(this HtmlHelper<T> helper, Expression<Func<T, string>> property)
+        public static Input InputText<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
             return new Input(helper, propertyContext, "text");
         }
 
-        public static FormGroup<Input> LabelledInputText<T>(this HtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
+        public static FormGroup<Input> LabelledInputText<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
         {
             return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "text"));
         }
@@ -84,35 +85,35 @@ namespace MvcForms.Forms
 
         #region InputNumber
 
-        public static Input InputNumber<T>(this HtmlHelper<T> helper, Expression<Func<T, string>> property)
+        public static Input InputNumber<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
             return new Input(helper, propertyContext, "number");
         }
 
-        public static FormGroup<Input> LabelledInputNumber<T>(this HtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
+        public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
         {
             return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "number"));
         }
 
-        public static Input InputNumber<T>(this HtmlHelper<T> helper, Expression<Func<T, int>> property)
+        public static Input InputNumber<T>(this IHtmlHelper<T> helper, Expression<Func<T, int>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
             return new Input(helper, propertyContext, "number");
         }
 
-        public static FormGroup<Input> LabelledInputNumber<T>(this HtmlHelper<T> helper, string label, Expression<Func<T, int>> property)
+        public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, int>> property)
         {
             return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "number"));
         }
 
-        public static Input InputNumber<T>(this HtmlHelper<T> helper, Expression<Func<T, int?>> property)
+        public static Input InputNumber<T>(this IHtmlHelper<T> helper, Expression<Func<T, int?>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
             return new Input(helper, propertyContext, "number");
         }
 
-        public static FormGroup<Input> LabelledInputNumber<T>(this HtmlHelper<T> helper, string label, Expression<Func<T, int?>> property)
+        public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, int?>> property)
         {
             return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "number"));
         }
@@ -121,7 +122,7 @@ namespace MvcForms.Forms
 
         public delegate TControl ControlFactory<TControl>(GroupContext groupContext);
 
-        public static FormGroup<TControl> LabelledControl<TModel, TProperty, TControl>(this HtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
+        public static FormGroup<TControl> LabelledControl<TModel, TProperty, TControl>(this IHtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
             where TControl : Control
         {
             var propertyContext = PropertyContext.New(helper, property);

@@ -2,7 +2,7 @@
 using HtmlTags;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Navigation
 {
@@ -15,7 +15,7 @@ namespace MvcForms.Navigation
         private bool            _modalReturn;
         private string          _defaultModalReturn;
 
-        public LinkButton(HtmlHelper html, IHtmlContent content, string action = "#") : base(html)
+        public LinkButton(IHtmlHelper html, IHtmlContent content, string action = "#") : base(html)
         {
             Content(content);
             Action(action);

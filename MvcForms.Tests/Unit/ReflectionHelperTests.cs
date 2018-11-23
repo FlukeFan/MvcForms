@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcForms.Tests.Unit.Utility;
 using NUnit.Framework;
 
@@ -21,7 +21,7 @@ namespace MvcForms.Tests.Unit
 
             helper.ViewData.ModelState.Keys.Count().Should().Be(1);
 
-            var untypedHelper = (helper as HtmlHelper);
+            var untypedHelper = (helper as IHtmlHelper);
 
             untypedHelper.GenericViewData().ModelState.Keys.Count().Should().Be(1);
 

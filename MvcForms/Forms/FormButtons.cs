@@ -1,5 +1,5 @@
 ﻿using HtmlTags;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
@@ -15,7 +15,7 @@ namespace MvcForms.Forms
         private HtmlTag _outer;
         private HtmlTag _inner;
 
-        public FormButtons(HtmlHelper html) : base(html)
+        public FormButtons(IHtmlHelper html) : base(html)
         {
         }
 

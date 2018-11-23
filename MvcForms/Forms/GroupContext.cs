@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
     public class GroupContext
     {
-        public static GroupContext New<T>(HtmlHelper<T> helper, PropertyContext propertyContext, string labelText)
+        public static GroupContext New<T>(IHtmlHelper<T> helper, PropertyContext propertyContext, string labelText)
         {
             var modelState = propertyContext.ModelState;
 

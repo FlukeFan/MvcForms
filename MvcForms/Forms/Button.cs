@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using HtmlTags;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
@@ -13,7 +13,7 @@ namespace MvcForms.Forms
         private string          _value;
         private bool            _noPjax;
 
-        public Button(HtmlHelper html, string type, IHtmlContent content) : base(html)
+        public Button(IHtmlHelper html, string type, IHtmlContent content) : base(html)
         {
             Type(type);
             Content(content);
