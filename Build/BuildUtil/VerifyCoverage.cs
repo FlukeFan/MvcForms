@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace MvcForms.Build.BuildUtil
+namespace Build.BuildUtil
 {
     public class VerifyCoverage : Command
     {

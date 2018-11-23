@@ -1,17 +1,21 @@
 <Project>
 
   <PropertyGroup>
-    <BuildUtil>$(MSBuildThisFileDirectory)\BuildUtil\bin\Debug\netcoreapp2.1\MvcForms.Build.BuildUtil.dll</BuildUtil>
+    <BuildUtil>$(MSBuildThisFileDirectory)\BuildUtil\bin\Debug\netcoreapp2.1\Build.BuildUtil.dll</BuildUtil>
   </PropertyGroup>
 
   <ItemGroup>
     <Watch Include="**\*.cs" />
     <Watch Include="**\*.scss" />
+    <Watch Include="**\*.js" />
+    <Watch Remove="**\wwwroot\js\*.*" />
+    <Watch Include="**\*.json" />
     <Watch Include="**\*.csproj" />
     <Watch Include="**\*.proj" />
     <Watch Include="**\*.targets" />
     <Watch Include="**\*.cshtml" />
     <Watch Remove="**\obj\**" />
+    <Watch Remove="**\bin\**" />
   </ItemGroup>
 
   <Target Name="GenerateWatchList">

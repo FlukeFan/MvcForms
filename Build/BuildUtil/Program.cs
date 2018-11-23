@@ -1,4 +1,4 @@
-﻿namespace MvcForms.Build.BuildUtil
+﻿namespace Build.BuildUtil
 {
     class Program
     {
