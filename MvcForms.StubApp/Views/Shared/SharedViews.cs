@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Razor;
 using MvcForms.StubApp.Utility;
 
 namespace MvcForms.StubApp.Views.Shared
@@ -13,7 +13,7 @@ namespace MvcForms.StubApp.Views.Shared
         public const string PjaxPartial = "~/Views/Shared/_PjaxPartial.cshtml";
         public const string PjaxModal   = "~/Views/Shared/_PjaxModal.cshtml";
 
-        public static IHtmlString CssFrameworkSelector(WebViewPage page)
+        public static HtmlString CssFrameworkSelector(RazorPage page)
         {
             var context = page.Context;
 
@@ -29,7 +29,7 @@ namespace MvcForms.StubApp.Views.Shared
             }
 
             selector.Append("</select>");
-            return new MvcHtmlString(selector.ToString());
+            return new HtmlString(selector.ToString());
         }
     }
 }

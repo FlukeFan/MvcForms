@@ -8,9 +8,9 @@ namespace MvcForms.StubApp.Views
         {
             base.SetLayout(title);
 
-            Layout = Request.IsPjaxModal()
+            Layout = Context.Request.IsPjaxModal()
                 ? SharedViews.PjaxModal
-                : Request.IsPjax()
+                : Context.Request.IsPjax()
                     ? SharedViews.PjaxPartial
                     : SharedViews.PjaxWhole;
         }

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace MvcForms.StubApp.Utility
 {
     public static class CssFrameworkExtensions
     {
-        public static CssFramework GetCurrentCssFramework(this HttpContextBase context)
+        public static CssFramework GetCurrentCssFramework(this HttpContext context)
         {
             var contextFramework = context.Items["CssFramework"];
 
@@ -17,7 +17,7 @@ namespace MvcForms.StubApp.Utility
             var frameworkCookie = context.Request.Cookies["cssFramework"];
 
             if (frameworkCookie != null)
-                currentFramework = (CssFramework)Enum.Parse(typeof(CssFramework), frameworkCookie.Value);
+                currentFramework = (CssFramework)Enum.Parse(typeof(CssFramework), frameworkCookie);
 
             context.Items["CssFramework"] = currentFramework;
             return currentFramework;

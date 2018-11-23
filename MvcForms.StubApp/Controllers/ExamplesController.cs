@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MvcForms.StubApp.Models.Examples;
 
 namespace MvcForms.StubApp.Controllers
@@ -22,7 +22,6 @@ namespace MvcForms.StubApp.Controllers
             return View();
         }
 
-        [HttpGet]
         public ActionResult Inputs()
         {
             ModelState.AddModelError("", "Example error message for the form");
@@ -30,7 +29,6 @@ namespace MvcForms.StubApp.Controllers
             return View(model);
         }
 
-        [HttpPost]
         public ActionResult Inputs(FormInputsModel postModel)
         {
             ModelState.AddModelError("", "Error displayed from form POST");

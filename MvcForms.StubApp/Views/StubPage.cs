@@ -1,15 +1,15 @@
-﻿using System.Web.Mvc;
+﻿using Microsoft.AspNetCore.Mvc.Razor;
 using MvcForms.StubApp.Views.Shared;
 
 namespace MvcForms.StubApp.Views
 {
-    public abstract class StubPage<T> : WebViewPage<T>
+    public abstract class StubPage<T> : RazorPage<T>
     {
         public virtual void SetLayout(string title)
         {
             ViewBag.Title = title;
 
-            Layout = Request.IsPjaxModal()
+            Layout = Context.Request.IsPjaxModal()
                 ? SharedViews.PjaxModal
                 : SharedViews.Master;
         }

@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MvcForms.StubApp.Models.Forms;
 
 namespace MvcForms.StubApp.Controllers
