@@ -4,6 +4,7 @@ using System.Web;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MvcForms.Forms
 {
@@ -15,15 +16,17 @@ namespace MvcForms.Forms
             return new ScopedHtmlHelper<TPostModel>(newHelper);
         }
 
-        public static HtmlHelper<TPostModel> ForModel<TViewModel, TPostModel>(this IHtmlHelper<TViewModel> helper, TPostModel postModel)
+        public static IHtmlHelper<TPostModel> ForModel<TViewModel, TPostModel>(this IHtmlHelper<TViewModel> helper, TPostModel postModel)
         {
-            var viewData = new ViewDataDictionary(helper.ViewData);
-            viewData.Model = postModel;
-            // no idea how to do this in Core *sigh*
-            //IHtmlGenerator generator = null;
-            //ICompositeViewEngine viewEngine = null;
-            //var newHelper = new HtmlHelper<TPostModel>(generator, viewEngine, helper.MetadataProvider, helper.ViewContext., data);
-            return null;// newHelper;
+            var viewContext = helper.ViewContext;
+            var postModelDataDictionary = new ViewDataDictionary<TPostModel>(viewContext.ViewData, postModel);
+            var postModelContext = new ViewContext(viewContext, viewContext.View, postModelDataDictionary, viewContext.Writer);
+
+            var serviceProvider = viewContext.HttpContext.RequestServices;
+            var value = serviceProvider.GetRequiredService(typeof(IHtmlHelper<TPostModel>));
+
+            (value as IViewContextAware)?.Contextualize(postModelContext);
+            return (IHtmlHelper<TPostModel>)value;
         }
 
         public static Form<TViewModel> Form<TViewModel>(this IHtmlHelper<TViewModel> helper)

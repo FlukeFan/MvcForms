@@ -1,7 +1,7 @@
 ﻿using System;
 using HtmlTags;
 using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
@@ -15,7 +15,7 @@ namespace MvcForms.Forms
         private string  _method;
         private string  _autoComplete;
 
-        public Form(HtmlHelper<T> html) : base(html)
+        public Form(IHtmlHelper<T> html) : base(html)
         {
             _action = html.ViewContext.HttpContext.Request.GetEncodedUrl();
             Method("post");

@@ -4,7 +4,9 @@ using System.Linq.Expressions;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
@@ -19,31 +21,41 @@ namespace MvcForms.Tests.Unit.Utility
 
         public static FakeHtmlHelper<T> New<T>(T model)
         {
-            //var viewDataDictionary = new ViewDataDictionary<T>(model);
-            //var viewContext = new FakeViewContext(viewDataDictionary);
-            //var viewDataContainer = new ViewDataContainer { ViewData = viewDataDictionary };
-
             return new FakeHtmlHelper<T>(model);
         }
     }
 
-    public class FakeHtmlHelper<T> : IHtmlHelper<T>
+    public class FakeHtmlHelper<T> : IHtmlHelper<T>, IViewContextAware
     {
-        public T Model { get; protected set; }
+        public ViewDataDictionary<T>    ViewData        { get; protected set; }
+
+        public FakeViewContext          FakeViewContext { get; protected set; }
+
+        public ViewContext              ViewContext     => FakeViewContext;
 
         public FakeHtmlHelper(T model)
         {
-            Model = model;
+            FakeViewContext = new FakeViewContext();
+
+            var detailsProvider = new DefaultCompositeMetadataDetailsProvider(new List<IMetadataDetailsProvider>());
+            var metadataProvider = new DefaultModelMetadataProvider(detailsProvider);
+            var viewDataDictionary = new ViewDataDictionary(metadataProvider, new ModelStateDictionary());
+            ViewData = new ViewDataDictionary<T>(viewDataDictionary);
+            ViewData.Model = model;
         }
 
         public FakeHtmlHelper<T> SetRawUrl(string url)
         {
+            FakeViewContext.FakeHttpContext.FakeHttpRequest.SetRawUrl(url);
             return this;
         }
 
-        #region IHtmlHelper
+        public void Contextualize(ViewContext viewContext)
+        {
+            FakeViewContext.Contextualize(viewContext);
+        }
 
-        public ViewDataDictionary<T> ViewData => throw new NotImplementedException();
+        #region NotImplemented
 
         public Html5DateRenderingMode Html5DateRenderingMode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -52,8 +64,6 @@ namespace MvcForms.Tests.Unit.Utility
         public IModelMetadataProvider MetadataProvider => throw new NotImplementedException();
 
         public dynamic ViewBag => throw new NotImplementedException();
-
-        public ViewContext ViewContext => throw new NotImplementedException();
 
         ViewDataDictionary IHtmlHelper.ViewData => throw new NotImplementedException();
 

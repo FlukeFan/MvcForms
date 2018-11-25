@@ -6,7 +6,6 @@ using NUnit.Framework;
 namespace MvcForms.Tests.Unit.Forms
 {
     [TestFixture]
-    [Ignore("updating to core")]
     public class FormExtensionsTests
     {
         public class TestViewModel
@@ -21,10 +20,10 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var html = FakeHtmlHelper.New(new TestViewModel());
 
-            //html.FakeViewContext.FakeHttpContext.FakeRequest.SetRawUrl("http://fake.url");
+            html.SetRawUrl("http://fake.url");
 
-            var form = html.FormFor(html.Model.Cmd);
-            form.Action().Should().Be("http://fake.url");
+            var form = html.FormFor(html.ViewData.Model.Cmd);
+            form.Action().Should().Be("http://fake.url:80/");
         }
     }
 }
