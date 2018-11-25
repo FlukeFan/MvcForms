@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace MvcForms.Forms
@@ -13,8 +14,8 @@ namespace MvcForms.Forms
             var propertyName = ExpressionHelper.GetExpressionText(property);
             var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(propertyName);
             var id = TagBuilder.CreateSanitizedId(name, "_");
-            var metadata = (ModelMetadata)null;//.FromLambdaExpression(property, helper.ViewData); todo - fix for core
-            var value = RenderValue(helper.ViewData.ModelState, name, metadata);
+            var explorer = ExpressionMetadataProvider.FromLambdaExpression(property, helper.ViewData, helper.MetadataProvider);
+            var value = RenderValue(helper.ViewData.ModelState, name, explorer);
             var modelState = helper.ViewData.ModelState;
             var propertyModelState = modelState[name];
 
@@ -23,7 +24,7 @@ namespace MvcForms.Forms
                 Name        = name,
                 Id          = id,
                 Value       = value,
-                Metadata    = metadata,
+                Explorer    = explorer,
                 ModelState  = propertyModelState,
             };
         }
@@ -33,12 +34,12 @@ namespace MvcForms.Forms
         public string           Id;
         public string           Name;
         public string           Value;
-        public ModelMetadata    Metadata;
+        public ModelExplorer    Explorer;
         public ModelStateEntry  ModelState;
 
-        public static string RenderValue(ModelStateDictionary modelState, string name, ModelMetadata metadata)
+        public static string RenderValue(ModelStateDictionary modelState, string name, ModelExplorer explorer)
         {
-            return ModelStateValue(modelState, name) ?? ModelValue(metadata);
+            return ModelStateValue(modelState, name) ?? ModelValue(explorer);
         }
 
         public static string ModelStateValue(ModelStateDictionary modelState, string name)
@@ -54,9 +55,9 @@ namespace MvcForms.Forms
             return value.AttemptedValue;
         }
 
-        public static string ModelValue(ModelMetadata metadata)
+        public static string ModelValue(ModelExplorer explorer)
         {
-            return Convert.ToString("todo - no idea what this was doing before");// metadata.Model);
+            return Convert.ToString(explorer.Model);
         }
     }
 }
