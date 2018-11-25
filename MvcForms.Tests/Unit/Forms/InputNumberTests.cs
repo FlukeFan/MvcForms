@@ -7,7 +7,6 @@ using NUnit.Framework;
 namespace MvcForms.Tests.Unit.Forms
 {
     [TestFixture]
-    [Ignore("updating to core")]
     public class InputNumberTests
     {
         [Test]
