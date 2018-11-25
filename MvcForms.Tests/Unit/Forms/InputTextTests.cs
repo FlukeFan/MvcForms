@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MvcForms.Forms;
 using MvcForms.StubApp.Models.Examples;
 using MvcForms.Tests.Unit.Utility;
@@ -7,7 +8,6 @@ using NUnit.Framework;
 namespace MvcForms.Tests.Unit.Forms
 {
     [TestFixture]
-    [Ignore("updating to core")]
     public class InputTextTests
     {
         [Test]
@@ -39,7 +39,7 @@ namespace MvcForms.Tests.Unit.Forms
         public void AttemptedValue()
         {
             var helper = FakeHtmlHelper.New(new FormInputsModel());
-            //helper.ViewData.ModelState.Add("StringInput1", new ModelState { Value = new ValueProviderResult("raw value", "attempted value", null) });
+            helper.ViewData.ModelState.SetModelValue("StringInput1", new ValueProviderResult("raw value"), "attempted value");
 
             var input = helper.InputText(f => f.StringInput1);
 
