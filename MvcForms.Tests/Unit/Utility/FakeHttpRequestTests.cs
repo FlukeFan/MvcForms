@@ -31,5 +31,15 @@ namespace MvcForms.Tests.Unit.Utility
             request.Path.Value.Should().Be("/");
             request.QueryString.Value.Should().Be("");
         }
+
+        [Test]
+        public void QueryCollection()
+        {
+            var request = new FakeHttpRequest();
+            request.SetRawUrl("/url?a=1&B=2&B=3");
+
+            request.Query["a"].Should().BeEquivalentTo("1");
+            request.Query["B"].Should().BeEquivalentTo("2", "3");
+        }
     }
 }
