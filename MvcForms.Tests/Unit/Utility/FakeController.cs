@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Routing;
 
 namespace MvcForms.Tests.Unit.Utility
 {
@@ -11,13 +13,15 @@ namespace MvcForms.Tests.Unit.Utility
 
         public FakeController()
         {
-            //var fakeContext = new FakeHttpContext();
-            //var routeData = new RouteData();
-            //ControllerContext = new ControllerContext(fakeContext, routeData, this);
+            var httpContext = new FakeHttpContext();
+            var routeData = new RouteData();
+            var actionDescriptor = new ControllerActionDescriptor();
+            var actionContext = new ActionContext(httpContext, routeData, actionDescriptor);
+            ControllerContext = new ControllerContext(actionContext);
         }
 
-        //public FakeHttpContext FakeHttpContext => (FakeHttpContext)HttpContext;
+        public FakeHttpContext FakeHttpContext => (FakeHttpContext)HttpContext;
 
-        public FakeController SetRawUrl(string rawUrl) { /*FakeHttpContext.FakeRequest.SetRawUrl(rawUrl);*/ return this; }
+        public FakeController SetRawUrl(string rawUrl) { FakeHttpContext.FakeHttpRequest.SetRawUrl(rawUrl); return this; }
     }
 }

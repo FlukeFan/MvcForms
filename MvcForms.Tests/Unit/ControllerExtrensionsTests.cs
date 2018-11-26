@@ -6,7 +6,6 @@ using NUnit.Framework;
 namespace MvcForms.Tests.Unit
 {
     [TestFixture]
-    [Ignore("updating to core")]
     public class ControllerExtrensionsTests
     {
         [Test]
@@ -36,7 +35,7 @@ namespace MvcForms.Tests.Unit
         [Test]
         public void ReturnModal_RedirectsToResponseUrl_IfDefaultNotSupplied()
         {
-            var requestUrl = "http://unit.test?modalReturnMissing=/result";
+            var requestUrl = "http://unit.test:80/?modalReturnMissing=/result";
             var controller = FakeController.New()
                 .SetRawUrl(requestUrl);
 

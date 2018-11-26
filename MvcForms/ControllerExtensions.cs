@@ -21,7 +21,8 @@ namespace MvcForms
 
         private static ActionResult RedirectModal(Controller controller, string defaultModalReturnAction = null)
         {
-            var modalReturnUrl = controller.Request.Query["modalReturnUrl"][0];
+            var modalReturn = controller.Request.Query["modalReturnUrl"];
+            var modalReturnUrl = modalReturn.Count > 0 ? modalReturn[0] : null;
             var redirectUrl = modalReturnUrl ?? defaultModalReturnAction ?? controller.Request.GetEncodedUrl();
             return new RedirectResult(redirectUrl);
         }
