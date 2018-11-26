@@ -10,6 +10,7 @@ namespace MvcForms
     {
         private static IDictionary<Type, PropertyInfo> _cachedViewData = new Dictionary<Type, PropertyInfo>();
 
+        /// <summary> TODO: find out if this is still needed in core (in previous versions of MVC, the reference from the IHtmlHelper was different from the IHtmlHelper&lt;T&gt;) </summary>
         public static ViewDataDictionary GenericViewData(this IHtmlHelper helper)
         {
             var helperType = helper.GetType();
@@ -26,6 +27,7 @@ namespace MvcForms
             return (ViewDataDictionary)viewData;
         }
 
+        /// <summary> TODO: find out if this is still needed in core (in previous versions of MVC, the reference from the IHtmlHelper was different from the IHtmlHelper&lt;T&gt;) </summary>
         public static dynamic GenericViewBag(this IHtmlHelper helper)
         {
             var helperType = helper.GetType();

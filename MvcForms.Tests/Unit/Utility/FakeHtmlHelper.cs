@@ -28,12 +28,10 @@ namespace MvcForms.Tests.Unit.Utility
     public class FakeHtmlHelper<T> : IHtmlHelper<T>, IViewContextAware
     {
         public IModelMetadataProvider   MetadataProvider    { get; protected set; }
-
         public ViewDataDictionary<T>    ViewData            { get; protected set; }
-
         public FakeViewContext          FakeViewContext     { get; protected set; }
-
         public ViewContext              ViewContext         => FakeViewContext;
+        public dynamic                  ViewBag             => ViewContext.ViewBag;
 
         public FakeHtmlHelper(T model)
         {
@@ -62,8 +60,6 @@ namespace MvcForms.Tests.Unit.Utility
         public Html5DateRenderingMode Html5DateRenderingMode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public string IdAttributeDotReplacement => throw new NotImplementedException();
-
-        public dynamic ViewBag => throw new NotImplementedException();
 
         ViewDataDictionary IHtmlHelper.ViewData => throw new NotImplementedException();
 

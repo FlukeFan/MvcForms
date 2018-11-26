@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MvcForms.Tests.Unit.Utility;
 using NUnit.Framework;
@@ -7,14 +8,13 @@ using NUnit.Framework;
 namespace MvcForms.Tests.Unit
 {
     [TestFixture]
-    [Ignore("updating to core")]
     public class ReflectionHelperTests
     {
         [Test]
         public void GenericViewData()
         {
             var helper = FakeHtmlHelper.New(new ReflectionHelperTests());
-            //helper.ViewData.ModelState.Add("Test", new ModelState { Value = new ValueProviderResult("rawValue", "attemptValue", null) });
+            helper.ViewData.ModelState.SetModelValue("Test", new ValueProviderResult("rawValue"), "attempted value");
 
             var genericViewData = helper.ViewData;
             var genericViewBag = helper.ViewBag;
@@ -29,6 +29,12 @@ namespace MvcForms.Tests.Unit
 
             var viewBagEquality = (bool)object.ReferenceEquals(untypedHelper.GenericViewBag(), genericViewBag);
             viewBagEquality.Should().BeTrue();
+        }
+
+        [Test][Ignore("Investigate if generic methods are still required")]
+        public void InvestigateIfGenericHelpersAreStillRequired()
+        {
+            // if they are still required, then remove the comment from the two methods
         }
     }
 }
