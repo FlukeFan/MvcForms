@@ -1,10 +1,13 @@
-﻿using MvcForms.StubApp.Controllers;
+﻿using System.Net;
+using FluentAssertions;
+using MvcForms.StubApp.Controllers;
 using MvcForms.Tests.StubApp.Utility;
 using NUnit.Framework;
 
 namespace MvcForms.Tests.StubApp.Controllers
 {
     [TestFixture]
+    [Ignore("updating to core")]
     public class ExamplesControllerTests : StubAppTest
     {
         [Test]
@@ -12,7 +15,9 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             Test(async http =>
             {
-                await http.GetAsync(ExamplesActions.Index());
+                var response = await http.GetAsync(ExamplesActions.Index());
+
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
             });
         }
 
@@ -21,7 +26,9 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             Test(async http =>
             {
-                await http.GetAsync(ExamplesActions.Buttons());
+                var response = await http.GetAsync(ExamplesActions.Buttons());
+
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
             });
         }
 
@@ -30,7 +37,9 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             Test(async http =>
             {
-                await http.GetAsync(ExamplesActions.Inputs());
+                var response = await http.GetAsync(ExamplesActions.Inputs());
+
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
             });
         }
     }
