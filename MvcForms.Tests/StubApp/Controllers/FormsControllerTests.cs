@@ -9,7 +9,6 @@ using NUnit.Framework;
 namespace MvcForms.Tests.StubApp.Controllers
 {
     [TestFixture]
-    [Ignore("updating to core")]
     public class FormsControllerTests : StubAppTest
     {
         [Test]
@@ -17,7 +16,9 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             Test(async http =>
             {
-                await http.GetAsync(FormsActions.Index());
+                var response = await http.GetAsync(FormsActions.Index());
+
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
             });
         }
 
@@ -26,7 +27,9 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             Test(async http =>
             {
-                await http.GetAsync(FormsActions.BootstrapHorizontal());
+                var response = await http.GetAsync(FormsActions.BootstrapHorizontal());
+
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
             });
         }
 
@@ -53,7 +56,7 @@ namespace MvcForms.Tests.StubApp.Controllers
                 form.GetText(m => m.BasicValue).Should().Be("testValue");
 
                 response.Text.Should().Contain("BasicValue=testValue");
-                response.Text.Should().Contain("{validation=}");
+                response.Text.Should().Contain("{validation=").And.Contain("></span>}");
             });
         }
 
@@ -95,7 +98,7 @@ namespace MvcForms.Tests.StubApp.Controllers
 
                 var form = response.Form<FormForPost>();
                 form.Method.Should().Be("post");
-                form.Action.Should().Be(FormsActions.FormFor("test").PathOnly());
+                form.Action.Should().Be("http://localhost" + FormsActions.FormFor("test"));
                 form.Element.Id.Should().Be("canSetId");
 
                 form.GetText(m => m.Value).Should().Be("test");

@@ -34,7 +34,7 @@ namespace MvcForms.Tests.StubApp.Utility
                 contentRoot = $"../{contentRoot}";
 
             var webHost = new WebHostBuilder()
-                .UseEnvironment("Testing")
+                .UseEnvironment("Development")
                 .UseContentRoot(contentRoot)
                 .UseStartup<TestStartup>();
 

@@ -1,4 +1,8 @@
-﻿@inherits StubPage<ForModelView>
+﻿@using MvcForms.StubApp.Controllers
+@using MvcForms.StubApp.Views
+@using MvcForms.StubApp.Models.Forms
+@using MvcForms.Navigation
+@inherits StubPage<object>
 @{
     SetLayout("Static HTML examples");
 }
@@ -15,6 +19,7 @@
         <li>@Html.LinkButton("ForModel()", FormsActions.ForModel())</li>
         <li>@Html.LinkButton("ForModel(\"test\")", FormsActions.ForModel("test"))</li>
         <li>@Html.LinkButton("ForModel(\"tst\")", FormsActions.ForModel("tst"))</li>
+        <li>@Html.LinkButton("ForModelUsing(\"test\")", FormsActions.ForModelUsing("test"))</li>
     </ul>
 </section>
 
