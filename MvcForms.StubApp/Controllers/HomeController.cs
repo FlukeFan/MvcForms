@@ -4,8 +4,8 @@ namespace MvcForms.StubApp.Controllers
 {
     public static class HomeActions
     {
-        public static string Index()    { return "~/"; }
-        public static string Testing()  { return "~/Home/Testing"; }
+        public static string Index()    { return "/"; }
+        public static string Testing()  { return "/Home/Testing"; }
     }
 
     public class HomeController : Controller

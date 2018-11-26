@@ -5,9 +5,9 @@ namespace MvcForms.StubApp.Controllers
 {
     public static class ExamplesActions
     {
-        public static string Index()    { return "~/Examples"; }
-        public static string Buttons()  { return "~/Examples/Buttons"; }
-        public static string Inputs()   { return "~/Examples/Inputs"; }
+        public static string Index()    { return "/Examples"; }
+        public static string Buttons()  { return "/Examples/Buttons"; }
+        public static string Inputs()   { return "/Examples/Inputs"; }
     }
 
     public class ExamplesController : Controller
