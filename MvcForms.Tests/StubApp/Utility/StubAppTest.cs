@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using MvcForms.StubApp;
 using MvcTesting.AspNetCore;
 using NUnit.Framework;
 
@@ -8,9 +11,12 @@ namespace MvcForms.Tests.StubApp.Utility
     [TestFixture]
     public abstract class StubAppTest
     {
+        private static TestServer           _testServer;
+        private static SimulatedHttpClient  _httpClient;
+
         protected SimulatedHttpClient HttpClient()
         {
-            return null;
+            return _httpClient;
         }
 
         protected void Test(Func<SimulatedHttpClient, Task> action)
@@ -20,19 +26,17 @@ namespace MvcForms.Tests.StubApp.Utility
 
         public static void SetUpWebHost()
         {
-            //StubApp = AspNetTestHost.For(@"..\..\..\MvcForms.StubApp", typeof(TestHostStartup));
+            var webHost = new WebHostBuilder()
+                .UseEnvironment("Testing")
+                .UseStartup<Startup>();
+
+            _testServer = webHost.MvcTestingTestServer();
+            _httpClient = _testServer.MvcTestingClient();
         }
 
         public static void TearDownWebHost()
         {
-            //using (StubApp) { }
+            using (_testServer) { }
         }
-
-        //private class TestHostStartup : AppDomainProxy
-        //{
-        //    public TestHostStartup()
-        //    {
-        //    }
-        //}
     }
 }

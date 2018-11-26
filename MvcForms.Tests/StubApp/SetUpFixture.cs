@@ -4,7 +4,6 @@ using NUnit.Framework;
 namespace MvcForms.Tests.StubApp
 {
     [SetUpFixture]
-    [Ignore("updating to core")]
     public class SetUpFixture
     {
         [OneTimeSetUp]
