@@ -1,10 +1,19 @@
-﻿@inherits PjaxPage<string>
+﻿@using MvcForms
+@using MvcForms.Forms
+@using MvcForms.Navigation
+@using MvcForms.Styles
+@using MvcForms.StubApp.Controllers
+@using MvcForms.StubApp.Views
+@inherits PjaxPage<string>
+@model string
 @{
     SetLayout("Buttons");
 }
 <h3>Buttons</h3>
 <style>
-    p { margin-top: 20px; }
+    p {
+        margin-top: 20px;
+    }
 </style>
 <p>
     @Html.LinkButton("LinkButton - no styling applied", "#").NoStyle()
@@ -38,11 +47,11 @@
         @Html.LinkButton("LinkButton.Style(BootstrapButton.Danger)", "#").Style(MvcForms.Styles.Bootstrap.BootstrapButton.Danger)
     </fieldset>
 </p>
-@if (Request.IsPjaxModal())
+@if (Context.Request.IsPjaxModal())
 {
     @Html.LinkButtonCancelModal()
 }
- else
+else
 {
     @Html.LinkButtonModal("Modal", ExamplesActions.Buttons())
 }

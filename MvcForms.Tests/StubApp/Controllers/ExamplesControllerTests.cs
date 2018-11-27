@@ -7,7 +7,6 @@ using NUnit.Framework;
 namespace MvcForms.Tests.StubApp.Controllers
 {
     [TestFixture]
-    [Ignore("updating to core")]
     public class ExamplesControllerTests : StubAppTest
     {
         [Test]

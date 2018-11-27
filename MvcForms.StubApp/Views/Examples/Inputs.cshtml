@@ -1,4 +1,12 @@
-﻿@inherits PjaxPage<MvcForms.StubApp.Models.Examples.InputsModel>
+﻿@using MvcForms
+@using MvcForms.Styles
+@using MvcForms.Forms
+@using MvcForms.Navigation
+@using MvcForms.StubApp.Controllers
+@using MvcForms.StubApp.Models.Examples
+@using MvcForms.StubApp.Views
+@inherits PjaxPage<InputsModel>
+@model InputsModel
 @{
     SetLayout("Inputs");
 }
@@ -6,7 +14,10 @@
 <h3>Inputs</h3>
 
 <style>
-    p { margin-top: 20px; }
+    p {
+        margin-top: 20px;
+    }
+
     form {
         background: #eee;
         max-width: 800px;
@@ -37,7 +48,7 @@
         @form.Html.ButtonSubmit("Submit").Style(MvcForms.Styles.Default.DefaultButton.Primary)
         @form.Html.ButtonSubmit("Another Submit")
 
-        if (Request.IsPjaxModal())
+        if (Context.Request.IsPjaxModal())
         {
             @Html.LinkButtonCancelModal()
         }
