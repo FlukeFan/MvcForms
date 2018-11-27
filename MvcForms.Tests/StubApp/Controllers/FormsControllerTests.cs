@@ -16,9 +16,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             Test(async http =>
             {
-                var response = await http.GetAsync(FormsActions.Index());
-
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
+                await http.GetAsync(FormsActions.Index());
             });
         }
 
@@ -27,9 +25,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             Test(async http =>
             {
-                var response = await http.GetAsync(FormsActions.BootstrapHorizontal());
-
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
+                await http.GetAsync(FormsActions.BootstrapHorizontal());
             });
         }
 

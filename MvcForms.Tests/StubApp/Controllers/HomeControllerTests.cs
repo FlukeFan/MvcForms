@@ -1,6 +1,4 @@
-﻿using System.Net;
-using FluentAssertions;
-using MvcForms.StubApp.Controllers;
+﻿using MvcForms.StubApp.Controllers;
 using MvcForms.Tests.StubApp.Utility;
 using NUnit.Framework;
 
@@ -14,9 +12,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         {
             Test(async http =>
             {
-                var response = await http.GetAsync(HomeActions.Index());
-
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
+                await http.GetAsync(HomeActions.Index());
             });
         }
     }
