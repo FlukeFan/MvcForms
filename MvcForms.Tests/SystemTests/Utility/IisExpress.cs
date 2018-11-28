@@ -110,7 +110,7 @@ namespace MvcForms.Tests.SystemTests.Utility
             var dir = searchFolder;
             var path = Path.GetFullPath(Path.Combine(dir, siteFolder));
 
-            while (!File.Exists(Path.Combine(path, "web.config")))
+            while (!File.Exists(Path.Combine(path, $"{siteFolder}.csproj")))
             {
                 if (searches.Contains(path))
                     throw new Exception($"Could not find {siteFolder} starting from {searchFolder} - searched {string.Join(", ", searches)}");
