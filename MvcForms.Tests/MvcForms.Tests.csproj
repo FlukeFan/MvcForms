@@ -15,6 +15,7 @@
     <PackageReference Include="MvcTesting" Version="0.0.2" />
     <PackageReference Include="NUnit" Version="3.11.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.44.0" />
   </ItemGroup>
 
   <ItemGroup>

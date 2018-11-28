@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace MvcForms.Tests.SystemTests
 {
+    [Ignore("Updating to core")]
     public class ModalTests_Js : ModalTests
     {
         protected override bool JsDisabled() { return false; }

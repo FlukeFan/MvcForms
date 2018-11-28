@@ -25,9 +25,7 @@ namespace MvcForms.Tests.SystemTests.Utility
         {
             Close();
 
-            var service = ChromeDriverService.CreateDefaultService();
-            service.HideCommandPromptWindow = true;
-            _instance = new ChromeDriver(service);
+            _instance = new ChromeDriver(".");
         }
     }
 }

@@ -30,11 +30,11 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void GoTo(string action)
         {
-            Console.WriteLine("Navigating to '{0}' ", action);
+            var url = $"http://localhost:{Port}{action}";
+            Console.WriteLine("Navigating to '{0}' ", url);
             WaitFor(() =>
             {
-                action = action.Replace("~/", $"http://localhost:{Port}/");
-                _webDriver.Navigate().GoToUrl(action);
+                _webDriver.Navigate().GoToUrl(url);
             });
         }
 

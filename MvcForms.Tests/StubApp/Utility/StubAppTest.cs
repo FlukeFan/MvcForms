@@ -47,7 +47,7 @@ namespace MvcForms.Tests.StubApp.Utility
             using (_testServer) { }
         }
 
-        private class TestStartup : Startup
+        public class TestStartup : Startup
         {
             public TestStartup(IConfiguration configuration) : base(configuration)
             {

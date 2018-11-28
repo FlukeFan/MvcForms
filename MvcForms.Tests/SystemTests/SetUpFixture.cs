@@ -5,7 +5,6 @@ using NUnit.Framework;
 namespace MvcForms.Tests.SystemTests
 {
     [SetUpFixture]
-    [Ignore("updating to core")]
     public class SetUpFixture
     {
         [OneTimeSetUp]
@@ -14,7 +13,7 @@ namespace MvcForms.Tests.SystemTests
             try
             {
                 Task.WaitAll(
-                    Task.Run(() => IisExpress.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port)),
+                    Task.Run(() => WebServer.BeforeTests(TestContext.CurrentContext.TestDirectory, "MvcForms.StubApp", BrowserApp.Port)),
                     Task.Run(() => WebDriver.Instance()));
             }
             catch { OneTimeTearDown(); throw; }
@@ -25,7 +24,7 @@ namespace MvcForms.Tests.SystemTests
         {
             Task.WaitAll(
                 Task.Run(() => WebDriver.Close()),
-                Task.Run(() => IisExpress.AfterTests()));
+                Task.Run(() => WebServer.AfterTests()));
         }
     }
 }
