@@ -23,7 +23,7 @@
 
     @if (Context.Request.Cookies["disableJs"] != "True")
     {
-        <script src="@Context.AddFileVersionToPath("/js/modernizr.min.js")"></script>
+        <script src="~/js/modernizr.min.js"></script>
     }
 
 </head>
@@ -40,8 +40,8 @@
     {
         <script src="~/js/jquery.min.js"></script>
         <script src="~/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-        <script src="~/Scripts/mvcForms.min.js"></script>
-        <script src="~/Scripts/stubApp.js"></script>
+        <script src="~/js/mvcForms.min.js"></script>
+        <script src="~/js/stubApp.js"></script>
         @RenderSection("scripts", required: false)
     }
     else
