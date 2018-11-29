@@ -22,6 +22,7 @@ namespace MvcForms.StubApp
 
         protected virtual void SetupAction(MvcOptions options)
         {
+            options.Filters.Add(new PjaxFilter());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

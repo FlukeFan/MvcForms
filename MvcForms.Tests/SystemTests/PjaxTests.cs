@@ -7,7 +7,6 @@ using OpenQA.Selenium;
 
 namespace MvcForms.Tests.SystemTests
 {
-    [Ignore("Updating to core")]
     public class PjaxTests_Js : PjaxTests
     {
         protected override bool JsDisabled() { return false; }
