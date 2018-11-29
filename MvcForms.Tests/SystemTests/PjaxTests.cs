@@ -29,7 +29,6 @@ namespace MvcForms.Tests.SystemTests
         }
     }
 
-    [Ignore("Updating to core")]
     public class PjaxTests_NoJs : PjaxTests
     {
         protected override bool JsDisabled() { return true; }

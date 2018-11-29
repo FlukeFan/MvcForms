@@ -1,4 +1,7 @@
-﻿@inherits PjaxPage<object>
+﻿@using MvcForms.Navigation
+@using MvcForms.StubApp.Controllers
+@using MvcForms.StubApp.Views
+@inherits PjaxPage<object>
 @{
     SetLayout("Page 2");
 }
@@ -16,10 +19,10 @@
     <div id="hidden" style="display: none">Hidden=false</div>
 </div>
 @section scripts {
-<script>
-    $('#customLink').click(function () {
-        $('#customLink').hide();
-        $('#hidden').show();
-    });
-</script>
+    <script>
+        $('#customLink').click(function () {
+            $('#customLink').hide();
+            $('#hidden').show();
+        });
+    </script>
 }

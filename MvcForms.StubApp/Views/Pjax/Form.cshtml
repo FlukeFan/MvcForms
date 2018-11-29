@@ -1,11 +1,13 @@
-﻿@inherits PjaxPage<string>
+﻿@using MvcForms.Forms
+@using  MvcForms.StubApp.Views
+@inherits PjaxPage<object>
 @{
     SetLayout("Form:" + Model);
 }
 <form method="post">
-    @if (Request.HttpMethod == "POST")
+    @if (Context.Request.Method == "POST")
     {
-        <div>button=@Request.Form["button"]</div>
+        <div>button=@Context.Request.Form["button"]</div>
     }
 
     <span>enter 'Success' to complete form: </span>
