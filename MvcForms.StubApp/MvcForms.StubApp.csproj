@@ -29,8 +29,9 @@
     <Touch Files="bin/content/lastCopied.flg" AlwaysCreate="true" />
   </Target>
 
-  <Target Name="JsCopy" AfterTargets="Compile">
+  <Target Name="ContentCopy" AfterTargets="Compile">
     <Copy SourceFiles="..\MvcForms\Scripts\mvcForms.min.js" DestinationFiles="wwwroot/js/mvcForms.min.js" />
+    <Copy SourceFiles="..\MvcForms\Content\mvcForms.min.css" DestinationFiles="wwwroot/css/mvcForms.min.css" />
   </Target>
 
 </Project>
