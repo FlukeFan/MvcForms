@@ -7,7 +7,7 @@
 
     <title>MvcForms - @ViewBag.Title</title>
 
-    <link rel="stylesheet" href="~/css/bootstrap-3.3.7/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/bootstrap-3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/mvcForms.min.css" />
 
     <style>
@@ -39,7 +39,7 @@
     @if (Context.Request.Cookies["disableJs"] != "True")
     {
         <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/bootstrap-3.3.7/js/bootstrap.min.js"></script>
         <script src="~/Scripts/mvcForms.min.js"></script>
         <script src="~/Scripts/stubApp.js"></script>
         @RenderSection("scripts", required: false)
