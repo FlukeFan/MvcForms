@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <BuildUtil>$(MSBuildThisFileDirectory)..\Build\BuildUtil\bin\Debug\netcoreapp2.1\Build.BuildUtil.dll</BuildUtil>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,10 +10,20 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
+    <PackageReference Include="Modernizr.New" Version="3.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MvcForms\MvcForms.csproj" />
   </ItemGroup>
+
+  <Target Name="CopyPackageContents" BeforeTargets="Compile" Inputs="$(MSBuildProjectFile)" Outputs="bin/content/lastUpdated.flg">
+    <Exec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectFullPath)&quot; $(NuGetPackageRoot)" />
+    <Touch Files="bin/content/lastUpdated.flg" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="Modernizr" AfterTargets="Compile" Inputs="bin/content/Modernizr.New/content/Scripts/modernizr-version.min.js" Outputs="wwwroot/js/modernizr.min.js">
+    <Copy SourceFiles="bin/content/Modernizr.New/content/Scripts/modernizr-version.min.js" DestinationFiles="wwwroot/js/modernizr.min.js" />
+  </Target>
 
 </Project>

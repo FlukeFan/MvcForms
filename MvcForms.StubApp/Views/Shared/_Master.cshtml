@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="~/Content/mvcForms.min.css" />
 
     <style>
-        .buttonList li { margin: 5px; }
+        .buttonList li {
+            margin: 5px;
+        }
+
         .btn {
             margin-right: 6px;
             margin-bottom: 6px;
@@ -20,7 +23,7 @@
 
     @if (Context.Request.Cookies["disableJs"] != "True")
     {
-        <script src="~/Scripts/modernizr-2.8.3.js"></script>
+        <script src="@Context.AddFileVersionToPath("/js/modernizr.min.js")"></script>
     }
 
 </head>
