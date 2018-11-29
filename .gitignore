@@ -3,4 +3,6 @@ obj
 .vs
 .vscode
 *.user
+/MvcForms/Scripts/mvcForms.js
+/MvcForms/Scripts/mvcForms.min.js
 /MvcForms.StubApp/wwwroot/js/modernizr.min.js

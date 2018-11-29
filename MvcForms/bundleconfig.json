@@ -1,0 +1,14 @@
+﻿// Configure bundling and minification for the project.
+// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  {
+    "outputFileName": "Scripts/mvcForms.js",
+    "inputFiles": [
+      "Scripts/overlay.js",
+      "Scripts/pjax.js",
+      "Scripts/dialog.js",
+      "Scripts/pjaxDialog.js",
+      "Scripts/forms.js"
+    ]
+  }
+]
