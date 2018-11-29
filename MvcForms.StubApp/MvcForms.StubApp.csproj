@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="jQuery" Version="[1.12.4,2)" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.1" />
@@ -22,8 +23,10 @@
     <Touch Files="bin/content/lastUpdated.flg" AlwaysCreate="true" />
   </Target>
 
-  <Target Name="Modernizr" AfterTargets="Compile" Inputs="bin/content/Modernizr.New/content/Scripts/modernizr-version.min.js" Outputs="wwwroot/js/modernizr.min.js">
+  <Target Name="PackageContent" AfterTargets="Compile" Inputs="bin/content/lastUpdated.flg" Outputs="bin/content/lastCopied.flg">
     <Copy SourceFiles="bin/content/Modernizr.New/content/Scripts/modernizr-version.min.js" DestinationFiles="wwwroot/js/modernizr.min.js" />
+    <Copy SourceFiles="bin/content/jQuery/content/Scripts/jquery-version.min.js" DestinationFiles="wwwroot/js/jquery.min.js" />
+    <Touch Files="bin/content/lastCopied.flg" AlwaysCreate="true" />
   </Target>
 
 </Project>

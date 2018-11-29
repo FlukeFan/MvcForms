@@ -52,6 +52,12 @@ namespace Build.BuildUtil
             {
                 var packageName = packageReference.Attributes["Include"].Value;
                 var version = packageReference.Attributes["Version"].Value;
+
+                if (version.Contains(","))
+                    version = version.Split(',')[0];
+
+                version = version.TrimStart('[').TrimStart('(');
+
                 var package = new Package { Name = packageName, Version = version };
                 packages.Add(package);
             }
