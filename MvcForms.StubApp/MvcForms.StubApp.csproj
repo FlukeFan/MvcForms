@@ -18,6 +18,16 @@
     <ProjectReference Include="..\MvcForms\MvcForms.csproj" />
   </ItemGroup>
 
+  <Target Name="DisableIisExpress" BeforeTargets="CoreCompile" Condition="$(BuildingInsideVisualStudio)!='true'">
+    <Message Importance="High" Text="Disable site (copy App_Offline.htm)" />
+    <Copy SourceFiles="..\Build\App_Offline.htm" DestinationFolder="." />
+  </Target>
+
+  <Target Name="ReenableIisExpress" AfterTargets="Build" Condition="Exists('./App_Offline.htm')">
+    <Message Importance="High" Text="Enable site (delete App_Offline.htm)" />
+    <Delete Files=".\App_Offline.htm" />
+  </Target>
+
   <Target Name="CopyPackageContents" BeforeTargets="Compile" Inputs="$(MSBuildProjectFile)" Outputs="bin/content/lastUpdated.flg">
     <Exec Command="dotnet &quot;$(BuildUtil)&quot; CopyPackageContents &quot;$(MSBuildProjectFullPath)&quot; $(NuGetPackageRoot)" />
     <Touch Files="bin/content/lastUpdated.flg" AlwaysCreate="true" />
