@@ -25,7 +25,10 @@ namespace MvcForms.Tests.SystemTests.Utility
         {
             Close();
 
-            _instance = new ChromeDriver(".");
+            var options = new ChromeOptions();
+            options.AddArgument("headless");
+
+            _instance = new ChromeDriver(".", options);
         }
     }
 }
