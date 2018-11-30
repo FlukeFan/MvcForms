@@ -55,6 +55,11 @@ namespace MvcForms.Tests.Unit.Utility
             FakeViewContext.Contextualize(viewContext);
         }
 
+        public IHtmlContent Raw(string value)
+        {
+            return new HtmlString(value);
+        }
+
         #region NotImplemented
 
         public Html5DateRenderingMode Html5DateRenderingMode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -150,11 +155,6 @@ namespace MvcForms.Tests.Unit.Utility
         public IHtmlContent Raw(object value)
         {
             throw new NotImplementedException();
-        }
-
-        public IHtmlContent Raw(string value)
-        {
-            return new HtmlString(value);
         }
 
         public IHtmlContent TextAreaFor<TResult>(Expression<Func<T, TResult>> expression, int rows, int columns, object htmlAttributes)

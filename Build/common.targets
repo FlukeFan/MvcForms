@@ -23,6 +23,7 @@
     <TestAssembly>$(AssemblyName).dll</TestAssembly>
     <TestSuccessFlag>$(AssemblyName).noCoverage$(NoCoverage).success.flg</TestSuccessFlag>
     <CoverageOutput>$(AssemblyName).coverage.xml</CoverageOutput>
+    <Asterisk>%2A</Asterisk>
 
   </PropertyGroup>
 

@@ -22,6 +22,8 @@ namespace MvcForms.Tests.Unit.Utility
             FakeHttpRequest = new FakeHttpRequest();
         }
 
+        #region NotImplemented
+
         public override IFeatureCollection Features => throw new NotImplementedException();
 
         public override HttpResponse Response => throw new NotImplementedException();
@@ -43,5 +45,7 @@ namespace MvcForms.Tests.Unit.Utility
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }
