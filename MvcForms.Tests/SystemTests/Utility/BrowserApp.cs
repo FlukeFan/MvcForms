@@ -27,10 +27,20 @@ namespace MvcForms.Tests.SystemTests.Utility
             _jsDisabled = disableJs;
         }
 
+        public void Write(string value)
+        {
+            TestContext.Progress.Write(value);
+        }
+
+        public void WriteLine(string value)
+        {
+            TestContext.Progress.WriteLine(value);
+        }
+
         public void GoTo(string action)
         {
             var url = $"http://localhost:{Port}{action}";
-            Console.WriteLine("Navigating to '{0}' ", url);
+            WriteLine($"Navigating to '{url}' ");
             WaitFor(() =>
             {
                 _webDriver.Navigate().GoToUrl(url);
@@ -83,7 +93,7 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void ShouldSeeText(string text)
         {
-            Console.WriteLine("Verify can see text '{0}'", text);
+            WriteLine($"Verify can see text '{text}'");
             WaitFor(() =>
             {
                 var body = _webDriver.FindElement(By.TagName("body"));
@@ -93,7 +103,7 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void ShouldNotSeeText(string text)
         {
-            Console.WriteLine("Verify can not see text '{0}'", text);
+            WriteLine($"Verify can not see text '{text}'");
             WaitFor(() =>
             {
                 var body = _webDriver.FindElement(By.TagName("body"));
@@ -103,7 +113,7 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void ShouldHaveTitleContaining(string text)
         {
-            Console.WriteLine("Verify title contains '{0}'", text);
+            WriteLine($"Verify title contains 'text'");
             WaitFor(() =>
             {
                 _webDriver.Title.Should().Contain(text);
@@ -112,7 +122,7 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void ShouldHaveValue(string inputSelector, string expectedValue)
         {
-            Console.WriteLine($"Verify input {inputSelector} has value '{expectedValue}'");
+            WriteLine($"Verify input {inputSelector} has value '{expectedValue}'");
             WaitFor(() =>
             {
                 var input = _webDriver.FindElement(By.CssSelector(inputSelector));
@@ -122,7 +132,7 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void ShouldHaveUrl(string action)
         {
-            Console.WriteLine("Verify url is for action '{0}'", action);
+            WriteLine($"Verify url is for action '{action}'");
             WaitFor(() =>
             {
                 _webDriver.Url.Should().EndWith(action.Replace("~", ""));
@@ -131,7 +141,7 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void Navigate(string linkText)
         {
-            Console.WriteLine("Click link '{0}'", linkText);
+            WriteLine($"Click link '{linkText}'");
             WaitFor(() =>
             {
                 IList<IWebElement> links = _webDriver.FindElements(By.TagName("a"))
@@ -148,13 +158,13 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         public void Back()
         {
-            Console.WriteLine("Click browser 'back' button");
+            WriteLine("Click browser 'back' button");
             _webDriver.Navigate().Back();
         }
 
         public void Forward()
         {
-            Console.WriteLine("Click browser 'forward' button");
+            WriteLine("Click browser 'forward' button");
             _webDriver.Navigate().Forward();
         }
 
@@ -165,7 +175,7 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         private void TypeText(string name, string selector, string text, bool clearFirst = true)
         {
-            Console.WriteLine("Type text '{0}' into '{1}'", text, name);
+            WriteLine($"Type text '{text}' into '{name}'");
             WaitFor(() =>
             {
                 var inputs = _webDriver.FindElements(By.CssSelector(selector))
@@ -196,7 +206,7 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         private void ClickButton(string text, string selector)
         {
-            Console.WriteLine("Click button {0}", text);
+            WriteLine($"Click button {text}");
             WaitFor(() =>
             {
                 IList<IWebElement> buttons = _webDriver.FindElements(By.CssSelector(selector))

@@ -11,7 +11,7 @@ namespace MvcForms.Tests.SystemTests.Utility
         public void SetUp()
         {
             App = new BrowserApp(JsDisabled());
-
+            App.WriteLine($"\n\nStarting browser test: {TestContext.CurrentContext.Test.FullName}");
         }
 
         protected abstract bool JsDisabled();

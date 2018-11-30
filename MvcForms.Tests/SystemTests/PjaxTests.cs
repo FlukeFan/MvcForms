@@ -1,5 +1,4 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MvcForms.StubApp.Controllers;
 using MvcForms.Tests.SystemTests.Utility;
 using NUnit.Framework;
@@ -54,14 +53,14 @@ namespace MvcForms.Tests.SystemTests
 
         protected void VerifyNavChanged()
         {
-            Console.WriteLine($"Verify header is not {_headerTicks}");
+            App.WriteLine($"Verify header is not {_headerTicks}");
             var newHeaderTicks = QueryHeaderTicks();
             newHeaderTicks.Should().NotBe(_headerTicks);
         }
 
         protected void VerifyNavRemained()
         {
-            Console.WriteLine($"Verify header is still {_headerTicks}");
+            App.WriteLine($"Verify header is still {_headerTicks}");
             var newHeaderTicks = QueryHeaderTicks();
             newHeaderTicks.Should().Be(_headerTicks);
         }
