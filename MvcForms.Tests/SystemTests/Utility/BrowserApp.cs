@@ -4,7 +4,6 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 
 namespace MvcForms.Tests.SystemTests.Utility
 {
@@ -176,19 +175,12 @@ namespace MvcForms.Tests.SystemTests.Utility
                 inputs.Count.Should().Be(1, "should be 1 visible {0}, but found {1}", name, inputs.Count);
                 var input = inputs.Single();
 
-                var actions = new Actions(_webDriver);
-                actions.Click(input);
+                input.Click();
 
                 if (clearFirst)
-                {
-                    actions.KeyDown(Keys.Control);
-                    actions.SendKeys("a");
-                    actions.KeyUp(Keys.Control);
-                    actions.SendKeys(Keys.Backspace);
-                }
+                    input.Clear();
 
-                actions.SendKeys(text);
-                actions.Perform();
+                input.SendKeys(text);
             });
         }
 
