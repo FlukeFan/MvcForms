@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using MvcForms.Styles;
 using MvcForms.Tests.SystemTests.Utility;
 using NUnit.Framework;
 
@@ -25,6 +26,8 @@ namespace MvcForms.Tests.SystemTests
             Task.WaitAll(
                 Task.Run(() => WebDriver.Close()),
                 Task.Run(() => WebServer.AfterTests()));
+
+            Styler.Set(new EmptyStyle());
         }
     }
 }

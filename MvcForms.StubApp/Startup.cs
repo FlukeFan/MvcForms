@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MvcForms.StubApp.Utility;
 
 namespace MvcForms.StubApp
 {
@@ -23,6 +24,7 @@ namespace MvcForms.StubApp
         protected virtual void SetupAction(MvcOptions options)
         {
             options.Filters.Add(new PjaxFilter());
+            Styler.Set(new MultiStyler());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

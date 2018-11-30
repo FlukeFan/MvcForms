@@ -1,4 +1,5 @@
-﻿using MvcForms.Tests.StubApp.Utility;
+﻿using MvcForms.Styles;
+using MvcForms.Tests.StubApp.Utility;
 using NUnit.Framework;
 
 namespace MvcForms.Tests.StubApp
@@ -16,6 +17,7 @@ namespace MvcForms.Tests.StubApp
         public void OneTimeTearDown()
         {
             StubAppTest.TearDownWebHost();
+            Styler.Set(new EmptyStyle());
         }
     }
 }
