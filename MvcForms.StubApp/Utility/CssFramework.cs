@@ -3,6 +3,6 @@
     public enum CssFramework
     {
         Bootstrap3,
-        Foundation,
+        Bootstrap4,
     }
 }
