@@ -23,7 +23,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void BootstrapHorizontal_GET_Renders()
         {
-            TestForAllCss(async http =>
+            TestForAllStylers(async http =>
             {
                 await http.GetAsync(FormsActions.BootstrapHorizontal());
             });

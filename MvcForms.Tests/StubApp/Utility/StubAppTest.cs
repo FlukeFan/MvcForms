@@ -28,7 +28,7 @@ namespace MvcForms.Tests.StubApp.Utility
             action(HttpClient()).Wait();
         }
 
-        protected void TestForAllCss(Func<SimulatedHttpClient, Task> action)
+        protected void TestForAllStylers(Func<SimulatedHttpClient, Task> action)
         {
             Test(async httpClient =>
             {

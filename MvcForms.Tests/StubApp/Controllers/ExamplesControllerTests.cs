@@ -10,7 +10,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void Index_GET_Renders()
         {
-            Test(async http =>
+            TestForAllStylers(async http =>
             {
                 await http.GetAsync(ExamplesActions.Index());
             });
@@ -19,7 +19,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void Buttons_GET_Renders()
         {
-            Test(async http =>
+            TestForAllStylers(async http =>
             {
                 await http.GetAsync(ExamplesActions.Buttons());
             });
@@ -28,7 +28,7 @@ namespace MvcForms.Tests.StubApp.Controllers
         [Test]
         public void Inputs_GET_Renders()
         {
-            Test(async http =>
+            TestForAllStylers(async http =>
             {
                 await http.GetAsync(ExamplesActions.Inputs());
             });
