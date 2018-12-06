@@ -1,4 +1,5 @@
-﻿@namespace MvcForms.StubApp.Views.Shared
+﻿@using MvcForms.StubApp.Utility
+@namespace MvcForms.StubApp.Views.Shared
 <!DOCTYPE html>
 <html class="no-js">
 <head>
@@ -7,7 +8,17 @@
 
     <title>MvcForms - @ViewBag.Title</title>
 
-    <link rel="stylesheet" href="~/bootstrap-3.3.7/css/bootstrap.min.css" />
+    @switch (Context.GetCurrentCssFramework())
+    {
+        case CssFramework.Bootstrap3:
+            <link rel="stylesheet" href="~/bootstrap-3.3.7/css/bootstrap.min.css" />
+            break;
+        case CssFramework.Bootstrap4:
+            <link rel="stylesheet" href="~/bootstrap-4.1.3/css/bootstrap.min.css" />
+            break;
+        default:
+            throw new Exception($"Unhandled framework: {Context.GetCurrentCssFramework()}");
+    }
     <link rel="stylesheet" href="~/css/mvcForms.min.css" />
 
     <style>
@@ -38,8 +49,19 @@
 
     @if (Context.Request.Cookies["disableJs"] != "True")
     {
-        <script src="~/js/jquery.min.js"></script>
-        <script src="~/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        @switch (Context.GetCurrentCssFramework())
+        {
+            case CssFramework.Bootstrap3:
+                <script src="~/js/jquery.min.js"></script>
+                <script src="~/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+                break;
+            case CssFramework.Bootstrap4:
+                <script src="~/js/jquery.min.js"></script>
+                <script src="~/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+                break;
+            default:
+                throw new Exception($"Unhandled framework: {Context.GetCurrentCssFramework()}");
+        }
         <script src="~/js/mvcForms.min.js"></script>
         <script src="~/js/stubApp.js"></script>
         @RenderSection("scripts", required: false)
