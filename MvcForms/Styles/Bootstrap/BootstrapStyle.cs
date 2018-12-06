@@ -44,7 +44,7 @@ namespace MvcForms.Styles.Bootstrap
         protected virtual HtmlTag AddButtonStyle(IHasButtonStyle button, HtmlTag tag)
         {
             var basicButton = "btn";
-            var buttonStyle = "btn-default";
+            var buttonStyle = DefaultButtonStyles[DefaultButton.Default];
             var controlBag = button.NullableControlBag;
 
             if (controlBag != null && controlBag.ContainsKey(ButtonStyle.Key))
