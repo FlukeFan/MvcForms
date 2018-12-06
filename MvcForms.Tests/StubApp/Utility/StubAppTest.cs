@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using MvcForms.StubApp;
+using MvcForms.StubApp.Utility;
 using MvcTesting.AspNetCore;
+using MvcTesting.Http;
 using NUnit.Framework;
 
 namespace MvcForms.Tests.StubApp.Utility
@@ -24,6 +26,22 @@ namespace MvcForms.Tests.StubApp.Utility
         protected void Test(Func<SimulatedHttpClient, Task> action)
         {
             action(HttpClient()).Wait();
+        }
+
+        protected void TestForAllCss(Func<SimulatedHttpClient, Task> action)
+        {
+            Test(async httpClient =>
+            {
+                var cookie = new TestCookie();
+                cookie.Name = "cssFramework";
+                httpClient.Cookies.Add(cookie);
+
+                foreach (CssFramework cssFramework in Enum.GetValues(typeof(CssFramework)))
+                {
+                    cookie.Value = cssFramework.ToString();
+                    await action(httpClient);
+                }
+            });
         }
 
         public static void SetUpWebHost()
