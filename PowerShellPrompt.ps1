@@ -9,3 +9,13 @@ if (!$openPrompt) {
 }
 
 Set-Location $folder
+
+function b { dotnet msbuild build.proj /p:RunTests=true /p:NoCoverage=true /m:16 $args }
+
+type readme.md
+
+echo ""
+
+"b=$function:b"
+
+echo ""
