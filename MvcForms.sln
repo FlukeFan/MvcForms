@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{B53E513F
 		CommandPrompt.bat = CommandPrompt.bat
 		icon.png = icon.png
 		LICENSE.txt = LICENSE.txt
+		PowerShellPrompt.ps1 = PowerShellPrompt.ps1
 		readme.md = readme.md
 	EndProjectSection
 EndProject
