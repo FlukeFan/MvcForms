@@ -10,12 +10,25 @@ if (!$openPrompt) {
 
 Set-Location $folder
 
-function b { dotnet msbuild build.proj /p:RunTests=true /p:NoCoverage=true /m:16 $args }
+function bc  { dotnet clean build.proj $args }
+function bw  { dotnet watch msbuild build.proj /p:RunTests=true /p:NoCoverage=true /m:16 $args }
+function ba  { dotnet msbuild build.proj /p:RunTests=true /m:16 $args }
+function b   { dotnet msbuild build.proj /p:RunTests=true /p:NoCoverage=true /m:16 $args }
+function br  { dotnet restore build.proj $args }
+
+function btw ($test) { dotnet watch msbuild build.proj /p:RunTests=true /m:16 /p:FilterTestFqn=$test $args }
+function bt  ($test) { dotnet msbuild build.proj /p:RunTests=true /m:16 /p:FilterTestFqn=$test $args }
 
 type readme.md
 
 echo ""
 
-"b=$function:b"
+"bc  = $function:bc"
+"bw  = $function:bw"
+"ba  = $function:ba"
+"b   = $function:b"
+"br  = $function:br"
+"btw = $function:btw"
+"bt  = $function:bt"
 
 echo ""
