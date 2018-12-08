@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -11,8 +13,8 @@ namespace MvcForms.Tests
         [Ignore("updating to core")]
         public void DependenciesHaveNotChanged()
         {
-            var folder = @"..\..\..\_output";
             var name = "MvcForms";
+            var folder = FindBinConfigFolder(".", name);
 
             NugetPackage.VerifyDependencies(folder, name, new string[]
             {
@@ -58,6 +60,32 @@ namespace MvcForms.Tests
                     method.IsVirtual.Should().BeTrue("methd {0} on {1} should be virtual to allow clients to override", method.Name, stylerType.FullName);
                 }
             }
+        }
+
+        private static string FindBinConfigFolder(string searchFolder, string name)
+        {
+            var config = "Unknown";
+            searchFolder = Path.GetFullPath(searchFolder);
+
+            while (!Directory.Exists(ConfigFolder(searchFolder, name, config)))
+            {
+                var parent = Directory.GetParent(searchFolder).FullName;
+
+                if (parent == searchFolder)
+                    throw new Exception($"Could not find ");
+
+                if (Path.GetFileName(parent)?.ToLower() == "bin")
+                    config = Path.GetFileName(searchFolder);
+
+                searchFolder = parent;
+            }
+
+            return ConfigFolder(searchFolder, name, config);
+        }
+
+        private static string ConfigFolder(string searchFolder, string name, string config)
+        {
+            return Path.Combine(searchFolder, name, "bin", config);
         }
     }
 }
