@@ -25,9 +25,9 @@ namespace MvcForms.Tests
             return contentFiles;
         }
 
-        public static void VerifyDependencies(string folder, string name, string[] expectedDependencies)
+        public static void VerifyDependencies(string name, string[] expectedDependencies)
         {
-            var dependencies = FindDependencies(folder, name);
+            var dependencies = FindDependencies(null, name);
 
             var extraDependencies = dependencies
                 .Where(d => !expectedDependencies.Any(ed => d.Matches(ed)))
@@ -73,8 +73,31 @@ namespace MvcForms.Tests
             return dependencies;
         }
 
+        private static string ConfigFolder(string searchFolder, string name, string config)
+        {
+            return Path.Combine(searchFolder, name, "bin", config);
+        }
+
         public static void UsingPackage(string folder, string name, Action<ZipArchive> action)
         {
+            var config = "Unknown";
+            var searchFolder = Path.GetFullPath(".");
+
+            while (!Directory.Exists(ConfigFolder(searchFolder, name, config)))
+            {
+                var parent = Directory.GetParent(searchFolder).FullName;
+
+                if (parent == searchFolder)
+                    throw new Exception($"Could not find ");
+
+                if (Path.GetFileName(parent)?.ToLower() == "bin")
+                    config = Path.GetFileName(searchFolder);
+
+                searchFolder = parent;
+            }
+
+            folder = ConfigFolder(searchFolder, name, config);
+
             var regFile = name + "\\.\\d+\\.\\d+\\.\\d+(\\.\\d+)?\\.nupkg";
             var regEx = new Regex(regFile);
             var files = Directory.GetFiles(folder, "*.*");
