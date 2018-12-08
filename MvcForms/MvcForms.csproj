@@ -11,7 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
+    <PackageReference Include="BuildBundlerMinifier" Version="2.8.391">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="BuildWebCompiler" Version="1.12.394" />
     <PackageReference Include="HtmlTags.AspNetCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.1" />

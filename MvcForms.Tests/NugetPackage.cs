@@ -33,15 +33,16 @@ namespace MvcForms.Tests
                 .Where(d => !expectedDependencies.Any(ed => d.Matches(ed)))
                 .ToList();
 
-            if (extraDependencies.Count != 0)
-                throw new Exception($"Found unexpected dependencies for {name}:\n{string.Join("\n", extraDependencies)}");
-
             var missingDependencies = expectedDependencies
                 .Where(ed => !dependencies.Any(d => d.Matches(ed)))
                 .ToList();
 
-            if (missingDependencies.Count != 0)
-                throw new Exception($"Missing dependencies for {name}:\n{string.Join("\n", missingDependencies)}");
+            if (extraDependencies.Count != 0 || missingDependencies.Count != 0)
+                throw new Exception($"Dependencies not matched for {name}:\n\n" +
+                    $"Expected dependencies:\n{string.Join("\n", expectedDependencies)}\n\n" +
+                    $"Actual dependencies:\n{string.Join("\n", dependencies)}\n\n" +
+                    $"Extra dependencies:\n{string.Join("\n", extraDependencies)}\n\n" +
+                    $"Missing dependencies:\n{string.Join("\n", missingDependencies)}\n\n");
         }
 
         public static IList<NugetDependency> FindDependencies(string folder, string name)
@@ -65,7 +66,7 @@ namespace MvcForms.Tests
                 {
                     var doc = new XmlDocument();
                     doc.Load(stream);
-                    var dependencyNodes = doc.SelectNodes("//*[local-name()='dependencies']/*[local-name()='dependency']");
+                    var dependencyNodes = doc.SelectNodes("//*[local-name()='dependency']");
                     dependencies = dependencyNodes.Cast<XmlElement>().Select(e => new NugetDependency(e)).ToList();
                 }
             });
