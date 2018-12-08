@@ -5,10 +5,10 @@ using NUnit.Framework;
 namespace MvcForms.Tests
 {
     [TestFixture]
-    [Ignore("updating to core")]
     public class DesignContraintsTests
     {
         [Test]
+        [Ignore("updating to core")]
         public void DependenciesHaveNotChanged()
         {
             var folder = @"..\..\..\_output";
@@ -22,6 +22,7 @@ namespace MvcForms.Tests
         }
 
         [Test]
+        [Ignore("updating to core")]
         public void OnlyMvcFormsScriptsArePackaged()
         {
             var folder = @"..\..\..\_output";
