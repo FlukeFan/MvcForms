@@ -11,7 +11,10 @@ namespace MvcForms.Tests
         [Ignore("updating to core")]
         public void DependenciesHaveNotChanged()
         {
-            NugetPackage.VerifyDependencies("MvcForms", new string[]
+            var folder = @"..\..\..\_output";
+            var name = "MvcForms";
+
+            NugetPackage.VerifyDependencies(folder, name, new string[]
             {
                 "jQuery:1.9.0",
                 "HtmlTags:*",
