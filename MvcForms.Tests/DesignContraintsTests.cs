@@ -31,15 +31,16 @@ namespace MvcForms.Tests
             var packageFolder = FindBinConfigFolder(".", name);
 
             var tmpDir = Path.GetFullPath("tmp");
-
-            if (Directory.Exists(tmpDir))
-                DeleteFolder(tmpDir);
+            DeleteFolder(tmpDir);
 
             Directory.CreateDirectory(tmpDir);
 
             var commonTargets = new XmlDocument();
             commonTargets.Load(Path.Combine(packageFolder, "../../../Build/common.targets"));
             var version = commonTargets.SelectSingleNode("//*[local-name()='Version']").InnerText;
+
+            var nugetCache = Path.Combine(Environment.GetEnvironmentVariable("UserProfile"), $".nuget/packages/{name}/{version}");
+            DeleteFolder(nugetCache);
 
             Exec.Cmd("dotnet", $"new web", tmpDir);
             Exec.Cmd("dotnet", $"add package MvcForms -v {version} -s {packageFolder}", tmpDir);
@@ -82,7 +83,8 @@ namespace MvcForms.Tests
         {
             try
             {
-                Directory.Delete(path, true);
+                if (Directory.Exists(path))
+                    Directory.Delete(path, true);
             }
             catch
             {
