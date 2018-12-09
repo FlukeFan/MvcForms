@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading;
+using FluentAssertions;
+using NUnit.Framework;
 
 namespace MvcForms.Tests
 {
     public static class Exec
     {
-        public static RunResult Cmd(string fileName, string arguments)
+        public static void Cmd(string fileName, string arguments, string workingDirectory)
         {
-            return Cmd(fileName, arguments, Environment.CurrentDirectory);
-        }
-
-        public static RunResult Cmd(string fileName, string arguments, string workingDirectory)
-        {
-            var result = new RunResult();
-
             using (Process process = new Process())
             {
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -27,6 +20,8 @@ namespace MvcForms.Tests
                 process.StartInfo.Arguments = arguments;
                 process.StartInfo.WorkingDirectory = workingDirectory;
 
+                TestContext.Progress.WriteLine($"Running {process.StartInfo.FileName} {process.StartInfo.Arguments} (in {process.StartInfo.WorkingDirectory})");
+
                 using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
                 using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
                 {
@@ -35,7 +30,7 @@ namespace MvcForms.Tests
                         if (eventArgs.Data == null)
                             outputWaitHandle.Set();
                         else
-                            result.Output.Add(eventArgs.Data);
+                            TestContext.Progress.WriteLine($"{eventArgs.Data}");
                     };
 
                     process.ErrorDataReceived += (sender, eventArgs) =>
@@ -43,7 +38,7 @@ namespace MvcForms.Tests
                         if (eventArgs.Data == null)
                             outputWaitHandle.Set();
                         else
-                            result.Errors.Add(eventArgs.Data);
+                            TestContext.Progress.WriteLine($"ERROR: {eventArgs.Data}");
                     };
 
                     process.Start();
@@ -52,18 +47,10 @@ namespace MvcForms.Tests
 
                     process.WaitForExit();
 
-                    result.ExitCode = process.ExitCode;
+                    TestContext.Progress.WriteLine($"Process exited with code {process.ExitCode}");
+                    process.ExitCode.Should().Be(0);
                 }
             }
-
-            return result;
-        }
-
-        public class RunResult
-        {
-            public int ExitCode;
-            public IList<string> Output = new List<string>();
-            public IList<string> Errors = new List<string>();
         }
     }
 }

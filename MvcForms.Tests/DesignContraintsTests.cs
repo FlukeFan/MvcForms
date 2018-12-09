@@ -33,7 +33,7 @@ namespace MvcForms.Tests
             var tmpDir = Path.GetFullPath("tmp");
             DeleteFolder(tmpDir);
 
-            Directory.CreateDirectory(tmpDir);
+            CreateFolder(tmpDir);
 
             var commonTargets = new XmlDocument();
             commonTargets.Load(Path.Combine(packageFolder, "../../../Build/common.targets"));
@@ -44,16 +44,14 @@ namespace MvcForms.Tests
 
             Exec.Cmd("dotnet", $"new web", tmpDir);
             Exec.Cmd("dotnet", $"add package MvcForms -v {version} -s {packageFolder}", tmpDir);
+            Exec.Cmd("dotnet", $"restore", tmpDir);
+            Exec.Cmd("dotnet", $"build", tmpDir);
 
-            Assert.Ignore("need to verify content files are extracted");
+            var cssFiles = Directory.GetFiles(Path.Combine(tmpDir, "wwwroot/lib/mvcForms/css")).Select(p => Path.GetFileName(p));
+            var jsFiles = Directory.GetFiles(Path.Combine(tmpDir, "wwwroot/lib/mvcForms/js")).Select(p => Path.GetFileName(p));
 
-            var contentFiles = NugetPackage.FindContentFiles(packageFolder, name);
-
-            contentFiles.Should().NotBeEmpty("content (script) files should be packaged");
-
-            var nonMvcFormsFiles = contentFiles.Where(f => !f.Contains("/mvcForms")).ToList();
-
-            nonMvcFormsFiles.Should().BeEmpty("only mvcForms files should be packaged (potentially change the build action to None)");
+            cssFiles.Should().BeEquivalentTo("mvcForms.css", "mvcForms.min.css", "mvcForms.scss");
+            jsFiles.Should().BeEquivalentTo("mvcForms.js", "mvcForms.min.js");
         }
 
         [Test]
@@ -81,20 +79,35 @@ namespace MvcForms.Tests
 
         private static void DeleteFolder(string path, int retryCount = 3)
         {
-            try
-            {
-                if (Directory.Exists(path))
-                    Directory.Delete(path, true);
-            }
-            catch
-            {
-                // *sigh* http://stackoverflow.com/questions/329355/cannot-delete-directory-with-directory-deletepath-true#comment11564214_329502
+            // *sigh* http://stackoverflow.com/questions/329355/cannot-delete-directory-with-directory-deletepath-true#comment11564214_329502
+            RetryWhile(
+                () => Directory.Exists(path),
+                () => Directory.Delete(path, true));
+        }
 
-                if (retryCount <= 0)
-                    throw;
+        private static void CreateFolder(string path, int retryCount = 3)
+        {
+            RetryWhile(
+                () => !Directory.Exists(path),
+                () => Directory.CreateDirectory(path));
+        }
 
-                Thread.Sleep(3);
-                DeleteFolder(path, retryCount - 1);
+        private static void RetryWhile(Func<bool> condition, Action action, int retryCount = 3)
+        {
+            while (condition())
+            {
+                try
+                {
+                    action();
+                }
+                catch
+                {
+                    if (retryCount <= 0)
+                        throw;
+
+                    Thread.Sleep(3);
+                    retryCount--;
+                }
             }
         }
 
