@@ -5,7 +5,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>full</DebugType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
@@ -29,5 +28,9 @@
     <Content Include="content/**" PackagePath="content/css" />
     <Content Include="scripts/mvcForms*" PackagePath="content/js" />
   </ItemGroup>
+
+  <Target Name="PackageAfterBundling" AfterTargets="Build" Condition="'$(AfterGeneratedContent)' != 'true'">
+    <MsBuild Projects="$(MSBuildThisFile)" Targets="Pack" Properties="AfterGeneratedContent=true" />
+  </Target>
 
 </Project>
