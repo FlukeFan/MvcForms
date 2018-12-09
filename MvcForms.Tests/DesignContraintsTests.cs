@@ -67,6 +67,9 @@ namespace MvcForms.Tests
             Exec.Cmd("dotnet", $"restore", tmpDir);
             Exec.Cmd("dotnet", $"build", tmpDir);
 
+            var tmpTargets = File.ReadAllText(Path.Combine(tmpDir, "obj/tmp.csproj.nuget.g.targets"));
+            TestContext.Progress.WriteLine($"Content of {Path.Combine(tmpDir, "obj/tmp.csproj.nuget.g.targets")}:\n\n{tmpTargets}");
+
             var cssFiles = Directory.GetFiles(Path.Combine(tmpDir, "wwwroot/lib/mvcForms/css")).Select(p => Path.GetFileName(p));
             var jsFiles = Directory.GetFiles(Path.Combine(tmpDir, "wwwroot/lib/mvcForms/js")).Select(p => Path.GetFileName(p));
 
