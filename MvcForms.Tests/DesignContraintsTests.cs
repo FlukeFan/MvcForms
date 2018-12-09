@@ -67,10 +67,6 @@ namespace MvcForms.Tests
             Exec.Cmd("dotnet", $"restore", tmpDir);
             Exec.Cmd("dotnet", $"build", tmpDir);
 
-            TestContext.Progress.WriteLine("nuget cache files:");
-            foreach (var file in Directory.GetFiles(nugetCache, "*.*", SearchOption.AllDirectories))
-                TestContext.Progress.WriteLine(file);
-
             var cssFiles = Directory.GetFiles(Path.Combine(tmpDir, "wwwroot/lib/mvcForms/css")).Select(p => Path.GetFileName(p));
             var jsFiles = Directory.GetFiles(Path.Combine(tmpDir, "wwwroot/lib/mvcForms/js")).Select(p => Path.GetFileName(p));
 

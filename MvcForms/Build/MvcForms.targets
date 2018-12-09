@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <MvcFormsPackageFolder>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..))</MvcFormsPackageFolder>
+    <MvcFormsPackageVersion>$([System.IO.Path]::GetFileName($(MvcFormsPackageFolder)))</MvcFormsPackageVersion>
+    <MvcFormsLibFolder>$(MSBuildProjectDirectory)\wwwroot\lib\mvcForms\</MvcFormsLibFolder>
+    <MvcFormsFlag>$(MvcFormsLibFolder)mvcForms.$(MvcFormsPackageVersion).uptodate</MvcFormsFlag>
+  </PropertyGroup>
+  <ItemGroup>
+    <MvcFormsContentFiles Include="$(MvcFormsPackageFolder)\content\**" />
+  </ItemGroup>
+  <Target Name="MvcFormsCheckAssets" BeforeTargets="Build" Condition="'$(CopyMvcFormsContent)' != 'false'">
+    <CallTarget Targets="MvcFormsCopyAssets" />
+  </Target>
+  <Target Name="MvcFormsCopyAssets" Inputs="@(MvcFormsContentFiles)" Outputs="$(MvcFormsFlag)">
+    <Message Importance="high" Text="Copying MvcForms assets into $(MvcFormsLibFolder)" />
+    <RemoveDir Directories="$(MvcFormsLibFolder)" />
+    <MakeDir Directories="$(MvcFormsLibFolder)" />
+    <Copy SourceFiles="@(MvcFormsContentFiles)" DestinationFolder="$(MvcFormsLibFolder)\%(RecursiveDir)" />
+    <Touch Files="$(MvcFormsFlag)" AlwaysCreate="true" />
+  </Target>
+</Project>
