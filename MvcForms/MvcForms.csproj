@@ -24,9 +24,10 @@
     </PackageReference>
   </ItemGroup>
 
-    <ItemGroup>
-    <Content Include="build\**" PackagePath="%(Identity)" />
-    <Content Include="content\**" PackagePath="%(Identity)" />
+  <ItemGroup>
+    <Content Include="build/**" PackagePath="content/build" />
+    <Content Include="content/**" PackagePath="content/css" />
+    <Content Include="scripts/mvcForms*" PackagePath="content/js" />
   </ItemGroup>
 
 </Project>
