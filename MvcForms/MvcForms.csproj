@@ -24,4 +24,9 @@
     </PackageReference>
   </ItemGroup>
 
+    <ItemGroup>
+    <Content Include="build\**" PackagePath="%(Identity)" />
+    <Content Include="content\**" PackagePath="%(Identity)" />
+  </ItemGroup>
+
 </Project>

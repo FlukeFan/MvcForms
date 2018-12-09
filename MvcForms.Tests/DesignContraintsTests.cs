@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Xml;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -23,13 +25,28 @@ namespace MvcForms.Tests
         }
 
         [Test]
-        [Ignore("updating to core")]
-        public void OnlyMvcFormsScriptsArePackaged()
+        public void ContentIsPackaged()
         {
-            var folder = @"..\..\..\_output";
             var name = "MvcForms";
+            var packageFolder = FindBinConfigFolder(".", name);
 
-            var contentFiles = NugetPackage.FindContentFiles(folder, name);
+            var tmpDir = Path.GetFullPath("tmp");
+
+            if (Directory.Exists(tmpDir))
+                DeleteFolder(tmpDir);
+
+            Directory.CreateDirectory(tmpDir);
+
+            var commonTargets = new XmlDocument();
+            commonTargets.Load(Path.Combine(packageFolder, "../../../Build/common.targets"));
+            var version = commonTargets.SelectSingleNode("//*[local-name()='Version']").InnerText;
+
+            Exec.Cmd("dotnet", $"new web", tmpDir);
+            Exec.Cmd("dotnet", $"add package MvcForms -v {version} -s {packageFolder}", tmpDir);
+
+            Assert.Ignore("need to verify content files are extracted");
+
+            var contentFiles = NugetPackage.FindContentFiles(packageFolder, name);
 
             contentFiles.Should().NotBeEmpty("content (script) files should be packaged");
 
@@ -58,6 +75,24 @@ namespace MvcForms.Tests
 
                     method.IsVirtual.Should().BeTrue("methd {0} on {1} should be virtual to allow clients to override", method.Name, stylerType.FullName);
                 }
+            }
+        }
+
+        private static void DeleteFolder(string path, int retryCount = 3)
+        {
+            try
+            {
+                Directory.Delete(path, true);
+            }
+            catch
+            {
+                // *sigh* http://stackoverflow.com/questions/329355/cannot-delete-directory-with-directory-deletepath-true#comment11564214_329502
+
+                if (retryCount <= 0)
+                    throw;
+
+                Thread.Sleep(3);
+                DeleteFolder(path, retryCount - 1);
             }
         }
 
