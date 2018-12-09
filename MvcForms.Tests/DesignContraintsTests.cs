@@ -15,9 +15,9 @@ namespace MvcForms.Tests
         public void DependenciesHaveNotChanged()
         {
             var name = "MvcForms";
-            var folder = FindBinConfigFolder(".", name);
+            var packageFolder = FindBinConfigFolder(".", name);
 
-            NugetPackage.VerifyDependencies(folder, name, new string[]
+            NugetPackage.VerifyDependencies(packageFolder, name, new string[]
             {
                 "HtmlTags.AspNetCore:*",
                 "Microsoft.AspNetCore.Mvc.Core:*",
@@ -27,8 +27,28 @@ namespace MvcForms.Tests
         [Test]
         public void ContentIsPackaged()
         {
+            var expectedCssFiles = new string[]
+            {
+                "mvcForms.css",
+                "mvcForms.min.css",
+                "mvcForms.scss",
+            };
+
+            var expectedJsFiles = new string[]
+            {
+                "mvcForms.js",
+                "mvcForms.min.js",
+            };
+
             var name = "MvcForms";
             var packageFolder = FindBinConfigFolder(".", name);
+
+            var expectedContentFiles = expectedCssFiles.Select(f => $"content/css/{f}")
+                .Concat(expectedJsFiles.Select(f => $"content/js/{f}"));
+
+            var contentFiles = NugetPackage.FindContentFiles(packageFolder, name);
+
+            contentFiles.Should().BeEquivalentTo(expectedContentFiles);
 
             var tmpDir = Path.GetFullPath("tmp");
             DeleteFolder(tmpDir);
@@ -50,8 +70,8 @@ namespace MvcForms.Tests
             var cssFiles = Directory.GetFiles(Path.Combine(tmpDir, "wwwroot/lib/mvcForms/css")).Select(p => Path.GetFileName(p));
             var jsFiles = Directory.GetFiles(Path.Combine(tmpDir, "wwwroot/lib/mvcForms/js")).Select(p => Path.GetFileName(p));
 
-            cssFiles.Should().BeEquivalentTo("mvcForms.css", "mvcForms.min.css", "mvcForms.scss");
-            jsFiles.Should().BeEquivalentTo("mvcForms.js", "mvcForms.min.js");
+            cssFiles.Should().BeEquivalentTo(expectedCssFiles);
+            jsFiles.Should().BeEquivalentTo(expectedJsFiles);
         }
 
         [Test]
