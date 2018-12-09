@@ -5,7 +5,7 @@
 
     <Version>0.0.5</Version>
     <Description>Some utility classes to help create simple form input in an MVC application.</Description>
-    <PackageTags>Asp.Net Mvc Forms Bootstrap</PackageTags>
+    <PackageTags>Asp.Net Core Mvc Forms Bootstrap</PackageTags>
     <Authors>Richard Brown</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/FlukeFan/MvcForms/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/FlukeFan/MvcForms</PackageProjectUrl>
