@@ -3,6 +3,8 @@ obj
 .vs
 .vscode
 *.user
+/MvcForms/Content/mvcForms.css
+/MvcForms/Content/mvcForms.min.css
 /MvcForms/Scripts/mvcForms.js
 /MvcForms/Scripts/mvcForms.min.js
 /MvcForms.StubApp/wwwroot/js/mvcForms.min.js
