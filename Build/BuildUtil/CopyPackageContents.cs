@@ -51,7 +51,12 @@ namespace Build.BuildUtil
             foreach (XmlElement packageReference in packageReferences)
             {
                 var packageName = packageReference.Attributes["Include"].Value;
-                var version = packageReference.Attributes["Version"].Value;
+                var versionAttribute = packageReference.Attributes["Version"];
+
+                if (versionAttribute == null)
+                    continue;
+
+                var version = versionAttribute.Value;
 
                 if (version.Contains(","))
                     version = version.Split(',')[0];
