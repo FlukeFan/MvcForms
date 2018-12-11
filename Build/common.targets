@@ -3,7 +3,7 @@
 
   <PropertyGroup>
 
-    <Version>0.0.6</Version>
+    <Version>0.0.7</Version>
     <Description>Some utility classes to help create simple form input in an MVC application.</Description>
     <PackageTags>Asp.Net Core Mvc Forms Bootstrap</PackageTags>
     <Authors>Richard Brown</Authors>

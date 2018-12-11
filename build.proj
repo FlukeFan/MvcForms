@@ -25,6 +25,7 @@
     <Exec Command="dotnet msbuild build.proj /p:RunTests=true /p:Configuration=Release" />
     <Exec Command="dotnet nuget push MvcForms\bin\Release\MvcForms.$(Version).nupkg --source nuget.org" />
     <Exec Command="dotnet clean build.proj" />
+    <Message Importance="high" Text="Version $(Version) pushed to nuget.org" />
   </Target>
 
 </Project>
