@@ -34,14 +34,17 @@ namespace MvcForms.Styles.Bootstrap
             }
 
             if (groupContext.HasErrors)
+            {
                 formGroup.Container.AddClass("is-invalid");
+                formGroup.Control.AddClass("is-invalid");
+            }
 
             return tag;
         }
 
         public override HtmlTag FormButtonsStyler(IRenderedFormButtons formButtons, HtmlTag tag)
         {
-            formButtons.Outer.AddClasses("row");
+            formButtons.Outer.AddClasses("form-row");
             formButtons.Inner.AddClasses("offset-sm-4", "col-sm-8");
             return tag;
         }
