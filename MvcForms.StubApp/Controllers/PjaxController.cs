@@ -10,6 +10,7 @@ namespace MvcForms.StubApp.Controllers
         public static string Page1()    { return "/Pjax/Page1"; }
         public static string Page2()    { return "/Pjax/Page2"; }
         public static string Page3()    { return "/Pjax/Page3"; }
+        public static string Page4()    { return "/Pjax/Page4"; }
         public static string Timeout()  { return "/Pjax/Timeout"; }
         public static string PageErr()  { return "/Pjax/PageErr"; }
         public static string Form()     { return "/Pjax/Form"; }
@@ -36,6 +37,11 @@ namespace MvcForms.StubApp.Controllers
         public ActionResult Page3()
         {
             return Redirect(PjaxActions.Page1());
+        }
+
+        public ActionResult Page4()
+        {
+            return new ChallengeResult();
         }
 
         public ActionResult Timeout()

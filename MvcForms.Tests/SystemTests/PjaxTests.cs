@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Web;
+using FluentAssertions;
 using MvcForms.StubApp.Controllers;
 using MvcForms.Tests.SystemTests.Utility;
 using NUnit.Framework;
@@ -119,6 +120,20 @@ namespace MvcForms.Tests.SystemTests
             App.ShouldSeeText("Page 1");
             App.ShouldHaveTitleContaining("Page 1");
             App.ShouldHaveUrl(PjaxActions.Page1());
+            VerifyNavState();
+        }
+
+        [Test]
+        public void Challenge()
+        {
+            App.GoTo(PjaxActions.Page2());
+
+            StoreNavState();
+            App.Navigate("Navigate Challenge");
+
+            App.ShouldSeeText("Page 1");
+            App.ShouldHaveTitleContaining("Page 1");
+            App.ShouldContainUrl(PjaxActions.Page1() + $"?ReturnUrl={HttpUtility.UrlEncode(PjaxActions.Page4())}");
             VerifyNavState();
         }
 

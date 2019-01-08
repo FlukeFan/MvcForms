@@ -295,6 +295,17 @@ var mfoPjax = {};
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 mfoOverlay.remove(overlay);
+
+                if (jqXHR.status === 401) {
+                    var location = jqXHR.getResponseHeader('location');
+
+                    if (location) {
+                        context.url = location;
+                        load(context, callback);
+                        return;
+                    }
+                }
+
                 mfoPjax.onError(jqXHR, textStatus, errorThrown, context, callback);
             }
         });

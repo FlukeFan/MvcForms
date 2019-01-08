@@ -135,7 +135,16 @@ namespace MvcForms.Tests.SystemTests.Utility
             WriteLine($"Verify url is for action '{action}'");
             WaitFor(() =>
             {
-                _webDriver.Url.Should().EndWith(action.Replace("~", ""));
+                _webDriver.Url.ToLower().Should().EndWith(action.Replace("~", "").ToLower());
+            });
+        }
+
+        public void ShouldContainUrl(string action)
+        {
+            WriteLine($"Verify url contains action '{action}'");
+            WaitFor(() =>
+            {
+                _webDriver.Url.ToLower().Should().Contain(action.Replace("~", "").ToLower());
             });
         }
 

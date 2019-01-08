@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="jQuery" Version="[1.12.4,2)" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
@@ -40,7 +41,7 @@
   </Target>
 
   <Target Name="ContentCopy" AfterTargets="Compile">
-    <Copy SourceFiles="..\MvcForms\Scripts\mvcForms.min.js" DestinationFiles="wwwroot/js/mvcForms.min.js" />
+    <Copy SourceFiles="..\MvcForms\Scripts\mvcForms.js" DestinationFiles="wwwroot/js/mvcForms.js" />
     <Copy SourceFiles="..\MvcForms\Content\mvcForms.min.css" DestinationFiles="wwwroot/css/mvcForms.min.css" />
   </Target>
 
