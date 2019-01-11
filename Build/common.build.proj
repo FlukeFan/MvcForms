@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Watch Include="**\*.cs" />
+    <Watch Include="**\*.css" />
     <Watch Include="**\*.scss" />
     <Watch Include="**\*.js" />
     <Watch Remove="**\wwwroot\js\*.*" />
@@ -45,7 +46,6 @@
     <MSBuild Projects="@(ProjectsToBuild->Reverse())" Targets="Clean" BuildInParallel="false" />
     <ItemGroup>
       <BinFolders Include="**\*.csproj" />
-      <BinFolders Remove="pre_core\**" />
     </ItemGroup>
     <RemoveDir Directories="@(BinFolders->'%(RelativeDir)bin')" />
     <RemoveDir Directories="@(BinFolders->'%(RelativeDir)obj')" />
