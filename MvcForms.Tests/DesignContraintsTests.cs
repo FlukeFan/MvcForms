@@ -25,6 +25,7 @@ namespace MvcForms.Tests
         }
 
         [Test]
+        [Category("Slow")]
         public void ContentIsPackaged()
         {
             var expectedCssFiles = new string[]

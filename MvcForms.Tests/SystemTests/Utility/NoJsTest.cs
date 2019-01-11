@@ -3,6 +3,7 @@
 namespace MvcForms.Tests.SystemTests.Utility
 {
     [TestFixture]
+    [Category("Slow")]
     public abstract class NoJsTest
     {
         protected BrowserApp App { get; set; }
