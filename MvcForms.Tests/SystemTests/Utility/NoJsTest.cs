@@ -17,6 +17,4 @@ namespace MvcForms.Tests.SystemTests.Utility
 
         protected abstract bool JsDisabled();
     }
-
-
 }

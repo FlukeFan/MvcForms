@@ -8,6 +8,7 @@ namespace MvcForms.StubApp.Controllers
         public static string Index()    { return "/Examples"; }
         public static string Buttons()  { return "/Examples/Buttons"; }
         public static string Inputs()   { return "/Examples/Inputs"; }
+        public static string Scroll()   { return "/Examples/Scroll"; }
     }
 
     public class ExamplesController : Controller
@@ -36,6 +37,18 @@ namespace MvcForms.StubApp.Controllers
             ModelState.AddModelError("", "Error displayed from form POST");
             var model = new InputsModel { PostModel = postModel };
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Scroll()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Scroll(object ignored)
+        {
+            return View();
         }
     }
 }

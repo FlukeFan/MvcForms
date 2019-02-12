@@ -1,0 +1,44 @@
+﻿@using MvcForms
+@using MvcForms.Styles
+@using MvcForms.Forms
+@using MvcForms.Navigation
+@using MvcForms.StubApp.Controllers
+@using MvcForms.StubApp.Models.Examples
+@using MvcForms.StubApp.Views
+@inherits PjaxPage<object>
+@model object
+@{
+    SetLayout("Scroll");
+}
+
+<h3>From inside scrollable area</h3>
+
+<style>
+    p {
+        margin-top: 20px;
+    }
+
+    form {
+        background: #eee;
+        max-width: 800px;
+        padding: 15px;
+    }
+
+    .scrollable {
+        height: 300px;
+        overflow: auto;
+    }
+</style>
+
+<div id="scrollDiv" class="scrollable" data-keep-scroll="scrollForm">
+    @using (var form = Html.FormFor(Model).Begin())
+    {
+
+        @for(var i = 0; i < 15; i++)
+        {
+            <h3>Some text row - @i</h3>
+        }
+
+        @form.Html.ButtonSubmit("Submit").Style(MvcForms.Styles.Default.DefaultButton.Primary).Tag(t => t.Id("postSubmit"))
+    }
+</div>
