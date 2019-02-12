@@ -11,7 +11,6 @@ namespace MvcForms.Tests.SystemTests
         protected override bool JsDisabled() { return false; }
 
         [Test]
-        [Ignore("WIP")]
         public void ScrollIsMaintained()
         {
             App.GoTo(ExamplesActions.Scroll());

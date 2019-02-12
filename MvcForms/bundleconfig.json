@@ -8,7 +8,8 @@
       "Scripts/pjax.js",
       "Scripts/dialog.js",
       "Scripts/pjaxDialog.js",
-      "Scripts/forms.js"
+      "Scripts/forms.js",
+      "Scripts/scroll.js"
     ]
   }
 ]
