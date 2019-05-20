@@ -41,7 +41,10 @@
     <h3>LabelledInputNumber</h3>
     @form.Html.LabelledInputNumber("Int", f => f.InputNumberInt)
     @form.Html.LabelledInputNumber("NullableInt", f => f.InputNumberNullableInt)
-    @form.Html.LabelledInputNumber("StringInput1", f => f.InputNumberString)
+    @form.Html.LabelledInputNumber("String", f => f.InputNumberString)
+
+    <h3>LabelledSelect</h3>
+    @form.Html.LabelledSelect("String", f => f.SelectString, new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" }, })
 
     using (form.Html.FormButtons())
     {

@@ -28,5 +28,7 @@ namespace MvcForms.StubApp.Models.Examples
         public int          InputNumberInt          { get; set; }
         public int          InputNumberNullableInt  { get; set; }
         public string       InputNumberString       { get; set; }
+
+        public string       SelectString            { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web;
 using Microsoft.AspNetCore.Html;
@@ -119,6 +120,15 @@ namespace MvcForms.Forms
         public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, int?>> property)
         {
             return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "number"));
+        }
+
+        #endregion
+
+        #region Select
+
+        public static FormGroup<Select> LabelledSelect<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, string>> property, IDictionary<string, string> values)
+        {
+            return LabelledControl(helper, label, property, ctx => new Select(helper, ctx.Property));
         }
 
         #endregion
