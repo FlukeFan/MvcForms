@@ -32,7 +32,7 @@ namespace MvcForms.StubApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Inputs(FormInputsModel postModel)
+        public ActionResult Inputs(InputsModelPost postModel)
         {
             ModelState.AddModelError("", "Error displayed from form POST");
             var model = new InputsModel { PostModel = postModel };

@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MvcForms.StubApp.Models.Examples
 {
@@ -7,40 +6,27 @@ namespace MvcForms.StubApp.Models.Examples
     {
         public InputsModel()
         {
-            PostModel = new FormInputsModel();
+            PostModel = new InputsModelPost();
         }
 
-        public FormInputsModel PostModel;
+        public InputsModelPost PostModel;
     }
 
-    public class FormInputsModel
+    public class InputsModelPost
     {
-        public FormInputsModel()
+        public InputsModelPost()
         {
-            StringInput1 = "existing StringInput1 value";
+            InputTextString1 = "existing StringInput1 value";
         }
 
-        public string StringInput1 { get; set; }
+        public string       InputTextString1        { get; set; }
 
         [Required(ErrorMessage = "Please supply a value")]
         [MinLength(3, ErrorMessage = "Please supply more than 3 characters")]
-        public string StringInput2 { get; set; }
+        public string       InputTextString2        { get; set; }
 
-        public FormInputsModel[] InputsArray;
-
-        public int          Int                 { get; set; }
-        public int?         NullableInt         { get; set; }
-
-        public long         Long                { get; set; }
-        public long?        NullableLong        { get; set; }
-
-        public bool         Bool                { get; set; }
-        public bool?        NullableBool        { get; set; }
-
-        public EnumValues   Enum                { get; set; }
-        public EnumValues?  NullableEnum        { get; set; }
-
-        public DateTime     DateTime            { get; set; }
-        public DateTime?    NullableDateTime    { get; set; }
+        public int          InputNumberInt          { get; set; }
+        public int          InputNumberNullableInt  { get; set; }
+        public string       InputNumberString       { get; set; }
     }
 }

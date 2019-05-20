@@ -32,16 +32,16 @@
 
     <h3>InputText</h3>
     <div>
-        @form.Html.InputText(f => f.StringInput1)
+        @form.Html.InputText(f => f.InputTextString1)
     </div>
 
     <h3>LabelledInputText</h3>
-    @form.Html.LabelledInputText("StringInput2", f => f.StringInput2)
+    @form.Html.LabelledInputText("StringInput2", f => f.InputTextString2)
 
     <h3>LabelledInputNumber</h3>
-    @form.Html.LabelledInputNumber("Int", f => f.Int)
-    @form.Html.LabelledInputNumber("NullableInt", f => f.NullableInt)
-    @form.Html.LabelledInputNumber("StringInput1", f => f.StringInput1)
+    @form.Html.LabelledInputNumber("Int", f => f.InputNumberInt)
+    @form.Html.LabelledInputNumber("NullableInt", f => f.InputNumberNullableInt)
+    @form.Html.LabelledInputNumber("StringInput1", f => f.InputNumberString)
 
     using (form.Html.FormButtons())
     {

@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using MvcForms.Forms;
-using MvcForms.StubApp.Models.Examples;
 using MvcForms.Tests.Unit.Utility;
 using NUnit.Framework;
 
@@ -12,20 +11,20 @@ namespace MvcForms.Tests.Unit.Forms
         [Test]
         public void InputHidden()
         {
-            var model = new FormInputsModel { StringInput1 = "123" };
+            var model = new ExamplePostModel { String = "123" };
 
-            var tag = model.Helper().InputHidden(f => f.StringInput1).RenderTag();
+            var tag = model.Helper().InputHidden(f => f.String).RenderTag();
 
             tag.TagName().Should().Be("input");
             tag.Attr("type").Should().Be("hidden");
-            tag.Attr("name").Should().Be("StringInput1");
+            tag.Attr("name").Should().Be("String");
             tag.Attr("value").Should().Be("123");
         }
 
         [Test]
         public void InputHidden_Long()
         {
-            var model = new FormInputsModel { Long = 123 };
+            var model = new ExamplePostModel { Long = 123 };
 
             var tag = model.Helper().InputHidden(f => f.Long).RenderTag();
 

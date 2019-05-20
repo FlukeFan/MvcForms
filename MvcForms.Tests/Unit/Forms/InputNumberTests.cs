@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using MvcForms.Forms;
-using MvcForms.StubApp.Models.Examples;
 using MvcForms.Tests.Unit.Utility;
 using NUnit.Framework;
 
@@ -12,7 +11,7 @@ namespace MvcForms.Tests.Unit.Forms
         [Test]
         public void InputNumber_Int()
         {
-            var model = new FormInputsModel { Int = 123 };
+            var model = new ExamplePostModel { Int = 123 };
 
             var tag = model.Helper().InputNumber(f => f.Int).RenderTag();
 
@@ -25,7 +24,7 @@ namespace MvcForms.Tests.Unit.Forms
         [Test]
         public void InputNumber_NullableInt()
         {
-            var model = new FormInputsModel { NullableInt = 123 };
+            var model = new ExamplePostModel { NullableInt = 123 };
 
             var tag = model.Helper().InputNumber(f => f.NullableInt).RenderTag();
 
@@ -37,23 +36,23 @@ namespace MvcForms.Tests.Unit.Forms
         [Test]
         public void InputNumber_String()
         {
-            var model = new FormInputsModel { StringInput1 = "123" };
+            var model = new ExamplePostModel { String = "123" };
 
-            var tag = model.Helper().InputNumber(f => f.StringInput1).RenderTag();
+            var tag = model.Helper().InputNumber(f => f.String).RenderTag();
 
             tag.Attr("type").Should().Be("number");
-            tag.Attr("name").Should().Be("StringInput1");
+            tag.Attr("name").Should().Be("String");
             tag.Attr("value").Should().Be("123");
         }
 
         [Test]
         public void Labelled()
         {
-            var model = new FormInputsModel();
+            var model = new ExamplePostModel();
 
             model.Helper().LabelledInputNumber("label", m => m.Int).RenderTag().ToHtmlString().Contains("type=\"number\"");
             model.Helper().LabelledInputNumber("label", m => m.NullableInt).RenderTag().ToHtmlString().Contains("type=\"number\"");
-            model.Helper().LabelledInputNumber("label", m => m.StringInput1).RenderTag().ToHtmlString().Contains("type=\"number\"");
+            model.Helper().LabelledInputNumber("label", m => m.String).RenderTag().ToHtmlString().Contains("type=\"number\"");
         }
     }
 }

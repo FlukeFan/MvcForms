@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using MvcForms.Forms;
-using MvcForms.StubApp.Models.Examples;
 using MvcForms.Tests.Unit.Utility;
 using NUnit.Framework;
 
@@ -12,11 +11,11 @@ namespace MvcForms.Tests.Unit.Forms
         [Test]
         public void FormGroup()
         {
-            var model = new FormInputsModel();
+            var model = new ExamplePostModel();
 
             var helper = FakeHtmlHelper.New(model);
 
-            var group = helper.LabelledInputText("test label", f => f.StringInput1);
+            var group = helper.LabelledInputText("test label", f => f.String);
             var tags = Render(group);
 
             tags.Label.Attr("for").Should().Be(tags.Control.Id());

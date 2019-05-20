@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using MvcForms.Forms;
-using MvcForms.StubApp.Models.Examples;
 using MvcForms.Tests.Unit.Utility;
 using NUnit.Framework;
 
@@ -12,7 +11,7 @@ namespace MvcForms.Tests.Unit.Forms
         [Test]
         public void AutoComplete_Off()
         {
-            var model = new FormInputsModel { StringInput1 = "existing value" };
+            var model = new ExamplePostModel { String = "existing value" };
 
             var tag = model.Helper().Form()
                 .AutoCompleteOff()
@@ -24,7 +23,7 @@ namespace MvcForms.Tests.Unit.Forms
         [Test]
         public void Form_AutoCompleteDefault()
         {
-            var model = new FormInputsModel { StringInput1 = "existing value" };
+            var model = new ExamplePostModel { String = "existing value" };
 
             var tag = model.Helper().Form().RenderTag();
 
