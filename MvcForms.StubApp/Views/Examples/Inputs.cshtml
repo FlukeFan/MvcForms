@@ -40,7 +40,7 @@
     @form.Html.FormGroup("String",      fg => fg.InputNumber(f => f.InputNumberString))
 
     <h3>Select</h3>
-    @form.Html.LabelledSelect("String", f => f.SelectString, new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" }, })
+    @form.Html.FormGroup("String",      fg => fg.Select(f => f.SelectString, new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" }, }))
 
     using (form.Html.FormGroupLayout())
     {

@@ -106,14 +106,13 @@ namespace MvcForms.Forms
 
         #region Select
 
-        public static FormGroup<Select> LabelledSelect<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, string>> property, IDictionary<string, string> values)
+        public static Select Select<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property, IDictionary<string, string> values)
         {
-            return LabelledControl(helper, label, property, ctx => new Select(helper, ctx.Property));
+            var propertyContext = PropertyContext.New(helper, property);
+            return new Select(helper, propertyContext);
         }
 
         #endregion
-
-        public delegate TControl ControlFactory<TControl>(GroupContext groupContext);
 
         public static FormGroup<TControl> FormGroup<TModel, TControl>(this IHtmlHelper<TModel> helper, string labelText, Func<IHtmlHelper<TModel>, TControl> controlFactory)
             where TControl : IPropertyControl
@@ -122,20 +121,6 @@ namespace MvcForms.Forms
             var propertyContext = control.PropertyContext;
             var groupContext = GroupContext.New(helper, propertyContext, labelText);
             var formGroup = new FormGroup<TControl>(helper, groupContext, control);
-            return formGroup;
-        }
-
-        public static FormGroup<TControl> LabelledControl<TModel, TProperty, TControl>(this IHtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
-            where TControl : Control
-        {
-            var propertyContext = PropertyContext.New(helper, property);
-
-            var groupContext = GroupContext.New(helper, propertyContext, labelText);
-
-            var control = controlFactory(groupContext);
-
-            var formGroup = new FormGroup<TControl>(helper, groupContext, control);
-
             return formGroup;
         }
     }

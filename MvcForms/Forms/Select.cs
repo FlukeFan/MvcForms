@@ -3,22 +3,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
-    public class Select : Control
+    public class Select : PropertyControl
     {
-        private PropertyContext _propertyContext;
         private string          _id;
         private string          _name;
         private string          _value;
 
-        public Select(IHtmlHelper html, PropertyContext propertyContext) : base(html)
+        public Select(IHtmlHelper html, PropertyContext propertyContext) : base(html, propertyContext)
         {
-            _propertyContext = propertyContext;
             Id(propertyContext.Id);
             Name(propertyContext.Name);
             Value(propertyContext.Value);
         }
-
-        protected PropertyContext PropertyContext => _propertyContext;
 
         public string   Id()                { return _id; }
         public Select   Id(string id)       { _id = id; return this; }
