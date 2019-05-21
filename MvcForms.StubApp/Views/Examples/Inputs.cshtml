@@ -35,9 +35,9 @@
     @form.Html.FormGroup("StringInput2", fg => fg.InputText(f => f.InputTextString2))
 
     <h3>InputNumber</h3>
-    @form.Html.LabelledInputNumber("Int", f => f.InputNumberInt)
-    @form.Html.LabelledInputNumber("NullableInt", f => f.InputNumberNullableInt)
-    @form.Html.LabelledInputNumber("String", f => f.InputNumberString)
+    @form.Html.FormGroup("Int",         fg => fg.InputNumber(f => f.InputNumberInt))
+    @form.Html.FormGroup("NullableInt", fg => fg.InputNumber(f => f.InputNumberNullableInt))
+    @form.Html.FormGroup("String",      fg => fg.InputNumber(f => f.InputNumberString))
 
     <h3>Select</h3>
     @form.Html.LabelledSelect("String", f => f.SelectString, new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" }, })

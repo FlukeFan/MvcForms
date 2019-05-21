@@ -44,15 +44,5 @@ namespace MvcForms.Tests.Unit.Forms
             tag.Attr("name").Should().Be("String");
             tag.Attr("value").Should().Be("123");
         }
-
-        [Test]
-        public void Labelled()
-        {
-            var model = new ExamplePostModel();
-
-            model.Helper().LabelledInputNumber("label", m => m.Int).RenderTag().ToHtmlString().Contains("type=\"number\"");
-            model.Helper().LabelledInputNumber("label", m => m.NullableInt).RenderTag().ToHtmlString().Contains("type=\"number\"");
-            model.Helper().LabelledInputNumber("label", m => m.String).RenderTag().ToHtmlString().Contains("type=\"number\"");
-        }
     }
 }

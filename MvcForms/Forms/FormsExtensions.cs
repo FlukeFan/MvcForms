@@ -90,31 +90,16 @@ namespace MvcForms.Forms
             return new Input(helper, "number", propertyContext);
         }
 
-        public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
-        {
-            return LabelledControl(helper, label, property, ctx => new Input(helper, "number", ctx.Property));
-        }
-
         public static Input InputNumber<T>(this IHtmlHelper<T> helper, Expression<Func<T, int>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
             return new Input(helper, "number", propertyContext);
         }
 
-        public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, int>> property)
-        {
-            return LabelledControl(helper, label, property, ctx => new Input(helper, "number", ctx.Property));
-        }
-
         public static Input InputNumber<T>(this IHtmlHelper<T> helper, Expression<Func<T, int?>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
             return new Input(helper, "number", propertyContext);
-        }
-
-        public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, int?>> property)
-        {
-            return LabelledControl(helper, label, property, ctx => new Input(helper, "number", ctx.Property));
         }
 
         #endregion
