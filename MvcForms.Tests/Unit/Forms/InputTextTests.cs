@@ -46,14 +46,6 @@ namespace MvcForms.Tests.Unit.Forms
         }
 
         [Test]
-        public void CanLabel()
-        {
-            var model = new ExamplePostModel();
-
-            model.Helper().LabelledInputText("label", m => m.String).RenderTag().ToHtmlString().Contains("type=\"text\"");
-        }
-
-        [Test]
         public void AutoComplete_Off()
         {
             var model = new ExamplePostModel();

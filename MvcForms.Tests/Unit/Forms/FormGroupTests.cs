@@ -15,7 +15,7 @@ namespace MvcForms.Tests.Unit.Forms
 
             var helper = FakeHtmlHelper.New(model);
 
-            var group = helper.LabelledInputText("test label", f => f.String);
+            var group = helper.FormGroup("test label", fg => fg.InputText(f => f.String));
             var tags = Render(group);
 
             tags.Label.Attr("for").Should().Be(tags.Control.Id());

@@ -3,25 +3,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
 {
-    public class Input : Control
+    public class Input : PropertyControl
     {
-        private PropertyContext _propertyContext;
         private string          _type;
         private string          _id;
         private string          _name;
         private string          _value;
         private string          _autoComplete;
 
-        public Input(IHtmlHelper html, PropertyContext propertyContext, string type) : base(html)
+        public Input(IHtmlHelper html, string type, PropertyContext propertyContext) : base(html, propertyContext)
         {
-            _propertyContext = propertyContext;
             Type(type);
             Id(propertyContext.Id);
             Name(propertyContext.Name);
             Value(propertyContext.Value);
         }
-
-        protected PropertyContext PropertyContext => _propertyContext;
 
         public string   Type()              { return _type; }
         public Input    Type(string type)   { _type = type; return this; }

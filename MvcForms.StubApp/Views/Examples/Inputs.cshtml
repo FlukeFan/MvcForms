@@ -31,19 +31,15 @@
     @form.Html.ErrorSummary()
 
     <h3>InputText</h3>
-    <div>
-        @form.Html.InputText(f => f.InputTextString1)
-    </div>
+    @form.Html.FormGroup("StringInput1", fg => fg.InputText(f => f.InputTextString1))
+    @form.Html.FormGroup("StringInput2", fg => fg.InputText(f => f.InputTextString2))
 
-    <h3>LabelledInputText</h3>
-    @form.Html.LabelledInputText("StringInput2", f => f.InputTextString2)
-
-    <h3>LabelledInputNumber</h3>
+    <h3>InputNumber</h3>
     @form.Html.LabelledInputNumber("Int", f => f.InputNumberInt)
     @form.Html.LabelledInputNumber("NullableInt", f => f.InputNumberNullableInt)
     @form.Html.LabelledInputNumber("String", f => f.InputNumberString)
 
-    <h3>LabelledSelect</h3>
+    <h3>Select</h3>
     @form.Html.LabelledSelect("String", f => f.SelectString, new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" }, })
 
     using (form.Html.FormButtons())

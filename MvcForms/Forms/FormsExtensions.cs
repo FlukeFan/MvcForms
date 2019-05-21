@@ -67,7 +67,7 @@ namespace MvcForms.Forms
         public static Input InputHidden<TModel, TValue>(this IHtmlHelper<TModel> helper, Expression<Func<TModel, TValue>> property)
         {
             var propertyContext = PropertyContext.New<TModel, TValue>(helper, property);
-            return new Input(helper, propertyContext, "hidden");
+            return new Input(helper, "hidden", propertyContext);
         }
 
         #endregion
@@ -77,12 +77,7 @@ namespace MvcForms.Forms
         public static Input InputText<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
-            return new Input(helper, propertyContext, "text");
-        }
-
-        public static FormGroup<Input> LabelledInputText<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
-        {
-            return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "text"));
+            return new Input(helper, "text", propertyContext);
         }
 
         #endregion
@@ -92,34 +87,34 @@ namespace MvcForms.Forms
         public static Input InputNumber<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
-            return new Input(helper, propertyContext, "number");
+            return new Input(helper, "number", propertyContext);
         }
 
         public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, string>> property)
         {
-            return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "number"));
+            return LabelledControl(helper, label, property, ctx => new Input(helper, "number", ctx.Property));
         }
 
         public static Input InputNumber<T>(this IHtmlHelper<T> helper, Expression<Func<T, int>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
-            return new Input(helper, propertyContext, "number");
+            return new Input(helper, "number", propertyContext);
         }
 
         public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, int>> property)
         {
-            return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "number"));
+            return LabelledControl(helper, label, property, ctx => new Input(helper, "number", ctx.Property));
         }
 
         public static Input InputNumber<T>(this IHtmlHelper<T> helper, Expression<Func<T, int?>> property)
         {
             var propertyContext = PropertyContext.New(helper, property);
-            return new Input(helper, propertyContext, "number");
+            return new Input(helper, "number", propertyContext);
         }
 
         public static FormGroup<Input> LabelledInputNumber<T>(this IHtmlHelper<T> helper, string label, Expression<Func<T, int?>> property)
         {
-            return LabelledControl(helper, label, property, ctx => new Input(helper, ctx.Property, "number"));
+            return LabelledControl(helper, label, property, ctx => new Input(helper, "number", ctx.Property));
         }
 
         #endregion
@@ -134,6 +129,16 @@ namespace MvcForms.Forms
         #endregion
 
         public delegate TControl ControlFactory<TControl>(GroupContext groupContext);
+
+        public static FormGroup<TControl> FormGroup<TModel, TControl>(this IHtmlHelper<TModel> helper, string labelText, Func<IHtmlHelper<TModel>, TControl> controlFactory)
+            where TControl : IPropertyControl
+        {
+            var control = controlFactory(helper);
+            var propertyContext = control.PropertyContext;
+            var groupContext = GroupContext.New(helper, propertyContext, labelText);
+            var formGroup = new FormGroup<TControl>(helper, groupContext, control);
+            return formGroup;
+        }
 
         public static FormGroup<TControl> LabelledControl<TModel, TProperty, TControl>(this IHtmlHelper<TModel> helper, string labelText, Expression<Func<TModel, TProperty>> property, ControlFactory<TControl> controlFactory)
             where TControl : Control

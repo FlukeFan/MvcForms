@@ -14,6 +14,8 @@ namespace MvcForms
     {
         IHtmlHelper Html    { get; }
         IUrlHelper  Url     { get; }
+
+        HtmlTag RenderTag();
     }
 
     public abstract class Control : IControl, IHtmlContent
