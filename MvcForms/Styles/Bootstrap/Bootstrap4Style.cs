@@ -42,10 +42,10 @@ namespace MvcForms.Styles.Bootstrap
             return tag;
         }
 
-        public override HtmlTag FormButtonsStyler(IRenderedFormButtons formButtons, HtmlTag tag)
+        public override HtmlTag FormButtonsStyler(IRenderedFormGroupLayout formGroupLayout, HtmlTag tag)
         {
-            formButtons.Outer.AddClasses("form-row");
-            formButtons.Inner.AddClasses("offset-sm-4", "col-sm-8");
+            formGroupLayout.Outer.AddClasses("form-row");
+            formGroupLayout.Inner.AddClasses("offset-sm-4", "col-sm-8");
             return tag;
         }
     }

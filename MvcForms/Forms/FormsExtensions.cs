@@ -51,10 +51,10 @@ namespace MvcForms.Forms
             return new Button(helper, "submit", content);
         }
 
-        public static ScopedHtmlHelper<T> FormButtons<T>(this IHtmlHelper<T> helper)
+        public static ScopedHtmlHelper<T> FormGroupLayout<T>(this IHtmlHelper<T> helper)
         {
-            var formButtons = new FormButtons(helper);
-            return formButtons.Begin<T>();
+            var formGroupLayout = new FormGroupLayout(helper);
+            return formGroupLayout.Begin<T>();
         }
 
         public static ErrorSummary ErrorSummary<T>(this IHtmlHelper<T> helper)

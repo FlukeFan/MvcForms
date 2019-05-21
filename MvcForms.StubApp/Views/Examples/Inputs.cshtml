@@ -42,7 +42,7 @@
     <h3>Select</h3>
     @form.Html.LabelledSelect("String", f => f.SelectString, new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" }, })
 
-    using (form.Html.FormButtons())
+    using (form.Html.FormGroupLayout())
     {
         @form.Html.ButtonSubmit("Submit").Style(MvcForms.Styles.Default.DefaultButton.Primary)
         @form.Html.ButtonSubmit("Another Submit")
