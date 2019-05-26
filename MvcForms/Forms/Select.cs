@@ -44,6 +44,9 @@ namespace MvcForms.Forms
                     .Text(option.Value)
                     .Attr("value", option.Key ?? "");
 
+                if (option.Key == _value)
+                    optionTag.Attr("selected", "selected");
+
                 select.Append(optionTag);
             }
 
