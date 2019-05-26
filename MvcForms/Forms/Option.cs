@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HtmlTags;
 
 namespace MvcForms.Forms
@@ -13,7 +12,7 @@ namespace MvcForms.Forms
 
         public static OptionGroup Group(string label, IEnumerable<OptionValue> options)
         {
-            return new OptionGroup();
+            return new OptionGroup(label, options);
         }
 
         public abstract HtmlTag CreateTag(string selectedValue);
@@ -45,9 +44,24 @@ namespace MvcForms.Forms
 
     public class OptionGroup : Option
     {
+        public OptionGroup(string label, IEnumerable<OptionValue> options)
+        {
+            Label = label;
+            Options = options;
+        }
+
+        public string                   Label   { get; }
+        public IEnumerable<OptionValue> Options { get; }
+
         public override HtmlTag CreateTag(string selectedValue)
         {
-            throw new NotImplementedException();
+            var tag = new HtmlTag("optgroup")
+                .Attr("label", Label);
+
+            foreach (var option in Options)
+                tag.Append(option.CreateTag(selectedValue));
+
+            return tag;
         }
     }
 }

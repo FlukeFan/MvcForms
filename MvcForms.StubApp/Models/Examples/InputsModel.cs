@@ -20,6 +20,20 @@ namespace MvcForms.StubApp.Models.Examples
             Option.Value("Key2", "Value 2"),
             Option.Value("Key3", "Value 3"),
         };
+
+        public IEnumerable<Option> GroupOptions = new []
+        {
+            Option.Group("Group 1", new []
+            {
+                Option.Value("G1K1", "Key 1 (Group 1)"),
+                Option.Value("G1K2", "Key 2 (Group 1)"),
+            }),
+            Option.Group("Group 2", new []
+            {
+                Option.Value("G2K1", "Key 1 (Group 2)"),
+                Option.Value("G2K2", "Key 2 (Group 2)"),
+            }),
+        };
     }
 
     public class InputsModelPost
@@ -41,6 +55,9 @@ namespace MvcForms.StubApp.Models.Examples
 
         [Required(ErrorMessage = "Please select an item")]
         public string       SelectString            { get; set; }
+
+        [Required(ErrorMessage = "Please select an item")]
+        public string       SelectGroup             { get; set; }
     }
 
     public static class InputsModelExtensions

@@ -50,14 +50,28 @@ namespace MvcForms.Tests.Unit.Forms
                     Option.Value("Key1", "value 1"),
                     Option.Value("Key2", "value 2"),
                 }),
-                Option.Group("Primary", new []
+                Option.Group("Secondary", new []
                 {
                     Option.Value("Key3", "value 3"),
                     Option.Value("Key4", "value 4"),
                 }),
             };
 
-            //var tag = model.Helper().Select(f => f.String, values).RenderTag();
+            var tag = model.Helper().Select(f => f.String, values).RenderTag();
+
+            var options = tag.Children;
+            options.Select(o => o.TagName()).Should().BeEquivalentTo("option", "optgroup", "optgroup");
+
+            {
+                var primayGroup = options[1];
+                primayGroup.Attr("label").Should().Be("Primary");
+                primayGroup.Children.Select(t => t.Attr("value")).Should().BeEquivalentTo("Key1", "Key2");
+            }
+            {
+                var secondaryGroup = options[2];
+                secondaryGroup.Attr("label").Should().Be("Secondary");
+                secondaryGroup.Children.Select(t => t.Attr("value")).Should().BeEquivalentTo("Key3", "Key4");
+            }
         }
     }
 }
