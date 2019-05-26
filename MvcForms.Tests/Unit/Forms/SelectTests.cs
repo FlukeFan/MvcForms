@@ -10,18 +10,18 @@ namespace MvcForms.Tests.Unit.Forms
     [TestFixture]
     public class SelectTests
     {
-        private IDictionary<string, string> _stringValues = new Dictionary<string, string>
+        private IEnumerable<Option> _values = new []
         {
-            { "Key1", "Value 1" },
-            { "Key2", "Value 2" },
-            { "Key3", "Value 3" },
+            Option.Value("Key1", "Value 1"),
+            Option.Value("Key2", "Value 2"),
+            Option.Value("Key3", "Value 3"),
         };
 
         [Test]
         public void Select_String()
         {
             var model = new ExamplePostModel { String = "Key2" };
-            var values = _stringValues.Prepend(KeyValuePair.Create<string, string>(null, "<please select>"));
+            var values = _values.Prepend(Option.Value(null, "<please select>"));
 
             var tag = model.Helper().Select(f => f.String, values).RenderTag();
 
@@ -35,6 +35,29 @@ namespace MvcForms.Tests.Unit.Forms
 
             options.Select(o => o.HasAttr("selected")).Count(s => s == true).Should().Be(1, "current value should be selected");
             options.Select(o => o.Attr("selected")).Should().BeEquivalentTo("", "", "selected", "");
+        }
+
+        [Test]
+        public void Select_OptGroups()
+        {
+            var model = new ExamplePostModel { String = "Key3" };
+
+            var values = new List<Option>
+            {
+                Option.Value(null, "<please select>"),
+                Option.Group("Primary", new []
+                {
+                    Option.Value("Key1", "value 1"),
+                    Option.Value("Key2", "value 2"),
+                }),
+                Option.Group("Primary", new []
+                {
+                    Option.Value("Key3", "value 3"),
+                    Option.Value("Key4", "value 4"),
+                }),
+            };
+
+            //var tag = model.Helper().Select(f => f.String, values).RenderTag();
         }
     }
 }

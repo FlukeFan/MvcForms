@@ -106,7 +106,7 @@ namespace MvcForms.Forms
 
         #region Select
 
-        public static Select Select<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property, IEnumerable<KeyValuePair<string, string>> options)
+        public static Select Select<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property, IEnumerable<Option> options)
         {
             var propertyContext = PropertyContext.New(helper, property);
             return new Select(helper, options, propertyContext);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using MvcForms.Forms;
 
 namespace MvcForms.StubApp.Models.Examples
 {
@@ -13,11 +14,11 @@ namespace MvcForms.StubApp.Models.Examples
 
         public InputsModelPost PostModel;
 
-        public IDictionary<string, string> StringOptions = new Dictionary<string, string>
+        public IEnumerable<Option> StringOptions = new []
         {
-            { "Key1", "Value 1" },
-            { "Key2", "Value 2" },
-            { "Key3", "Value 3" },
+            Option.Value("Key1", "Value 1"),
+            Option.Value("Key2", "Value 2"),
+            Option.Value("Key3", "Value 3"),
         };
     }
 
@@ -44,9 +45,9 @@ namespace MvcForms.StubApp.Models.Examples
 
     public static class InputsModelExtensions
     {
-        public static IEnumerable<KeyValuePair<TKey, string>> Optional<TKey>(this IEnumerable<KeyValuePair<TKey, string>> options)
+        public static IEnumerable<Option> Optional(this IEnumerable<Option> options)
         {
-            return options.Prepend(KeyValuePair.Create(default(TKey), "<please select>"));
+            return options.Prepend(Option.Value(null, "<please select>"));
         }
     }
 }
