@@ -109,7 +109,7 @@ namespace MvcForms.Forms
         public static Select Select<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property, IEnumerable<KeyValuePair<string, string>> options)
         {
             var propertyContext = PropertyContext.New(helper, property);
-            return new Select(helper, propertyContext);
+            return new Select(helper, options, propertyContext);
         }
 
         #endregion

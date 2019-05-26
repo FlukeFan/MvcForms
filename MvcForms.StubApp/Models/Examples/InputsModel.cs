@@ -38,6 +38,7 @@ namespace MvcForms.StubApp.Models.Examples
         public int          InputNumberNullableInt  { get; set; }
         public string       InputNumberString       { get; set; }
 
+        [Required(ErrorMessage = "Please select an item")]
         public string       SelectString            { get; set; }
     }
 

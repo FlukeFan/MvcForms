@@ -1,4 +1,5 @@
-﻿using HtmlTags;
+﻿using System.Collections.Generic;
+using HtmlTags;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcForms.Forms
@@ -8,12 +9,14 @@ namespace MvcForms.Forms
         private string          _id;
         private string          _name;
         private string          _value;
+        private IEnumerable<KeyValuePair<string, string>> _options;
 
-        public Select(IHtmlHelper html, PropertyContext propertyContext) : base(html, propertyContext)
+        public Select(IHtmlHelper html, IEnumerable<KeyValuePair<string, string>> options, PropertyContext propertyContext) : base(html, propertyContext)
         {
             Id(propertyContext.Id);
             Name(propertyContext.Name);
             Value(propertyContext.Value);
+            Options(options);
         }
 
         public string   Id()                { return _id; }
@@ -25,12 +28,24 @@ namespace MvcForms.Forms
         public string   Value()             { return _value; }
         public Select   Value(string value) { _value = value; return this; }
 
+        public IEnumerable<KeyValuePair<string, string>>    Options()                                                   { return _options; }
+        public Select                                       Options(IEnumerable<KeyValuePair<string, string>> options)  { _options = options; return this; }
+
         protected override HtmlTag CreateTag()
         {
             var select = new HtmlTag("select")
                 .Attr("id", _id)
                 .Attr("name", _name)
                 .Attr("value", _value);
+
+            foreach (var option in _options)
+            {
+                var optionTag = new HtmlTag("option")
+                    .Text(option.Value)
+                    .Attr("value", option.Key ?? "");
+
+                select.Append(optionTag);
+            }
 
             return select;
         }
