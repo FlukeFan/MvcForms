@@ -12,6 +12,7 @@ namespace MvcForms.Styles.Bootstrap
             RegisterInterface<IRenderedFormGroupLayout>((c, t) => FormButtonsStyler((IRenderedFormGroupLayout)c, t));
             RegisterInterface<IRenderedErrorSummary>((c, t) => ErrorSummaryStyler((IRenderedErrorSummary)c, t));
             Register<Input>((c, t) => InputStyler((Input)c, t));
+            Register<Select>((c, t) => SelectStyler((Select)c, t));
         }
 
         public virtual HtmlTag FormStyler(IForm form, HtmlTag tag)
@@ -71,6 +72,11 @@ namespace MvcForms.Styles.Bootstrap
             return input.Type() != "hidden"
                 ? tag.AddClasses("form-control")
                 : tag;
+        }
+
+        public virtual HtmlTag SelectStyler(Select select, HtmlTag tag)
+        {
+            return tag.AddClasses("form-control");
         }
     }
 }
