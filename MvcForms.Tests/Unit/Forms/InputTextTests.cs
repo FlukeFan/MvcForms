@@ -64,5 +64,15 @@ namespace MvcForms.Tests.Unit.Forms
 
             tag.ToString().Should().NotContain("autocomplete");
         }
+
+        [Test]
+        public void NullValue()
+        {
+            var model = new ExamplePostModel();
+
+            var tag = model.Helper().InputText(f => f.String).RenderTag();
+
+            tag.Value().Should().Be("");
+        }
     }
 }

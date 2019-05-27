@@ -27,6 +27,7 @@ namespace MvcForms.Tests.Unit.Forms
 
             tag.TagName().Should().Be("select");
             tag.Attr("name").Should().Be("String");
+            tag.Attr("id").Should().Be("String");
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("value")).Should().AllBeEquivalentTo(true, "all key values should be set");
@@ -35,6 +36,29 @@ namespace MvcForms.Tests.Unit.Forms
 
             options.Select(o => o.HasAttr("selected")).Count(s => s == true).Should().Be(1, "current value should be selected");
             options.Select(o => o.Attr("selected")).Should().BeEquivalentTo("", "", "selected", "");
+        }
+
+        [Test]
+        public void String_NullValue()
+        {
+            var model = new ExamplePostModel { String = null };
+            var values = _values.Prepend(Option.Value(null, "<please select>"));
+
+            var tag = model.Helper().Select(f => f.String, values).RenderTag();
+
+            var options = tag.Children;
+            options.Select(o => o.HasAttr("selected")).Count(s => s == true).Should().Be(0, "nothin should be selected");
+        }
+
+        [Test]
+        public void SanitizedId()
+        {
+            var helper = FakeHtmlHelper.New(new ExamplePostModel());
+
+            var tag = helper.Select(f => f.InputsArray[1].String2, new Option[0]).RenderTag();
+
+            tag.Attr("name").Should().Be("InputsArray[1].String2");
+            tag.Attr("id").Should().Be("InputsArray_1__String2");
         }
 
         [Test]
