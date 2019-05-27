@@ -45,6 +45,7 @@ var mfoOverlay = {};
                     el.removeProp('tabindex');
                 }
 
+                el.removeClass('mfo-overlay-disabled');
             });
 
             if (disabled === false) {
@@ -52,6 +53,7 @@ var mfoOverlay = {};
             }
 
             el.prop('tabindex', -1);
+            el.addClass('mfo-overlay-disabled');
 
         });
 

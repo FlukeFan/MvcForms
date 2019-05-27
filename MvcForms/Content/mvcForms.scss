@@ -3,6 +3,14 @@
     background-color: rgba(0,0,0,1);
 }
 
+// keep background white on elements disabled by overlay
+// so that there is no 'flicker' for fast postbacks
+input, select, textarea, area {
+    &.mfo-overlay-disabled {
+        background-color: white !important;
+    }
+}
+
 .mfo-dialog {
     background: white;
     box-shadow: 0 5px 15px rgba(0,0,0,.5);
