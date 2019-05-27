@@ -21,6 +21,17 @@ namespace MvcForms.Tests.Unit.Forms
             tags.Label.Attr("for").Should().Be(tags.Control.Id());
         }
 
+        [Test]
+        public void MutateControl()
+        {
+            var model = new ExamplePostModel();
+
+            var group = model.Helper().FormGroup("test label", fg => fg.InputText(f => f.String)).Control(tb => tb.Value("override"));
+            var tag = Render(group);
+
+            tag.Control.Value().Should().Be("override");
+        }
+
         public IRenderedFormGroup Render<T>(FormGroup<T> group)
             where T : Control
         {

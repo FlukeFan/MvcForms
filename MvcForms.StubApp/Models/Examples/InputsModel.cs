@@ -58,6 +58,8 @@ namespace MvcForms.StubApp.Models.Examples
 
         [Required(ErrorMessage = "Please select an item")]
         public string       SelectGroup             { get; set; }
+
+        public string       SelectSized             { get; set; }
     }
 
     public static class InputsModelExtensions

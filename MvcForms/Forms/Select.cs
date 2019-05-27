@@ -10,6 +10,7 @@ namespace MvcForms.Forms
         private string              _name;
         private string              _selectedValue;
         private IEnumerable<Option> _options;
+        private int?                _size;
 
         public Select(IHtmlHelper html, IEnumerable<Option> options, PropertyContext propertyContext) : base(html, propertyContext)
         {
@@ -31,11 +32,15 @@ namespace MvcForms.Forms
         public IEnumerable<Option>  Options()                               { return _options; }
         public Select               Options(IEnumerable<Option> options)    { _options = options; return this; }
 
+        public int?                 Size()                                  { return _size; }
+        public Select               Size(int? size)                         { _size = size; return this; }
+
         protected override HtmlTag CreateTag()
         {
             var select = new HtmlTag("select")
                 .Attr("id", _id)
-                .Attr("name", _name);
+                .Attr("name", _name)
+                .Attr("size", _size);
 
             foreach (var option in _options)
             {

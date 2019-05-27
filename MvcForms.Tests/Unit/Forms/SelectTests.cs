@@ -10,18 +10,17 @@ namespace MvcForms.Tests.Unit.Forms
     [TestFixture]
     public class SelectTests
     {
-        private IEnumerable<Option> _values = new []
+        private IEnumerable<Option> _stringValues = new []
         {
             Option.Value("Key1", "Value 1"),
             Option.Value("Key2", "Value 2"),
             Option.Value("Key3", "Value 3"),
         };
 
-        [Test]
         public void Select_String()
         {
             var model = new ExamplePostModel { String = "Key2" };
-            var values = _values.Prepend(Option.Value(null, "<please select>"));
+            var values = _stringValues.Prepend(Option.Value(null, "<please select>"));
 
             var tag = model.Helper().Select(f => f.String, values).RenderTag();
 
@@ -42,7 +41,7 @@ namespace MvcForms.Tests.Unit.Forms
         public void String_NullValue()
         {
             var model = new ExamplePostModel { String = null };
-            var values = _values.Prepend(Option.Value(null, "<please select>"));
+            var values = _stringValues.Prepend(Option.Value(null, "<please select>"));
 
             var tag = model.Helper().Select(f => f.String, values).RenderTag();
 
@@ -96,6 +95,16 @@ namespace MvcForms.Tests.Unit.Forms
                 secondaryGroup.Attr("label").Should().Be("Secondary");
                 secondaryGroup.Children.Select(t => t.Attr("value")).Should().BeEquivalentTo("Key3", "Key4");
             }
+        }
+
+        [Test]
+        public void Select_Size()
+        {
+            var model = new ExamplePostModel();
+
+            var tag = model.Helper().Select(f => f.String, new Option[0]).Size(3).RenderTag();
+
+            tag.Attr("size").Should().Be("3");
         }
     }
 }

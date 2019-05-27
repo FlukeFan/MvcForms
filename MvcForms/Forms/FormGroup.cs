@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using HtmlTags;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -44,6 +45,12 @@ namespace MvcForms.Forms
         HtmlTag IRenderedFormGroup.ControlContainer => _controlContainerTag;
         HtmlTag IRenderedFormGroup.Control          => _controlTag;
         HtmlTag IRenderedFormGroup.Error            => _errorTag;
+
+        public FormGroup<TControl> Control(Action<TControl> action)
+        {
+            action(_control);
+            return this;
+        }
 
         protected override HtmlTag CreateTag()
         {
