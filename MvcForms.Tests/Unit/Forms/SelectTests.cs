@@ -20,7 +20,7 @@ namespace MvcForms.Tests.Unit.Forms
         public void Select_String()
         {
             var model = new ExamplePostModel { String = "Key2" };
-            var values = _stringValues.Prepend(Option.Value(null, "<please select>"));
+            var values = _stringValues.Optional("<please select>");
 
             var tag = model.Helper().Select(f => f.String, values).RenderTag();
 
@@ -41,7 +41,7 @@ namespace MvcForms.Tests.Unit.Forms
         public void String_NullValue()
         {
             var model = new ExamplePostModel { String = null };
-            var values = _stringValues.Prepend(Option.Value(null, "<please select>"));
+            var values = _stringValues.Optional("<please select>");
 
             var tag = model.Helper().Select(f => f.String, values).RenderTag();
 

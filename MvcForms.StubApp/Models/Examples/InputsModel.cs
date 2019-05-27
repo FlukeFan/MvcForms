@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using MvcForms.Forms;
 
 namespace MvcForms.StubApp.Models.Examples
@@ -60,13 +59,5 @@ namespace MvcForms.StubApp.Models.Examples
         public string       SelectGroup             { get; set; }
 
         public string       SelectSized             { get; set; }
-    }
-
-    public static class InputsModelExtensions
-    {
-        public static IEnumerable<Option> Optional(this IEnumerable<Option> options)
-        {
-            return options.Prepend(Option.Value(null, "<please select>"));
-        }
     }
 }
