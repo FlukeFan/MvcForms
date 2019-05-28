@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using HtmlTags;
 
 namespace MvcForms.Forms
@@ -15,7 +16,7 @@ namespace MvcForms.Forms
             return new OptionGroup(label, options);
         }
 
-        public abstract HtmlTag CreateTag(string selectedValue);
+        public abstract HtmlTag CreateTag(string[] selectedValues);
     }
 
     public class OptionValue : Option
@@ -29,13 +30,13 @@ namespace MvcForms.Forms
         public string Key   { get; }
         public string Label { get; }
 
-        public override HtmlTag CreateTag(string selectedValue)
+        public override HtmlTag CreateTag(string[] selectedValues)
         {
             var tag = new HtmlTag("option")
                 .Text(Label)
                 .Attr("value", Key ?? "");
 
-            if (Key == selectedValue)
+            if (selectedValues.Contains(Key))
                 tag.Attr("selected", "selected");
 
             return tag;
@@ -53,13 +54,13 @@ namespace MvcForms.Forms
         public string                   Label   { get; }
         public IEnumerable<OptionValue> Options { get; }
 
-        public override HtmlTag CreateTag(string selectedValue)
+        public override HtmlTag CreateTag(string[] selectedValues)
         {
             var tag = new HtmlTag("optgroup")
                 .Attr("label", Label);
 
             foreach (var option in Options)
-                tag.Append(option.CreateTag(selectedValue));
+                tag.Append(option.CreateTag(selectedValues));
 
             return tag;
         }

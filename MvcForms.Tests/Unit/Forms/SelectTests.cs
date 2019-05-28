@@ -17,7 +17,7 @@ namespace MvcForms.Tests.Unit.Forms
             Option.Value("Key3", "Value 3"),
         };
 
-        public void Select_String()
+        public void String()
         {
             var model = new ExamplePostModel { String = "Key2" };
             var values = _stringValues.Optional("<please select>");
@@ -61,7 +61,7 @@ namespace MvcForms.Tests.Unit.Forms
         }
 
         [Test]
-        public void Select_OptGroups()
+        public void OptGroups()
         {
             var model = new ExamplePostModel { String = "Key3" };
 
@@ -98,13 +98,26 @@ namespace MvcForms.Tests.Unit.Forms
         }
 
         [Test]
-        public void Select_Size()
+        public void Size()
         {
             var model = new ExamplePostModel();
 
             var tag = model.Helper().Select(f => f.String, new Option[0]).Size(3).RenderTag();
 
             tag.Attr("size").Should().Be("3");
+        }
+
+        [Test]
+        public void Multiple()
+        {
+            var model = new ExamplePostModel { Strings = new[] { "Key2", "Key3" } };
+
+            var tag = model.Helper().Select(f => f.Strings, _stringValues).RenderTag();
+
+            tag.Attr("multiple").Should().Be("true");
+
+            var options = tag.Children;
+            options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, true);
         }
     }
 }

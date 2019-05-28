@@ -112,6 +112,12 @@ namespace MvcForms.Forms
             return new Select(helper, options, propertyContext);
         }
 
+        public static Select Select<T>(this IHtmlHelper<T> helper, Expression<Func<T, IEnumerable<string>>> property, IEnumerable<Option> options)
+        {
+            var propertyContext = PropertyContext.New(helper, property, isList: true);
+            return new Select(helper, options, propertyContext).Multiple(true);
+        }
+
         #endregion
 
         public static FormGroup<TControl> FormGroup<TModel, TControl>(this IHtmlHelper<TModel> helper, string labelText, Func<IHtmlHelper<TModel>, TControl> controlFactory)

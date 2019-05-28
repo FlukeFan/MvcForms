@@ -8,15 +8,16 @@ namespace MvcForms.Forms
     {
         private string              _id;
         private string              _name;
-        private string              _selectedValue;
+        private string[]            _selectedValues;
         private IEnumerable<Option> _options;
         private int?                _size;
+        private bool                _multiple;
 
         public Select(IHtmlHelper html, IEnumerable<Option> options, PropertyContext propertyContext) : base(html, propertyContext)
         {
             Id(propertyContext.Id);
             Name(propertyContext.Name);
-            SelectedValue(propertyContext.Value);
+            SelectedValue(propertyContext.Values);
             Options(options);
         }
 
@@ -26,14 +27,17 @@ namespace MvcForms.Forms
         public string               Name()                                  { return _name; }
         public Select               Name(string name)                       { _name = name; return this; }
 
-        public string               SelectedValue()                         { return _selectedValue; }
-        public Select               SelectedValue(string value)             { _selectedValue = value; return this; }
+        public string[]             SelectedValues()                        { return _selectedValues; }
+        public Select               SelectedValue(string[] values)          { _selectedValues = values; return this; }
 
         public IEnumerable<Option>  Options()                               { return _options; }
         public Select               Options(IEnumerable<Option> options)    { _options = options; return this; }
 
         public int?                 Size()                                  { return _size; }
         public Select               Size(int? size)                         { _size = size; return this; }
+
+        public bool                 Multiple()                              { return _multiple; }
+        public Select               Multiple(bool multiple)                 { _multiple = multiple; return this; }
 
         protected override HtmlTag CreateTag()
         {
@@ -42,9 +46,12 @@ namespace MvcForms.Forms
                 .Attr("name", _name)
                 .Attr("size", _size);
 
+            if (_multiple)
+                select.Attr("multiple", "true");
+
             foreach (var option in _options)
             {
-                var optionTag = option.CreateTag(_selectedValue);
+                var optionTag = option.CreateTag(_selectedValues);
                 select.Append(optionTag);
             }
 

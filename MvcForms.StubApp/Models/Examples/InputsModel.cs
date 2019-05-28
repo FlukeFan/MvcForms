@@ -59,5 +59,6 @@ namespace MvcForms.StubApp.Models.Examples
         public string       SelectGroup             { get; set; }
 
         public string       SelectSized             { get; set; }
+        public string[]     SelectMultiple          { get; set; }
     }
 }
