@@ -106,16 +106,10 @@ namespace MvcForms.Forms
 
         #region Select
 
-        public static Select Select<T>(this IHtmlHelper<T> helper, Expression<Func<T, string>> property, IEnumerable<Option> options)
+        public static Select Select<T, U>(this IHtmlHelper<T> helper, Expression<Func<T, U>> property, IEnumerable<Option> options)
         {
             var propertyContext = PropertyContext.New(helper, property);
-            return new Select(helper, options, propertyContext);
-        }
-
-        public static Select Select<T>(this IHtmlHelper<T> helper, Expression<Func<T, IEnumerable<string>>> property, IEnumerable<Option> options)
-        {
-            var propertyContext = PropertyContext.New(helper, property, isList: true);
-            return new Select(helper, options, propertyContext).Multiple(true);
+            return new Select(helper, options, propertyContext).Multiple(propertyContext.IsList);
         }
 
         #endregion

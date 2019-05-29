@@ -11,12 +11,15 @@ namespace MvcForms.Forms
 {
     public class PropertyContext
     {
-        public static PropertyContext New<T, P>(IHtmlHelper<T> helper, Expression<Func<T, P>> property, bool isList = false)
+        public static PropertyContext New<T, P>(IHtmlHelper<T> helper, Expression<Func<T, P>> property)
         {
             var propertyName = ExpressionHelper.GetExpressionText(property);
             var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(propertyName);
             var id = TagBuilder.CreateSanitizedId(name, "_");
             var explorer = ExpressionMetadataProvider.FromLambdaExpression(property, helper.ViewData, helper.MetadataProvider);
+
+            var isList = typeof(IEnumerable).IsAssignableFrom(explorer.ModelType) && !typeof(string).IsAssignableFrom(explorer.ModelType);
+
             var values = RenderValue(helper.ViewData.ModelState, name, explorer, isList);
             var modelState = helper.ViewData.ModelState;
             var propertyModelState = modelState[name];
@@ -25,6 +28,7 @@ namespace MvcForms.Forms
             {
                 Name        = name,
                 Id          = id,
+                IsList      = isList,
                 Values      = values,
                 Value       = isList ? null : values.SingleOrDefault(),
                 Explorer    = explorer,
@@ -36,6 +40,7 @@ namespace MvcForms.Forms
 
         public string           Id;
         public string           Name;
+        public bool             IsList;
         public string           Value;
         public string[]         Values;
         public ModelExplorer    Explorer;

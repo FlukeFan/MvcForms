@@ -10,17 +10,30 @@ namespace MvcForms.Tests.Unit.Forms
     [TestFixture]
     public class SelectTests
     {
-        private IEnumerable<Option> _stringValues = new []
+        private IEnumerable<Option> _stringOptions = new []
         {
             Option.Value("Key1", "Value 1"),
             Option.Value("Key2", "Value 2"),
             Option.Value("Key3", "Value 3"),
         };
 
+        private IEnumerable<Option> _intOptions = new[]
+        {
+            Option.Value("1", "Value 1"),
+            Option.Value("2", "Value 2"),
+            Option.Value("3", "Value 3"),
+        };
+
+        private IEnumerable<Option> _boolOptions = new[]
+        {
+            Option.Value("False", "No"),
+            Option.Value("True", "Yes"),
+        };
+
         public void String()
         {
             var model = new ExamplePostModel { String = "Key2" };
-            var values = _stringValues.Optional("<please select>");
+            var values = _stringOptions.Optional("<please select>");
 
             var tag = model.Helper().Select(f => f.String, values).RenderTag();
 
@@ -41,7 +54,7 @@ namespace MvcForms.Tests.Unit.Forms
         public void String_NullValue()
         {
             var model = new ExamplePostModel { String = null };
-            var values = _stringValues.Optional("<please select>");
+            var values = _stringOptions.Optional("<please select>");
 
             var tag = model.Helper().Select(f => f.String, values).RenderTag();
 
@@ -112,12 +125,78 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { Strings = new[] { "Key2", "Key3" } };
 
-            var tag = model.Helper().Select(f => f.Strings, _stringValues).RenderTag();
+            var tag = model.Helper().Select(f => f.Strings, _stringOptions).RenderTag();
 
             tag.Attr("multiple").Should().Be("true");
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, true);
+        }
+
+        [Test]
+        public void Int()
+        {
+            var model = new ExamplePostModel { Int = 2 };
+
+            var tag = model.Helper().Select(f => f.Int, _intOptions).RenderTag();
+
+            var options = tag.Children;
+            options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
+        }
+
+        [Test]
+        public void NullableInt()
+        {
+            var model = new ExamplePostModel { NullableInt = 2 };
+
+            var tag = model.Helper().Select(f => f.NullableInt, _intOptions).RenderTag();
+
+            var options = tag.Children;
+            options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
+        }
+
+        [Test]
+        public void Bool()
+        {
+            var model = new ExamplePostModel { Bool = true };
+
+            var tag = model.Helper().Select(f => f.Bool, _boolOptions).RenderTag();
+
+            var options = tag.Children;
+            options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true);
+        }
+
+        [Test]
+        public void NullableBool()
+        {
+            var model = new ExamplePostModel { NullableBool = true };
+
+            var tag = model.Helper().Select(f => f.NullableBool, _boolOptions).RenderTag();
+
+            var options = tag.Children;
+            options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true);
+        }
+
+        [Test]
+        public void Enum()
+        {
+            var model = new ExamplePostModel { Enum = ExamplePostModel.Values.Key2 };
+
+            var tag = model.Helper().Select(f => f.Enum, _stringOptions).RenderTag();
+
+            var options = tag.Children;
+            options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
+        }
+
+        [Test]
+        public void NullableEnum()
+        {
+            var model = new ExamplePostModel { NullableEnum = ExamplePostModel.Values.Key2 };
+
+            var tag = model.Helper().Select(f => f.NullableEnum, _stringOptions).RenderTag();
+
+            var options = tag.Children;
+            options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
         }
     }
 }
