@@ -17,17 +17,17 @@ namespace MvcForms.Tests.Unit.Forms
             { "Key3", "Value 3" },
         };
 
-        private IEnumerable<Option> _intOptions = new[]
+        private IDictionary<int, string> _intValues = new Dictionary<int, string>
         {
-            Option.Value("1", "Value 1"),
-            Option.Value("2", "Value 2"),
-            Option.Value("3", "Value 3"),
+            { 1, "Value 1" },
+            { 2, "Value 2" },
+            { 3, "Value 3" },
         };
 
-        private IEnumerable<Option> _boolOptions = new[]
+        private IDictionary<bool, string> _boolValues = new Dictionary<bool, string>
         {
-            Option.Value("False", "No"),
-            Option.Value("True", "Yes"),
+            { false, "No" },
+            { true, "Yes" },
         };
 
         private IDictionary<ExamplePostModel.Values, string> _enumValues = new Dictionary<ExamplePostModel.Values, string>
@@ -173,7 +173,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { Int = 2 };
 
-            var tag = model.Helper().Select(f => f.Int, _intOptions).RenderTag();
+            var tag = model.Helper().Select(f => f.Int, _intValues).RenderTag();
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
@@ -184,7 +184,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { NullableInt = 2 };
 
-            var tag = model.Helper().Select(f => f.NullableInt, _intOptions).RenderTag();
+            var tag = model.Helper().Select(f => f.NullableInt, _intValues).RenderTag();
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
@@ -195,7 +195,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { Bool = true };
 
-            var tag = model.Helper().Select(f => f.Bool, _boolOptions).RenderTag();
+            var tag = model.Helper().Select(f => f.Bool, _boolValues).RenderTag();
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true);
@@ -206,7 +206,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { NullableBool = true };
 
-            var tag = model.Helper().Select(f => f.NullableBool, _boolOptions).RenderTag();
+            var tag = model.Helper().Select(f => f.NullableBool, _boolValues).RenderTag();
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true);
