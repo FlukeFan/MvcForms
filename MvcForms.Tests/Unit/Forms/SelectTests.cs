@@ -10,11 +10,11 @@ namespace MvcForms.Tests.Unit.Forms
     [TestFixture]
     public class SelectTests
     {
-        private IEnumerable<Option> _stringOptions = new []
+        private IDictionary<string, string> _stringValues = new Dictionary<string, string>
         {
-            Option.Value("Key1", "Value 1"),
-            Option.Value("Key2", "Value 2"),
-            Option.Value("Key3", "Value 3"),
+            { "Key1", "Value 1" },
+            { "Key2", "Value 2" },
+            { "Key3", "Value 3" },
         };
 
         private IEnumerable<Option> _intOptions = new[]
@@ -30,12 +30,18 @@ namespace MvcForms.Tests.Unit.Forms
             Option.Value("True", "Yes"),
         };
 
+        private IDictionary<ExamplePostModel.Values, string> _enumValues = new Dictionary<ExamplePostModel.Values, string>
+        {
+            { ExamplePostModel.Values.Key1, "Value 1" },
+            { ExamplePostModel.Values.Key2, "Value 2" },
+            { ExamplePostModel.Values.Key3, "Value 3" },
+        };
+
         public void String()
         {
             var model = new ExamplePostModel { String = "Key2" };
-            var values = _stringOptions.Optional("<please select>");
 
-            var tag = model.Helper().Select(f => f.String, values).RenderTag();
+            var tag = model.Helper().Select(f => f.String, _stringValues).Optional("<please select>").RenderTag();
 
             tag.TagName().Should().Be("select");
             tag.Attr("name").Should().Be("String");
@@ -54,9 +60,8 @@ namespace MvcForms.Tests.Unit.Forms
         public void String_NullValue()
         {
             var model = new ExamplePostModel { String = null };
-            var values = _stringOptions.Optional("<please select>");
 
-            var tag = model.Helper().Select(f => f.String, values).RenderTag();
+            var tag = model.Helper().Select(f => f.String, _stringValues).Optional("<please select>").RenderTag();
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("selected")).Count(s => s == true).Should().Be(0, "nothin should be selected");
@@ -125,7 +130,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { Strings = new[] { "Key2", "Key3" } };
 
-            var tag = model.Helper().Select(f => f.Strings, _stringOptions).RenderTag();
+            var tag = model.Helper().Select(f => f.Strings, _stringValues).RenderTag();
 
             tag.Attr("multiple").Should().Be("true");
 
@@ -138,14 +143,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { String = "Key2" };
 
-            var options = new Dictionary<string, string>
-            {
-                {  "Key1", "Value 1" },
-                {  "Key2", "Value 2" },
-                {  "Key3", "Value 3" },
-            };
-
-            var tag = model.Helper().Select(f => f.String, options).RenderTag();
+            var tag = model.Helper().Select(f => f.String, _stringValues).RenderTag();
 
             var optionTags = tag.Children;
             optionTags.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
@@ -219,7 +217,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { Enum = ExamplePostModel.Values.Key2 };
 
-            var tag = model.Helper().Select(f => f.Enum, _stringOptions).RenderTag();
+            var tag = model.Helper().Select(f => f.Enum, _enumValues).RenderTag();
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
@@ -230,7 +228,7 @@ namespace MvcForms.Tests.Unit.Forms
         {
             var model = new ExamplePostModel { NullableEnum = ExamplePostModel.Values.Key2 };
 
-            var tag = model.Helper().Select(f => f.NullableEnum, _stringOptions).RenderTag();
+            var tag = model.Helper().Select(f => f.NullableEnum, _enumValues).RenderTag();
 
             var options = tag.Children;
             options.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
