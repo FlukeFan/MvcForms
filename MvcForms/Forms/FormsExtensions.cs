@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using Microsoft.AspNetCore.Html;
@@ -115,7 +114,7 @@ namespace MvcForms.Forms
 
         public static Select Select<T, U>(this IHtmlHelper<T> helper, Expression<Func<T, U>> property, IEnumerable<KeyValuePair<U, string>> options)
         {
-            var optionList = options.Select(kvp => Option.Value(Convert.ToString(kvp.Key), kvp.Value));
+            var optionList = options.ToOptions();
             var propertyContext = PropertyContext.New(helper, property);
             return new Select(helper, optionList, propertyContext).Multiple(propertyContext.IsList);
         }
