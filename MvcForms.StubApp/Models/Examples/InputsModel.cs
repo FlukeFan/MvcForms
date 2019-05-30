@@ -13,11 +13,11 @@ namespace MvcForms.StubApp.Models.Examples
 
         public InputsModelPost PostModel;
 
-        public IEnumerable<Option> StringOptions = new []
+        public IDictionary<string, string> StringValues = new Dictionary<string, string>
         {
-            Option.Value("Key1", "Value 1"),
-            Option.Value("Key2", "Value 2"),
-            Option.Value("Key3", "Value 3"),
+            { "Key1", "Value 1" },
+            { "Key2", "Value 2" },
+            { "Key3", "Value 3" },
         };
 
         public IEnumerable<Option> GroupOptions = new []

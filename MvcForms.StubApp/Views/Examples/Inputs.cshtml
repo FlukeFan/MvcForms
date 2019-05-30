@@ -40,10 +40,10 @@
     @form.Html.FormGroup("String",              fg => fg.InputNumber(f => f.InputNumberString))
 
     <h3>Select</h3>
-    @form.Html.FormGroup("String",              fg => fg.Select(f => f.SelectString, Model.StringOptions.Optional("<please select>")))
+    @form.Html.FormGroup("String",              fg => fg.Select(f => f.SelectString, Model.StringValues).Optional("<please select>"))
     @form.Html.FormGroup("Group",               fg => fg.Select(f => f.SelectGroup, Model.GroupOptions.Optional("<please select>")))
-    @form.Html.FormGroup("Sized",               fg => fg.Select(f => f.SelectSized, Model.StringOptions)).Control(s => s.Size(3))
-    @form.Html.FormGroup("Multiple",            fg => fg.Select(f => f.SelectMultiple, Model.StringOptions))
+    @form.Html.FormGroup("Sized",               fg => fg.Select(f => f.SelectSized, Model.StringValues)).Control(s => s.Size(3))
+    @form.Html.FormGroup("Multiple",            fg => fg.Select(f => f.SelectMultiple, Model.StringValues))
 
 
     using (form.Html.FormGroupLayout())
