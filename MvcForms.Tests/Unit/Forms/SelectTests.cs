@@ -134,6 +134,24 @@ namespace MvcForms.Tests.Unit.Forms
         }
 
         [Test]
+        public void Typed()
+        {
+            var model = new ExamplePostModel { String = "Key2" };
+
+            var options = new Dictionary<string, string>
+            {
+                {  "Key1", "Value 1" },
+                {  "Key2", "Value 2" },
+                {  "Key3", "Value 3" },
+            };
+
+            var tag = model.Helper().Select(f => f.String, options).RenderTag();
+
+            var optionTags = tag.Children;
+            optionTags.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, true, false);
+        }
+
+        [Test]
         public void Int()
         {
             var model = new ExamplePostModel { Int = 2 };
