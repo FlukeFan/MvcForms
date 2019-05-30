@@ -39,6 +39,12 @@ namespace MvcForms.Forms
         public bool                 Multiple()                              { return _multiple; }
         public Select               Multiple(bool multiple)                 { _multiple = multiple; return this; }
 
+        public Select               Optional(string text)
+        {
+            _options = _options.Optional(text);
+            return this;
+        }
+
         protected override HtmlTag CreateTag()
         {
             var select = new HtmlTag("select")

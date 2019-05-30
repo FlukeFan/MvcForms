@@ -152,6 +152,25 @@ namespace MvcForms.Tests.Unit.Forms
         }
 
         [Test]
+        public void Typed_Optional()
+        {
+            var model = new ExamplePostModel { NullableEnum = ExamplePostModel.Values.Key2 };
+
+            var options = new Dictionary<ExamplePostModel.Values, string>
+            {
+                { ExamplePostModel.Values.Key1, "Value 1" },
+                { ExamplePostModel.Values.Key2, "Value 2" },
+                { ExamplePostModel.Values.Key3, "Value 3" },
+            };
+
+            var tag = model.Helper().Select(f => f.NullableEnum, options).Optional("<please select>").RenderTag();
+
+            var optionTags = tag.Children;
+            optionTags.Select(o => o.Text()).Should().BeEquivalentTo("<please select>", "Value 1", "Value 2", "Value 3");
+            optionTags.Select(o => o.HasAttr("selected")).Should().BeEquivalentTo(false, false, true, false);
+        }
+
+        [Test]
         public void Int()
         {
             var model = new ExamplePostModel { Int = 2 };
