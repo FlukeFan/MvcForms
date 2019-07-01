@@ -215,5 +215,19 @@ namespace MvcForms.Tests.SystemTests
 
             VerifyNavChanged();
         }
+
+        [Test]
+        public void SubmitForm_Get()
+        {
+            App.GoTo(PjaxActions.FormGet());
+
+            StoreNavState();
+            App.TypeText("value", "123");
+            App.Submit("go");
+
+            App.ShouldSeeText("value=123");
+
+            VerifyNavState();
+        }
     }
 }

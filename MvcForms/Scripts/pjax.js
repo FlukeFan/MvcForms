@@ -95,7 +95,7 @@ var mfoPjax = {};
             form: form,
             url: form.attr('action') || location.pathname + location.search + location.hash,
             data: data,
-            verb: form.attr('method') || 'POST',
+            verb: form.attr('method') || 'GET',
             container: container
         };
 

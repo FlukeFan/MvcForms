@@ -15,6 +15,7 @@ namespace MvcForms.StubApp.Controllers
         public static string PageErr()  { return "/Pjax/PageErr"; }
         public static string Form()     { return "/Pjax/Form"; }
         public static string FormDone() { return "/Pjax/FormDone"; }
+        public static string FormGet()  { return "/Pjax/FormGet"; }
     }
 
     public class PjaxController : Controller
@@ -76,6 +77,12 @@ namespace MvcForms.StubApp.Controllers
         public ActionResult FormDone()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult FormGet(string value)
+        {
+            return View("FormGet", value);
         }
     }
 }

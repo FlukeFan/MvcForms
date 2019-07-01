@@ -1,0 +1,12 @@
+﻿@using MvcForms.Forms
+@using  MvcForms.StubApp.Views
+@model string
+@inherits PjaxPage<string>
+@{
+    SetLayout("Form GET");
+}
+<form>
+    <div id="output">value=@Model</div>
+    <input type="text" name="value" value="@Model" />
+    @Html.ButtonSubmit("go")
+</form>
