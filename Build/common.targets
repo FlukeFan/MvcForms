@@ -9,7 +9,6 @@
     <Authors>Richard Brown</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/FlukeFan/MvcForms</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/FlukeFan/MvcForms/master/icon.png</PackageIconUrl>
 
     <PreserveCompilationContext Condition="$(IsTestProject)=='true'">true</PreserveCompilationContext>
     <CoverageTarget Condition="'$(CoverageTarget)'==''">90</CoverageTarget>

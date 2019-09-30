@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{18C1498F-CFB8-4D89-A1F6-F884ED44A9EF}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{B53E513F
 		.gitignore = .gitignore
 		build.proj = build.proj
 		CommandPrompt.bat = CommandPrompt.bat
-		icon.png = icon.png
+		global.json = global.json
 		LICENSE.txt = LICENSE.txt
 		PowerShellPrompt.ps1 = PowerShellPrompt.ps1
 		readme.md = readme.md
