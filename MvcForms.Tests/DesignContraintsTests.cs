@@ -20,7 +20,6 @@ namespace MvcForms.Tests
             NugetPackage.VerifyDependencies(packageFolder, name, new string[]
             {
                 "HtmlTags.AspNetCore:*",
-                "Microsoft.AspNetCore.Mvc.Core:*",
             });
         }
 

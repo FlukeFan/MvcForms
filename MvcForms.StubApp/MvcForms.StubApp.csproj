@@ -3,17 +3,12 @@
   <Import Project="..\Build\common.targets" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <CopyPackageContent>true</CopyPackageContent>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="jQuery" Version="[1.12.4,2)" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
     <PackageReference Include="Modernizr.New" Version="3.4.0" />
   </ItemGroup>
 

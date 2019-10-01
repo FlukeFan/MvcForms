@@ -3,7 +3,7 @@
   <Import Project="..\Build\Common.targets" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <DebugType>full</DebugType>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
@@ -11,21 +11,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildBundlerMinifier" Version="2.9.406">
+    <PackageReference Include="BuildBundlerMinifier" Version="3.0.415">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="BuildWebCompiler" Version="1.12.394">
+    <PackageReference Include="BuildWebCompiler" Version="1.12.405">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="HtmlTags.AspNetCore" Version="7.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.1" />
-    <PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.1.2-alpha">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="HtmlTags.AspNetCore" Version="7.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath=""/>
+    <None Include="icon.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>

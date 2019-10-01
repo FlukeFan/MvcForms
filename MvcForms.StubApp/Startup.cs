@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MvcForms.StubApp.Utility;
 
 namespace MvcForms.StubApp
@@ -25,7 +26,7 @@ namespace MvcForms.StubApp
                     o.LoginPath = Controllers.PjaxActions.Page1();
                 });
 
-            services.AddMvc(SetupAction);
+            services.AddControllersWithViews(SetupAction);
         }
 
         protected virtual void SetupAction(MvcOptions options)
@@ -35,7 +36,7 @@ namespace MvcForms.StubApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -48,12 +49,8 @@ namespace MvcForms.StubApp
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseRouting();
+            app.UseEndpoints(ep => ep.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"));
         }
     }
 }

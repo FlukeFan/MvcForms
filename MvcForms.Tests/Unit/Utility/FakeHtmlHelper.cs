@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -37,7 +37,8 @@ namespace MvcForms.Tests.Unit.Utility
         {
             FakeViewContext = new FakeViewContext();
 
-            var detailsProvider = new DefaultCompositeMetadataDetailsProvider(new List<IMetadataDetailsProvider>());
+            var type = typeof(BindingSourceMetadataProvider).Assembly.GetTypes().Single(t => t.Name == "DefaultCompositeMetadataDetailsProvider");
+            var detailsProvider = (ICompositeMetadataDetailsProvider)Activator.CreateInstance(type, new List<IMetadataDetailsProvider>());
             MetadataProvider = new DefaultModelMetadataProvider(detailsProvider);
             var viewDataDictionary = new ViewDataDictionary(MetadataProvider, new ModelStateDictionary());
             ViewData = new ViewDataDictionary<T>(viewDataDictionary);
